@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="menu_web_insurance_quotation" model="website.menu">
+            <field name="name">Quote Request</field>
+            <field name="url">/insurance/quote/request</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">11</field>
+        </record>
+
+        <!--Tracking-->
+        <record id="menu_web_quote_tracking_details" model="website.menu">
+            <field name="name">Track Request</field>
+            <field name="url">/quote/track-details</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">12</field>
+        </record>
+    </data>
+</odoo>

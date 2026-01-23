@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="insurance_crm_lead_inherit_form_view" model="ir.ui.view">
+            <field name="name">insurance.crm.lead.inherit.form.view</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <header>
+                    <button string="Create Insurance" name="%(action_crm_insurance)d" type="action" class="oe_highlight"
+                            invisible="type != 'opportunity' or probability &lt; 100 or previous_insurance_id != False or insurance_id != False"/>
+
+                    <button string="Renew Insurance" name="%(action_renew_insurance)d" type="action"
+                            class="btn btn-info" groups="tk_insurance_management.insurance_manager"
+                            invisible="type != 'opportunity' or probability &lt; 100 or previous_insurance_id == False or insurance_id != False"/>
+                </header>
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="website_ref_number"/>
+                </xpath>
+                <xpath expr="//field[@name='email_from']" position="attributes">
+                    <attribute name="required">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="required">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="insurance_id" invisible="insurance_id == False" readonly="1"/>
+                </xpath>
+                <xpath expr="//notebook/page[1]" position="after">
+                    <page name="insurance_details" string="Insurance Details">
+                        <div class="row">
+                            <div class="col-6" style="text-align: left;">
+                                <button string="In Progress" name="a_draft_to_b_in_progress" type="object"
+                                        class="btn btn-warning m-1"
+                                        invisible="website_tracking_status not in ['a_draft']"/>
+                                <button string="Complete" name="b_in_progress_to_c_complete" type="object"
+                                        class="btn btn-success m-1"
+                                        invisible="website_tracking_status not in ['b_in_progress']"/>
+                                <button string="Cancel" name="c_complete_to_d_cancel" type="object"
+                                        class="btn btn-danger"
+                                        invisible="website_tracking_status not in ['a_draft', 'b_in_progress']"/>
+                            </div>
+                            <div class="col-6" style="text-align: right;">
+                                <field name="website_tracking_status" widget="statusbar"
+                                       statusbar_visible="a_draft,b_in_progress,c_complete"/>
+                            </div>
+                        </div>
+                        <group>
+                            <group string="Policy Holder’s Detail">
+                                <field name="website_ref_number"/>
+                                <label for="policy_holder_dob" string="Date of Birth"/>
+                                <div class="address_format">
+                                    <field name="policy_holder_dob" style="width: 35%" required="1"
+                                           readonly="insurance_id != False"/>
+                                    <strong style="margin-left: 15px;">&#160;Age</strong>
+                                    <field name="policy_holder_age" style="width: 35%; margin-left: 10px;"
+                                           readonly="1"/>
+                                </div>
+                                <field name="policy_holder_gender" widget="radio" options="{'horizontal': true}"
+                                       readonly="insurance_id != False"/>
+                                <field name="website_tracking_status" invisible="1"/>
+                                <field name="is_won" invisible="1"/>
+                            </group>
+                        </group>
+                        <separator string="Policy Details" name="policy_details"/>
+                        <group>
+                            <group>
+                                <field name="insurance_category_id" options="{'no_edit': True, 'no_create': True}"
+                                       required="1" readonly="insurance_id != False"/>
+                                <field name="category" invisible="1"/>
+                                <field name="insurance_sub_category_id" options="{'no_edit': True, 'no_create': True}"
+                                       readonly="insurance_id != False"/>
+                                <field name="file_name" invisible="1" readonly="insurance_id != False"/>
+                                <field name="attachment" filename="file_name" widget="binary"
+                                       readonly="insurance_id != False"/>
+                            </group>
+                            <group>
+                                <field name="policy_provider_cmp_id" required="1" readonly="insurance_id != False"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="insurance_policy_id" options="{'no_edit': True, 'no_create': True}"
+                                       readonly="insurance_id != False"/>
+                                <field name="insurance_buying_for_id" options="{'no_edit': True, 'no_create': True}"
+                                       readonly="insurance_id != False"/>
+                            </group>
+                        </group>
+                        <di>
+                            <separator string="Lead Tracking Details" name="lead_tracking_details"/>
+                            <field name="quote_lead_tracking_ids" readonly="insurance_id != False">
+                                <list editable="bottom">
+                                    <field name="tracking_date" required="1"/>
+                                    <field name="tracking_description"/>
+                                    <field name="crm_lead_id" column_invisible="True"/>
+                                </list>
+                            </field>
+                        </di>
+                    </page>
+                    <page name="renewal_insurance_details" string="Renewal Insurance Details"
+                          invisible="previous_insurance_id == False">
+                        <group>
+                            <group>
+                                <field name="previous_insurance_id" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

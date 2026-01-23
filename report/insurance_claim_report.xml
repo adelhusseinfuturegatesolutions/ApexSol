@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="insurance_claim_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="claim">
+                <t t-call="web.external_layout">
+                    <t t-set="report_color" t-value="docs.get_report_color()"/>
+                    <t t-set="report_lighter_color" t-value="docs.get_report_color_lighter()"/>
+                    <style>
+                        .page{
+                        font-family: 'Arial', 'Helvetica Neue', sans-serif;
+                        }
+
+                        .header-custom{
+                        text-align: left;border-bottom:2px solid<t t-esc="report_color"/>;
+                        color:<t t-esc="report_color"/>;
+                        font-size:25px;
+                        }
+
+                        <!--Modern Section Headers -->
+                        .section-header {
+                        background:<t t-esc="report_color"/>;
+                        color: white;
+                        padding: 9px 20px 5px 20px;
+                        margin: 25px 0 15px 0;
+                        font-size: 13pt;
+                        font-weight: 600;
+                        letter-spacing: 0.3px;
+                        }
+
+                        .section-header-alt {
+                        background:<t t-esc="report_lighter_color"/>;
+                        color:<t t-esc="report_color"/>;
+                        padding: 10px 20px;
+                        margin: 20px 0 12px 0;
+                        font-size: 12pt;
+                        font-weight: 600;
+                        border-left: 4px solid<t t-esc="report_color"/>;
+                        }
+                        .border-left {
+                        border-left: 1px solid #e0e0e0;
+                        }
+
+                        table.modern-table {
+                        width: 100%;
+                        border-collapse: separate;
+                        border-spacing: 0;
+                        margin-bottom: 20px;
+                        font-family: Arial, sans-serif;
+                        }
+
+                        table.modern-table td {
+                        padding: 9px 9px;
+                        border-bottom: 2px solid #f0f0f0;
+                        vertical-align: top;
+                        }
+
+                        table.modern-table tr:last-child td {
+                        border-bottom: none;
+                        }
+
+                        table.modern-table td.field-label {
+                        width: 30%;
+                        font-size: 10pt;
+                        color: #1a1a1a;
+                        font-weight: bold;
+                        background:<t t-esc="report_lighter_color"/>;
+                        }
+
+                        table.modern-table td.field-value {
+                        width: 65%;
+                        color: #555;
+                        font-size: 10.5pt;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        padding-left:20px;
+                        }
+
+                        .amount-label-text {
+                        font-size: 10pt;
+                        color: #666;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        margin-bottom: 8px;
+                        text-align: center;
+
+                        }
+                        .amount-value-text {
+                        font-size: 24pt;
+                        color:<t t-esc="report_color"/>;
+                        font-weight: 600;
+                        letter-spacing: 0.5px;
+                        text-align: center;
+                        }
+
+                        .amount-words {
+                        font-size: 9pt;
+                        color: #666;
+                        margin-top: 5px;
+                        font-style: italic;
+                        text-align: center;
+                        }
+                    </style>
+                    <div class="page" style="font-family: 'Arial', 'Helvetica Neue', sans-serif;">
+                        <div class="header-custom">
+                            <strong>Insurance Claim Document
+                            </strong>
+                            <p style="color:#71797E;font-size: 13px;">
+                                Comprehensive Insurance Coverage Details &amp; Terms
+                            </p>
+                        </div>
+                        <!--display number-->
+                        <t t-set="section_no" t-value="0"/>
+                        <!-- ================================== Claim Details ================================== -->
+                        <t t-set="section_no" t-value="section_no + 1"/>
+                        <div class="section-header"><span t-esc="section_no"/>. CLAIM DETAILS
+                        </div>
+                        <div t-att-style="'margin-top:8px;background-color:%s;'%report_lighter_color">
+                            <table style="width:100%;" class="table table-borderless">
+                                <tr>
+                                    <td style="width:33%; border:none;padding-left:10px;color:#71797E;">
+                                        Insurance Number
+                                        <br/>
+                                        <strong t-attf-style="color:{{report_color}};">
+                                            <span t-field="claim.insurance_id.insurance_number"/>
+                                        </strong>
+                                    </td>
+                                    <td style="width:33%; border:none; padding-left:10px;color:#71797E;">
+                                        Claim Number
+                                        <br/>
+                                        <strong t-attf-style="color:{{report_color}};">
+                                            <span t-field="claim.claim_number"/>
+                                        </strong>
+                                    </td>
+                                    <td style="width:33%; border:none; padding-left:10px;color:#71797E;">
+                                        Claim Date
+                                        <br/>
+                                        <strong t-attf-style="color:{{report_color}};">
+                                            <span t-field="claim.claim_date"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                        <!-- ================================== Policyholder Information ================================== -->
+                        <t t-set="section_no" t-value="section_no + 1"/>
+                        <div class="section-header"><span t-esc="section_no"/>. POLICY HOLDER DETAILS
+                        </div>
+                        <table class="modern-table table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Policy Holder</td>
+                                    <td class="field-value">
+                                        <span t-field="claim.policy_holder_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Gender</td>
+                                    <td class="field-value">
+                                        <span t-field="claim.policy_holder_gender"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Date of Birth</td>
+                                    <td class="field-value">
+                                        <span t-field="claim.policy_holder_dob" class="me-1"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Age</td>
+                                    <td class="field-value">
+                                        <span t-field="claim.policy_holder_age"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Email</td>
+                                    <td class="field-value">
+                                        <span t-field="claim.email"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Phone</td>
+                                    <td class="field-value">
+                                        <span t-field="claim.phone"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Address</td>
+                                    <td class="field-value">
+                                        <span t-field="claim.policy_holder_street"/>
+                                        <t t-if="claim.policy_holder_street2">
+                                            <span t-field="claim.policy_holder_street2"/>
+                                        </t>
+                                        <t t-if="claim.policy_holder_city"><span
+                                                t-field="claim.policy_holder_city"/>,
+                                        </t>
+                                        <t t-if="claim.policy_holder_state_id"><span
+                                                t-field="claim.policy_holder_state_id"/>,
+                                        </t>
+                                        <span t-field="claim.policy_holder_zip"/>
+                                        <span t-field="claim.policy_holder_country_id"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- ================================== Policy Information ================================== -->
+                        <t t-set="section_no" t-value="section_no + 1"/>
+                        <div class="section-header"><span t-esc="section_no"/>. POLICY DETAILS
+                        </div>
+                        <table class="modern-table table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Policy Category</td>
+                                    <td class="field-value">
+                                        <span t-field="claim.insurance_category_id"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Sub Category</td>
+                                    <td class="field-value">
+                                        <span t-field="claim.insurance_sub_category_id"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Insurance Policy</td>
+                                    <td class="field-value">
+                                        <span t-field="claim.insurance_policy_id"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Policy Time Period</td>
+                                    <td class="field-value">
+                                        <span t-field="claim.policy_price_list_id"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- ================================== Agent Information ================================== -->
+                        <div style="page-break-inside: avoid !important;" t-if="claim.agent_required == True">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header" t-if="claim.agent_required == True"><span
+                                    t-esc="section_no"/>. AGENT DETAILS
+                            </div>
+                            <table class="modern-table table table-borderless" t-if="claim.agent_required == True">
+                                <tbody>
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Agent</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.agent_id"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Phone</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.agent_id.phone"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Email</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.agent_id.email"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== Insurance Details ================================== -->
+                        <div style="page-break-inside: avoid !important;" >
+                            <div class="section-header" t-if="claim.desired_coverage_type == 'individual'">
+                                <t t-set="section_no" t-value="section_no + 1"/>
+                                <span t-esc="section_no"/>. INSURER DETAILS
+                            </div>
+                            <table class="modern-table table table-borderless"
+                                   t-if="claim.desired_coverage_type == 'individual'">
+                                <tbody>
+
+                                    <tr t-if="claim.insured_id">
+                                        <td class="field-label" style="padding-left:20px;">Insured</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.insured_id"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="claim.gender">
+                                        <td class="field-label" style="padding-left:20px;">Gender</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.gender"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="claim.dob">
+                                        <td class="field-label" style="padding-left:20px;">Date of Birth</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.dob" class="me-1"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="claim.dob">
+                                        <td class="field-label" style="padding-left:20px;">Age</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.age"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="claim.marital_status">
+                                        <td class="field-label" style="padding-left:20px;">Marital Status</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.marital_status"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="claim.blood_group">
+                                        <td class="field-label" style="padding-left:20px;">Blood Group</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.blood_group"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="claim.insured_height">
+                                        <td class="field-label" style="padding-left:20px;">Height (cm)</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.insured_height"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="claim.insured_weight">
+                                        <td class="field-label" style="padding-left:20px;">Weight (kg)</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.insured_weight"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="claim.insured_birthmark">
+                                        <td class="field-label" style="padding-left:20px;">Birthmark</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.insured_birthmark"/>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <table class="table table-borderless"
+                                   style="font-size:13px; border-collapse:collapse;page-break-inside: avoid !important;"
+                                   t-if="claim.category == 'health' and claim.desired_coverage_type in ['family', 'group']">
+                                <thead>
+                                    <tr t-att-style="'border-bottom:2px solid %s;background-color:%s;'%(report_color,report_lighter_color) ">
+                                        <th style="padding-left:19px; width:20%; text-align:left;">Insured</th>
+                                        <th style="width:15%;">Date of Birth</th>
+                                        <th style="width:9%;">Age</th>
+                                        <th style="width:7%;">Gender</th>
+                                        <th style="width:9%;">Blood Group</th>
+                                        <th style="width:7%;text-align:right;">Height (cm)</th>
+                                        <th style="width:6%;text-align:right;">Weight (kg)</th>
+                                        <th style="width:3%;">Birthmark</th>
+                                        <th style="width:15%;text-align:left;">Marital Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="claim.insured_details_ids" t-as="claimed">
+                                        <tr style="border-bottom:1px solid #ddd;">
+                                            <td style="padding-left:20px; width:15%; text-align:left;">
+                                                <span t-field="claimed.partner_id"/>
+                                            </td>
+                                            <td style="width:10%;">
+                                                <span t-if="claimed.insured_dob" t-field="claimed.insured_dob"/>
+                                            </td>
+                                            <td style="width:5%;">
+                                                <span t-if="claimed.insured_ages" t-field="claimed.insured_ages"/>
+                                            </td>
+                                            <td style="width:8%;">
+                                                <span t-if="claimed.insured_gender" t-field="claimed.insured_gender"/>
+                                            </td>
+                                            <td style="width:8%;">
+                                                <span t-if="claimed.insured_blood_group"
+                                                      t-field="claimed.insured_blood_group"/>
+                                            </td>
+                                            <td style="width:10%;text-align:right;">
+                                                <span t-if="claimed.insured_heights" t-field="claimed.insured_heights"/>
+                                            </td>
+                                            <td style="width:10%;text-align:right;">
+                                                <span t-if="claimed.insured_weights" t-field="claimed.insured_weights"/>
+                                            </td>
+                                            <td style="width:3%;">
+                                                <span t-if="claimed.insured_birthmarks"
+                                                      t-field="claimed.insured_birthmarks"/>
+                                            </td>
+                                            <td style="width:12%; text-align:left;">
+                                                <span t-if="claimed.insured_marital_status"
+                                                      t-field="claimed.insured_marital_status"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== Insurance Nominee ================================== -->
+                        <div style="page-break-inside: avoid !important;" t-if="claim.claim_nominee_ids">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header" t-if="claim.claim_nominee_ids"><span
+                                    t-esc="section_no"/>. INSURANCE NOMINEE
+                            </div>
+                            <table class="table table-borderless"
+                                   style="font-size:13px; border-collapse:collapse;page-break-inside: avoid !important;"
+                                   t-if="claim.claim_nominee_ids">
+                                <thead>
+                                    <tr t-att-style="'border-bottom:2px solid %s;background-color:%s;'%(report_color,report_lighter_color ) ">
+                                        <th style="padding-left:22px; width:35%;">Name</th>
+                                        <th style="width:20%;">Relation with Policy Holder</th>
+                                        <th style="width:15%;text-align: right;">Date of Birth</th>
+                                        <th style="width:15%;">Age</th>
+                                        <th style="width:15%;text-align: right;padding-right:10px;">Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="claim.claim_nominee_ids" t-as="nominee">
+                                        <tr style="border-bottom:1px solid #ddd;">
+                                            <td style="padding-left:20px; width:35%; ">
+                                                <span t-field="nominee.partner_id"/>
+                                            </td>
+                                            <td style="width:20%;">
+                                                <span t-field="nominee.insurance_nominee_relation_id"/>
+                                            </td>
+                                            <td style="width:10;text-align:right;">
+                                                <span t-field="nominee.nominee_dob"/>
+                                            </td>
+                                            <td style="width:15%;">
+                                                <span t-field="nominee.nominee_age"/>
+                                            </td>
+                                            <td style="width:15%;text-align: right;padding-right:10px;">
+                                                <span t-field="nominee.percentage" class="me-1"/>%
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== Policy provider ================================== -->
+                        <div style="page-break-inside: avoid !important;" t-if="claim.policy_provider_cmp_id">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header" t-if="claim.policy_provider_cmp_id "><span
+                                    t-esc="section_no"/>. POLICY PROVIDER (CEDING COMPANY)
+                            </div>
+                            <table class="modern-table table table-borderless" t-if="claim.policy_provider_cmp_id">
+                                <tbody>
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Policy Provider</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.policy_provider_cmp_id"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Phone</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.policy_provider_cmp_id.phone"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Email</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.policy_provider_cmp_id.email"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="claim.invoice_id">
+                                        <td class="field-label" style="padding-left:20px;">Ceding Company Bill</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.invoice_id"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== ReInsurer Company Details ================================== -->
+                        <div style="page-break-inside: avoid !important;" t-if="claim.re_insurance_id">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header" t-if="claim.re_insurance_id"><span
+                                    t-esc="section_no"/>. REINSURER COMPANY DETAILS
+                            </div>
+                            <table class="modern-table table table-borderless" t-if="claim.re_insurance_id">
+                                <tbody>
+                                    <tr t-if="claim.re_insurance_id">
+                                        <td class="field-label" style="padding-left:20px;">ReInsurance</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.re_insurance_id"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="claim.reinsurance_company_id">
+                                        <td class="field-label" style="padding-left:20px;">ReInsurer</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.reinsurance_company_id"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-id="claim.reinsurer_invoice_id">
+                                        <td class="field-label" style="padding-left:20px;">ReInsurer Bill</td>
+                                        <td class="field-value">
+                                            <span t-field="claim.reinsurer_invoice_id"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== Claim Documents ================================== -->
+                        <div style="page-break-inside: avoid !important;" t-if="claim.claim_documents_ids">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header" t-if="claim.claim_documents_ids"><span
+                                    t-esc="section_no"/>. CLAIM DOCUMENTS
+                            </div>
+                            <table class="table table-borderless"
+                                   style="font-size:13px; claim_document_type_id-collapse:collapse;page-break-inside: avoid !important;"
+                                   t-if="claim.claim_documents_ids">
+                                <thead>
+                                    <tr t-att-style="'border-bottom:2px solid %s;background-color:%s;'%(report_color,report_lighter_color)">
+                                        <th style="padding-left:22px; width:15%;">Document Type</th>
+                                        <th style="width:25%;">Description</th>
+                                        <th style="width:45%;">Document</th>
+                                        <th style="width:15%;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="claim.claim_documents_ids" t-as="document">
+                                        <tr style="border-bottom:1px solid #ddd;">
+                                            <td style="padding-left:20px; width:15%; ">
+                                                <span t-field="document.claim_document_type_id"/>
+                                            </td>
+                                            <td style="width:25%;">
+                                                <span t-field="document.description"/>
+                                            </td>
+                                            <td style="width:45;">
+                                                <span t-field="document.file_name"/>
+                                            </td>
+                                            <td style="width:15%;">
+                                                <strong style="color:#155724; border-radius:4px; padding:5px 15px 2px 15px;background-color:#d4edda;">
+                                                    <span t-field="document.state"/>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== Claim Financial Overview ================================== -->
+                        <p style="page-break-before:always;"/>
+                        <div style="page-break-inside: avoid !important;margin-bottom:10px;">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header"><span t-esc="section_no"/>. CLAIM FINANCIAL OVERVIEW
+                            </div>
+                            <div t-attf-style="border:3px solid {{report_color}}; padding:20px;">
+                                <div class="amount-label-text">Claim Amount</div>
+                                <div class="amount-value-text">
+                                    <span t-field="claim.amount_paid"/>
+                                </div>
+                                <div class="amount-words">
+                                    (<span t-field="claim.claim_reasons_ids"/>)
+                                </div>
+                            </div>
+                        </div>
+                        <table class="modern-table" style="border:2px solid #f0f0f0;">
+                            <tbody>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">
+                                        Policy Amount
+                                    </td>
+                                    <td class="field-value" style="text-align:right;padding-right:20px;">
+                                        <span t-field="claim.policy_amount"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">
+                                        Remaining Amount (After this Claim)
+                                    </td>
+                                    <td class="field-value" style="text-align:right;padding-right:20px;">
+                                        <span t-field="claim.due_amount"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">
+                                        Due Amount
+                                    </td>
+                                    <td class="field-value" style="text-align:right;padding-right:20px;">
+                                        <span t-field="claim.total_due_amount"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- ================================== Claim Images ================================== -->
+                        <p style="page-break-before:always;"/>
+                        <div style="page-break-inside: avoid !important;" t-if="claim.claim_image_ids">
+                                <t t-set="section_no" t-value="section_no + 1"/>
+                                <div class="section-header" t-if="claim.claim_image_ids "><span
+                                        t-esc="section_no"/>. CLAIM IMAGES
+                                </div>
+                                <table class="table table-borderless"
+                                       style="page-break-inside: avoid !important; font-size: 11px; width: 100%,margin-top:10px;"
+                                       t-if="claim.claim_image_ids">
+                                    <t t-set="img_count" t-value="0"/>
+                                    <tr>
+                                        <td>
+                                            <t t-foreach="claim.claim_image_ids" t-as="img">
+                                                <t t-set="img_count" t-value="img_count + 1"/>
+                                                <div style="display: inline-block; margin-left: 11px;">
+                                                    <t t-if="img.avatar">
+                                                        <img t-att-src="image_data_uri(img.avatar)"
+                                                             style="width: 200px; height: 200px;"/>
+                                                    </t>
+                                                    <h6 style="margin-top:5px;">
+                                                        <span t-field="img.name"/>
+                                                    </h6>
+                                                </div>
+                                                <t t-if="img_count % 4 == 0">
+                                                    <br/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        <!-- ================================== Terms & Condition ================================== -->
+                        <div t-att-style="'background-color:%s;border-left:4px solid %s;padding:20px;margin-top:10px;page-break-inside: avoid !important;'%(report_lighter_color,report_color)"
+                             t-if="claim.policy_terms_and_conditions">
+                            <span class="fw-bold" t-attf-style="color:{{report_color}};">
+                                Terms &amp; Conditions
+                            </span>
+                            <br/>
+                            <span t-field="claim.policy_terms_and_conditions"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="action_insurance_claim_report" model="ir.actions.report">
+        <field name="name">Claim Report</field>
+        <field name="model">claim.information</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tk_insurance_management.insurance_claim_report_template</field>
+        <field name="report_file">tk_insurance_management.insurance_claim_report_template</field>
+        <field name="binding_model_id" ref="model_claim_information"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

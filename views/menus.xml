@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <menuitem id="main_menu_insurance_management" name="Insurance"
+                  web_icon="tk_insurance_management,static/description/icon.png"/>
+        <menuitem id="menu_insurance_management"
+                  name="Dashboard"
+                  sequence="0"
+                  action="action_insurance_dashboard"
+                  parent="main_menu_insurance_management"
+                  groups="tk_insurance_management.insurance_manager"/>
+
+        <menuitem id="menu_insurance_lead" name="Leads" parent="main_menu_insurance_management" sequence="1"/>
+        <menuitem id="menu_insurance_quot_request"
+                  name="Requests"
+                  sequence="1"
+                  action="crm.crm_lead_all_leads"
+                  parent="menu_insurance_lead"
+                  groups="tk_insurance_management.insurance_manager"/>
+        <menuitem id="menu_insurance_quot_pipeline"
+                  name="Pipeline"
+                  sequence="2"
+                  action="crm.crm_lead_action_pipeline"
+                  parent="menu_insurance_lead"
+                  groups="tk_insurance_management.insurance_manager"/>
+
+        <menuitem id="menu_res_partner_agent"
+                  name="Agents"
+                  parent="main_menu_insurance_management"
+                  action="action_res_partner_agent"
+                  groups="tk_insurance_management.insurance_manager"
+                  sequence="2"/>
+        <menuitem id="menu_insurance_information"
+                  name="Insurances"
+                  parent="main_menu_insurance_management"
+                  action="insurance_information_action"
+                  sequence="3"/>
+        <menuitem id="menu_re_insurance"
+                  name="ReInsurances"
+                  parent="main_menu_insurance_management"
+                  action="action_re_insurance"
+                  sequence="4"/>
+        <menuitem id="menu_claim_information"
+                  name="Claims"
+                  parent="main_menu_insurance_management"
+                  action="claim_information_action"
+                  sequence="5"/>
+        <menuitem id="menu_res_partner_customers"
+                  name="Customers"
+                  parent="main_menu_insurance_management"
+                  action="contacts.action_contacts"
+                  groups="tk_insurance_management.insurance_manager"
+                  sequence="6"/>
+
+        <menuitem id="menu_insurance_report" name="Reports" parent="main_menu_insurance_management" sequence="7"/>
+        <menuitem id="menu_insurance_expiry_report"
+                  name="Upcoming Insurance Expiration Report"
+                  parent="menu_insurance_report"
+                  action="action_insurance_expiry_report"
+                  sequence="1"/>
+        <menuitem id="menu_insurance_excel_report"
+                  name="Insurance History Report"
+                  parent="menu_insurance_report"
+                  action="action_insurance_excel_report"
+                  sequence="2"/>
+        <menuitem id="menu_claim_excel_report"
+                  name="Claim History Report"
+                  parent="menu_insurance_report"
+                  action="action_claim_excel_report"
+                  sequence="3"/>
+
+        <menuitem id="menu_configuration" name="Configurations" parent="main_menu_insurance_management"
+                  groups="tk_insurance_management.insurance_manager" sequence="8"/>
+        <menuitem id="menu_insurance_category"
+                  name="Categories"
+                  parent="menu_configuration"
+                  action="action_insurance_category"
+                  sequence="1"/>
+        <menuitem id="menu_insurance_insurance_sub_category"
+                  name="Sub Categories"
+                  parent="menu_configuration"
+                  action="action_insurance_sub_category"
+                  sequence="2"/>
+        <menuitem id="menu_insurance_time_period"
+                  name="Policy Time Periods"
+                  parent="menu_configuration"
+                  action="action_insurance_time_period"
+                  sequence="3"/>
+        <menuitem id="menu_insurance_policy"
+                  name="Insurance Policy"
+                  parent="menu_configuration"
+                  action="action_insurance_policy"
+                  sequence="4"/>
+        <menuitem id="menu_insurance_buying_for"
+                  name="Insurance For"
+                  parent="menu_configuration"
+                  action="action_insurance_buying_for"
+                  sequence="5"/>
+        <menuitem id="menu_document_details" name="Document Details" parent="menu_configuration" sequence="6"/>
+        <menuitem id="menu_insured_document_type"
+                  name="Insured Documents"
+                  parent="menu_document_details"
+                  action="action_insured_document_type"
+                  sequence="1"/>
+        <menuitem id="menu_claim_document_type"
+                  name="Claim Documents"
+                  parent="menu_document_details"
+                  action="action_claim_document_type"
+                  sequence="2"/>
+
+        <menuitem id="menu_claim_reasons"
+                  name="Claim Reasons"
+                  parent="menu_configuration"
+                  action="action_claim_reasons"
+                  sequence="7"/>
+        <menuitem id="menu_insurance_nominee_relation"
+                  name="Nominees Relations"
+                  parent="menu_configuration"
+                  action="action_insurance_nominee_relation"
+                  sequence="8"/>
+        <menuitem id="menu_re_insurance_type"
+                  name="ReInsurance Types"
+                  parent="menu_configuration"
+                  action="action_re_insurance_type"
+                  sequence="9"/>
+    </data>
+</odoo>

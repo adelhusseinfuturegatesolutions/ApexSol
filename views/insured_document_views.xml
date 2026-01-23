@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="insured_documents_view_form" model="ir.ui.view">
+            <field name="name">insured.documents.view.form</field>
+            <field name="model">insured.documents</field>
+            <field name="arch" type="xml">
+                <form edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="insured_info_id"/>
+                                <field name="insured_id"/>
+                            </group>
+                            <group>
+                                <field name="insured_document_type_id"/>
+                                <field name="file_name" invisible="1"/>
+                                <field name="avatar" filename="file_name" widget="binary" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="insured_documents_list_view" model="ir.ui.view">
+            <field name="name">insured.documents.list.view</field>
+            <field name="model">insured.documents</field>
+            <field name="arch" type="xml">
+                <list editable="bottom" delete="false" duplicate="false">
+                    <field name="insured_info_id" readonly="1"/>
+                    <field name="insured_id" readonly="1"/>
+                    <field name="insured_document_type_id" required="1"
+                           options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="file_name" column_invisible="True"/>
+                    <field name="avatar" filename="file_name" widget="binary"/>
+                    <field name="state" widget="badge"
+                           decoration-info="state == 'draft'"
+                           decoration-success="state == 'verified'"
+                           decoration-danger="state == 'rejected'"/>
+                    <button string="Verified" name="verified_claim" type="object" class="btn btn-success"
+                            invisible="state == 'verified' or state == 'rejected'"/>
+                    <button string="Rejected" name="rejected_claim" type="object" class="btn btn-danger"
+                            invisible="state == 'rejected' or state == 'verified'"/>
+                    <button string="Resubmit" name="document_resubmit" type="object" class="btn btn-info"
+                            invisible="state != 'rejected'"/>
+                </list>
+            </field>
+        </record>
+        <record id="insured_documents_search_view" model="ir.ui.view">
+            <field name="name">insured.documents.search.view</field>
+            <field name="model">insured.documents</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="insured_document_type_id"/>
+                    <group>
+                        <filter name="insured_document_type_id" string="Document Name"
+                                context="{'group_by':'insured_document_type_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_insured_documents" model="ir.actions.act_window">
+            <field name="name">Insured Documents</field>
+            <field name="res_model">insured.documents</field>
+            <field name="view_mode">list,search</field>
+        </record>
+    </data>
+</odoo>

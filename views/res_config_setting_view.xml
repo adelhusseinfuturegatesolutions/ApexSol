@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="insurance_res_config_settings_form_view" model="ir.ui.view">
+            <field name="name">insurance.res.config.settings.form.view</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app data-string="Insurance Management" string="Insurance Management"
+                         name="tk_insurance_management">
+                        <block title="Reminder Days for Installment">
+                            <setting help="Reminder days for Creating Installments Invoice">
+                                <field name="reminder_days"/>
+                            </setting>
+                        </block>
+                        <block title="Insurance Policy Expiry Settings">
+                            <setting
+                                    help="Number of days before expiry to highlight insurance policies on the dashboard.">
+                                <field name="policy_expiry_remaining_days"/>
+                            </setting>
+                        </block>
+                        <block title="Automated Insurance Cancellation Policy.">
+                            <setting help="Insurance Policy cancellation">
+                                <field name="is_auto_cancellation"/>
+                            </setting>
+                            <setting help="Reminder Days for Insurance Expiry">
+                                <field name="insurance_expiry_days"/>
+                            </setting>
+                        </block>
+                        <block title="Insurance Website">
+                            <setting help="Insurance Terms and Conditions">
+                                <field name="is_terms_and_conditions"/>
+                            </setting>
+                            <setting help="Terms and Conditions URL"
+                                     invisible="is_terms_and_conditions == False">
+                                <field name="terms_condition_url" required="is_terms_and_conditions == True"/>
+                            </setting>
+                        </block>
+
+                        <block title="Insurance Company Migration Status">
+                            <setting help="Is Insurance Company Provider Migrated">
+                                <field name="is_insurance_company_migrated" readonly="1"/>
+                            </setting>
+                        </block>
+
+                        <block title="Report Color Details">
+                            <setting help="Download Report of this color">
+                                <field name="report_color_config" widget="color"/>
+                            </setting>
+                            <setting help="Download Claim Report with this color">
+                                <field name="claim_report_color_config" widget="color"/>
+                            </setting>
+                            <setting>
+                                <button icon="fa-repeat" string="Reset Color" type="object" class="btn btn-primary"
+                                        name="action_reset_color"/>
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

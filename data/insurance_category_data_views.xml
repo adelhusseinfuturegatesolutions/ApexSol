@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="life_insurance" model="insurance.category">
+            <field name="name">Life Insurance</field>
+            <field name="category">life</field>
+            <field name="category_code">TLI</field>
+        </record>
+        <record id="health_insurance" model="insurance.category">
+            <field name="name">Health Insurance</field>
+            <field name="category">health</field>
+            <field name="category_code">UHI</field>
+        </record>
+        <record id="property_insurance" model="insurance.category">
+            <field name="name">Property Insurance</field>
+            <field name="category">property</field>
+            <field name="category_code">HI</field>
+        </record>
+        <record id="liability_insurance" model="insurance.category">
+            <field name="name">Liability Insurance</field>
+            <field name="category">liability</field>
+            <field name="category_code">GLI</field>
+        </record>
+        <record id="disability_insurance" model="insurance.category">
+            <field name="name">Disability Insurance</field>
+            <field name="category">disability</field>
+            <field name="category_code">SDI</field>
+        </record>
+        <record id="travel_insurance" model="insurance.category">
+            <field name="name">Travel Insurance</field>
+            <field name="category">travel</field>
+            <field name="category_code">MTI</field>
+        </record>
+        <record id="pet_insurance" model="insurance.category">
+            <field name="name">Pet Insurance</field>
+            <field name="category">pet</field>
+            <field name="category_code">AOPI</field>
+        </record>
+        <record id="business_insurance" model="insurance.category">
+            <field name="name">Business Insurance</field>
+            <field name="category">business</field>
+            <field name="category_code">BI</field>
+        </record>
+        <record id="vehicle_insurance" model="insurance.category">
+            <field name="name">Vehicle Insurance</field>
+            <field name="category">vehicle</field>
+            <field name="category_code">VI</field>
+        </record>
+    </data>
+</odoo>
+
+
+
+

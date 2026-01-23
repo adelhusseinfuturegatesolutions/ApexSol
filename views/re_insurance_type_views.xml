@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="re_insurance_type_form_view" model="ir.ui.view">
+            <field name="name">re.insurance.type.form.view</field>
+            <field name="model">re.insurance.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="e.g. Treaty Reinsurance.." required="1"/>
+                            </h1>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="re_insurance_type_list_view" model="ir.ui.view">
+            <field name="name">re.insurance.type.list.view</field>
+            <field name="model">re.insurance.type</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+        <record id="re_insurance_type_search_view" model="ir.ui.view">
+            <field name="name">re.insurance.type.search.view</field>
+            <field name="model">re.insurance.type</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        <record id="action_re_insurance_type" model="ir.actions.act_window">
+            <field name="name">ReInsurance Types</field>
+            <field name="res_model">re.insurance.type</field>
+            <field name="view_mode">list,form,search</field>
+        </record>
+    </data>
+</odoo>

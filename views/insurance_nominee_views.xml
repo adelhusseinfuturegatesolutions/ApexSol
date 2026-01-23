@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="insurance_nominee_view_form" model="ir.ui.view">
+            <field name="name">insurance.nominee.view.form</field>
+            <field name="model">insurance.nominee</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Nominee Details">
+                            <group>
+                                <field name="partner_id" options="{'no_create': True, 'no_create_edit': True}"
+                                       required="1"/>
+                                <field name="insurance_nominee_relation_id" required="1"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                            </group>
+                            <group>
+                                <label for="nominee_dob" string="Date of Birth"/>
+                                <div class="address_format">
+                                    <field name="nominee_dob" style="width: auto"/>
+                                    <strong>&#160;Age</strong>
+                                    <field name="nominee_age" style="width: auto; margin-left: 5px;"/>
+                                </div>
+                                <label for="percentage" class="mt-1" string="Percentage"/>
+                                <div name="percentage">
+                                    <field name="percentage" class="oe_inline"/>
+                                    <strong>&#160;%</strong>
+                                </div>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="insurance_nominee_view_list" model="ir.ui.view">
+            <field name="name">insurance.nominee.view.list</field>
+            <field name="model">insurance.nominee</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="partner_id"/>
+                    <field name="insurance_nominee_relation_id"/>
+                    <field name="nominee_dob"/>
+                    <field name="nominee_age"/>
+                    <field name="percentage" widget="progressbar" sum="percentage"/>
+                </list>
+            </field>
+        </record>
+        <record id="action_insurance_nominee" model="ir.actions.act_window">
+            <field name="name">Nominee</field>
+            <field name="res_model">insurance.nominee</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Insurance Nominee Relation-->
+        <record id="insurance_nominee_relation_list_view" model="ir.ui.view">
+            <field name="name">insurance.nominee.relation.list.view</field>
+            <field name="model">insurance.nominee.relation</field>
+            <field name="arch" type="xml">
+                <list editable="bottom">
+                    <field name="name" required="1"/>
+                </list>
+            </field>
+        </record>
+        <record id="action_insurance_nominee_relation" model="ir.actions.act_window">
+            <field name="name">Nominee Relations</field>
+            <field name="res_model">insurance.nominee.relation</field>
+            <field name="view_mode">list</field>
+        </record>
+    </data>
+</odoo>

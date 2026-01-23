@@ -1,0 +1,1090 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Insurance EMI-->
+        <record id="insurance_emi_form_view" model="ir.ui.view">
+            <field name="name">insurance.emi.form.view</field>
+            <field name="model">insurance.emi</field>
+            <field name="arch" type="xml">
+                <form edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="installment_date"/>
+                            </group>
+                            <group>
+                                <field name="installment_amount"/>
+                                <label for="invoice_id" string="Invoice" invisible="invoice_id == False"/>
+                                <div class="address_format">
+                                    <field name="invoice_id" invisible="invoice_id == False"
+                                           readonly="1" force_save="1" style="width: auto;"/>
+                                    <field name="payment_state" widget="badge"
+                                           decoration-success="payment_state=='paid'"
+                                           decoration-danger="payment_state=='not_paid'"
+                                           decoration-info="payment_state=='in_payment'"
+                                           decoration-primary="payment_state=='partial'"
+                                           decoration-warning="payment_state=='reversed'" nolabel="1"
+                                           invisible="invoice_id == False"
+                                           style="margin-left: 15px; width: auto;"/>
+                                </div>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Insurance Information -->
+        <record id="insurance_information_view_form" model="ir.ui.view">
+            <field name="name">insurance.information.view.form</field>
+            <field name="model">insurance.information</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="instalment_complete" invisible="1"/>
+                        <field name="renew_insurance_id" invisible="1"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,running,expired"/>
+                        <button string="Confirm" name="draft_to_confirmed" type="object" class="oe_highlight"
+                                invisible="state not in ['draft']" groups="tk_insurance_management.insurance_manager"/>
+
+                        <button class="oe_highlight" type="object" name="action_insurance_invoice"
+                                string="Create Invoice" groups="tk_insurance_management.insurance_manager"
+                                invisible="state not in ['confirmed'] or invoice_id != False or premium_type == 'installment'"/>
+
+                        <button class="oe_highlight" type="object" name="action_create_emi_installment"
+                                string="Create Installments" groups="tk_insurance_management.insurance_manager"
+                                invisible="state not in ['confirmed'] or instalment_complete != False or premium_type == 'fixed'"/>
+
+                        <button name="action_create_agent_bill" string="Create Agent Commission Bill" type="object"
+                                class="oe_highlight"
+                                invisible="state == 'draft' or agent_required == False or agent_bill_id != False"
+                                groups="tk_insurance_management.insurance_manager"/>
+
+                        <button string="Start Policy" name="confirmed_to_running" type="object" class="oe_highlight"
+                                invisible="instalment_complete == False or state not in ['confirmed']"
+                                groups="tk_insurance_management.insurance_manager"/>
+
+                        <button name="%(action_insurance_claim)d" string="Create Claim" type="action"
+                                class="oe_highlight" invisible="state != 'running' or total_due_amount == 0"
+                                groups="tk_insurance_management.insurance_manager"/>
+
+                        <button name="%(action_re_insurance_contract)d" string="Create ReInsurance" type="action"
+                                class="btn btn-info" groups="tk_insurance_management.insurance_manager"
+                                invisible="state not in ['confirmed', 'running'] or is_reinsurance_required == False or re_insurance_id != False"/>
+
+                        <button string="Renew Insurance" name="%(action_renew_insurance)d" type="action"
+                                class="btn btn-info" invisible="state not in ['expired'] or renew_insurance_id != False"
+                                groups="tk_insurance_management.insurance_manager"/>
+
+                        <button string="Cancel" name="renew_to_cancel" type="object" class="btn btn-danger"
+                                groups="tk_insurance_management.insurance_manager"
+                                invisible="state in ['draft', 'cancel', 'expired']"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box" position="inside">
+                            <button class="oe_stat_button" type="object" name="action_insured_document"
+                                    icon="fa-fw o_button_icon fa-id-card-o">
+                                <field string="Documents" name="document_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="action_insured_claim"
+                                    icon="fa-bars" invisible="claim_count == 0">
+                                <field string="Claims" name="claim_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="action_remaining_amount" icon="fa-money"
+                                    invisible="claim_count == 0 or total_due_amount == 0">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_due_amount"/>
+                                    </span>
+                                    <span class="o_stat_text">Remain Amounts</span>
+                                </div>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="action_renew_insurance_view"
+                                    icon="fa-heartbeat" invisible="renew_insurance_id == False">
+                                <field string="Renew" name="renew_insurance_count" widget="statinfo"/>
+                                <field name="renew_insurance_id" invisible="1"/>
+                            </button>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="oe_title">
+                                    <h1>
+                                        <field name="insurance_number"/>
+                                    </h1>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="text-align: right; margin: 0px;"
+                                 invisible="renew_insurance_id == False">
+                                <widget name="web_ribbon" title="Renew" bg_color="bg-success"/>
+                            </div>
+                        </div>
+                        <separator string="Policy Holder Details" name="policy_holder_details"/>
+                        <group>
+                            <group>
+                                <field name="crm_lead_id" invisible="crm_lead_id == False" readonly="1"/>
+                                <field name="policy_holder_id" required="1" readonly="state not in 'draft'"
+                                       options="{'no_edit': True, 'no_create': True}"/>
+                                <field name="policy_holder_gender" widget="radio" options="{'horizontal': true}"
+                                       required="1" readonly="state not in 'draft'"/>
+                                <label for="policy_holder_dob" string="Date of Birth"/>
+                                <div class="address_format">
+                                    <field name="policy_holder_dob" style="width: 35%" required="1"
+                                           readonly="state not in 'draft'"/>
+                                    <strong style="margin-left: 15px;">&#160;Age</strong>
+                                    <field name="policy_holder_age" style="width: 35%; margin-left: 10px;"
+                                           readonly="1"/>
+                                </div>
+                                <field name="access_token" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="email" readonly="state not in 'draft'"/>
+                                <field name="phone" readonly="state not in 'draft'"/>
+                                <span class="o_form_label o_td_label" name="address_name">
+                                    Address
+                                </span>
+                                <div class="o_address_format">
+                                    <field name="policy_holder_street" placeholder="Street" class="o_address_street"
+                                           readonly="state not in 'draft'"/>
+                                    <field name="policy_holder_street2" placeholder="Street 2"
+                                           class="o_address_street" readonly="state not in 'draft'"/>
+                                    <field name="policy_holder_city" placeholder="City" class="o_address_city"
+                                           readonly="state not in 'draft'"/>
+                                    <field name="policy_holder_state_id" class="o_address_state" placeholder="State"
+                                           options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                                           readonly="state not in 'draft'"/>
+                                    <field name="policy_holder_zip" placeholder="ZIP" class="o_address_zip"
+                                           readonly="state not in 'draft'"/>
+                                    <field name="policy_holder_country_id" placeholder="Country"
+                                           class="o_address_country" readonly="state not in 'draft'"
+                                           options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                </div>
+                            </group>
+                        </group>
+                        <separator string="Policy Details" name="policy_details"/>
+                        <group>
+                            <group>
+                                <field name="insurance_category_id" options="{'no_edit': True, 'no_create': True}"
+                                       readonly="state not in 'draft'" required="1"/>
+                                <field name="insurance_sub_category_id" options="{'no_edit': True, 'no_create': True}"
+                                       readonly="state not in 'draft'" required="1"/>
+                                <field name="insurance_policy_id" options="{'no_edit': True, 'no_create': True}"
+                                       readonly="state not in 'draft'" required="1"/>
+                                <field name="insurance_buying_for_id" options="{'no_edit': True, 'no_create': True}"
+                                       readonly="state not in 'draft'"/>
+                                <field name="policy_provider_cmp_id" readonly="state not in 'draft'" required="1"
+                                       options="{'no_edit': True, 'no_create': True}"/>
+                                <field name="previous_insurance_id" invisible="previous_insurance_id == False"
+                                       readonly="1"/>
+                                <field name="renew_insurance_lead_id" invisible="renew_insurance_lead_id == False"
+                                       readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="policy_certificate_no" required="category == 'vehicle'"
+                                       invisible="category != 'vehicle'" readonly="state not in 'draft'"/>
+                                <field name="previous_policy_no" required="category == 'vehicle'"
+                                       invisible="category != 'vehicle'" readonly="state not in 'draft'"/>
+                                <field name="policy_price_list_id" required="1" readonly="state not in 'draft'"
+                                       options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                                <field name="policy_durations" invisible="1"/>
+                                <field name="issue_date" required="1" readonly="state not in 'draft'"/>
+                                <field name="expiry_date" readonly="1" force_save="1"/>
+                                <field name="is_auto_cancellation" invisible="1"/>
+                                <field name="cancellation_date" invisible="1"/>
+                                <field name="insurance_expiry_days" invisible="1"/>
+                                <field name="reminder_days" invisible="1"/>
+                                <field name="policy_amount" readonly="state not in 'draft'"/>
+                                <field name="category" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+
+                                <field name="is_reinsurance_required"
+                                       readonly="state in ['expired', 'renew', 'cancel'] or re_insurance_id != False"/>
+                                <label for="re_insurance_id" string="ReInsurance"
+                                       invisible="re_insurance_id == False"/>
+                                <div class="address_format" invisible="re_insurance_id == False">
+                                    <field name="re_insurance_id" style="width: auto;" readonly="1"/>
+                                    <field name="re_insurance_status" widget="badge"
+                                           decoration-info="re_insurance_status == 'draft'"
+                                           decoration-warning="re_insurance_status == 'active'"
+                                           decoration-success="re_insurance_status in ('running', 'approve')"
+                                           decoration-danger="re_insurance_status in ('expired', 'reject')"
+                                           optional="show" style="margin-left: 15px; width: auto;"/>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Agent Details">
+                                <field name="agent_required" readonly="agent_bill_id != False or state not in 'draft'"/>
+                                <field name="agent_id" options="{'no_create': True}" invisible="agent_required == False"
+                                       readonly="agent_bill_id != False or state not in 'draft'"
+                                       required="agent_required != False"/>
+                                <field name="agent_phone" invisible="agent_required == False"/>
+                                <field name="agent_email" invisible="agent_required == False"/>
+                            </group>
+                            <group string="Agent Commission Details" invisible="agent_required == False">
+                                <field name="commission_type" widget="radio" options="{'horizontal': true}"
+                                       readonly="agent_bill_id != False" required="agent_required == True"/>
+                                <field name="fixed_commission"
+                                       invisible="commission_type != 'fixed'" readonly="agent_bill_id != False"/>
+                                <field name="percentage_commission"
+                                       invisible="commission_type != 'percentage'" readonly="agent_bill_id != False"/>
+                                <field name="total_commission"
+                                       invisible="commission_type != 'percentage'"/>
+                                <field name="agent_bill_id" invisible="agent_bill_id == False" readonly="1"/>
+                            </group>
+                        </group>
+                        <separator string="Insured Details" name="insured_details"
+                                   invisible="category != 'health'"/>
+                        <group invisible="category != 'health'">
+                            <group invisible="desired_coverage_type != 'individual'">
+                                <field name="insured_id" readonly="state not in 'draft'"
+                                       options="{'no_edit': True, 'no_create': True}"/>
+                                <field name="gender" readonly="state not in 'draft'"/>
+                                <label for="dob" string="Date of Birth"/>
+                                <div class="address_format">
+                                    <field name="dob" style="width: 35%" readonly="state not in 'draft'"/>
+                                    <strong style="margin-left: 15px;">&#160;Age</strong>
+                                    <field name="age" style="width: 35%; margin-left: 10px;"/>
+                                </div>
+                                <field name="marital_status" readonly="state not in 'draft'"/>
+                            </group>
+                            <group invisible="desired_coverage_type != 'individual'">
+                                <field name="blood_group" readonly="state not in 'draft'"/>
+                                <field name="insured_height" readonly="state not in 'draft'"/>
+                                <field name="insured_weight" readonly="state not in 'draft'"/>
+                                <field name="insured_birthmark" readonly="state not in 'draft'"/>
+                            </group>
+                            <field name="insured_details_ids" readonly="state not in 'draft'"
+                                   invisible="desired_coverage_type not in ['family', 'group']">
+                                <list editable="bottom">
+                                    <field name="partner_id"/>
+                                    <field name="insured_dob"/>
+                                    <field name="insured_ages"/>
+                                    <field name="insured_gender"/>
+                                    <field name="insured_blood_group"/>
+                                    <field name="insured_heights"/>
+                                    <field name="insured_weights"/>
+                                    <field name="insured_birthmarks"/>
+                                    <field name="insured_marital_status"/>
+                                </list>
+                            </field>
+                        </group>
+                        <separator string="Life Insurance Policy Details" name="life_insurance_policy_details"
+                                   invisible="category != 'life'"/>
+                        <group invisible="category != 'life'">
+                            <group>
+                                <field name="life_insured_age" string="Insured Age" force_save="1"
+                                       readonly="state not in 'draft'"/>
+                                <field name="is_smoking_status" widget="radio" options="{'horizontal': true}"
+                                       readonly="renew_insurance_id != False"/>
+                            </group>
+                            <group>
+                                <field name="desired_death_amount" readonly="state not in 'draft'"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <div class="row" invisible="category != 'life'">
+                            <br/>
+                            <hr/>
+                            <div class="col-6">
+                                <h5>Length of Coverage Terms</h5>
+                                <field name="length_of_coverage_term" readonly="state not in 'draft'"/>
+                                <h5>Occupation and Hobbies of Insured</h5>
+                                <field name="occupation_and_hobbies" readonly="state not in 'draft'"/>
+                            </div>
+                            <div class="col-6">
+                                <h5>Health History of Insured</h5>
+                                <field name="life_health_history" readonly="state not in 'draft'"/>
+                                <h5>Family Medical History of Insured</h5>
+                                <field name="family_medical_history" readonly="state not in 'draft'"/>
+                            </div>
+                            <hr/>
+                        </div>
+
+                        <separator string="Health Insurance Policy Details" name="health_insurance_policy_details"
+                                   invisible="category != 'health'"/>
+                        <group invisible="category != 'health'">
+                            <group>
+                                <field name="desired_coverage_type" required="category == 'health'"
+                                       widget="radio" options="{'horizontal': true}" string="Coverage Type"
+                                       readonly="category != 'health' or state not in 'draft'"/>
+                                <field name="health_insured_age" readonly="1" force_save="1"
+                                       invisible="category != 'health' or desired_coverage_type != 'individual'"/>
+                            </group>
+                            <group>
+                                <field name="health_deductible_amount" string="Deductible Amount"
+                                       readonly="state not in 'draft'"/>
+                                <field name="copay_amount" readonly="state not in 'draft'"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <div class="row" invisible="category != 'health'">
+                            <br/>
+                            <hr/>
+                            <div class="col-6">
+                                <h5>Out of Pocket Maximum</h5>
+                                <field name="out_of_pocket_maximum" readonly="state not in 'draft'"/>
+                                <h5>Health History of Insured</h5>
+                                <field name="health_history_of_insured" readonly="state not in 'draft'"/>
+                            </div>
+                            <div class="col-6">
+                                <h5>Prescription Drug Coverage</h5>
+                                <field name="drug_coverage" readonly="state not in 'draft'"/>
+                                <h5>Preferred Healthcare Provider Network</h5>
+                                <field name="healthcare_provider_network" readonly="state not in 'draft'"/>
+                            </div>
+                            <hr/>
+                        </div>
+
+                        <separator string="Property Insurance Policy Details" name="property_insurance_policy_details"
+                                   invisible="category != 'property'"/>
+                        <group invisible="category != 'property'">
+                            <group>
+                                <field name="property_type" readonly="state not in 'draft'"/>
+                                <field name="area_sq_ft" readonly="state not in 'draft'"/>
+                                <field name="construct_year" required="category == 'property'"
+                                       readonly="state not in 'draft'"/>
+                                <field name="desired_coverage_types" string="Coverage Type"
+                                       required="category == 'property'" readonly="state not in 'draft'"/>
+                                <field name="property_usage" readonly="state not in 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="property_value" readonly="state not in 'draft'"/>
+                                <field name="property_deductible_amount" string="Deductible Amount"
+                                       readonly="state not in 'draft'"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                                <span class="o_form_label o_td_label" name="address_name">
+                                    Address
+                                </span>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street"
+                                           readonly="state not in 'draft'"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"
+                                           readonly="state not in 'draft'"/>
+                                    <field name="city" placeholder="City" class="o_address_city"
+                                           readonly="state not in 'draft'"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State"
+                                           options="{'no_create':True,'no_create_edit':True,'no_open':True}"
+                                           readonly="state not in 'draft'"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                           readonly="state not in 'draft'"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country"
+                                           options="{'no_create':True,'no_create_edit':True,'no_open':True}"
+                                           readonly="state not in 'draft'"/>
+                                </div>
+                            </group>
+                        </group>
+                        <div class="row" invisible="category != 'property'">
+                            <br/>
+                            <hr/>
+                            <div class="col-6">
+                                <h5>Property Coverage Limits</h5>
+                                <field name="property_coverage_limits" readonly="state not in 'draft'"/>
+                                <h5>Construction Type and Materials</h5>
+                                <field name="construction_type_and_materials"
+                                       readonly="state not in 'draft'"/>
+                            </div>
+                            <div class="col-6">
+                                <h5>Special Features of the Property</h5>
+                                <field name="special_features_of_the_property"
+                                       readonly="state not in 'draft'"/>
+                                <h5>Personal Property Inventory</h5>
+                                <field name="personal_property_inventory" readonly="state not in 'draft'"/>
+                            </div>
+                            <hr/>
+                        </div>
+
+                        <separator string="Liability Insurance Policy Details" name="liability_insurance_policy_details"
+                                   invisible="category != 'liability'"/>
+                        <group invisible="category != 'liability'">
+                            <group>
+                                <field name="liability_coverage_type" string="Coverage Type"
+                                       required="category == 'liability'" readonly="state not in 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="type_of_liability_risk" widget="radio" options="{'horizontal': true}"
+                                       readonly="state not in 'draft'"/>
+                            </group>
+                        </group>
+                        <div class="row" invisible="category != 'liability'">
+                            <br/>
+                            <hr/>
+                            <div class="col-6">
+                                <h5>Desired Coverage Limits</h5>
+                                <field name="desired_coverage_limits" readonly="state not in 'draft'"/>
+                            </div>
+                            <div class="col-6">
+                                <h5>Business Type and Operations (for Business Liability Insurance)</h5>
+                                <field name="business_type_and_operations" readonly="state not in 'draft'"/>
+                            </div>
+                            <hr/>
+                        </div>
+
+                        <separator string="Disability Insurance Policy Details"
+                                   name="disability_insurance_policy_details" invisible="category != 'disability'"/>
+                        <group invisible="category != 'disability'">
+                            <group>
+                                <field name="occupation" required="category == 'disability'"
+                                       readonly="state not in 'draft'"/>
+                                <field name="insured_is_smoking" readonly="renew_insurance_id != False"/>
+                            </group>
+                            <group>
+                                <field name="income" readonly="state not in 'draft'"/>
+                                <field name="disability_desired_benefit_amount" readonly="state not in 'draft'"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <div class="row" invisible="category != 'disability'">
+                            <br/>
+                            <hr/>
+                            <div class="col-6">
+                                <h5>Length of Coverage Period</h5>
+                                <field name="length_coverage_disability_period" readonly="state not in 'draft'"/>
+                                <h5>Health History</h5>
+                                <field name="disability_health_history" readonly="state not in 'draft'"/>
+                            </div>
+                            <div class="col-6">
+                                <h5>Occupation and Hobbies of Insured</h5>
+                                <field name="occupation_and_hobbies" readonly="state not in 'draft'"/>
+                            </div>
+                            <hr/>
+                        </div>
+
+                        <separator string="Travel Insurance Policy Details" name="travel_insurance_policy_details"
+                                   invisible="category != 'travel'"/>
+                        <group invisible="category != 'travel'">
+                            <group>
+                                <field name="types_of_coverage" widget="radio"
+                                       readonly="renew_insurance_id != False"/>
+                                <field name="travel_source" readonly="state not in 'draft'"/>
+                                <field name="travel_destination" readonly="state not in 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="trip_start_date"/>
+                                <field name="trip_end_date"/>
+                                <label for="trip_length"/>
+                                <div class="o_row">
+                                    <field name="trip_length" readonly="state not in 'draft'"/>
+                                    <field name="odometer_unit"/>
+                                </div>
+                                <field name="trip_coverage_amount" readonly="state not in 'draft'"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <div class="row" invisible="category != 'travel'">
+                            <br/>
+                            <hr/>
+                            <div class="col-6">
+                                <h5>Travel Purpose</h5>
+                                <field name="travel_purpose" readonly="state not in 'draft'"/>
+                            </div>
+                            <div class="col-6">
+                                <h5>Traveler Health History</h5>
+                                <field name="traveler_health_history" readonly="state not in 'draft'"/>
+                            </div>
+                            <hr/>
+                        </div>
+
+                        <separator string="Pet Insurance Policy Details" name="pet_insurance_policy_details"
+                                   invisible="category != 'pet'"/>
+                        <group invisible="category != 'pet'">
+                            <group>
+                                <field name="pet_name"/>
+                                <label for="age_of_breed_of_the_pet" string="Age"/>
+                                <div class="address_format">
+                                    <field name="age_of_breed_of_the_pet" style="width: 35%"
+                                           readonly="state not in 'draft'"/>
+                                    <strong>&#160;&#160;Years&#160;&#160;</strong>
+                                </div>
+                                <field name="pet_desired_coverage_type" widget="radio" options="{'horizontal': true}"
+                                       string="Coverage Type" readonly="renew_insurance_id != False"/>
+                            </group>
+                            <group>
+                                <field name="breed_type"/>
+                                <field name="exclusions" widget="radio" options="{'horizontal': true}"
+                                       readonly="state not in 'draft'"/>
+                                <field name="accident_coverage"
+                                       invisible="pet_desired_coverage_type == False or pet_desired_coverage_type == 'illness'"
+                                       required="category == 'pet'" readonly="state != 'draft'"/>
+                                <field name="illness_coverage"
+                                       invisible="pet_desired_coverage_type == False or pet_desired_coverage_type == 'accident'"
+                                       required="category == 'pet'" readonly="state != 'draft'"/>
+                                <field name="pet_deductible_amount" string="Deductible Amount"
+                                       readonly="state not in 'draft'"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <div class="row" invisible="category != 'pet'">
+                            <br/>
+                            <hr/>
+                            <div class="col-6">
+                                <h6>Health History</h6>
+                                <field name="pet_health_history" readonly="state not in 'draft'"/>
+                            </div>
+                            <div class="col-6">
+                                <h6>Coverage Limits</h6>
+                                <field name="pet_coverage_limits" readonly="state not in 'draft'"/>
+                            </div>
+                            <hr/>
+                        </div>
+
+                        <separator string="Business Insurance Policy Details" name="business_insurance_policy_details"
+                                   invisible="category != 'business'"/>
+                        <group invisible="category != 'business'">
+                            <group>
+                                <field name="business_name" readonly="state not in 'draft'"/>
+                                <field name="business_desired_coverage_type" widget="radio" string="Coverage Type"
+                                       readonly="renew_insurance_id != False"/>
+                            </group>
+                            <group>
+                                <field name="business_property_value" readonly="state not in 'draft'"/>
+                                <field name="number_of_employees" readonly="state not in 'draft'"/>
+                                <field name="business_deductible_amount" string="Deductible Amount"
+                                       readonly="state not in 'draft'"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <div class="row" invisible="category != 'business'">
+                            <br/>
+                            <hr/>
+                            <div class="col-6">
+                                <h5>Business Type and Operations</h5>
+                                <field name="business_type_operation" readonly="state not in 'draft'"/>
+                                <h5>Industry Specific Risks(Such as Malpractice Insurance for Healthcare Providers)</h5>
+                                <field name="industry_specific_risks" readonly="state not in 'draft'"/>
+                            </div>
+                            <div class="col-6">
+                                <h5>Business Coverage Limits</h5>
+                                <field name="business_coverage_limits" readonly="state not in 'draft'"/>
+                            </div>
+                            <hr/>
+                        </div>
+                        <group>
+                            <group>
+                            </group>
+                            <group name="insurance_manager" string="Insurance Manager Details">
+                                <field name="responsible_id" widget="many2one_avatar_user" required="1"
+                                       options="{'no_edit': True, 'no_create': True}"
+                                       readonly="state not in 'draft'"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page name="payment_details" string="Payment Details">
+                                <group>
+                                    <group string="Types of Payments">
+                                        <field name="premium_type" widget="radio" options="{'horizontal': true}"
+                                               readonly="instalment_complete == True"/>
+                                    </group>
+                                    <group string="Payment Details">
+                                        <field name="currency_id" invisible="1"/>
+                                        <label for="total_policy_amount" string="Total Policy Amount"/>
+                                        <div class="address_format">
+                                            <field name="total_policy_amount" force_save="1" readonly="1"
+                                                   style="width: auto;"/>
+                                            <strong invisible="premium_type == 'fixed'"
+                                                    style="margin-left: 15px; width:auto;">
+                                                &#160;&#160;Monthly Installments&#160;&#160;
+                                            </strong>
+                                            <field name="monthly_installment" invisible="premium_type == 'fixed'"
+                                                   readonly="1" force_save="1" style="margin-left: 15px; width: auto;"/>
+                                        </div>
+
+                                        <field name="claim_amount" readonly="1" force_save="1"/>
+
+                                        <label for="invoice_id" string="Insurance Invoice"
+                                               invisible="invoice_id == False or premium_type == 'installment'"/>
+                                        <div class="address_format">
+                                            <field name="invoice_id"
+                                                   invisible="invoice_id == False or premium_type == 'installment'"
+                                                   readonly="1" force_save="1" style="width: auto;"/>
+                                            <field name="payment_state" widget="badge"
+                                                   decoration-success="payment_state=='paid'"
+                                                   decoration-danger="payment_state=='not_paid'"
+                                                   decoration-info="payment_state=='in_payment'"
+                                                   decoration-primary="payment_state=='partial'"
+                                                   decoration-warning="payment_state=='reversed'" nolabel="1"
+                                                   invisible="invoice_id == False or premium_type == 'installment'"
+                                                   style="margin-left: 15px; width: auto;"/>
+                                        </div>
+                                    </group>
+                                </group>
+
+                                <separator string="Insurance EMI Details" name="insurance_emi_details"
+                                           invisible="premium_type == 'fixed' or instalment_complete == False"/>
+                                <field name="insurance_emi_ids"
+                                       invisible="premium_type == 'fixed' or instalment_complete == False" nolabel="1">
+                                    <list create="false"
+                                          decoration-success="payment_state == 'paid'"
+                                          decoration-danger="payment_state == 'not_paid'">
+                                        <field name="name" readonly="1"/>
+                                        <field name="installment_date" readonly="1"/>
+                                        <field name="premium_type" column_invisible="True"/>
+                                        <field name="installment_amount" sum="installment_amount" readonly="1"/>
+                                        <field name="invoice_id" readonly="1" widget="many2one_button"/>
+                                        <field name="payment_state" widget="badge"
+                                               decoration-success="payment_state=='paid'"
+                                               decoration-danger="payment_state=='not_paid'"
+                                               decoration-info="payment_state=='in_payment'"
+                                               decoration-primary="payment_state=='partial'"
+                                               decoration-warning="payment_state=='reversed'"/>
+                                        <field name="company_id" column_invisible="True"/>
+                                        <field name="currency_id" column_invisible="True"/>
+                                        <button class="btn btn-outline-primary" type="object" icon="fa-share-square-o"
+                                                name="action_insurance_emi_invoice"
+                                                string="Create Invoice" invisible="invoice_id != False"
+                                                groups="tk_insurance_management.insurance_manager"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page name="property_insurance_image" string="Property Images"
+                                  invisible="category != 'property'">
+                                <field name="property_insurance_image_ids" nolabel="1" readonly="state in 'expired'">
+                                    <form>
+                                        <sheet>
+                                            <div class="oe_title float-left">
+                                                <label for="name"/>
+                                                <h1>
+                                                    <field name="name" placeholder="e.g. Front View" required="1"/>
+                                                </h1>
+                                            </div>
+                                            <div style="width: 40%; height: 40%;" class="float-right">
+                                                <field name="avatar" style="width: 40%; height: 40%;"
+                                                       class="img-thumbnail float-right" widget="image"/>
+                                            </div>
+                                        </sheet>
+                                    </form>
+                                    <kanban string="Property Images">
+                                        <field name="id"/>
+                                        <field name="name"/>
+                                        <field name="avatar"/>
+                                        <templates>
+                                            <t t-name="card" class="border-0">
+                                                <div class="card oe_kanban_global_click p-0 border-0">
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <strong>
+                                                                <field name="name"/>
+                                                            </strong>
+                                                        </div>
+                                                        <div class="col-4 text-end">
+                                                            <!-- below 100 Kb: good -->
+                                                            <t t-if="record.avatar.raw_value.length &lt; 100*1000">
+                                                                <t t-set="size_status" t-value="'text-bg-success'"/>
+                                                                <t t-set="message">Acceptable file size</t>
+                                                            </t>
+                                                            <!-- below 1000 Kb: decent -->
+                                                            <t t-elif="record.avatar.raw_value.length &lt; 1000*1000">
+                                                                <t t-set="size_status" t-value="'text-bg-warning'"/>
+                                                                <t t-set="message">Huge file size. The image should be
+                                                                    optimized/reduced.
+                                                                </t>
+                                                            </t>
+                                                            <!-- above 1000 Kb: bad -->
+                                                            <t t-else="1">
+                                                                <t t-set="size_status" t-value="'text-bg-danger'"/>
+                                                                <t t-set="message">Optimization required! Reduce the
+                                                                    image size or increase your compression settings.
+                                                                </t>
+                                                            </t>
+                                                            <span t-attf-class="badge #{size_status} o_product_image_size"
+                                                                  t-esc="record.avatar.value" t-att-title="message"/>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="mb-1 mt-1"/>
+                                                    <div class="h-100 w-100">
+                                                        <field name="avatar" widget="image" class="card-img-top"
+                                                               style="height:223px;"
+                                                               options="{'img_class': 'object-fit-cover h-100 w-100', 'size': [360, 223]}"/>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                            <page name="vehicle_insurance_policy_details" string="Vehicle Insurance Policy Details"
+                                  invisible="category != 'vehicle'">
+                                <group string="Insured Vehicle Details">
+                                    <group>
+                                        <field name="vehicle_name" required="category == 'vehicle'"
+                                               readonly="state not in 'draft'"/>
+                                        <field name="model" readonly="state not in 'draft'"/>
+                                        <field name="year" readonly="state not in 'draft'"/>
+                                        <field name="cubic_capacity" readonly="state not in 'draft'"/>
+                                        <field name="setting_capacity" readonly="state not in 'draft'"/>
+                                    </group>
+                                    <group>
+                                        <field name="vin_no" required="category == 'vehicle'"
+                                               readonly="state not in 'draft'"/>
+                                        <field name="reg_no"
+                                               required="category == 'vehicle'"
+                                               readonly="state not in 'draft'"/>
+                                        <field name="place_of_reg" readonly="state not in 'draft'"/>
+                                        <field name="usage_of_vehicle" widget="radio" options="{'horizontal': true}"
+                                               readonly="state not in 'draft'"/>
+                                        <field name="coverage_type" string="Coverage Type"
+                                               readonly="state not in 'draft'"/>
+                                    </group>
+                                </group>
+                                <group string="Vehicle Insured Declared Values">
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <group>
+                                        <field name="for_the_vehicle" readonly="state not in 'draft'"/>
+                                        <field name="for_trailer" readonly="state not in 'draft'"/>
+                                        <field name="non_electric_accessories"
+                                               readonly="state not in 'draft'"/>
+                                    </group>
+                                    <group>
+                                        <field name="electric_accessories" readonly="state not in 'draft'"/>
+                                        <field name="value_of_cng_lpg_kit" readonly="state not in 'draft'"/>
+                                        <field name="total_idv" readonly="state not in 'draft'" force_save="1"/>
+                                    </group>
+                                </group>
+                                <group string="Schedule of Premiums">
+                                    <group string="Own Damage Premium">
+                                        <field name="basic_od" readonly="state not in 'draft'"/>
+                                        <field name="od_package_premium" string="Package Premium"
+                                               readonly="state not in 'draft'"/>
+                                        <field name="service_tax" readonly="state not in 'draft'"/>
+                                        <field name="special_discount" readonly="state not in 'draft'"/>
+                                        <field name="final_premium" readonly="state not in 'draft'" force_save="1"/>
+                                    </group>
+                                    <group string="Third Party Liability Premium">
+                                        <field name="basic_tp_liability" readonly="state not in 'draft'"/>
+                                        <field name="pa_cover_for_owner_driver"
+                                               readonly="state not in 'draft'"/>
+                                        <field name="package_premium" string="Package Premium"
+                                               readonly="state not in 'draft'"/>
+                                        <field name="liability_service_tax"
+                                               readonly="state not in 'draft'"/>
+                                        <field name="total_premium" readonly="state not in 'draft'" force_save="1"/>
+                                    </group>
+                                </group>
+                                <br/>
+                                <hr/>
+                                <h5>Limitation as to Use</h5>
+                                <field name="limitation_as_to_use" readonly="state not in 'draft'"/>
+                                <hr/>
+                                <h5>Limits of Liability</h5>
+                                <field name="limits_of_liability" readonly="state not in 'draft'"/>
+                                <hr/>
+                                <h5>Deductibles Under Section</h5>
+                                <field name="deductibles_under_section" readonly="state not in 'draft'"/>
+                                <hr/>
+                                <h5>Special Conditions</h5>
+                                <field name="special_conditions" readonly="state not in 'draft'"/>
+                                <hr/>
+                                <h5>Driving History</h5>
+                                <field name="driving_history" readonly="state not in 'draft'"/>
+                            </page>
+                            <page name="vehicle_images" string="Vehicle Images" invisible="category != 'vehicle'">
+                                <field name="vehicle_insurance_image_ids" nolabel="1" readonly="state in 'expired'">
+                                    <form>
+                                        <sheet>
+                                            <div class="oe_title float-left">
+                                                <label for="name"/>
+                                                <h1>
+                                                    <field name="name" placeholder="e.g. Front Side" required="1"/>
+                                                </h1>
+                                            </div>
+                                            <div style="width: 40%; height: 40%;" class="float-right">
+                                                <field name="avatar" style="width: 40%; height: 40%;"
+                                                       class="img-thumbnail float-right" widget="image"/>
+                                            </div>
+                                        </sheet>
+                                    </form>
+                                    <kanban string="Vehicle Insurance Images">
+                                        <field name="id"/>
+                                        <field name="name"/>
+                                        <field name="avatar"/>
+                                        <templates>
+                                            <t t-name="card" class="border-0">
+                                                <div class="card oe_kanban_global_click p-0 border-0">
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <strong>
+                                                                <field name="name"/>
+                                                            </strong>
+                                                        </div>
+                                                        <div class="col-4 text-end">
+                                                            <!-- below 100 Kb: good -->
+                                                            <t t-if="record.avatar.raw_value.length &lt; 100*1000">
+                                                                <t t-set="size_status" t-value="'text-bg-success'"/>
+                                                                <t t-set="message">Acceptable file size</t>
+                                                            </t>
+                                                            <!-- below 1000 Kb: decent -->
+                                                            <t t-elif="record.avatar.raw_value.length &lt; 1000*1000">
+                                                                <t t-set="size_status" t-value="'text-bg-warning'"/>
+                                                                <t t-set="message">Huge file size. The image should be
+                                                                    optimized/reduced.
+                                                                </t>
+                                                            </t>
+                                                            <!-- above 1000 Kb: bad -->
+                                                            <t t-else="1">
+                                                                <t t-set="size_status" t-value="'text-bg-danger'"/>
+                                                                <t t-set="message">Optimization required! Reduce the
+                                                                    image size or increase your compression settings.
+                                                                </t>
+                                                            </t>
+                                                            <span t-attf-class="badge #{size_status} o_product_image_size"
+                                                                  t-esc="record.avatar.value" t-att-title="message"/>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="mb-1 mt-1"/>
+                                                    <div class="h-100 w-100">
+                                                        <field name="avatar" widget="image" class="card-img-top"
+                                                               style="height:223px;"
+                                                               options="{'img_class': 'object-fit-cover h-100 w-100', 'size': [360, 223]}"/>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                            <page name="policy_description" string="Policy Description">
+                                <field name="policy_descriptions" readonly="state not in 'draft'"/>
+                            </page>
+                            <page name="policy_terms_and_condition" string="Terms &amp; Conditions">
+                                <field name="policy_terms_and_conditions" readonly="state not in 'draft'"/>
+                            </page>
+                            <page name="insurance_nominees" string="Insurance Nominee">
+                                <field name="insurance_nominee_ids" readonly="state not in ['draft', 'confirmed']">
+                                    <list>
+                                        <field name="partner_id"/>
+                                        <field name="insurance_nominee_relation_id"/>
+                                        <field name="nominee_dob"/>
+                                        <field name="nominee_age"/>
+                                        <field name="percentage" widget="progressbar" sum="percentage"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page name="declaration_signatures" string="Declaration &amp; Signatures">
+                                <field name="declaration"/>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <field name="policy_holder_signature" widget="signature" nolabel="1"/>
+                                        <br/>
+                                        <span>
+                                            <strong>
+                                                Policy Holder Signature
+                                            </strong>
+                                        </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <field name="authorized_signatory" widget="signature" nolabel="1"/>
+                                        <br/>
+                                        <span>
+                                            <strong>
+                                                Authorized Signature
+                                            </strong>
+                                        </span>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+        <record id="insurance_information_view_list" model="ir.ui.view">
+            <field name="name">insurance.information.view.list</field>
+            <field name="model">insurance.information</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="insurance_number"/>
+                    <field name="policy_holder_id"/>
+                    <field name="insurance_category_id"/>
+                    <field name="insurance_sub_category_id"/>
+                    <field name="insurance_policy_id"/>
+                    <field name="policy_price_list_id"/>
+                    <field name="issue_date"/>
+                    <field name="expiry_date"/>
+                    <field name="state" widget="badge"
+                           decoration-info="state == 'draft'"
+                           decoration-warning="state == 'confirmed'"
+                           decoration-success="state == 'running'"
+                           decoration-danger="state in ('expired', 'cancel')"
+                           decoration-primary="state == 'renew'"/>
+                </list>
+            </field>
+        </record>
+        <record id="insurance_information_calendar_view" model="ir.ui.view">
+            <field name="name">insurance.information.calendar.view</field>
+            <field name="model">insurance.information</field>
+            <field name="arch" type="xml">
+                <calendar string="Insurance Information Calendar"
+                          date_start="issue_date"
+                          event_open_popup="true"
+                          mode="month"
+                          color="insurance_category_id"
+                          scales="day,month,year"
+                          quick_create="False">
+                    <field name="policy_holder_id"/>
+                    <field name="insurance_category_id" filters="1"/>
+                    <field name="insurance_sub_category_id"/>
+                    <field name="insurance_policy_id"/>
+                    <field name="policy_price_list_id"/>
+                    <field name="state" widget="badge"
+                           decoration-info="state == 'draft'"
+                           decoration-warning="state == 'confirmed'"
+                           decoration-success="state == 'running'"
+                           decoration-danger="state in ('expired', 'cancel')"
+                           decoration-primary="state == 'renew'"/>
+                </calendar>
+            </field>
+        </record>
+        <record id="insurance_information_kanban_view" model="ir.ui.view">
+            <field name="name">insurance.information.kanban.view</field>
+            <field name="model">insurance.information</field>
+            <field name="arch" type="xml">
+                <kanban edit="false" group_create="0" records_draggable="0" class="o_slide_kanban" sample="1"
+                        quick_create="false">
+                    <field name="id"/>
+                    <field name="insurance_number"/>
+                    <field name="issue_date"/>
+                    <field name="expiry_date"/>
+                    <field name="state"/>
+                    <field name="activity_ids"/>
+                    <field name="policy_holder_id"/>
+                    <field name="insurance_policy_id"/>
+                    <field name="policy_price_list_id"/>
+                    <field name="total_policy_amount"/>
+                    <field name="company_id"/>
+                    <field name="currency_id"/>
+                    <templates>
+                        <t t-name="card">
+                            <main>
+                                <!-- Header -->
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <field name="insurance_number" class="fw-bold fs-5"/>
+                                    <field name="state" widget="label_selection"
+                                           options="{'classes': {
+                                                           'draft': 'info',
+                                                           'confirmed': 'warning',
+                                                           'running': 'success',
+                                                           'expired': 'danger',
+                                                           'renew': 'primary',
+                                                           'cancel': 'danger'}}"/>
+                                </div>
+                                <!-- Insurance Info -->
+                                <div class="mb-2">
+                                    <div class="text-muted small mb-1">
+                                        <i class="fa fa-user me-1" title="Policy Holder"/>
+                                        <field name="policy_holder_id"/>
+                                    </div>
+                                    <div class="text-muted small mb-1">
+                                        <i class="fa fa-umbrella me-1" title="Insurance Policy"/>
+                                        <field name="insurance_policy_id"/>
+                                    </div>
+                                    <div class="text-muted small">
+                                        <i class="fa fa-clock-o me-1" title="Policy Price List"/>
+                                        <field name="policy_price_list_id"/>
+                                    </div>
+                                </div>
+                                <!-- Footer -->
+                                <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                                    <div class="text-muted small d-flex align-items-center flex-wrap">
+                                        <i class="fa fa-calendar me-1" title="Policy Period"/>
+                                        <field name="issue_date" class="me-1"/>
+                                        -
+                                        <field name="expiry_date" class="ms-1"/>
+                                        <field name="activity_ids" widget="kanban_activity" class="ms-2"/>
+                                    </div>
+                                    <div class="fw-bold text-end">
+                                        <field name="total_policy_amount"/>
+                                    </div>
+                                </div>
+                            </main>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="insurance_information_pivot_view" model="ir.ui.view">
+            <field name="name">insurance.information.pivot.view</field>
+            <field name="model">insurance.information</field>
+            <field name="arch" type="xml">
+                <pivot string="Insurance Analysis" sample="1">
+                    <field name="insurance_category_id" type="row"/>
+                    <field name="policy_holder_id" type="row"/>
+                    <field name="issue_date" type="col"/>
+                </pivot>
+            </field>
+        </record>
+        <record id="insurance_information_graph_view" model="ir.ui.view">
+            <field name="name">insurance.information.graph.view</field>
+            <field name="model">insurance.information</field>
+            <field name="arch" type="xml">
+                <graph string="Insurance Analysis" sample="1">
+                    <field name="policy_holder_id"/>
+                    <field name="insurance_number"/>
+                    <field name="issue_date" interval="month"/>
+                    <field name="expiry_date" interval="month"/>
+                </graph>
+            </field>
+        </record>
+        <record id="insurance_information_search_view" model="ir.ui.view">
+            <field name="name">insurance.information.search.view</field>
+            <field name="model">insurance.information</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="policy_holder_id"/>
+                    <field name="insurance_number"/>
+                    <group>
+                        <filter name="policy_holder_id" string="Policy Holder"
+                                context="{'group_by': 'policy_holder_id'}"/>
+                        <filter name="insurance_category_id" string="Policy Category"
+                                context="{'group_by': 'insurance_category_id'}"/>
+                        <filter name="insurance_sub_category_id" string="Sub Category"
+                                context="{'group_by': 'insurance_sub_category_id'}"/>
+                        <filter name="insurance_policy_id" string="Insurance Policy"
+                                context="{'group_by': 'insurance_policy_id'}"/>
+                        <filter name="policy_price_list_id" string="Policy Terms"
+                                context="{'group_by': 'policy_price_list_id'}"/>
+                        <filter name="premium_type" string="Premium Type"
+                                context="{'group_by': 'premium_type'}"/>
+                        <filter name="policy_holder_gender" string="Gender"
+                                context="{'group_by': 'policy_holder_gender'}"/>
+                        <filter name="agent_id" string="Agents"
+                                context="{'group_by': 'agent_id'}"/>
+                        <filter name="issue_date" string="Issue Date"
+                                context="{'group_by': 'issue_date'}"/>
+                        <filter name="expiry_date" string="Expiry Date"
+                                context="{'group_by': 'expiry_date'}"/>
+
+                        <filter name="state_draft" string="New"
+                                domain="[('state', '=', 'draft')]"/>
+                        <filter name="state_confirmed" string="Confirmed"
+                                domain="[('state', '=', 'confirmed')]"/>
+                        <filter name="state_running" string="Running"
+                                domain="[('state', '=', 'running')]"/>
+                        <filter name="state_expired" string="Expired"
+                                domain="[('state', '=', 'expired')]"/>
+                        <filter name="state_cancel" string="Cancelled"
+                                domain="[('state', '=', 'cancel')]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="insurance_information_action" model="ir.actions.act_window">
+            <field name="name">Insurances</field>
+            <field name="res_model">insurance.information</field>
+            <field name="view_mode">list,form,kanban,calendar,pivot,graph,search,activity</field>
+        </record>
+    </data>
+</odoo>

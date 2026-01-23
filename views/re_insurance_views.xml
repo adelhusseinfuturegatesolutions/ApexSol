@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!--Re Insurance Document List View-->
+        <record id="re_insurance_document_list_view" model="ir.ui.view">
+            <field name="name">re.insurance.document.list.view</field>
+            <field name="model">re.insurance.document</field>
+            <field name="arch" type="xml">
+                <list editable="bottom" duplicate="false">
+                    <field name="re_insurance_id" readonly="1"/>
+                    <field name="file_name" column_invisible="True"/>
+                    <field name="avatar" filename="file_name" widget="binary" required="1"
+                           readonly="status == 'verified'"/>
+                    <field name="description" readonly="status == 'verified'"/>
+                    <field name="status" widget="badge"
+                           decoration-info="status == 'draft'"
+                           decoration-success="status == 'verified'"
+                           decoration-danger="status == 'rejected'"/>
+                    <button string="Verified" name="verified_re_insurance_document" type="object"
+                            class="btn btn-success" invisible="status == 'verified' or status == 'rejected'"/>
+                    <button string="Rejected" name="rejected_re_insurance_document" type="object" class="btn btn-danger"
+                            invisible="status == 'rejected' or status == 'verified'"/>
+                    <button string="Resubmit" name="re_insurance_document_resubmit" type="object" class="btn btn-info"
+                            invisible="status != 'rejected'"/>
+                    <button string="Delete" name="action_delete_document" type="object" class="btn btn-danger"
+                            icon="fa-trash" confirm="Are you sure you want to delete this document?"
+                            invisible="status != 'rejected'"/>
+                </list>
+            </field>
+        </record>
+
+        <!--Re Insurance Form View-->
+        <record id="re_insurance_form_view" model="ir.ui.view">
+            <field name="name">re.insurance.form.view</field>
+            <field name="model">re.insurance</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" create="false">
+                    <header>
+                        <field name="status" widget="statusbar" statusbar_visible="draft,approve,active,running"/>
+                        <button string="Approve" name="draft_to_approve" type="object" class="btn btn-success"
+                                invisible="status != 'draft'" groups="tk_insurance_management.insurance_manager"/>
+                        <button string="Reject" name="%(action_reinsurance_reject_reason)d" type="action"
+                                class="btn btn-danger" invisible="status != 'draft'"
+                                confirm="Do you really want to proceed with rejecting the reinsurance?"
+                                groups="tk_insurance_management.insurance_manager"/>
+                        <button string="Active" name="approve_to_active" type="object" class="btn btn-warning"
+                                invisible="status != 'approve'" groups="tk_insurance_management.insurance_manager"/>
+                        <button string="Running" name="active_to_running" type="object" class="btn btn-success"
+                                invisible="status != 'active'" groups="tk_insurance_management.insurance_manager"/>
+                        <button string="Expired" name="running_to_expired" type="object" class="btn btn-danger"
+                                invisible="status != 'running'" groups="tk_insurance_management.insurance_manager"/>
+                        <button string="Reset to Draft" name="reinsurance_reset_to_draft" type="object"
+                                class="btn btn-info" invisible="status != 'reject'"
+                                groups="tk_insurance_management.insurance_manager"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box" position="inside">
+                            <button class="oe_stat_button" type="object" name="action_re_insurance_document_view"
+                                    icon="fa-fw o_button_icon fa-id-card-o">
+                                <field string="Documents" name="document_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="sequence_number"/>
+                            </h1>
+                        </div>
+                        <separator name="insurance_details" string="Insurance Details"/>
+                        <group>
+                            <group>
+                                <field name="insurance_id" readonly="1"/>
+                                <field name="insurance_policy_id" readonly="1"/>
+                                <field name="policy_number" readonly="1"/>
+                                <field name="policy_amount" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="contract_date" readonly="1"/>
+                                <field name="issue_date" readonly="1"/>
+                                <field name="expiry_date" readonly="1"/>
+                                <field name="sum_assured" readonly="1"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group name="policy_provider_details" string="Policy Provider (Ceding Company)">
+                                <field name="policy_provider_cmp_id" readonly="1"/>
+                                <field name="provider_phone" widget="phone" readonly="1"/>
+                                <field name="provider_email" widget="email" readonly="1"/>
+                            </group>
+                            <group name="reinsurer_company_details" string="ReInsurer Company Details">
+                                <field name="reinsurance_company_id" readonly="status != 'draft'"/>
+                                <field name="r_phone" widget="phone" readonly="status != 'draft'"/>
+                                <field name="r_email" widget="email" readonly="status != 'draft'"/>
+                                <field name="re_insurance_type_id" readonly="status != 'draft'"/>
+                                <field name="treaty_types" readonly="status != 'draft'"/>
+                            </group>
+                        </group>
+                        <separator name="financial_details" string="Financial Details"/>
+                        <group>
+                            <group>
+                                <field name="retention_amount" readonly="status != 'draft'"/>
+                                <field name="reinsured_amount" readonly="status != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="reinsurance_premium" readonly="status != 'draft'"/>
+                                <label for="reinsurer_percentage" string="Reinsurer Percentage"/>
+                                <div class="address_format">
+                                    <field name="reinsurer_percentage" style="width: 30%" readonly="status != 'draft'"/>
+                                    <strong>&#160;%&#160;</strong>
+                                </div>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <separator name="coverage_details" string="Coverage Details"/>
+                        <group>
+                            <group>
+                                <field name="territory" placeholder="e.g. UAE.." readonly="status != 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="start_date" readonly="status != 'draft'" required="1"/>
+                                <field name="end_date" readonly="status in ['running', 'expired']" required="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                            </group>
+                            <group name="manager_details" string="Manager Details">
+                                <field name="responsible_id" widget="many2one_avatar_user"
+                                       readonly="status != 'draft'"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="risk_description" string="Risk Descriptions">
+                                <field name="risk_description" nolabel="1" placeholder="Risk Description.."
+                                       readonly="status == 'expired'"/>
+                            </page>
+                            <page name="exclusion" string="Exclusions">
+                                <field name="exclusions" nolabel="1" placeholder="Exclusions.."
+                                       readonly="status == 'expired'"/>
+                            </page>
+                            <page name="terms_and_conditions" string="Terms &amp; Conditions">
+                                <field name="terms_and_conditions" nolabel="1" placeholder="Terms &amp; Conditions.."
+                                       readonly="status == 'expired'"/>
+                            </page>
+                            <page name="re_insurance_rejection_reasons" string="Rejection Reasons"
+                                  invisible="status != 'reject'">
+                                <field name="rejection_reason" nolabel="1" readonly="1"/>
+                            </page>
+                        </notebook>
+                        <br/>
+                        <div class="row">
+                            <div class="col-4">
+                            </div>
+                            <div class="col-4">
+                                <group>
+                                    <field name="ceding_company_date" style="width: auto;" string="Date"
+                                           required="status not in ['draft', 'reject']" readonly="status == 'expired'"/>
+                                </group>
+                                <field name="ceding_company_signature" widget="signature" nolabel="1"
+                                       style="width: auto;" required="status not in ['draft', 'reject']"
+                                       readonly="status == 'expired'"/>
+                                <br/>
+                                <h5 style="text-align: center;">
+                                    Authorized Signatory (Insurer)
+                                </h5>
+                            </div>
+                            <div class="col-4">
+                                <group>
+                                    <field name="reinsurer_company_date" style="width: auto;" string="Date"
+                                           required="status not in ['draft', 'reject']" readonly="status == 'expired'"/>
+                                </group>
+                                <field name="reinsurer_company_signature" widget="signature" nolabel="1"
+                                       style="width: auto;" required="status not in ['draft', 'reject']"
+                                       readonly="status == 'expired'"/>
+                                <br/>
+                                <h5 style="text-align: center;">
+                                    Authorized Signatory (Reinsurer)
+                                </h5>
+                            </div>
+                        </div>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+        <record id="re_insurance_list_view" model="ir.ui.view">
+            <field name="name">re.insurance.list.view</field>
+            <field name="model">re.insurance</field>
+            <field name="arch" type="xml">
+                <list duplicate="false" create="false">
+                    <field name="sequence_number"/>
+                    <field name="insurance_id"/>
+                    <field name="contract_date"/>
+                    <field name="re_insurance_type_id"/>
+                    <field name="treaty_types"/>
+                    <field name="policy_provider_cmp_id"/>
+                    <field name="reinsurance_company_id" string="ReInsurer Company"/>
+                    <field name="status" widget="badge"
+                           decoration-info="status == 'draft'"
+                           decoration-warning="status == 'active'"
+                           decoration-success="status in ('running', 'approve')"
+                           decoration-danger="status in ('expired', 'reject')"/>
+                </list>
+            </field>
+        </record>
+        <record id="re_insurance_calendar_view" model="ir.ui.view">
+            <field name="name">re.insurance.calendar.view</field>
+            <field name="model">re.insurance</field>
+            <field name="arch" type="xml">
+                <calendar string="ReInsurance Calendar"
+                          date_start="contract_date"
+                          event_open_popup="true"
+                          mode="month"
+                          color="treaty_types"
+                          scales="day,month,year"
+                          create="0">
+                    <field name="insurance_id"/>
+                    <field name="re_insurance_type_id"/>
+                    <field name="treaty_types" filters="1"/>
+                    <field name="policy_provider_cmp_id"/>
+                    <field name="reinsurance_company_id" string="ReInsurer Company"/>
+                </calendar>
+            </field>
+        </record>
+        <record id="re_insurance_search_view" model="ir.ui.view">
+            <field name="name">re.insurance.search.view</field>
+            <field name="model">re.insurance</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="sequence_number"/>
+                    <group>
+                        <filter name="re_insurance_type_id" string="ReInsurance Types"
+                                context="{'group_by': 're_insurance_type_id'}"/>
+                        <filter name="treaty_types" string="Treaty Types"
+                                context="{'group_by': 'treaty_types'}"/>
+                        <filter name="insurance_id" string="Insurance"
+                                context="{'group_by': 'insurance_id'}"/>
+                        <filter name="policy_provider_cmp_id" string="Ceding Company"
+                                context="{'group_by': 'policy_provider_cmp_id'}"/>
+                        <filter name="reinsurance_company_id" string="ReInsurer Company"
+                                context="{'group_by': 'reinsurance_company_id'}"/>
+                        <filter name="status" string="Status"
+                                context="{'group_by': 'status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_re_insurance" model="ir.actions.act_window">
+            <field name="name">ReInsurances</field>
+            <field name="res_model">re.insurance</field>
+            <field name="view_mode">list,form,calendar,search,activity</field>
+        </record>
+    </data>
+</odoo>

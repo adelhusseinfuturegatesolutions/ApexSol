@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="insured_details_form_view" model="ir.ui.view">
+            <field name="name">insured.details.form.view</field>
+            <field name="model">insured.details</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id" required="1"/>
+                                <label for="insured_dob" string="Date of Birth"/>
+                                <div class="address_format">
+                                    <field name="insured_dob" style="width: 35%;"/>
+                                    <strong style="margin-left: 15px;">&#160;Age</strong>
+                                    <field name="insured_ages" style="width: 35%; margin-left: 10px;"/>
+                                </div>
+                                <field name="insured_heights"/>
+                                <field name="insured_gender"/>
+                            </group>
+                            <group>
+                                <field name="insured_blood_group"/>
+                                <field name="insured_birthmarks"/>
+                                <field name="insured_weights"/>
+                                <field name="insured_marital_status"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="insured_details_list_view" model="ir.ui.view">
+            <field name="name">insured.details.list.view</field>
+            <field name="model">insured.details</field>
+            <field name="arch" type="xml">
+                <list editable="bottom">
+                    <field name="partner_id"/>
+                    <field name="insured_dob"/>
+                    <field name="insured_ages"/>
+                    <field name="insured_gender"/>
+                    <field name="insured_blood_group"/>
+                    <field name="insured_heights"/>
+                    <field name="insured_weights"/>
+                    <field name="insured_birthmarks"/>
+                    <field name="insured_marital_status"/>
+                </list>
+            </field>
+        </record>
+        <record id="action_insured_details" model="ir.actions.act_window">
+            <field name="name">Insured Details</field>
+            <field name="res_model">insured.details</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

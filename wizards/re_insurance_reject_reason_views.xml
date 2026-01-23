@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="reinsurance_reject_reason_form_view" model="ir.ui.view">
+            <field name="name">reinsurance.reject.reason.form.view</field>
+            <field name="model">reinsurance.reject.reason</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="reinsurance_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="rejection_reasons" string="Rejection Reasons">
+                            <field name="rejection_reason" nolabel="1" required="1"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Submit Reason" name="action_submit_reject_reason" type="object"
+                                class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_reinsurance_reject_reason" model="ir.actions.act_window">
+            <field name="name">Rejection Reason</field>
+            <field name="res_model">reinsurance.reject.reason</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="reinsurance_reject_reason_form_view"/>
+        </record>
+    </data>
+</odoo>

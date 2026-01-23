@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="claim_information_view_form" model="ir.ui.view">
+            <field name="name">claim.information.view.form</field>
+            <field name="model">claim.information</field>
+            <field name="arch" type="xml">
+                <form create="false">
+                    <header>
+                        <field name="reinsurer_invoice_id" invisible="1"/>
+                        <field name="invoice_id" invisible="1"/>
+                        <field name="is_reinsurance_required" invisible="1"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,submit,under_review,approved,closed"/>
+
+                        <button string="Registered" name="draft_to_submit" type="object" class="btn btn-info"
+                                invisible="state != 'draft'" groups="tk_insurance_management.insurance_manager"/>
+
+                        <button string="Document Submit" name="submit_to_document_submitted" type="object"
+                                class="btn btn-warning"
+                                invisible="state != 'submit'" groups="tk_insurance_management.insurance_manager"/>
+
+                        <button string="Under Review" name="document_submitted_to_under_review" type="object"
+                                class="btn btn-warning" invisible="state != 'document_submitted'"
+                                groups="tk_insurance_management.insurance_manager"/>
+
+                        <button string="Approved" name="under_review_to_approved" type="object" class="btn btn-success"
+                                invisible="state != 'under_review'" groups="tk_insurance_management.insurance_manager"/>
+
+                        <button string="Rejected" name="claim_not_approved" type="object" class="btn btn-danger"
+                                invisible="state != 'under_review'" groups="tk_insurance_management.insurance_manager"/>
+
+                        <button string="Reset to Draft" name="claim_reset_to_draft" type="object" class="btn btn-info"
+                                invisible="state != 'not_approved'" groups="tk_insurance_management.insurance_manager"/>
+
+                        <button string="Create Claim Settlement Bill" name="create_ceding_company_bill" type="object"
+                                class="btn btn-primary" groups="tk_insurance_management.insurance_manager"
+                                invisible="is_reinsurance_required != False or invoice_id != False or state != 'approved' or total_due_amount == 0"/>
+
+                        <button string="Ceding Settlement" name="create_ceding_company_bill" type="object"
+                                class="btn btn-primary" groups="tk_insurance_management.insurance_manager"
+                                invisible="is_reinsurance_required == False or invoice_id != False or state != 'approved' or total_due_amount == 0"/>
+
+                        <button string="Reinsurance Settlement" name="create_reinsurance_company_bill" type="object"
+                                class="btn btn-primary" groups="tk_insurance_management.insurance_manager"
+                                invisible="is_reinsurance_required == False or reinsurer_invoice_id != False or state != 'approved' or total_due_amount == 0"/>
+
+                        <button string="Settle" name="approved_to_settled" type="object" class="btn btn-warning"
+                                invisible="state != 'approved' or
+                                (is_reinsurance_required and (invoice_id == False or reinsurer_invoice_id == False)) or
+                                (not is_reinsurance_required and invoice_id == False)"
+                                groups="tk_insurance_management.insurance_manager"/>
+
+                        <button string="Create Invoice for Claim Fees" name="create_invoice_claim_fees" type="object"
+                                class="btn btn-info" groups="tk_insurance_management.insurance_manager"
+                                invisible="fee_invoice_id != False or state != 'settled'"/>
+
+                        <button string="Closed" name="settled_to_closed" type="object" class="btn btn-success"
+                                invisible="state != 'settled'" groups="tk_insurance_management.insurance_manager"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="view_insurance_claim_bills"
+                                    icon="fa-money" invisible="claim_bills == 0">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="claim_bills"/>
+                                    </span>
+                                    <span class="o_stat_text">Claim Bills</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="claim_number"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Insurance Details">
+                                <field name="insurance_id" readonly="1"/>
+                                <field name="access_token" invisible="1"/>
+                            </group>
+                            <group string="Claim Date Details">
+                                <field name="claim_date" readonly="insurance_id != False" required="1"/>
+                            </group>
+                        </group>
+                        <separator string="Policy Holder Details" name="policy_holder_details"/>
+                        <group>
+                            <group>
+                                <field name="policy_holder_id" readonly="insurance_id != False"/>
+                                <field name="policy_holder_gender" readonly="insurance_id != False"/>
+                                <label for="policy_holder_dob" string="Date of Birth"/>
+                                <div class="address_format">
+                                    <field name="policy_holder_dob" style="width: 35%"
+                                           readonly="insurance_id != False"/>
+                                    <strong style="margin-left: 15px;">&#160;Age</strong>
+                                    <field name="policy_holder_age" style="width: 35%; margin-left: 10px;"
+                                           readonly="insurance_id != False"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="email" readonly="insurance_id != False"/>
+                                <field name="phone" readonly="insurance_id != False"/>
+                                <span class="o_form_label o_td_label" name="address_name">
+                                    Address
+                                </span>
+                                <div class="o_address_format">
+                                    <field name="policy_holder_street" placeholder="Street" class="o_address_street"
+                                           readonly="insurance_id != False"/>
+                                    <field name="policy_holder_street2" placeholder="Street 2"
+                                           class="o_address_street" readonly="insurance_id != False"/>
+                                    <field name="policy_holder_city" placeholder="City" class="o_address_city"
+                                           readonly="insurance_id != False"/>
+                                    <field name="policy_holder_state_id" class="o_address_state" placeholder="State"
+                                           options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                                           readonly="insurance_id != False"/>
+                                    <field name="policy_holder_zip" placeholder="ZIP" class="o_address_zip"
+                                           readonly="insurance_id != False"/>
+                                    <field name="policy_holder_country_id" placeholder="Country"
+                                           class="o_address_country" readonly="insurance_id != False"
+                                           options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Policy Details">
+                                <field name="insurance_category_id" readonly="insurance_id != False" required="1"/>
+                                <field name="insurance_sub_category_id" readonly="insurance_id != False" required="1"/>
+                                <field name="insurance_policy_id" readonly="insurance_id != False" required="1"/>
+                                <field name="policy_price_list_id" readonly="insurance_id != False"/>
+                                <field name="category" invisible="1"/>
+                                <field name="desired_coverage_type" invisible="1"/>
+                            </group>
+                            <group string="Agent Details" invisible="agent_required == False">
+                                <field name="agent_required" readonly="insurance_id != False"/>
+                                <field name="agent_id" readonly="insurance_id != False"/>
+                            </group>
+                        </group>
+
+                        <separator string="Insured Details" name="claim_insured_details"
+                                   invisible="category != 'health'"/>
+                        <group invisible="category != 'health'">
+                            <group invisible="desired_coverage_type != 'individual'">
+                                <field name="insured_id" readonly="insurance_id != False"/>
+                                <field name="gender" readonly="insurance_id != False"/>
+                                <label for="dob" string="Date of Birth"/>
+                                <div class="address_format">
+                                    <field name="dob" style="width: 35%" readonly="insurance_id != False"/>
+                                    <strong style="margin-left: 15px;">&#160;Age</strong>
+                                    <field name="age" style="width: 35%; margin-left: 10px;"
+                                           readonly="insurance_id != False"/>
+                                </div>
+                                <field name="marital_status" readonly="insurance_id != False"/>
+                            </group>
+                            <group invisible="desired_coverage_type != 'individual'">
+                                <field name="blood_group" readonly="insurance_id != False"/>
+                                <field name="insured_height" readonly="insurance_id != False"/>
+                                <field name="insured_weight" readonly="insurance_id != False"/>
+                                <field name="insured_birthmark" readonly="insurance_id != False"/>
+                            </group>
+                            <field name="claim_insured_details_ids" readonly="insurance_id != False"
+                                   invisible="desired_coverage_type not in ['family', 'group']">
+                                <list editable="bottom">
+                                    <field name="partner_id"/>
+                                    <field name="insured_dob"/>
+                                    <field name="insured_ages"/>
+                                    <field name="insured_gender"/>
+                                    <field name="insured_blood_group"/>
+                                    <field name="insured_heights"/>
+                                    <field name="insured_weights"/>
+                                    <field name="insured_birthmarks"/>
+                                    <field name="insured_marital_status"/>
+                                </list>
+                            </field>
+                        </group>
+                        <group>
+                            <group string="Policy Provider (Ceding Company)">
+                                <field name="policy_provider_cmp_id" readonly="insurance_id != False" required="1"/>
+                            </group>
+                            <group string="ReInsurer Company Details" invisible="is_reinsurance_required == False">
+                                <field name="is_reinsurance_required" readonly="1"/>
+                                <field name="re_insurance_id" readonly="1"/>
+                                <field name="reinsurance_company_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <separator string="Claim Financial Overview" name="claim_financial_overview"/>
+                        <group>
+                            <group>
+                                <field name="policy_amount" readonly="1"/>
+                                <field name="due_amount" readonly="1"/>
+                                <field name="total_due_amount"/>
+                            </group>
+                            <group>
+                                <field name="amount_paid" readonly="invoice_id != False"/>
+                                <field name="ceding_company_pays" invisible="is_reinsurance_required == False"
+                                       readonly="invoice_id != False"/>
+                                <field name="reinsurer_pays" invisible="is_reinsurance_required == False"
+                                       readonly="reinsurer_invoice_id != False"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Claim Fee Charges Details">
+                                <field name="claim_fee_amount" readonly="fee_invoice_id != False"/>
+                                <label for="fee_invoice_id" string="Claim Fee Invoice"
+                                       invisible="fee_invoice_id == False"/>
+                                <div class="address_format" invisible="fee_invoice_id == False">
+                                    <field name="fee_invoice_id" style="width: auto;" readonly="1"/>
+                                    <field name="fee_status" widget="badge"
+                                           decoration-danger="fee_status == 'not_paid'"
+                                           decoration-warning="fee_status in ('partial', 'in_payment')"
+                                           decoration-success="fee_status in ('paid', 'reversed')"
+                                           invisible="fee_status in 'invoicing_legacy'"
+                                           optional="show" style="margin-left: 15px; width: auto;"/>
+                                </div>
+                            </group>
+                            <group string="Insurance Claims Officer Details">
+                                <field name="responsible_id" widget="many2one_avatar_user" required="1"
+                                       readonly="insurance_id != False"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="reason_claim_application" string="Reason For Claim Application">
+                                <group>
+                                    <group string="Reason for Filing the Claim Application">
+                                        <field name="claim_reasons_ids" widget="many2many_tags"
+                                               options="{'no_create': True, 'no_create_edit': True, 'color_field': 'color'}"
+                                               required="1" readonly="state in ['approved', 'settled', 'closed']"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="claim_documents" string="Claim Documents">
+                                <field name="claim_documents_ids" readonly="state in ['approved', 'settled', 'closed']">
+                                    <list default_order='claim_document_type_id asc'
+                                          decoration-success="state == 'verified'"
+                                          decoration-danger="state == 'rejected'">
+                                        <field name="claim_document_type_id"/>
+                                        <field name="description"/>
+                                        <field name="file_name" column_invisible="True"/>
+                                        <field name="avatar" filename="file_name" widget="binary"/>
+                                        <field name="state" widget="badge"
+                                               decoration-info="state == 'draft'"
+                                               decoration-success="state == 'verified'"
+                                               decoration-danger="state == 'rejected'"/>
+                                        <button string="Verified" name="verified_claim" type="object"
+                                                class="btn btn-success"
+                                                invisible="state == 'verified' or state == 'rejected'"/>
+                                        <button string="Rejected" name="rejected_claim" type="object"
+                                                class="btn btn-danger"
+                                                invisible="state == 'rejected' or state == 'verified'"/>
+                                        <button string="Resubmit" name="document_resubmit" type="object"
+                                                class="btn btn-info" invisible="state != 'rejected'"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page name="claim_images" string="Claim Images">
+                                <field name="claim_image_ids" readonly="state in ['approved', 'settled', 'closed']">
+                                    <form>
+                                        <sheet>
+                                            <div class="oe_title float-left">
+                                                <label for="name"/>
+                                                <h1>
+                                                    <field name="name" placeholder="e.g. Name" required="1"/>
+                                                </h1>
+                                            </div>
+                                            <div style="width: 40%; height: 40%;" class="float-right">
+                                                <field name="avatar" style="width: 40%; height: 40%;" required="1"
+                                                       class="img-thumbnail float-right" widget="image"/>
+                                            </div>
+                                        </sheet>
+                                    </form>
+                                    <kanban string="Claim Images">
+                                        <field name="id"/>
+                                        <field name="name"/>
+                                        <field name="avatar"/>
+                                        <templates>
+                                            <t t-name="card" class="border-0">
+                                                <div class="card oe_kanban_global_click p-0 border-0">
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <strong>
+                                                                <field name="name"/>
+                                                            </strong>
+                                                        </div>
+                                                        <div class="col-4 text-end">
+                                                            <!-- below 100 Kb: good -->
+                                                            <t t-if="record.avatar.raw_value.length &lt; 100*1000">
+                                                                <t t-set="size_status" t-value="'text-bg-success'"/>
+                                                                <t t-set="message">Acceptable file size</t>
+                                                            </t>
+                                                            <!-- below 1000 Kb: decent -->
+                                                            <t t-elif="record.avatar.raw_value.length &lt; 1000*1000">
+                                                                <t t-set="size_status" t-value="'text-bg-warning'"/>
+                                                                <t t-set="message">Huge file size. The image should be
+                                                                    optimized/reduced.
+                                                                </t>
+                                                            </t>
+                                                            <!-- above 1000 Kb: bad -->
+                                                            <t t-else="1">
+                                                                <t t-set="size_status" t-value="'text-bg-danger'"/>
+                                                                <t t-set="message">Optimization required! Reduce the
+                                                                    image size or increase your compression settings.
+                                                                </t>
+                                                            </t>
+                                                            <span t-attf-class="badge #{size_status} o_product_image_size"
+                                                                  t-esc="record.avatar.value" t-att-title="message"/>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="mb-1 mt-1"/>
+                                                    <div class="h-100 w-100">
+                                                        <field name="avatar" widget="image" class="card-img-top"
+                                                               style="height:223px;"
+                                                               options="{'img_class': 'object-fit-cover h-100 w-100', 'size': [360, 223]}"/>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                            <page name="claim_nominees" string="Insurance Nominee">
+                                <field name="claim_nominee_ids" readonly="1">
+                                    <list>
+                                        <field name="partner_id"/>
+                                        <field name="insurance_nominee_relation_id"/>
+                                        <field name="nominee_dob"/>
+                                        <field name="nominee_age"/>
+                                        <field name="percentage" widget="progressbar" sum="percentage"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page name="terms_and_conditions" string="Terms &amp; Conditions">
+                                <field name="policy_terms_and_conditions"
+                                       readonly="state in ['approved', 'settled', 'closed']"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+        <record id="claim_information_view_list" model="ir.ui.view">
+            <field name="name">claim.information.view.list</field>
+            <field name="model">claim.information</field>
+            <field name="arch" type="xml">
+                <list create="false">
+                    <field name="claim_number"/>
+                    <field name="insurance_id"/>
+                    <field name="claim_date"/>
+                    <field name="policy_holder_id"/>
+                    <field name="insurance_category_id"/>
+                    <field name="insurance_sub_category_id"/>
+                    <field name="insurance_policy_id"/>
+                    <field name="policy_amount"/>
+                    <field name="due_amount"/>
+                    <field name="amount_paid" sum="amount_paid"/>
+                    <field name="state" widget="badge" string="Claim Status"
+                           decoration-info="state in ('draft', 'submit')"
+                           decoration-warning="state in ('document_submitted', 'under_review')"
+                           decoration-success="state in ('approved', 'closed')"
+                           decoration-danger="state == 'not_approved'"
+                           decoration-primary="state == 'settled'"/>
+                    <field name="company_id" column_invisible="True"/>
+                    <field name="currency_id" column_invisible="True"/>
+                </list>
+            </field>
+        </record>
+        <record id="claim_information_calendar_view" model="ir.ui.view">
+            <field name="name">claim.information.calendar.view</field>
+            <field name="model">claim.information</field>
+            <field name="arch" type="xml">
+                <calendar string="Claim Information Calendar"
+                          date_start="claim_date"
+                          event_open_popup="true"
+                          mode="month"
+                          color="insurance_category_id"
+                          scales="day,month,year"
+                          quick_create="False">
+                    <field name="policy_holder_id"/>
+                    <field name="insurance_id"/>
+                    <field name="insurance_category_id" filters="1"/>
+                    <field name="insurance_sub_category_id"/>
+                    <field name="insurance_policy_id"/>
+                    <field name="state" widget="badge" string="Status"
+                           decoration-info="state in ('draft', 'submit')"
+                           decoration-warning="state in ('document_submitted', 'under_review')"
+                           decoration-success="state in ('approved', 'closed')"
+                           decoration-danger="state == 'not_approved'"
+                           decoration-primary="state == 'settled'"/>
+                </calendar>
+            </field>
+        </record>
+        <record id="claim_information_pivot_view" model="ir.ui.view">
+            <field name="name">claim.information.pivot.view</field>
+            <field name="model">claim.information</field>
+            <field name="arch" type="xml">
+                <pivot string="Claim Analysis" sample="1">
+                    <field name="insurance_category_id" type="row"/>
+                    <field name="insurance_id" type="row"/>
+                    <field name="claim_date" type="col"/>
+                </pivot>
+            </field>
+        </record>
+        <record id="claim_information_graph_view" model="ir.ui.view">
+            <field name="name">claim.information.graph.view</field>
+            <field name="model">claim.information</field>
+            <field name="arch" type="xml">
+                <graph string="Claim Analysis" sample="1">
+                    <field name="policy_holder_id"/>
+                    <field name="insurance_id"/>
+                    <field name="claim_number"/>
+                    <field name="claim_date" interval="month"/>
+                </graph>
+            </field>
+        </record>
+        <record id="claim_information_kanban_view" model="ir.ui.view">
+            <field name="name">claim.information.kanban.view</field>
+            <field name="model">claim.information</field>
+            <field name="arch" type="xml">
+                <kanban edit="false" group_create="0" records_draggable="0" class="o_slide_kanban" sample="1"
+                        quick_create="false">
+                    <field name="id"/>
+                    <field name="claim_number"/>
+                    <field name="insurance_id"/>
+                    <field name="insurance_policy_id"/>
+                    <field name="claim_date"/>
+                    <field name="state"/>
+                    <field name="amount_paid"/>
+                    <field name="company_id"/>
+                    <field name="currency_id"/>
+                    <field name="activity_ids"/>
+                    <templates>
+                        <t t-name="card">
+                            <main>
+                                <!-- Header -->
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <field name="claim_number" class="fw-bold fs-5"/>
+                                    <field name="state" widget="label_selection"
+                                           options="{'classes': {
+                                                                'draft': 'info',
+                                                                'submit': 'info',
+                                                                'document_submitted': 'warning',
+                                                                'under_review': 'warning',
+                                                                'approved': 'success',
+                                                                'not_approved': 'danger',
+                                                                'settled': 'primary',
+                                                                'closed': 'success'}}"/>
+                                </div>
+                                <!-- Insurance Info -->
+                                <div class="mb-2">
+                                    <div class="text-muted small mb-1">
+                                        <i class="fa fa-user me-1" title="Policy Holder"/>
+                                        <field name="policy_holder_id"/>
+                                    </div>
+                                    <div class="text-muted small">
+                                        <i class="fa fa-shield me-1" title="Insurance"/>
+                                        <field name="insurance_id"/>
+                                    </div>
+                                    <div class="text-muted small mb-1">
+                                        <i class="fa fa-umbrella me-1" title="Insurance Policy"/>
+                                        <field name="insurance_policy_id"/>
+                                    </div>
+                                </div>
+                                <!-- Footer -->
+                                <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                                    <div class="text-muted small d-flex align-items-center flex-wrap">
+                                        <i class="fa fa-calendar me-1" title="Policy Period"/>
+                                        <field name="claim_date" class="me-1"/>
+                                        <field name="activity_ids" widget="kanban_activity" class="ms-2"/>
+                                    </div>
+                                    <div class="fw-bold text-end">
+                                        <t t-if="record.amount_paid.raw_value">
+                                            <field name="amount_paid"/>
+                                        </t>
+                                    </div>
+                                </div>
+                            </main>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="claim_information_search_view" model="ir.ui.view">
+            <field name="name">claim.information.search.view</field>
+            <field name="model">claim.information</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="claim_number"/>
+                    <field name="insurance_id"/>
+                    <field name="policy_holder_id"/>
+                    <group>
+                        <filter name="insurance_id" string="Insurance"
+                                context="{'group_by': 'insurance_id'}"/>
+                        <filter name="policy_holder_id" string="Policy Holder"
+                                context="{'group_by': 'policy_holder_id'}"/>
+                        <filter name="insurance_category_id" string="Insurance Category"
+                                context="{'group_by': 'insurance_category_id'}"/>
+                        <filter name="insurance_policy_id" string="Insurance Policy"
+                                context="{'group_by': 'insurance_policy_id'}"/>
+                        <filter name="agent_id" string="Agents"
+                                context="{'group_by': 'agent_id'}"/>
+                        <filter name="state" string="Status"
+                                context="{'group_by': 'state'}"/>
+                        <filter name="claim_date" string="Claim Date"
+                                context="{'group_by': 'claim_date'}"/>
+
+                        <filter name="state_draft" string="New"
+                                domain="[('state', '=', 'draft')]"/>
+                        <filter name="state_submit" string="Registered"
+                                domain="[('state', '=', 'submit')]"/>
+                        <filter name="state_under_review" string="Under Review"
+                                domain="[('state', '=', 'under_review')]"/>
+                        <filter name="state_running" string="Approved"
+                                domain="[('state', '=', 'approved')]"/>
+                        <filter name="state_expired" string="Rejected"
+                                domain="[('state', '=', 'not_approved')]"/>
+                        <filter name="state_settled" string="Settled"
+                                domain="[('state', '=', 'settled')]"/>
+                        <filter name="state_closed" string="Closed"
+                                domain="[('state', '=', 'closed')]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="claim_information_action" model="ir.actions.act_window">
+            <field name="name">Claims</field>
+            <field name="res_model">claim.information</field>
+            <field name="view_mode">list,kanban,form,calendar,pivot,graph,search,activity</field>
+        </record>
+    </data>
+</odoo>

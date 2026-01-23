@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!--Res Partner-->
+        <record id="res_partner_form_view" model="ir.ui.view">
+            <field name="name">res.partner.form.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="action_view_insurances" icon="fa-heartbeat"
+                            invisible="is_agent != False">
+                        <div class="o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="total_insurance_count"/>
+                            </span>
+                            <span class="o_stat_text">Insurances</span>
+                        </div>
+                    </button>
+                    <button class="oe_stat_button" type="object" name="action_view_claims" icon="fa-address-card-o"
+                            invisible="is_agent != False">
+                        <div class="o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="total_claim_count"/>
+                            </span>
+                            <span class="o_stat_text">Claims</span>
+                        </div>
+                    </button>
+                    <button class="oe_stat_button" type="object" name="action_bill_view" icon="fa-credit-card"
+                            invisible="is_agent == False">
+                        <div class="o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="total_agent_bill"/>
+                            </span>
+                            <span class="o_stat_text">Agent Bills</span>
+                        </div>
+                    </button>
+                </div>
+                <xpath expr="//page[@name='contact_addresses']" position="attributes">
+                    <attribute name="autofocus">
+                    </attribute>
+                </xpath>
+                <xpath expr="//notebook/page[@name='contact_addresses']" position="before">
+                    <page name="insurance" string="Insurance Details"
+                          autofocus="autofocus">
+                        <field name="insurance_information_ids" readonly="1">
+                            <list no_open="1">
+                                <field name="insurance_number"/>
+                                <field name="policy_holder_id"/>
+                                <field name="agent_id" column_invisible="True"/>
+                                <field name="insurance_category_id"/>
+                                <field name="issue_date"/>
+                                <field name="expiry_date"/>
+                                <field name="agent_bill_id" readonly="1" widget="many2one_button"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//notebook/page[@name='insurance']" position="after">
+                    <page name="roles" string="Roles">
+                        <group>
+                            <group string="Roles Details">
+                                <field name="is_re_insurance_company"/>
+                                <field name="is_agent"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="action_res_partner_agent" model="ir.actions.act_window">
+            <field name="name">Agents</field>
+            <field name="res_model">res.partner</field>
+            <field name="domain">[('is_agent', '=', True)]</field>
+            <field name="context">{'default_is_agent': True}</field>
+            <field name="view_mode">kanban,list,form</field>
+        </record>
+    </data>
+</odoo>

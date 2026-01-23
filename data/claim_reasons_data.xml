@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="claim_reasons_1" model="claim.reasons">
+            <field name="color">1</field>
+            <field name="name">Maturity of the Policy</field>
+        </record>
+        <record id="claim_reasons_2" model="claim.reasons">
+            <field name="color">2</field>
+            <field name="name">Surrender of the Policy</field>
+        </record>
+        <record id="claim_reasons_3" model="claim.reasons">
+            <field name="color">3</field>
+            <field name="name">Discounted Value in Policy</field>
+        </record>
+        <record id="claim_reasons_4" model="claim.reasons">
+            <field name="color">4</field>
+            <field name="name">Death of the Insured</field>
+        </record>
+        <record id="claim_reasons_5" model="claim.reasons">
+            <field name="color">5</field>
+            <field name="name">Paid up of Lapsed Policy</field>
+        </record>
+        <record id="claim_reasons_6" model="claim.reasons">
+            <field name="color">6</field>
+            <field name="name">Other</field>
+        </record>
+    </data>
+</odoo>

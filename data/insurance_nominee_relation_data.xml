@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="nominee_relation_1" model="insurance.nominee.relation">
+            <field name="name">Spouse</field>
+        </record>
+        <record id="nominee_relation_2" model="insurance.nominee.relation">
+            <field name="name">Son</field>
+        </record>
+        <record id="nominee_relation_3" model="insurance.nominee.relation">
+            <field name="name">Daughter</field>
+        </record>
+        <record id="nominee_relation_4" model="insurance.nominee.relation">
+            <field name="name">Father</field>
+        </record>
+        <record id="nominee_relation_5" model="insurance.nominee.relation">
+            <field name="name">Mother</field>
+        </record>
+        <record id="nominee_relation_6" model="insurance.nominee.relation">
+            <field name="name">Brother</field>
+        </record>
+        <record id="nominee_relation_7" model="insurance.nominee.relation">
+            <field name="name">Sister</field>
+        </record>
+        <record id="nominee_relation_8" model="insurance.nominee.relation">
+            <field name="name">Grandfather</field>
+        </record>
+        <record id="nominee_relation_9" model="insurance.nominee.relation">
+            <field name="name">Grandfather</field>
+        </record>
+        <record id="nominee_relation_10" model="insurance.nominee.relation">
+            <field name="name">Friend</field>
+        </record>
+        <record id="nominee_relation_11" model="insurance.nominee.relation">
+            <field name="name">Relative</field>
+        </record>
+        <record id="nominee_relation_12" model="insurance.nominee.relation">
+            <field name="name">Business partner</field>
+        </record>
+    </data>
+</odoo>
