@@ -62,7 +62,7 @@
                             <group string="Roles Details">
                                 <field name="is_re_insurance_company"/>
                                 <field name="is_agent"/>
-                                <field name="category_id"/>
+                                <field name="insurance_category_id"/>
                             </group>
                         </group>
                     </page>
