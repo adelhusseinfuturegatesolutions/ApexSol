@@ -85,6 +85,10 @@
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box" position="inside">
+                            <button class="oe_stat_button" type="object" name="action_insured_nominee"
+                                    icon="oi-user-plus">
+                                <field string="Nominees" name="nominees_count" widget="statinfo"/>
+                            </button>  
                             <button class="oe_stat_button" type="object" name="action_insured_document"
                                     icon="fa-fw o_button_icon fa-id-card-o">
                                 <field string="Documents" name="document_count" widget="statinfo"/>

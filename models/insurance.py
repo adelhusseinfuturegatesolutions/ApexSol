@@ -141,6 +141,8 @@ class InsuranceInformation(models.Model):
                                            inverse_name='insured_info_id', string="Document")
 
     document_count = fields.Integer(compute='_compute_document_count')
+    nominees_count = fields.Integer(compute='_compute_nominee_count')
+
     claim_count = fields.Integer(compute='_compute_claim_count')
 
     responsible_id = fields.Many2one(
@@ -1034,6 +1036,12 @@ class InsuranceInformation(models.Model):
         for rec in self:
             rec.document_count = self.env['insured.documents'].search_count(
                 [('insured_info_id', '=', rec.id)])
+                
+    def _compute_nominee_count(self):
+        """Nominee count"""
+        for rec in self:
+            rec.nominees_count = self.env['insurance.nominee'].search_count(
+                [('insurance_information_id', '=', rec.id)])
 
     def action_insured_document(self):
         """Insured document"""
@@ -1045,6 +1053,19 @@ class InsuranceInformation(models.Model):
             'context': {
                 'default_insured_info_id': self.id,
                 'default_insured_id': self.policy_holder_id.id
+            },
+            'view_mode': 'list',
+            'target': 'current',
+        }
+    def action_insured_nominee(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Nominees'),
+            'res_model': 'insured.documents',
+            'domain': [('insurance_information_id', '=', self.id)],
+            'context': {
+                'default_insurance_information_id': self.id,
+                'default_insurance_information_id': self.policy_holder_id.id
             },
             'view_mode': 'list',
             'target': 'current',

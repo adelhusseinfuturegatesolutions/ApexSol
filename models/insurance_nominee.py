@@ -54,7 +54,7 @@ class InsuranceNominee(models.Model):
         ('other', "Other")], string="Marital Status")
     insurance_information_id = fields.Many2one('insurance.information', ondelete='cascade')
     claim_information_id = fields.Many2one('claim.information', ondelete='cascade')
-    company_id = fields.Many2one('res.company', string='Policy Holder')
+    policy_holder_id = fields.Many2one('res.partner', string='Policy Holder')
     medical_history_ids = fields.One2many('medical.history', 'insure_nominee_id',string="Medical History")
 
     @api.constrains('nominee_dob')

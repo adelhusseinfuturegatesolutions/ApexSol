@@ -34,7 +34,7 @@
                                 <field name="insured_weights"/>
                                 <field name="insured_birthmarks"/>
                                 <field name="insured_marital_status"/>
-                                <field name="insured_weights"/>
+                                <field name="policy_holder_id"/>
                             </group>
 
                         </group>
