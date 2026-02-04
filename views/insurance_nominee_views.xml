@@ -9,8 +9,13 @@
                     <sheet>
                         <group string="Nominee Details">
                             <group>
+                                <label for="name" string="Name"/>
+                                <field name="name"/>
+
+
                                 <field name="partner_id" options="{'no_create': True, 'no_create_edit': True}"
                                        required="1"/>
+                                       
                                 
                             </group>
                             <group>
