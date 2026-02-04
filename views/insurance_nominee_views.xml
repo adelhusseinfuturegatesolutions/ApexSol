@@ -60,7 +60,7 @@
             <field name="model">insurance.nominee</field>
             <field name="arch" type="xml">
                 <list>
-                    <field name="partner_id"/>
+                    <field name="name"/>
                     <field name="nominee_dob"/>
                     <field name="nominee_age"/>
                 </list>
