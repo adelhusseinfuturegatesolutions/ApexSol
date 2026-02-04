@@ -20,14 +20,14 @@
                                     <strong>&#160;Age</strong>
                                     <field name="nominee_age" style="width: auto; margin-left: 5px;"/>
                                 </div>
-                                <!-- <label for="percentage" class="mt-1" string="Percentage"/>
-                                <div name="percentage">
-                                    <field name="percentage" class="oe_inline"/>
+                                <div name="nominee_id">
+                                    <field name="nominee_id" class="oe_inline"/>
                                     <strong>&#160;%</strong>
-                                </div> -->
+                                </div>
+                                <field name="insured_gender"/>
+
                             </group>
                             <group>
-                                <field name="insured_gender"/>
                                 <field name="insured_blood_group"/>
                                 <field name="insured_heights"/>
                                 <field name="insured_weights"/>
