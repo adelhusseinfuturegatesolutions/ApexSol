@@ -86,7 +86,8 @@
                     <sheet>
                         <div class="oe_button_box" name="button_box" position="inside">
                             <button class="oe_stat_button" type="object" name="action_insured_nominee"
-                                    icon="oi-user-plus">
+                                    icon="oi-user-plus" context="{'default_insurance_information_id': active_id}">
+>
                                 <field string="Nominees" name="nominees_count" widget="statinfo"/>
                             </button>  
                             <button class="oe_stat_button" type="object" name="action_insured_document"

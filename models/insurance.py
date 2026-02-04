@@ -1065,7 +1065,7 @@ class InsuranceInformation(models.Model):
             'domain': [('insurance_information_id', '=', self.id)],
             'context': {
                 'default_insurance_information_id': self.id,
-                'default_insurance_information_id': self.policy_holder_id.id
+                'default_policy_holder_id': self.policy_holder_id.id
             },
             'view_mode': 'list,form',
             'target': 'current',
