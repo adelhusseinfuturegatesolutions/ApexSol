@@ -72,6 +72,16 @@ class InsuranceNominee(models.Model):
 
     relation_type_id = fields.Many2one("insurance.nominee.relation",string="Relationship")
 
+    # policy details
+    insurance_category_id = fields.Many2one('insurance.category', string="Policy Category" , related='insurance_information_id.insurance_category_id')
+    insurance_sub_category_id = fields.Many2one('insurance.sub.category', string="Sub Category",related='insurance_information_id.insurance_sub_category_id')
+    insurance_policy_id = fields.Many2one('insurance.policy', string='Insurance Policy',related='insurance_information_id.insurance_policy_id')
+    policy_price_list_id = fields.Many2one('policy.price.list', string="Policy Time Period",related='insurance_information_id.policy_price_list_id')
+    policy_provider_cmp_id = fields.Many2one('res.partner', string='Policy Provider',related='insurance_information_id.policy_provider_cmp_id')
+    issue_date = fields.Date(string="Issue Date", related='insurance_information_id.issue_date')
+    expiry_date = fields.Date(string="Expiry Date", related='insurance_information_id.expiry_date')
+
+
     @api.constrains('nominee_dob')
     def _check_nominee_dob(self):
         """Check nominee dob"""

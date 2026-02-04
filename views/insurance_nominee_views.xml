@@ -36,7 +36,15 @@
                                 <field name="insured_marital_status"/>
                                 <field name="policy_holder_id"/>
                             </group>
-
+                            <group string="Policy Details">
+                                        <field name="insurance_category_id"/>
+                                        <field name="insurance_sub_category_id"/>
+                                        <field name="insurance_policy_id"/>
+                                        <field name="policy_price_list_id"/>
+                                        <field name="policy_provider_cmp_id"/>
+                                        <field name="issue_date"/>
+                                        <field name="expiry_date"/>
+                            </group>
                         </group>
                         <notebook>
                             <page string="Medical History">
