@@ -13,9 +13,7 @@
                                 <field name="name"/>
 
 
-                                <field name="partner_id" options="{'no_create': True, 'no_create_edit': True}"
-                                       required="1"/>
-                                       
+                                
                                 
                             </group>
                             <group>
@@ -27,7 +25,6 @@
                                 </div>
                                 <div name="nominee_id">
                                     <field name="nominee_id" class="oe_inline"/>
-                                    <strong>&#160;%</strong>
                                 </div>
                                 <field name="insured_gender"/>
 

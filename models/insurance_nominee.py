@@ -20,7 +20,6 @@ class InsuranceNominee(models.Model):
     _description = __doc__
     _rec_name = 'name'
 
-    partner_id = fields.Many2one("res.partner", string="Name", domain="[('is_agent', '=', False)]")
     name = fields.Char(string="Name")
     nominee_id = fields.Char(string="ID")
     nominee_dob = fields.Date(string="Date of Birth")
