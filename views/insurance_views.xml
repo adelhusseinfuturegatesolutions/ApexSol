@@ -258,7 +258,7 @@
                                 <field name="insured_weight" readonly="state not in 'draft'"/>
                                 <field name="insured_birthmark" readonly="state not in 'draft'"/>
                             </group>
-                            <field name="insured_details_ids" readonly="state not in 'draft'"
+                            <!-- <field name="insured_details_ids" readonly="state not in 'draft'"
                                    invisible="desired_coverage_type not in ['family', 'group']">
                                 <list editable="bottom">
                                     <field name="partner_id"/>
@@ -271,7 +271,7 @@
                                     <field name="insured_birthmarks"/>
                                     <field name="insured_marital_status"/>
                                 </list>
-                            </field>
+                            </field> -->
                         </group>
                         <separator string="Life Insurance Policy Details" name="life_insurance_policy_details"
                                    invisible="category != 'life'"/>
@@ -861,7 +861,7 @@
                             <page name="policy_terms_and_condition" string="Terms &amp; Conditions">
                                 <field name="policy_terms_and_conditions" readonly="state not in 'draft'"/>
                             </page>
-                            <page name="insurance_nominees" string="Insurance Nominee">
+                            <!-- <page name="insurance_nominees" string="Insurance Nominee">
                                 <field name="insurance_nominee_ids" readonly="state not in ['draft', 'confirmed']">
                                     <list>
                                         <field name="partner_id"/>
@@ -871,7 +871,7 @@
                                         <field name="percentage" widget="progressbar" sum="percentage"/>
                                     </list>
                                 </field>
-                            </page>
+                            </page> -->
                             <page name="declaration_signatures" string="Declaration &amp; Signatures">
                                 <field name="declaration"/>
                                 <div class="row">

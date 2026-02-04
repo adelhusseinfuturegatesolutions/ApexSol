@@ -11,8 +11,8 @@
                             <group>
                                 <field name="partner_id" options="{'no_create': True, 'no_create_edit': True}"
                                        required="1"/>
-                                <field name="insurance_nominee_relation_id" required="1"
-                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                                <!-- <field name="insurance_nominee_relation_id" required="1"
+                                       options="{'no_create': True, 'no_create_edit': True}"/> -->
                             </group>
                             <group>
                                 <label for="nominee_dob" string="Date of Birth"/>
@@ -21,13 +21,35 @@
                                     <strong>&#160;Age</strong>
                                     <field name="nominee_age" style="width: auto; margin-left: 5px;"/>
                                 </div>
-                                <label for="percentage" class="mt-1" string="Percentage"/>
+                                <!-- <label for="percentage" class="mt-1" string="Percentage"/>
                                 <div name="percentage">
                                     <field name="percentage" class="oe_inline"/>
                                     <strong>&#160;%</strong>
-                                </div>
+                                </div> -->
                             </group>
+                            <group>
+                                <field name="insured_gender"/>
+                                <field name="insured_blood_group"/>
+                                <field name="insured_heights"/>
+                                <field name="insured_weights"/>
+                                <field name="insured_birthmarks"/>
+                                <field name="insured_marital_status"/>
+                                <field name="insured_weights"/>
+                            </group>
+
                         </group>
+                        <notebook>
+                            <page string="Medical History">
+                                <field name="medical_history_ids" >
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="disease_year"/>
+                                        <field name="notes"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                        </notebook>
                     </sheet>
                 </form>
             </field>
