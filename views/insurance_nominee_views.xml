@@ -48,6 +48,18 @@
                                     </list>
                                 </field>
                             </page>
+                            <page string="Family Members" invisible="parent_nominee_id != False">
+                                <field name="family_member_ids">
+                                    <list editable="bottom">
+                                        <field name="nominee_id"/>
+                                        <field name="name"/>
+                                        <field name="relation_type_id"/>
+                                        <field name="insured_gender"/>
+                                        <field name="nominee_dob"/>
+                                        <field name="insured_blood_group"/>
+                                    </list>
+                                </field>
+                            </page>
 
                         </notebook>
                     </sheet>
@@ -60,6 +72,7 @@
             <field name="arch" type="xml">
                 <list>
                     <field name="name"/>
+                    <field name="nominee_id"/>
                     <field name="nominee_dob"/>
                     <field name="nominee_age"/>
                 </list>

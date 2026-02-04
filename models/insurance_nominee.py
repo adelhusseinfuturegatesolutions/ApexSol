@@ -57,6 +57,20 @@ class InsuranceNominee(models.Model):
     policy_holder_id = fields.Many2one('res.partner', string='Policy Holder')
     active = fields.Boolean(default=True)
     medical_history_ids = fields.One2many('medical.history', 'insure_nominee_id',string="Medical History")
+    parent_nominee_id = fields.Many2one(
+        'insurance.nominee', 
+        string="Main Nominee (Employee)", 
+        index=True, 
+        ondelete='cascade'
+    )
+    
+    family_member_ids = fields.One2many(
+        'insurance.nominee', 
+        'parent_nominee_id', 
+        string="Family Members"
+    )
+
+    relation_type_id = fields.Many2one("insurance.nominee.relation",string="Relationship")
 
     @api.constrains('nominee_dob')
     def _check_nominee_dob(self):
