@@ -30,27 +30,37 @@
                   action="action_res_partner_agent"
                   groups="tk_insurance_management.insurance_manager"
                   sequence="2"/>
-        <menuitem id="menu_insurance_information"
+         <menuitem id="menu_insurance_root"
                   name="Insurances"
                   parent="main_menu_insurance_management"
-                  action="insurance_information_action"
                   sequence="3"/>
+        <menuitem id="menu_insurance_information"
+                  name="Insurances"
+                  parent="menu_insurance_root"
+                  action="insurance_information_action"
+                  sequence="4"/>
+          <menuitem id="menu_insurance_nominees"
+                  name="Insurances Nominees"
+                  parent="menu_insurance_root"
+                  action="action_insurance_nominee"
+                  sequence="5"/>
+        
         <menuitem id="menu_re_insurance"
                   name="ReInsurances"
                   parent="main_menu_insurance_management"
                   action="action_re_insurance"
-                  sequence="4"/>
+                  sequence="6"/>
         <menuitem id="menu_claim_information"
                   name="Claims"
                   parent="main_menu_insurance_management"
                   action="claim_information_action"
-                  sequence="5"/>
+                  sequence="7"/>
         <menuitem id="menu_res_partner_customers"
                   name="Customers"
                   parent="main_menu_insurance_management"
                   action="contacts.action_contacts"
                   groups="tk_insurance_management.insurance_manager"
-                  sequence="6"/>
+                  sequence="8"/>
 
         <menuitem id="menu_insurance_report" name="Reports" parent="main_menu_insurance_management" sequence="7"/>
         <menuitem id="menu_insurance_expiry_report"
