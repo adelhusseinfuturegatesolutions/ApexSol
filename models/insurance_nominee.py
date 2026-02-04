@@ -21,8 +21,7 @@ class InsuranceNominee(models.Model):
     _rec_name = 'partner_id'
 
     partner_id = fields.Many2one("res.partner", string="Name", domain="[('is_agent', '=', False)]")
-    # insurance_nominee_relation_id = fields.Many2one('insurance.nominee.relation',
-    #                                                 string="Relation with Policy Holder")
+                                                  string="Relation with Policy Holder")
     nominee_dob = fields.Date(string="Date of Birth")
     nominee_age = fields.Char(string="Age", compute="_compute_nominee_age_count", translate=True)
     insured_gender = fields.Selection([
