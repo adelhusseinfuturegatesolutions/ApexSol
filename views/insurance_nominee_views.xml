@@ -9,7 +9,10 @@
                     <sheet>
                         <group string="Nominee Details">
                             <group>
-                                <label for="name" string="Name"/>
+                                <label for="name"/>
+                                <h3>
+                                    <field name="name"/>
+                                </h3>
                                 <field name="nominee_id" />
 
 
