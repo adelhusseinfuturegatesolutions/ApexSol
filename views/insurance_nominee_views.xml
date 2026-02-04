@@ -11,8 +11,7 @@
                             <group>
                                 <field name="partner_id" options="{'no_create': True, 'no_create_edit': True}"
                                        required="1"/>
-                                <!-- <field name="insurance_nominee_relation_id" required="1"
-                                       options="{'no_create': True, 'no_create_edit': True}"/> -->
+                                
                             </group>
                             <group>
                                 <label for="nominee_dob" string="Date of Birth"/>
@@ -60,10 +59,8 @@
             <field name="arch" type="xml">
                 <list>
                     <field name="partner_id"/>
-                    <!-- <field name="insurance_nominee_relation_id"/> -->
                     <field name="nominee_dob"/>
                     <field name="nominee_age"/>
-                    <!-- <field name="percentage" widget="progressbar" sum="percentage"/> -->
                 </list>
             </field>
         </record>
