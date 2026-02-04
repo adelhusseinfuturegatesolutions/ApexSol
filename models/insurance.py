@@ -1036,7 +1036,7 @@ class InsuranceInformation(models.Model):
         for rec in self:
             rec.document_count = self.env['insured.documents'].search_count(
                 [('insured_info_id', '=', rec.id)])
-                
+
     def _compute_nominee_count(self):
         """Nominee count"""
         for rec in self:
@@ -1061,13 +1061,13 @@ class InsuranceInformation(models.Model):
         return {
             'type': 'ir.actions.act_window',
             'name': _('Nominees'),
-            'res_model': 'insured.documents',
+            'res_model': 'insurance.nominee',
             'domain': [('insurance_information_id', '=', self.id)],
             'context': {
                 'default_insurance_information_id': self.id,
                 'default_insurance_information_id': self.policy_holder_id.id
             },
-            'view_mode': 'list',
+            'view_mode': 'list,form',
             'target': 'current',
         }
 
