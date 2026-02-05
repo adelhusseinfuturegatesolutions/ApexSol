@@ -135,7 +135,7 @@
                                        options="{'no_edit': True, 'no_create': True}"/>
                                 <field name="policy_holder_gender" widget="radio" options="{'horizontal': true}"
                                        invisible="1" readonly="state not in 'draft'"/>
-                                <label for="policy_holder_dob" string="Date of Birth"/>
+                                <label for="policy_holder_dob" string="Date of Birth" invisible="1"/>
                                 <div class="address_format">
                                     <field name="policy_holder_dob" style="width: 35%" invisible="1"
                                            readonly="state not in 'draft'"/>
