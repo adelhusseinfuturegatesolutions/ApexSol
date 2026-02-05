@@ -133,5 +133,10 @@
                   parent="menu_configuration"
                   action="action_re_insurance_type"
                   sequence="9"/>
+        <menuitem id="menu_services_provider"
+                  name="Services Providers"
+                  parent="menu_configuration"
+                  action="action_services_provider"
+                  sequence="10"/>
     </data>
 </odoo>
