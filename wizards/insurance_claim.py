@@ -52,7 +52,7 @@ class InsuranceClaim(models.TransientModel):
     def insurance_claim_create(self):
         """Create insurance claim"""
         for rec in self.insurance_id:
-            nomniee = self.insurance_nominee_id
+            nominee = self.insurance_nominee_id
             # Validate reinsurance requirement
             if rec.is_reinsurance_required:
                 if not rec.re_insurance_id:
