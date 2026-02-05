@@ -72,7 +72,7 @@ class InsuranceNominee(models.Model):
     )
 
     relation_type_id = fields.Many2one("insurance.nominee.relation",string="Relationship")
-    claim_count = fields.Integer(compute='_compute_claim_count')
+    claims_count = fields.Integer(compute='_compute_claim_count')
 
 
     # policy details
@@ -111,10 +111,10 @@ class InsuranceNominee(models.Model):
     def _compute_claim_count(self):
         """Claim count"""
         for rec in self:
-            rec.claim_count = self.env['claim.information'].search_count(
+            rec.claims_count = self.env['claim.information'].search_count(
                 [('insurance_nominee_id', '=', rec.id)])
 
-    def action_insured_claim(self):
+    def action_insured_nominee_claim(self):
         """Insured claim"""
         return {
             'type': 'ir.actions.act_window',
