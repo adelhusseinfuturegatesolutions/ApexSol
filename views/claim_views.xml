@@ -331,7 +331,7 @@
                                 </field>
                             </page> -->
                             <page name="claim_services" string="Services">
-                                <field name="claim_service_ids" readonly="1">
+                                <field name="claim_service_ids">
                                     <list editable="bottom">
                                         <field name="product_service_id"/>
                                         <field name="price"/>
