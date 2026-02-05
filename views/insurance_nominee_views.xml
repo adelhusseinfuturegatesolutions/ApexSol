@@ -6,7 +6,22 @@
             <field name="model">insurance.nominee</field>
             <field name="arch" type="xml">
                 <form>
+                <header>
+                <button name="%(action_insurance_claim)d" string="Create Claim" type="action" class="oe_highlight"
+                                groups="tk_insurance_management.insurance_manager"/>
+                </header>
                     <sheet>
+                    <div class="oe_button_box" name="button_box">
+                       <button class="oe_stat_button" type="object" name="action_insured_claim"
+                                    icon="fa-bars" invisible="claim_count == 0">
+                                <field string="Claims" name="claim_count" widget="statinfo"/>
+                            </button>
+                    </div>
+
+                    <!-- Add this block for the image and basic info -->
+                    <div class="oe_avatar">
+                        <field name="image_1920" widget="image"/>
+                    </div>
                         <group string="Nominee Details">
                             <group>
                                 <label for="name"/>

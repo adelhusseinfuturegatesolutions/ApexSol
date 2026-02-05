@@ -20,6 +20,7 @@ class InsuranceNominee(models.Model):
     _description = __doc__
     _rec_name = 'name'
 
+    image_1920 = fields.Image("Image", max_width=1920, max_height=1920)
     name = fields.Char(string="Name")
     nominee_id = fields.Char(string="ID")
     nominee_dob = fields.Date(string="Date of Birth")
@@ -71,6 +72,8 @@ class InsuranceNominee(models.Model):
     )
 
     relation_type_id = fields.Many2one("insurance.nominee.relation",string="Relationship")
+    claim_count = fields.Integer(compute='_compute_claim_count')
+
 
     # policy details
     insurance_category_id = fields.Many2one('insurance.category', string="Policy Category" , related='insurance_information_id.insurance_category_id')
@@ -104,6 +107,26 @@ class InsuranceNominee(models.Model):
                 rec.nominee_age = f"{max(nominee_age, 0)} Years"
             else:
                 rec.nominee_age = "0 Years"
+
+    def _compute_claim_count(self):
+        """Claim count"""
+        for rec in self:
+            rec.claim_count = self.env['claim.information'].search_count(
+                [('insurance_nominee_id', '=', rec.id)])
+
+    def action_insured_claim(self):
+        """Insured claim"""
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Claims'),
+            'res_model': 'claim.information',
+            'domain': [('insurance_nominee_id', '=', self.id)],
+            'context': {
+                'default_insurance_nominee_id': self.id,
+            },
+            'view_mode': 'list,form',
+            'target': 'current',
+        }
 
 class MedicalHistory(models.Model):
     _name = 'medical.history'
