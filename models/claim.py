@@ -29,6 +29,8 @@ class ClaimInformation(models.Model):
                                default=lambda self: _('New'), copy=False)
     insurance_id = fields.Many2one('insurance.information', string="Insurance",
                                    ondelete='cascade', domain="[('state', '=', 'running')]")
+    nominee_id = fields.Char(string="ID", related='insurance_nominee_id.nominee_id')
+
     claim_date = fields.Date(string='Date')
 
     policy_holder_id = fields.Many2one('res.partner', string="Policy Holder")
@@ -184,6 +186,7 @@ class ClaimInformation(models.Model):
     nominee_dob = fields.Date()
     payment_status = fields.Selection(related='invoice_id.payment_state', string="Payment Status")
     access_token = fields.Char()
+    claim_service_ids = fields.One2many('claim.services', 'claim_information_id', string="Services")
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -322,9 +325,9 @@ class ClaimInformation(models.Model):
                     if record.reinsurer_pays <= 0:
                         raise ValidationError(_("Reinsurer pays must be greater than zero."))
 
-                if record.claim_fee_amount <= 0 or record.claim_fee_amount > record.amount_paid:
-                    raise ValidationError(
-                        _("Claim fee amount must be greater than zero and not exceed the claim amount."))
+                # if record.claim_fee_amount <= 0 or record.claim_fee_amount > record.amount_paid:
+                #     raise ValidationError(
+                #         _("Claim fee amount must be greater than zero and not exceed the claim amount."))
 
     @api.depends('dob')
     def _compute_insured_age_count(self):
@@ -536,3 +539,14 @@ class ClaimInformation(models.Model):
     # DEPRECATED
     policy_provider_id = fields.Many2one('res.company', string="Company (legacy)")
     reinsurer_company_id = fields.Many2one('res.company', string=" Company (legacy)")
+
+
+class ClaimServices(models.Model):
+    _name = 'claim.services'
+    _description = __doc__
+    _rec_name = 'name'
+
+    product_service_id = fields.Many2one('product.template', string="Service", domain=[('type', '=', 'service')])
+    price = fields.Char(string="Price", related='product_service_id.list_price')
+    claim_information_id = fields.Many2one('claim.information')
+

@@ -78,6 +78,7 @@
                         <group>
                             <group string="Insurance Details">
                                 <field name="insurance_id" readonly="1"/>
+                                <field name="nominee_id"/>
                                 <field name="access_token" invisible="1"/>
                             </group>
                             <group string="Claim Date Details">
@@ -319,14 +320,21 @@
                                     </kanban>
                                 </field>
                             </page>
-                            <page name="claim_nominees" string="Insurance Nominee">
+                            <!-- <page name="claim_nominees" string="Insurance Nominee">
                                 <field name="claim_nominee_ids" readonly="1">
                                     <list>
-                                        <!-- <field name="partner_id"/> -->
-                                        <!-- <field name="insurance_nominee_relation_id"/> -->
+                                        <field name="name"/>
+                                        <field name="insurance_nominee_relation_id"/>
                                         <field name="nominee_dob"/>
                                         <field name="nominee_age"/>
-                                        <!-- <field name="percentage" widget="progressbar" sum="percentage"/> -->
+                                    </list>
+                                </field>
+                            </page> -->
+                            <page name="claim_services" string="Services">
+                                <field name="claim_service_ids" readonly="1">
+                                    <list editable="bottom">
+                                        <field name="product_service_id"/>
+                                        <field name="price"/>
                                     </list>
                                 </field>
                             </page>

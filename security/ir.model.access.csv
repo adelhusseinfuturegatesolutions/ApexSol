@@ -109,3 +109,4 @@ tk_insurance_management.access_claim_report_manager,access_claim_report_manager,
 tk_insurance_management.access_crm_lead_portal,access_crm_lead_portal,crm.model_crm_lead,base.group_portal,1,0,1,0
 
 tk_insurance_management.access_medical_history,medical_history,tk_insurance_management.model_medical_history,tk_insurance_management.insurance_user,1,1,1,1
+tk_insurance_management.access_claim_services,claim_services,tk_insurance_management.model_claim_services,tk_insurance_management.insurance_user,1,1,1,1
