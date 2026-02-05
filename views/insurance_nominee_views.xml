@@ -13,7 +13,7 @@
                     <sheet>
                     <div class="oe_button_box" name="button_box">
                        <button class="oe_stat_button" type="object" name="action_insured_claim"
-                                    icon="fa-bars" invisible="claim_count == 0">
+                                    icon="fa-bars">
                                 <field string="Claims" name="claim_count" widget="statinfo"/>
                             </button>
                     </div>
