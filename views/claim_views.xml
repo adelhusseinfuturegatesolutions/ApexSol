@@ -159,7 +159,7 @@
                                 <field name="insured_weight" readonly="insurance_id != False"/>
                                 <field name="insured_birthmark" readonly="insurance_id != False"/>
                             </group>
-                            <field name="claim_insured_details_ids" readonly="insurance_id != False"
+                            <!-- <field name="claim_insured_details_ids" readonly="insurance_id != False"
                                    invisible="desired_coverage_type not in ['family', 'group']">
                                 <list editable="bottom">
                                     <field name="partner_id"/>
@@ -172,7 +172,7 @@
                                     <field name="insured_birthmarks"/>
                                     <field name="insured_marital_status"/>
                                 </list>
-                            </field>
+                            </field> -->
                         </group>
                         <group>
                             <group string="Policy Provider (Ceding Company)">

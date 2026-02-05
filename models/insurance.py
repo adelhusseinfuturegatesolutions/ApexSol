@@ -86,7 +86,7 @@ class InsuranceInformation(models.Model):
     premium_type = fields.Selection([
         ('fixed', "Fixed"),
         ('installment', "Installment")],
-        default='installment',
+        default='fixed',
         string="Premium Type")
     insurance_category_id = fields.Many2one('insurance.category', string="Policy Category")
     category = fields.Selection(related="insurance_category_id.category")

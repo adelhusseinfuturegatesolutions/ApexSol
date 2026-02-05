@@ -12,13 +12,31 @@ class InsuranceClaim(models.TransientModel):
     _description = __doc__
 
     insurance_id = fields.Many2one('insurance.information', string="Insurance")
+    insurance_nominee_id = fields.Many2one('insurance.nominee', string="Insurance Nominee")
     claim_date = fields.Date(string='Date')
 
+    # @api.model
+    # def default_get(self, field):
+    #     """Default record"""
+    #     res = super().default_get(field)
+    #     res['insurance_id'] = self.env.context.get('active_id')
+    #     return res
     @api.model
-    def default_get(self, field):
-        """Default record"""
-        res = super().default_get(field)
-        res['insurance_id'] = self.env.context.get('active_id')
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
+        
+        active_id = self.env.context.get('active_id')
+        
+        if active_id and self.env.context.get('active_model') == 'insurance.nominee':
+            nominee = self.env['insurance.nominee'].browse(active_id)
+            
+            # Set the Nominee field
+            res['insurance_nominee_id'] = nominee.id
+            
+            # Set the Insurance field from the nominee's relationship
+            if nominee.insurance_information_id:
+                res['insurance_id'] = nominee.insurance_information_id.id
+                
         return res
 
     @api.constrains('claim_date', 'insurance_id')
@@ -34,6 +52,7 @@ class InsuranceClaim(models.TransientModel):
     def insurance_claim_create(self):
         """Create insurance claim"""
         for rec in self.insurance_id:
+            nomniee = self.insurance_nominee_id
             # Validate reinsurance requirement
             if rec.is_reinsurance_required:
                 if not rec.re_insurance_id:
@@ -55,7 +74,7 @@ class InsuranceClaim(models.TransientModel):
             # Prepare claim data
             reinsurance_valid = rec.is_reinsurance_required and rec.re_insurance_id.status != 'expired'
             data = {
-                'insurance_id': rec.id,
+                'insurance_nominee_id': nominee.id,
                 'claim_date': self.claim_date,
                 'policy_holder_id': rec.policy_holder_id.id,
                 'email': rec.email,
@@ -66,19 +85,19 @@ class InsuranceClaim(models.TransientModel):
                 'policy_holder_state_id': rec.policy_holder_state_id.id,
                 'policy_holder_country_id': rec.policy_holder_country_id.id,
                 'policy_holder_zip': rec.policy_holder_zip,
-                'policy_holder_dob': rec.policy_holder_dob,
-                'policy_holder_age': rec.policy_holder_age,
-                'policy_holder_gender': rec.policy_holder_gender,
+                'policy_holder_dob': nomniee.nominee_dob,
+                'policy_holder_age': nomniee.nominee_age,
+                'policy_holder_gender': nomniee.insured_gender,
 
                 'insured_id': rec.insured_id.id,
-                'gender': rec.gender,
-                'dob': rec.dob,
-                'age': rec.age,
-                'marital_status': rec.marital_status,
-                'blood_group': rec.blood_group,
-                'insured_height': rec.insured_height,
-                'insured_weight': rec.insured_weight,
-                'insured_birthmark': rec.insured_birthmark,
+                'gender': nomniee.insured_gender,
+                'dob': nomniee.nominee_dob,
+                'age': nomniee.nominee_age,
+                'marital_status': nomniee.insured_marital_status,
+                'blood_group': nomniee.insured_blood_group,
+                'insured_height': nomniee.insured_heights,
+                'insured_weight': nomniee.insured_weights,
+                'insured_birthmark': nomniee.insured_birthmarks,
 
                 'insurance_policy_id': rec.insurance_policy_id.id,
                 'insurance_category_id': rec.insurance_category_id.id,
