@@ -74,7 +74,8 @@ class InsuranceClaim(models.TransientModel):
             # Prepare claim data
             reinsurance_valid = rec.is_reinsurance_required and rec.re_insurance_id.status != 'expired'
             data = {
-                'insurance_nominee_id': nominee.nominee_id,
+                'insurance_id': rec.id,
+                'insurance_nominee_id': nominee.id,
                 'claim_date': self.claim_date,
                 'policy_holder_id': rec.policy_holder_id.id,
                 'email': rec.email,
@@ -97,7 +98,7 @@ class InsuranceClaim(models.TransientModel):
                 'blood_group': nomniee.insured_blood_group,
                 'insured_height': nomniee.insured_heights,
                 'insured_weight': nomniee.insured_weights,
-                'insured_birthmark': nomniee.insured_birthmarks,
+                'insured_birthmark': nomniee.insured_blood_group,
 
                 'insurance_policy_id': rec.insurance_policy_id.id,
                 'insurance_category_id': rec.insurance_category_id.id,
