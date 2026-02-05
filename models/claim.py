@@ -103,7 +103,7 @@ class ClaimInformation(models.Model):
     agent_required = fields.Boolean(string="Agent Required")
     agent_id = fields.Many2one('res.partner', string='Agent', domain=[('is_agent', '=', True)])
     policy_amount = fields.Monetary(string="Policy Amount")
-    amount_paid = fields.Monetary(string="Claim Amount")
+    amount_paid = fields.Monetary(string="Claim Amount",compute="_compute_total_amount", store=True)
     due_amount = fields.Monetary(string="Remaining Amount")
 
     policy_provider_cmp_id = fields.Many2one('res.partner', string='Policy Provider',
@@ -200,6 +200,12 @@ class ClaimInformation(models.Model):
             token = secrets.token_urlsafe(12).replace('_', '-')
             record.access_token = token
         return records
+
+    @api.depends('claim_service_ids.price')
+    def _compute_total_amount(self):
+        for rec in self:
+            total = sum(rec.claim_service_ids.mapped('price'))
+            rec.amount_paid = total
 
     def draft_to_submit(self):
         """Draft to submit"""
