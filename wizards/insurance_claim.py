@@ -74,7 +74,7 @@ class InsuranceClaim(models.TransientModel):
             # Prepare claim data
             reinsurance_valid = rec.is_reinsurance_required and rec.re_insurance_id.status != 'expired'
             data = {
-                'insurance_nominee_id': nominee.id,
+                'insurance_nominee_id': nominee.nominee_id,
                 'claim_date': self.claim_date,
                 'policy_holder_id': rec.policy_holder_id.id,
                 'email': rec.email,

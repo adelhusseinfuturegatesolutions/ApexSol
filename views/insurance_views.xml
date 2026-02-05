@@ -67,9 +67,9 @@
                                 invisible="instalment_complete == False or state not in ['confirmed']"
                                 groups="tk_insurance_management.insurance_manager"/>
 
-                        <button name="%(action_insurance_claim)d" string="Create Claim" type="action"
+                        <!-- <button name="%(action_insurance_claim)d" string="Create Claim" type="action"
                                 class="oe_highlight" invisible="state != 'running' or total_due_amount == 0"
-                                groups="tk_insurance_management.insurance_manager"/>
+                                groups="tk_insurance_management.insurance_manager"/> -->
 
                         <button name="%(action_re_insurance_contract)d" string="Create ReInsurance" type="action"
                                 class="btn btn-info" groups="tk_insurance_management.insurance_manager"
@@ -94,10 +94,10 @@
                                     icon="fa-fw o_button_icon fa-id-card-o">
                                 <field string="Documents" name="document_count" widget="statinfo"/>
                             </button>
-                            <button class="oe_stat_button" type="object" name="action_insured_claim"
+                            <!-- <button class="oe_stat_button" type="object" name="action_insured_claim"
                                     icon="fa-bars" invisible="claim_count == 0">
                                 <field string="Claims" name="claim_count" widget="statinfo"/>
-                            </button>
+                            </button> -->
                             <button class="oe_stat_button" type="object" name="action_remaining_amount" icon="fa-money"
                                     invisible="claim_count == 0 or total_due_amount == 0">
                                 <div class="o_stat_info">
