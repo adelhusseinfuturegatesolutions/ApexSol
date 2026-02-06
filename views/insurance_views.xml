@@ -139,7 +139,7 @@
                                 <div class="address_format">
                                     <field name="policy_holder_dob" style="width: 35%" invisible="1"
                                            readonly="state not in 'draft'"/>
-                                    <strong style="margin-left: 15px;">&#160;Age</strong>
+                                    <!-- <strong style="margin-left: 15px;">&#160;Age</strong> -->
                                     <field name="policy_holder_age" style="width: 35%; margin-left: 10px;"
                                            readonly="1" invisible="1"/>
                                 </div>
