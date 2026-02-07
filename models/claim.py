@@ -106,10 +106,10 @@ class ClaimInformation(models.Model):
     amount_paid = fields.Monetary(string="Claim Amount",compute="_compute_total_amount", store=True)
     due_amount = fields.Monetary(string="Remaining Amount")
 
-    policy_provider_cmp_id = fields.Many2one('res.partner', string='Policy Provider',
+    policy_provider_cmp_id = fields.Many2one('res.partner', string='Service Provider',
                                              domain=[('is_company', '=', True),
                                                      ('is_re_insurance_company', '=', False)])
-    service_provider_id = fields.Many2one('services.provider', string='Service Provider')
+    # service_provider_id = fields.Many2one('services.provider', string='Service Provider')
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company,
                                  string="Company")
     currency_id = fields.Many2one('res.currency', string='Currency',

@@ -176,8 +176,8 @@
                         </group>
                         <group>
                             <group string="Policy Provider (Ceding Company)">
-                                <field name="policy_provider_cmp_id" readonly="insurance_id != False" invisible="1"/>
-                                <field name="service_provider_id"/>
+                                <field name="policy_provider_cmp_id"/>
+                                <field name="service_provider_id" invisible="1"/>
                             </group>
                             <group string="ReInsurer Company Details" invisible="is_reinsurance_required == False">
                                 <field name="is_reinsurance_required" readonly="1"/>

@@ -45,11 +45,11 @@
                   action="action_insurance_nominee"
                   sequence="5"/>
         
-        <menuitem id="menu_re_insurance"
+        <!-- <menuitem id="menu_re_insurance"
                   name="ReInsurances"
                   parent="main_menu_insurance_management"
                   action="action_re_insurance"
-                  sequence="6"/>
+                  sequence="6"/> -->
         <menuitem id="menu_claim_information"
                   name="Claims"
                   parent="main_menu_insurance_management"
@@ -128,11 +128,11 @@
                   parent="menu_configuration"
                   action="action_insurance_nominee_relation"
                   sequence="8"/>
-        <menuitem id="menu_re_insurance_type"
+        <!-- <menuitem id="menu_re_insurance_type"
                   name="ReInsurance Types"
                   parent="menu_configuration"
                   action="action_re_insurance_type"
-                  sequence="9"/>
+                  sequence="9"/> -->
         <menuitem id="menu_services_provider"
                   name="Services Providers"
                   parent="menu_configuration"
