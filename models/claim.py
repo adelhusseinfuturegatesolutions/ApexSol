@@ -109,7 +109,6 @@ class ClaimInformation(models.Model):
     policy_provider_cmp_id = fields.Many2one('res.partner', string='Service Provider',
                                              domain=[('is_company', '=', True),
                                                      ('is_re_insurance_company', '=', False)])
-    # service_provider_id = fields.Many2one('services.provider', string='Service Provider')
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company,
                                  string="Company")
     currency_id = fields.Many2one('res.currency', string='Currency',
