@@ -553,7 +553,8 @@ class ClaimServices(models.Model):
     _rec_name = 'product_service_id'
 
     product_service_id = fields.Many2one('product.template', string="Service", domain=[('type', '=', 'service')])
-    price = fields.Float(string="Price")
+    service_price = fields.Float(string="Price", readonly=False)
+
     claim_information_id = fields.Many2one('claim.information')
 
 class ServicesProvider(models.Model):
