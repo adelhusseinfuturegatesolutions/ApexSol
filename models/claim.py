@@ -201,10 +201,10 @@ class ClaimInformation(models.Model):
             record.access_token = token
         return records
 
-    @api.depends('claim_service_ids.price')
+    @api.depends('claim_service_ids.service_price')
     def _compute_total_amount(self):
         for rec in self:
-            total = sum(rec.claim_service_ids.mapped('price'))
+            total = sum(rec.claim_service_ids.mapped('service_price'))
             rec.amount_paid = total
 
     def draft_to_submit(self):
