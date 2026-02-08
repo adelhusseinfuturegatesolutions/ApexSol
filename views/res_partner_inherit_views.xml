@@ -63,6 +63,7 @@
                                 <field name="is_re_insurance_company"/>
                                 <field name="is_agent"/>
                                 <field name="insurance_category_id"/>
+                                <field name="is_service_provider"/>
                             </group>
                         </group>
                     </page>

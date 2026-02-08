@@ -24,6 +24,8 @@ class ResPartner(models.Model):
                                        compute='_compute_total_claim_count')
 
     insurance_category_id = fields.Many2one('insurance.category', string="Category")
+    is_service_provider = fields.Boolean(string="Service Provider")
+
 
     def _compute_total_insurance_count(self):
         """Total insurance count"""
