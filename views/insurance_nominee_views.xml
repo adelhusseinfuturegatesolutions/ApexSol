@@ -29,6 +29,8 @@
                                     <field name="name"/>
                                 </h3>
                                 <field name="nominee_id" />
+                                <field name="policy_holder_id"/>
+
 
 
                             </group>
@@ -49,7 +51,6 @@
                                 <field name="insured_weights"/>
                                 <field name="insured_birthmarks"/>
                                 <field name="insured_marital_status"/>
-                                <field name="policy_holder_id"/>
                             </group>
                             <group string="Policy Details" invisible="1">
                                         <field name="insurance_category_id"/>
