@@ -940,15 +940,30 @@ class InsuranceInformation(models.Model):
             else:
                 rec.total_commission = 0.0
 
-    @api.depends('total_policy_amount', 'commission_type', 'total_commission', 'policy_amount',
-                 'fixed_commission')
+    # @api.depends('total_policy_amount', 'commission_type', 'total_commission', 'policy_amount',
+    #              'fixed_commission')
+    # def _compute_total_policy_amount(self):
+    #     """Compute total policy amount"""
+    #     for rec in self:
+    #         if rec.commission_type == "percentage":
+    #             rec.total_policy_amount = rec.policy_amount + rec.total_commission
+    #         else:
+    #             rec.total_policy_amount = rec.policy_amount + rec.fixed_commission
+    @api.depends('policy_amount', 'nominees_count', 'commission_type', 'total_commission', 'fixed_commission')
     def _compute_total_policy_amount(self):
-        """Compute total policy amount"""
+        """Compute total policy amount based on Nominees and Commission"""
         for rec in self:
+            # 1. Calculate Base Amount (Policy Amount * Number of Nominees)
+            # Note: We use max(1, count) if you want the policy_amount to remain 
+            # as is when there are 0 nominees. Otherwise, it will be 0.0.
+            count = rec.nominees_count or 1 
+            base_multiplied_amount = rec.policy_amount * count
+            
+            # 2. Add Commission based on type
             if rec.commission_type == "percentage":
-                rec.total_policy_amount = rec.policy_amount + rec.total_commission
+                rec.total_policy_amount = base_multiplied_amount + rec.total_commission
             else:
-                rec.total_policy_amount = rec.policy_amount + rec.fixed_commission
+                rec.total_policy_amount = base_multiplied_amount + rec.fixed_commission
 
     @api.depends('claim_amount')
     def _compute_insurance_due_amount(self):
