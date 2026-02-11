@@ -165,6 +165,15 @@
                                     </div>
                                 </div>
                             </page>
+                            <page name="services_insurance" string="Insurance Policy Services"
+                                  invisible="category != 'health'">
+                                  <field name="policy_service_ids">
+                                    <list editable="bottom">
+                                        <field name="product_service_id"/>
+                                        <field name="service_ceiling"/>
+                                    </list>
+                                </field>
+                            </page>
                             <page name="property_insurance" string="Property Insurance Policy Details"
                                   invisible="category != 'property'">
                                 <group string="Property Details">

@@ -78,6 +78,8 @@ class InsurancePolicy(models.Model):
     policy_price_list_ids = fields.One2many(comodel_name='policy.price.list',
                                             inverse_name='insurance_policy_id',
                                             string="Policy Price list")
+    policy_service_ids = fields.One2many('policy.services', 'insurance_policy_id', string="Policy Services")
+
 
     # Life Insurance:
     desired_death_amount = fields.Monetary(string="Death Amount")
@@ -288,3 +290,13 @@ class InsurancePolicy(models.Model):
                                                                  limit=1)
             if insurance:
                 raise ValidationError(_('You cannot delete policy because it is linked to insurance.'))
+
+class PolicyServices(models.Model):
+    _name = 'policy.services'
+    _description = __doc__
+    _rec_name = 'product_service_id'
+
+    product_service_id = fields.Many2one('product.template', string="Service", domain=[('type', '=', 'service')])
+    service_ceiling = fields.Float(string="Service Ceiling", readonly=False)
+    insurance_policy_id = fields.Many2one('insurance.policy')
+
