@@ -186,7 +186,15 @@ class ClaimInformation(models.Model):
     nominee_dob = fields.Date()
     payment_status = fields.Selection(related='invoice_id.payment_state', string="Payment Status")
     access_token = fields.Char()
-    claim_service_ids = fields.One2many('claim.services', 'claim_information_id', string="Services", domain="[('product_service_id', 'in', insurance_policy_id.policy_service_ids.product_service_id)]")
+    claim_service_ids = fields.One2many('claim.services', 'claim_information_id', string="Services")
+    allowed_service_ids = fields.Many2many('product.product', compute='_compute_allowed_services')
+
+    @api.depends('insurance_policy_id.policy_service_ids.product_service_id')
+    def _compute_allowed_services(self):
+        for record in self:
+            # Collect all product_service_id IDs from the policy
+            services = record.insurance_policy_id.policy_service_ids.mapped('product_service_id')
+            record.allowed_service_ids = services
 
     @api.model_create_multi
     def create(self, vals_list):

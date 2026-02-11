@@ -131,6 +131,8 @@
                                 <field name="policy_price_list_id" readonly="insurance_id != False"/>
                                 <field name="category" invisible="1"/>
                                 <field name="desired_coverage_type" invisible="1"/>
+                                <field name="allowed_service_ids" invisible="1"/>
+
                             </group>
                             <group string="Agent Details" invisible="agent_required == False">
                                 <field name="agent_required" readonly="insurance_id != False"/>
@@ -333,7 +335,7 @@
                             <page name="claim_services" string="Services">
                                 <field name="claim_service_ids">
                                     <list editable="bottom">
-                                        <field name="product_service_id" domain="[('id', 'in', parent.insurance_policy_id.policy_service_ids.product_service_id)]"/>
+                                        <field name="product_service_id" domain="[('id', 'in', parent.allowed_service_ids)]"/>
                                         <field name="service_price"/>
                                     </list>
                                 </field>
