@@ -561,8 +561,33 @@ class ClaimServices(models.Model):
     _rec_name = 'product_service_id'
 
     product_service_id = fields.Many2one('product.template', string="Service", domain=[('type', '=', 'service')])
+    service_ceiling = fields.Float(string="Service Ceiling")
     service_price = fields.Float(string="Price", readonly=False)
+    remaining = fields.Float(string="Remaining", compute="_compute_remaining")
     claim_information_id = fields.Many2one('claim.information')
+
+    @api.onchange('product_service_id')
+    def _onchange_product_service_id(self):
+        """ Fetch the ceiling from the Policy Line matching this service """
+        if self.product_service_id and self.claim_information_id.insurance_policy_id:
+            policy = self.claim_information_id.insurance_policy_id
+            
+            # Find the specific line that matches the selected service
+            policy_line = policy.policy_service_ids.filtered(
+                lambda l: l.product_service_id == self.product_service_id)
+            
+            if policy_line:
+                # Set the ceiling from the first match found (take the first if multiple)
+                self.service_ceiling = policy_line[0].service_ceiling
+            else:
+                self.service_ceiling = 0.0
+        else:
+            self.service_ceiling = 0.0
+
+    @api.depends('service_ceiling','service_price')
+    def _compute_remaining(self):
+        for rec in self:
+            rec.remaining = rec.service_ceiling - rec.service_price
 
 class ServicesProvider(models.Model):
     _name = 'services.provider'
