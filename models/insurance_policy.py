@@ -60,7 +60,7 @@ class InsurancePolicy(models.Model):
     policy_terms_and_conditions = fields.Text(string="Terms & Conditions", translate=True)
     policy_provider_cmp_id = fields.Many2one('res.partner', string='Policy Provider',
                                              domain=[('is_company', '=', True),
-                                                     ('is_re_insurance_company', '=', False)])
+                                                     ('is_re_insurance_company', '=', False)], required=False)
     phone = fields.Char(related='policy_provider_cmp_id.phone', string="Phone", translate=True)
     street = fields.Char(related="policy_provider_cmp_id.street", string="Street", translate=True)
     street2 = fields.Char(related="policy_provider_cmp_id.street2", string="Street 2", translate=True)
