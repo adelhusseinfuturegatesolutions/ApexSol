@@ -50,7 +50,7 @@
                                 <field name="company_id" invisible="1"/>
                             </group>
                             <group string="Details of Policy Provider">
-                                <field name="policy_provider_cmp_id" required="1"
+                                <field name="policy_provider_cmp_id" required="0"
                                        options="{'no_create': True, 'no_create_edit': True}"/>
                                 <field name="phone"/>
                                 <span class="o_form_label o_td_label" name="address_name">
