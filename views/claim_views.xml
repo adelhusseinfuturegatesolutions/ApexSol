@@ -333,7 +333,7 @@
                             <page name="claim_services" string="Services">
                                 <field name="claim_service_ids">
                                     <list editable="bottom">
-                                        <field name="product_service_id"/>
+                                        <field name="product_service_id" domain="[('id', 'in', parent.insurance_policy_id.policy_service_ids.product_service_id)]"/>
                                         <field name="service_price"/>
                                     </list>
                                 </field>
