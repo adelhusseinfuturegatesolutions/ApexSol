@@ -187,7 +187,7 @@ class ClaimInformation(models.Model):
     payment_status = fields.Selection(related='invoice_id.payment_state', string="Payment Status")
     access_token = fields.Char()
     claim_service_ids = fields.One2many('claim.services', 'claim_information_id', string="Services")
-    allowed_service_ids = fields.Many2many('product.product', compute='_compute_allowed_services')
+    allowed_service_ids = fields.Many2many('product.template', compute='_compute_allowed_services')
 
     @api.depends('insurance_policy_id.policy_service_ids.product_service_id')
     def _compute_allowed_services(self):
