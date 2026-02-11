@@ -71,7 +71,6 @@ class InsuranceNominee(models.Model):
         string="Family Members"
     )
 
-    relation_type_id = fields.Many2one("insurance.nominee.relation",string="Relationship")
     relation_type = fields.Selection([('spouse','Spouse'),('son','Son'),('daughter','Daughter'),('father','Father'),('mother','Mother')],string="Relationship.")
     amount_factor = fields.Float(string='Amount Factor')
     claims_count = fields.Integer(compute='_compute_claim_count')

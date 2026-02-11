@@ -77,7 +77,6 @@
                                     <list editable="bottom">
                                         <field name="nominee_id"/>
                                         <field name="name"/>
-                                        <field name="relation_type_id" invisible="1"/>
                                         <field name="relation_type"/>
                                         <field name="insured_gender"/>
                                         <field name="nominee_dob"/>
