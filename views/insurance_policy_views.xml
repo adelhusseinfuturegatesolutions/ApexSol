@@ -596,7 +596,7 @@
                     <field name="policy_number"/>
                     <field name="insurance_category_id"/>
                     <field name="insurance_sub_category_id"/>
-                    <field name="policy_provider_cmp_id"/>
+                    <field name="policy_provider_cmp_id" required="0"/>
                     <field name="sum_assured"/>
                     <field name="currency_id" column_invisible="1"/>
                     <field name="company_id" column_invisible="1"/>
