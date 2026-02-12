@@ -967,26 +967,27 @@ class InsuranceInformation(models.Model):
     @api.depends('policy_amount', 'insurance_nominee_ids', 'insurance_nominee_ids.family_member_ids.amount_factor', 
              'commission_type', 'total_commission', 'fixed_commission')
     def _compute_total_policy_amount(self):
-        """Compute total policy amount: Main Nominees (Base) + Members (Factorized) + Commission"""
         for rec in self:
             total_base_amount = 0.0
             
-            # 1. Process Main Nominees
-            for main_nominee in rec.insurance_nominee_ids:
-                # Add the standard policy amount for the Main Nominee
+            # Filter to only loop through Main Nominees (those without a parent)
+            main_nominees = rec.insurance_nominee_ids.filtered(lambda n: not n.parent_nominee_id)
+            
+            for main in main_nominees:
+                # Add Base Policy Amount for the Main Nominee
                 total_base_amount += rec.policy_amount
                 
-                # 2. Process their Family Members
-                for member in main_nominee.family_member_ids:
-                    # If amount_factor is > 0, multiply; otherwise, just add the base policy_amount
+                # Process their attached Family Members
+                for member in main.family_member_ids:
                     factor = member.amount_factor if member.amount_factor > 0 else 1.0
                     total_base_amount += (rec.policy_amount * factor)
 
-            # 3. Add the Final Commission
+            # Apply Commission
             if rec.commission_type == "percentage":
                 rec.total_policy_amount = total_base_amount + rec.total_commission
             else:
                 rec.total_policy_amount = total_base_amount + rec.fixed_commission
+
 
 
     @api.depends('claim_amount')
