@@ -332,13 +332,22 @@
                                     </list>
                                 </field>
                             </page> -->
-                            <page name="claim_services" string="Services">
+                            <page name="claim_services" string="Services With Ceiling">
                                 <field name="claim_service_ids">
                                     <list editable="bottom">
                                         <field name="product_service_id" domain="[('id', 'in', parent.allowed_service_ids)]"/>
                                         <field name="service_ceiling"/>
                                         <field name="service_price"/>
                                         <field name="remaining"/>
+
+                                    </list>
+                                </field>
+                            </page>
+                            <page name="claim_services_ceiling" string="Services Without Ceiling">
+                                <field name="claim_service_ceiling_ids">
+                                    <list editable="bottom">
+                                        <field name="product_service_id"/>
+                                        <field name="service_price"/>
 
                                     </list>
                                 </field>

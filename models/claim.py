@@ -187,6 +187,8 @@ class ClaimInformation(models.Model):
     payment_status = fields.Selection(related='invoice_id.payment_state', string="Payment Status")
     access_token = fields.Char()
     claim_service_ids = fields.One2many('claim.services', 'claim_information_id', string="Services")
+    claim_service_ceiling_ids = fields.One2many('claim.services.ceiling', 'claim_information_id', string="Services")
+
     allowed_service_ids = fields.Many2many('product.template', compute='_compute_allowed_services')
 
     @api.depends('insurance_policy_id.policy_service_ids.product_service_id')
@@ -209,11 +211,18 @@ class ClaimInformation(models.Model):
             record.access_token = token
         return records
 
-    @api.depends('claim_service_ids.service_price')
+    @api.depends('claim_service_ids.service_price', 'claim_service_ceiling_ids.service_price')
     def _compute_total_amount(self):
         for rec in self:
-            total = sum(rec.claim_service_ids.mapped('service_price'))
-            rec.amount_paid = total
+            # 1. Sum service_price from the first One2many
+            total_services = sum(rec.claim_service_ids.mapped('service_price'))
+            
+            # 2. Sum service_price from the second One2many (ceiling lines)
+            total_ceilings = sum(rec.claim_service_ceiling_ids.mapped('service_price'))
+            
+            # 3. Combine both for the final paid amount
+            rec.amount_paid = total_services + total_ceilings
+
 
     def draft_to_submit(self):
         """Draft to submit"""
@@ -562,7 +571,7 @@ class ClaimServices(models.Model):
 
     product_service_id = fields.Many2one('product.template', string="Service", domain=[('type', '=', 'service')])
     service_ceiling = fields.Float(string="Service Ceiling")
-    service_price = fields.Float(string="Price", readonly=False)
+    service_price = fields.Float(string="Service Amount", readonly=False)
     remaining = fields.Float(string="Remaining", compute="_compute_remaining")
     claim_information_id = fields.Many2one('claim.information')
 
@@ -588,6 +597,16 @@ class ClaimServices(models.Model):
     def _compute_remaining(self):
         for rec in self:
             rec.remaining = rec.service_ceiling - rec.service_price
+
+class ClaimServicesCeiling(models.Model):
+    _name = 'claim.services.ceiling'
+    _description = __doc__
+    _rec_name = 'product_service_id'
+
+    product_service_id = fields.Many2one('product.template', string="Service", domain=[('type', '=', 'service')])
+    service_price = fields.Float(string="Service Amount", readonly=False)
+    claim_information_id = fields.Many2one('claim.information')
+
 
 class ServicesProvider(models.Model):
     _name = 'services.provider'
