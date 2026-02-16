@@ -612,7 +612,7 @@ class ClaimServicesCeiling(models.Model):
         """Fetch price from the Provider's Pricelist"""
         if self.product_service_id and self.claim_id.policy_provider_cmp_id:
             # 1. Get the Provider and their Pricelist
-            provider = self.claim_id.policy_provider_cmp_id
+            provider = self.claim_information_id.policy_provider_cmp_id
             pricelist = provider.property_product_pricelist
 
             if pricelist:
