@@ -607,6 +607,23 @@ class ClaimServicesCeiling(models.Model):
     service_price = fields.Float(string="Service Amount", readonly=False)
     claim_information_id = fields.Many2one('claim.information')
 
+    @api.onchange('product_service_id')
+    def _onchange_product_service_id(self):
+        """Fetch price from the Provider's Pricelist"""
+        if self.product_service_id and self.claim_id.policy_provider_cmp_id:
+            # 1. Get the Provider and their Pricelist
+            provider = self.claim_id.policy_provider_cmp_id
+            pricelist = provider.property_product_pricelist
+
+            if pricelist:
+                
+                price = pricelist._get_product_price(
+                        product_variant, 
+                        quantity=1.0, 
+                        partner=provider
+                    )
+                self.service_price = price
+
 
 class ServicesProvider(models.Model):
     _name = 'services.provider'
