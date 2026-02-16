@@ -616,13 +616,17 @@ class ClaimServicesCeiling(models.Model):
             pricelist = provider.property_product_pricelist
 
             if pricelist:
+                # 2. Get the first variant of the template (required for pricelist logic)
+                product_variant = self.product_service_id.product_variant_id
                 
-                price = pricelist._get_product_price(
+                if product_variant:
+                   
+                    price = pricelist._get_product_price(
                         product_variant, 
                         quantity=1.0, 
                         partner=provider
                     )
-                self.service_price = price
+                    self.service_price = price
 
 
 class ServicesProvider(models.Model):
