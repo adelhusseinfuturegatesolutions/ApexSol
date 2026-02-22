@@ -964,23 +964,32 @@ class InsuranceInformation(models.Model):
     #             rec.total_policy_amount = base_multiplied_amount + rec.total_commission
     #         else:
     #             rec.total_policy_amount = base_multiplied_amount + rec.fixed_commission
-    @api.depends('policy_amount', 'insurance_nominee_ids', 'insurance_nominee_ids.family_member_ids.amount_factor', 
-             'commission_type', 'total_commission', 'fixed_commission')
+    @api.depends('policy_amount', 'insurance_nominee_ids', 'insurance_nominee_ids.family_member_ids.relation_type', 
+             'commission_type', 'total_commission', 'fixed_commission', 'insurance_policy_id.family_member_ids')
     def _compute_total_policy_amount(self):
         for rec in self:
             total_base_amount = 0.0
             
-            # Filter to only loop through Main Nominees (those without a parent)
+            # 1. Map the policy's predefined amounts by relation type for quick lookup
+            # Expects insurance_policy_id to have a o2m 'family_member_ids' with 'relation_type' and 'insurance_amount'
+            policy_amounts = {
+                line.relation_type: line.insurance_amount 
+                for line in rec.insurance_policy_id.family_member_ids
+            }
+            
             main_nominees = rec.insurance_nominee_ids.filtered(lambda n: not n.parent_nominee_id)
             
             for main in main_nominees:
                 # Add Base Policy Amount for the Main Nominee
                 total_base_amount += rec.policy_amount
                 
-                # Process their attached Family Members
+                # 2. Process Family Members based on Policy Settings
                 for member in main.family_member_ids:
-                    factor = member.amount_factor if member.amount_factor > 0 else 1.0
-                    total_base_amount += (rec.policy_amount * factor)
+                    # Check if this member's relation exists in the Insurance Policy configuration
+                    extra_amount = policy_amounts.get(member.relation_type, 0.0)
+                    
+                    # Add the specific insurance_amount found in the policy to the base
+                    total_base_amount += extra_amount
 
             # Apply Commission
             if rec.commission_type == "percentage":
