@@ -79,6 +79,8 @@ class InsurancePolicy(models.Model):
                                             inverse_name='insurance_policy_id',
                                             string="Policy Price list")
     policy_service_ids = fields.One2many('policy.services', 'insurance_policy_id', string="Policy Services")
+    family_member_ids = fields.One2many('family.member.insurance', 'insurance_policy_id', string="Family Members")
+
 
 
     # Life Insurance:
@@ -299,4 +301,14 @@ class PolicyServices(models.Model):
     product_service_id = fields.Many2one('product.template', string="Service", domain=[('type', '=', 'service')])
     service_ceiling = fields.Float(string="Service Ceiling", readonly=False)
     insurance_policy_id = fields.Many2one('insurance.policy')
+
+class FamilyMemberAmounts(models.Model):
+    _name = 'family.member.insurance'
+    _description = __doc__
+    _rec_name = 'relation_type'
+
+    relation_type = fields.Selection([('spouse','Spouse'),('son','Son'),('daughter','Daughter'),('father','Father'),('mother','Mother')],string="Family Member")
+    insurance_amount = fields.Float(string="Insurance Amount", readonly=False)
+    insurance_policy_id = fields.Many2one('insurance.policy')
+
 

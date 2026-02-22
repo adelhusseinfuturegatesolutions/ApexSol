@@ -582,6 +582,14 @@
                             <page name="terms_and_conditions" string="Terms &amp; Conditions">
                                 <field name="policy_terms_and_conditions"/>
                             </page>
+                            <page name="family_members" string="Family Members Insurance">
+                                <field name="family_member_ids">
+                                    <list editable="bottom">
+                                        <field name="relation_type"/>
+                                        <field name="insurance_amount"/>
+                                    </list>
+                                </field>
+                            </page>
                         </notebook>
                     </sheet>
                 </form>
