@@ -348,6 +348,9 @@
                                     <list editable="bottom">
                                         <field name="product_service_id"/>
                                         <field name="service_price"/>
+                                        <field name="provider_service_amount"/>
+                                        <field name="difference_amount"/>
+
 
                                     </list>
                                 </field>

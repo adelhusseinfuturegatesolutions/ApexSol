@@ -605,7 +605,14 @@ class ClaimServicesCeiling(models.Model):
 
     product_service_id = fields.Many2one('product.template', string="Service", domain=[('type', '=', 'service')])
     service_price = fields.Float(string="Service Amount", readonly=False)
+    provider_service_amount = fields.Float(string="Service Amount By Provider")
+    difference_amount = fields.Float(string="Difference Amount", compute="_compute_difference")
     claim_information_id = fields.Many2one('claim.information')
+
+    @api.depends('provider_service_amount','service_price')
+    def _compute_difference(self):
+        for rec in self:
+            rec.difference_amount = rec.service_price - rec.provider_service_amount
 
     @api.onchange('product_service_id')
     def _onchange_product_service_id(self):
