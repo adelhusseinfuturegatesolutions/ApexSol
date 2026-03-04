@@ -76,9 +76,8 @@ class ProviderService(models.AbstractModel):
             sheet.write(row, 2, location, cell_format)
             sheet.write(row, 3, amount, num_format)
             sheet.write(row, 4, date, cell_format)
-            sheet.write(row, 5, location, cell_format)
-            sheet.write(row, 6, account_number, cell_format)
-            sheet.write(row, 7, account_name, cell_format)
+            sheet.write(row, 5, account_number, cell_format)
+            sheet.write(row, 6, account_name, cell_format)
             
 
             row += 1
