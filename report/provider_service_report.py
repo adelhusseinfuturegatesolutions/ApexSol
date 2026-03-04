@@ -55,7 +55,7 @@ class ProviderService(models.AbstractModel):
             })
 
        
-        sheet.merge_range(6, 1, 6, 3, company.name, company_name_format)
+        sheet.merge_range(5, 1, 5, 3, company.name, company_name_format)
         
         sheet.merge_range(7, 1, 7, 3, "Hospitals Medical Services Entitlement", invoice_title_format)
 
