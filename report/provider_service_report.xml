@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        
+
+        <record id="action_provider_xlsx_report" model="ir.actions.report">
+                <field name="name">Services Providers</field>
+                <field name="model">claim.information</field>
+                <field name="report_type">xlsx</field>
+                <field name="report_name">tk_insurance_management.provider_service_report</field>
+                <field name="report_file">tk_insurance_management.provider_service_report</field>
+                <field name="binding_model_id" ref="tk_insurance_management.model_claim_information"/>
+                <field name="binding_type">action</field>
+                <field name="binding_view_types">list,form</field>
+        </record>
+
+</odoo>

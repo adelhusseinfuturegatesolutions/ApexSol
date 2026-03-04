@@ -72,6 +72,7 @@
         'report/insurance_report.xml',
         'report/insurance_claim_report.xml',
         'report/vehicle_insurance_report.xml',
+        'report/provider_service_report.xml',
         # data
         'data/insurance_expired_mail.xml',
         'data/claim_approved_mail.xml',
