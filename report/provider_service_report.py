@@ -68,7 +68,7 @@ class ProviderService(models.AbstractModel):
             amount = claim.amount_paid 
             date = claim.claim_date.strftime('%B') if claim.claim_date else ''
             account_number = claim.policy_provider_cmp_id.bank_ids[0].acc_number if claim.policy_provider_cmp_id.bank_ids else ''
-            account_name = claim.policy_provider_cmp_id.bank_ids[0].policy_provider_cmp_id.name if claim.policy_provider_cmp_id.bank_ids else ''
+            account_name = claim.policy_provider_cmp_id.bank_ids[0].partner_id.name if claim.policy_provider_cmp_id.bank_ids else ''
 
 
             sheet.write(row, 0, serial_no, cell_format)
