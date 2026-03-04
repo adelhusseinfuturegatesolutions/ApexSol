@@ -64,8 +64,8 @@ class ProviderService(models.AbstractModel):
 
         for claim in claims:
             provider_name = claim.policy_provider_cmp_id.name
-            location = claim.policy_provider_cmp_id.street else ''
-            amount = claim.amount_paid else ''
+            location = claim.policy_provider_cmp_id.street 
+            amount = claim.amount_paid 
             date = claim.claim_date.strftime('%B') if claim.claim_date else ''
             account_number = claim.policy_provider_cmp_id.bank_ids[0].acc_number if claim.partner_id.bank_ids else ''
             account_name = claim.policy_provider_cmp_id.bank_ids[0].partner_id.name if claim.partner_id.bank_ids else ''
