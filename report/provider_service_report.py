@@ -12,7 +12,7 @@ class ProviderService(models.AbstractModel):
             'bold': True, 'align': 'center', 'font_size': 10
         })
         invoice_title_format = workbook.add_format({
-            'bold': True, 'align': 'center', 'font_size': 16, 'font_color': '#2c3e50'
+            'bold': True, 'align': 'center', 'font_size': 14, 'font_color': '#2c3e50'
         })
         header_format = workbook.add_format({
             'bold': True, 'align': 'center', 'valign': 'vcenter',
