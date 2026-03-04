@@ -9,7 +9,7 @@ class ProviderService(models.AbstractModel):
     def generate_xlsx_report(self, workbook, data, claims):
         # 1. Define Formats
         company_name_format = workbook.add_format({
-            'bold': True, 'align': 'center', 'font_size': 14
+            'bold': True, 'align': 'center', 'font_size': 10
         })
         invoice_title_format = workbook.add_format({
             'bold': True, 'align': 'center', 'font_size': 18, 'font_color': '#2c3e50'
@@ -37,13 +37,21 @@ class ProviderService(models.AbstractModel):
             # Decode the base64 logo
             image_data = io.BytesIO(base64.b64decode(company.logo))
             
-            sheet.insert_image('B1', 'logo.png', {
+            # sheet.insert_image('B1', 'logo.png', {
+            #     'image_data': image_data,
+            #     'x_scale': 0.7,   # Increase/decrease to fit width of B, C, D
+            #     'y_scale': 0.7,   # Maintain aspect ratio
+            #     'x_offset': 5,    # Slight padding from the left of Column B
+            #     'y_offset': 5,    # Slight padding from the top of Row 1
+            #     'object_position': 1 # Ensures the image moves/sizes with cells
+            # })
+            sheet.insert_image('C1', 'logo.png', {
                 'image_data': image_data,
-                'x_scale': 0.7,   # Increase/decrease to fit width of B, C, D
-                'y_scale': 0.7,   # Maintain aspect ratio
-                'x_offset': 5,    # Slight padding from the left of Column B
-                'y_offset': 5,    # Slight padding from the top of Row 1
-                'object_position': 1 # Ensures the image moves/sizes with cells
+                'x_scale': 0.85,   # Increased slightly to cover more of C and D
+                'y_scale': 0.85,   # Maintain aspect ratio
+                'x_offset': 10,    # Padding from the left of Column C
+                'y_offset': 5,     # Padding from the top of Row 1
+                'object_position': 1 
             })
 
        
