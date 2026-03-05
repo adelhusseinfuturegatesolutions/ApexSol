@@ -5,6 +5,7 @@ import secrets
 from odoo.exceptions import ValidationError
 from odoo import api, fields, models, _
 from ..utils import _display_notification
+from odoo.exceptions import ValidationError
 
 
 class ClaimImage(models.Model):
@@ -598,6 +599,14 @@ class ClaimServices(models.Model):
         for rec in self:
             rec.remaining = rec.service_ceiling - rec.service_price
 
+    @api.constrains('service_ceiling', 'service_price')
+    def _check_ceiling_amount(self):
+        for record in self:
+            if record.service_ceiling < record.service_price:
+                raise ValidationError(_(
+                    "Error! The 'Service Price ' (%s) cannot be greater than the 'Service Ceiling' (%s)."
+                ) % (record.service_price, record.service_ceiling))
+
 class ClaimServicesCeiling(models.Model):
     _name = 'claim.services.ceiling'
     _description = __doc__
@@ -613,6 +622,14 @@ class ClaimServicesCeiling(models.Model):
     def _compute_difference(self):
         for rec in self:
             rec.difference_amount = rec.service_price - rec.provider_service_amount
+
+    @api.constrains('provider_service_amount', 'service_price')
+    def _check_provider_amount(self):
+        for record in self:
+            if record.provider_service_amount > record.service_price:
+                raise ValidationError(_(
+                    "Error! The 'Service Amount By Provider' (%s) cannot be greater than the 'Service Price' (%s)."
+                ) % (record.provider_service_amount, record.service_price))
 
     @api.onchange('product_service_id')
     def _onchange_product_service_id(self):
