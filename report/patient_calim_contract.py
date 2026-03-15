@@ -60,8 +60,8 @@ class PatientClaimContract(models.AbstractModel):
         sheet.merge_range(7, 1, 7, 3, "Hospitals Medical Services Entitlement", invoice_title_format)
 
         if data.get('start_date') and data.get('end_date'):
-        period_text = f"From: {data['start_date']} To: {data['end_date']}"
-        sheet.merge_range(8, 1, 8, 3, period_text, company_name_format)
+            period_text = f"From: {data['start_date']} To: {data['end_date']}"
+            sheet.merge_range(8, 1, 8, 3, period_text, company_name_format)
 
         # 5. Data Headers (Starting at Row 10)
         row = 9
