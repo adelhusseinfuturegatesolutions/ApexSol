@@ -65,32 +65,32 @@ class PatientClaimContract(models.AbstractModel):
 
         # 5. Data Headers (Starting at Row 10)
         row = 9
-        # headers = ['#','إسم مزود الخدمة', 'المنطقة','المبلغ', 'الشهر', 'رقم الحساب', ' رقم الحساب بإسم']
-        # for col, header in enumerate(headers):
-        #     sheet.write(row, col, header, header_format)
+        headers = ['#','إسم مزود الخدمة', 'المنطقة','المبلغ', 'الشهر', 'رقم الحساب', ' رقم الحساب بإسم']
+        for col, header in enumerate(headers):
+            sheet.write(row, col, header, header_format)
         
-        # row += 1
+        row += 1
 
-        # # 6. Populate Data
-        # serial_no = 1
+        # 6. Populate Data
+        serial_no = 1
 
-        # for claim in claims:
-        #     provider_name = claim.policy_provider_cmp_id.name
-        #     location = claim.policy_provider_cmp_id.street 
-        #     amount = claim.amount_paid 
-        #     date = claim.claim_date.strftime('%B') if claim.claim_date else ''
-        #     account_number = claim.policy_provider_cmp_id.bank_ids[0].acc_number if claim.policy_provider_cmp_id.bank_ids else ''
-        #     account_name = claim.policy_provider_cmp_id.bank_ids[0].partner_id.name if claim.policy_provider_cmp_id.bank_ids else ''
+        for claim in claims:
+            provider_name = claim.policy_provider_cmp_id.name
+            location = claim.policy_provider_cmp_id.street 
+            amount = claim.amount_paid 
+            date = claim.claim_date.strftime('%B') if claim.claim_date else ''
+            account_number = claim.policy_provider_cmp_id.bank_ids[0].acc_number if claim.policy_provider_cmp_id.bank_ids else ''
+            account_name = claim.policy_provider_cmp_id.bank_ids[0].partner_id.name if claim.policy_provider_cmp_id.bank_ids else ''
 
 
-        #     sheet.write(row, 0, serial_no, cell_format)
-        #     sheet.write(row, 1, provider_name, cell_format)
-        #     sheet.write(row, 2, location, cell_format)
-        #     sheet.write(row, 3, amount, num_format)
-        #     sheet.write(row, 4, date, cell_format)
-        #     sheet.write(row, 5, account_number, cell_format)
-        #     sheet.write(row, 6, account_name, cell_format)
+            sheet.write(row, 0, serial_no, cell_format)
+            sheet.write(row, 1, provider_name, cell_format)
+            sheet.write(row, 2, location, cell_format)
+            sheet.write(row, 3, amount, num_format)
+            sheet.write(row, 4, date, cell_format)
+            sheet.write(row, 5, account_number, cell_format)
+            sheet.write(row, 6, account_name, cell_format)
             
 
-        #     row += 1
-        #     serial_no += 1
+            row += 1
+            serial_no += 1
