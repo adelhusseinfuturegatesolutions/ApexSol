@@ -910,21 +910,60 @@
             <field name="name">insurance.information.view.list</field>
             <field name="model">insurance.information</field>
             <field name="arch" type="xml">
-                <list>
-                    <field name="insurance_number"/>
-                    <field name="policy_holder_id"/>
-                    <field name="insurance_category_id"/>
-                    <field name="insurance_sub_category_id"/>
-                    <field name="insurance_policy_id"/>
-                    <field name="policy_price_list_id"/>
-                    <field name="issue_date"/>
-                    <field name="expiry_date"/>
-                    <field name="state" widget="badge"
+                <list decoration-danger="state == 'expired' or (expiry_date and expiry_date &lt; today())"
+                      decoration-warning="state == 'confirmed'"
+                      decoration-success="state == 'running'"
+                      decoration-info="state == 'draft'"
+                      decoration-muted="state == 'cancel'">
+                    
+                    <!-- عمود رقم البوليصة -->
+                    <field name="insurance_number" string="رقم البوليصة" optional="show"/>
+                    
+                    <!-- عمود اسم صاحب البوليصة -->
+                    <field name="policy_holder_id" string="صاحب البوليصة" optional="show"/>
+                    
+                    <!-- عمود فئة التأمين -->
+                    <field name="insurance_category_id" string="فئة التأمين" optional="show"/>
+                    
+                    <!-- عمود نوع البوليصة -->
+                    <field name="insurance_policy_id" string="نوع البوليصة" optional="show"/>
+                    
+                    <!-- عمود تاريخ الإصدار -->
+                    <field name="issue_date" string="تاريخ الإصدار" optional="show"/>
+                    
+                    <!-- عمود تاريخ الانتهاء (مهم جداً) -->
+                    <field name="expiry_date" string="تاريخ الانتهاء" optional="show"/>
+                    
+                    <!-- عمود المبلغ الإجمالي -->
+                    <field name="total_policy_amount" string="المبلغ الإجمالي" optional="show" sum="total_policy_amount"/>
+                    
+                    <!-- عمود حالة الدفع -->
+                    <field name="payment_state" string="حالة الفاتورة" optional="show" widget="badge"
+                           decoration-success="payment_state == 'paid'"
+                           decoration-danger="payment_state == 'not_paid'"
+                           decoration-info="payment_state == 'in_payment'"
+                           decoration-warning="payment_state in ('partial', 'reversed')"/>
+                    
+                    <!-- عمود الحالة الرئيسية -->
+                    <field name="state" string="الحالة" widget="badge"
                            decoration-info="state == 'draft'"
                            decoration-warning="state == 'confirmed'"
                            decoration-success="state == 'running'"
                            decoration-danger="state in ('expired', 'cancel')"
                            decoration-primary="state == 'renew'"/>
+                    
+                    <!-- عمود مدير التأمين -->
+                    <field name="responsible_id" string="مدير التأمين" optional="hide" widget="many2one_avatar_user"/>
+                    
+                    <!-- عمود الوكيل -->
+                    <field name="agent_id" string="الوكيل" optional="hide" 
+                           invisible="agent_required == False"/>
+                    
+                    <!-- عمود نوع القسط -->
+                    <field name="premium_type" string="نوع القسط" optional="hide"
+                           decoration-info="premium_type == 'fixed'"
+                           decoration-warning="premium_type == 'installment'"/>
+                    
                 </list>
             </field>
         </record>
