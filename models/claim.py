@@ -219,7 +219,7 @@ class ClaimInformation(models.Model):
             total_services = sum(rec.claim_service_ids.mapped('service_price'))
             
             # 2. Sum service_price from the second One2many (ceiling lines)
-            total_ceilings = sum(rec.claim_service_ceiling_ids.mapped('service_price'))
+            total_ceilings = sum(rec.claim_service_ceiling_ids.mapped('provider_service_amount'))
             
             # 3. Combine both for the final paid amount
             rec.amount_paid = total_services + total_ceilings
