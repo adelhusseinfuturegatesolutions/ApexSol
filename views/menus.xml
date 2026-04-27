@@ -78,11 +78,11 @@
                   parent="menu_insurance_report"
                   action="action_claim_excel_report"
                   sequence="3"/>
-        <menuitem id="menu_patient_contract_claim_excel_report"
+        <!-- <menuitem id="menu_patient_contract_claim_excel_report"
                   name="Patient Contract Claim Report"
                   parent="menu_insurance_report"
                   action="action_patient_contract_claim_excel_report"
-                  sequence="4"/>
+                  sequence="4"/> -->
 
         <menuitem id="menu_configuration" name="Configurations" parent="main_menu_insurance_management"
                   groups="tk_insurance_management.insurance_manager" sequence="8"/>
