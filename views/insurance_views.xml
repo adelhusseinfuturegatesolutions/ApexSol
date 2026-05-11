@@ -910,7 +910,7 @@
             <field name="name">insurance.information.view.list</field>
             <field name="model">insurance.information</field>
             <field name="arch" type="xml">
-                <list decoration-danger="state == 'expired' or (expiry_date and expiry_date &lt; today())"
+                <list decoration-danger="state == 'expired' or (expiry_date and expiry_date &lt; today)"
                       decoration-warning="state == 'confirmed'"
                       decoration-success="state == 'running'"
                       decoration-info="state == 'draft'"
