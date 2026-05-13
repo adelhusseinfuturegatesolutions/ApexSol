@@ -71,7 +71,7 @@ class InsuranceNominee(models.Model):
         string="Family Members"
     )
 
-    relation_type = fields.Selection([('Employee (Male)','Employee (Male)')('Employee (Female)','Employee (Female)'),('Wife','Wife'),('son','Son'),('daughter','Daughter'),('father','Father'),('mother','Mother'),('Husband','Husband')],string="Relationship.")
+    relation_type = fields.Selection([('Employee (Male)','Employee (Male)'),('Employee (Female)','Employee (Female)'),('Wife','Wife'),('son','Son'),('daughter','Daughter'),('father','Father'),('mother','Mother'),('Husband','Husband')],string="Relationship.")
     amount_factor = fields.Float(string='Amount Factor')
     claims_count = fields.Integer(compute='_compute_claim_count')
 
