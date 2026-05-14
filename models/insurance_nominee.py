@@ -44,15 +44,9 @@ class InsuranceNominee(models.Model):
     insured_weights = fields.Char(string="Weight(kg)")
     insured_birthmarks = fields.Char(string="Birthmark")
     insured_marital_status = fields.Selection([
-        ('single', "Single"),
-        ('married', "Married"),
-        ('divorced', "Divorced"),
-        ('widowed', "Widowed"),
-        ('separated', "Separated"),
-        ('annulled', "Annulled"),
-        ('domestic', "Domestic Partnership/Civil Union"),
-        ('common', "Common-Law Marriage"),
-        ('other', "Other")], string="Marital Status")
+        ('Employee-Male', "Employee-Male"),
+        ('Employee-Female', "Employee-Female"), 
+        ('other', "Other")], string="Status")
     insurance_information_id = fields.Many2one('insurance.information', ondelete='cascade')
     claim_information_id = fields.Many2one('claim.information', ondelete='cascade')
     policy_holder_id = fields.Many2one('res.partner', string='Policy Holder')
