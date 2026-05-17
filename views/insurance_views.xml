@@ -179,9 +179,9 @@
                                 <field name="insurance_policy_id" options="{'no_edit': True, 'no_create': True}"
                                        readonly="state not in 'draft'" required="1"/>
                                 <field name="insurance_buying_for_id" options="{'no_edit': True, 'no_create': True}"
-                                       readonly="state not in 'draft'"/>
+                                       readonly="state not in 'draft'" invisible='1'/>
                                 <field name="policy_provider_cmp_id" readonly="state not in 'draft'" required="1"
-                                       options="{'no_edit': True, 'no_create': True}"/>
+                                       options="{'no_edit': True, 'no_create': True}" invisible='1'/>
                                 <field name="previous_insurance_id" invisible="previous_insurance_id == False"
                                        readonly="1"/>
                                 <field name="renew_insurance_lead_id" invisible="renew_insurance_lead_id == False"

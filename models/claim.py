@@ -623,13 +623,13 @@ class ClaimServicesCeiling(models.Model):
         for rec in self:
             rec.difference_amount = rec.service_price - rec.provider_service_amount
 
-    @api.constrains('provider_service_amount', 'service_price')
-    def _check_provider_amount(self):
-        for record in self:
-            if record.provider_service_amount > record.service_price:
-                raise ValidationError(_(
-                    "Error! The 'Service Amount By Provider' (%s) cannot be greater than the 'Service Price' (%s)."
-                ) % (record.provider_service_amount, record.service_price))
+    # @api.constrains('provider_service_amount', 'service_price')
+    # def _check_provider_amount(self):
+    #     for record in self:
+    #         if record.provider_service_amount > record.service_price:
+    #             raise ValidationError(_(
+    #                 "Error! The 'Service Amount By Provider' (%s) cannot be greater than the 'Service Price' (%s)."
+    #             ) % (record.provider_service_amount, record.service_price))
 
     @api.onchange('product_service_id')
     def _onchange_product_service_id(self):

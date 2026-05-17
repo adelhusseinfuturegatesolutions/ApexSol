@@ -740,13 +740,13 @@ class InsuranceInformation(models.Model):
             else:
                 record.health_insured_age = 'below_five'
 
-    @api.constrains('issue_date')
-    def _check_issue_date(self):
-        """Check that the issue date is not before today"""
-        today = fields.Date.today()
-        for record in self:
-            if record.issue_date and record.issue_date < today:
-                raise ValidationError(_("The issue date cannot be earlier than today."))
+    # @api.constrains('issue_date')
+    # def _check_issue_date(self):
+    #     """Check that the issue date is not before today"""
+    #     today = fields.Date.today()
+    #     for record in self:
+    #         if record.issue_date and record.issue_date < today:
+    #             raise ValidationError(_("The issue date cannot be earlier than today."))
 
     @api.constrains('state', 'policy_amount', 'desired_death_amount', 'fixed_commission',
                     'percentage_commission', 'health_deductible_amount', 'copay_amount',
