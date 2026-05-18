@@ -1,4 +1,153 @@
 $dashboard-bg : #ffffff !default;
+$tk-primary: #2563eb;
+$tk-accent: #7c3aed;
+$tk-success: #10b981;
+$tk-warn: #f59e0b;
+$tk-danger: #ef4444;
+$tk-ink: #1e293b;
+$tk-muted: #64748b;
+$tk-soft: #f1f5f9;
+
+.tk_insurance_form {
+    .o_form_sheet_bg {
+        background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%) !important;
+    }
+    .o_form_sheet {
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06);
+        border: 1px solid #e2e8f0;
+    }
+    .o_form_statusbar {
+        background: linear-gradient(90deg, #eef2ff 0%, #ffffff 100%);
+        border-bottom: 1px solid #e2e8f0;
+        padding: 8px 12px;
+
+        .o_arrow_button {
+            font-weight: 600;
+        }
+        .btn.oe_highlight {
+            background: $tk-primary !important;
+            border-color: $tk-primary !important;
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+        }
+        .btn-info {
+            background: $tk-accent !important;
+            border-color: $tk-accent !important;
+            color: #fff !important;
+        }
+        .btn-danger {
+            background: $tk-danger !important;
+            border-color: $tk-danger !important;
+        }
+    }
+    .oe_title h1 {
+        color: $tk-ink;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+    }
+    .oe_button_box .oe_stat_button {
+        border-radius: 10px;
+        margin: 4px;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
+        }
+        .o_button_icon {
+            color: $tk-primary;
+        }
+    }
+
+    .tk_section_header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        margin: 18px 0 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 15px;
+        color: #ffffff;
+        background: linear-gradient(90deg, $tk-primary, $tk-accent);
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.18);
+
+        i {
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 6px;
+            border-radius: 8px;
+        }
+    }
+    .tk_header_holder {
+        background: linear-gradient(90deg, #0ea5e9, #2563eb);
+    }
+    .tk_header_policy {
+        background: linear-gradient(90deg, #7c3aed, #db2777);
+    }
+    .tk_header_insured {
+        background: linear-gradient(90deg, #10b981, #06b6d4);
+    }
+
+    .o_horizontal_separator {
+        color: $tk-ink;
+        font-weight: 600;
+        border-left: 4px solid $tk-primary;
+        padding: 4px 10px;
+        background: $tk-soft;
+        border-radius: 6px;
+        margin: 14px 0 8px;
+    }
+
+    .o_inner_group > tbody > tr > td.o_td_label,
+    .o_form_label {
+        color: $tk-muted;
+        font-weight: 500;
+    }
+
+    .tk_insurance_notebook {
+        > .nav-tabs {
+            border-bottom: 2px solid #e2e8f0;
+            gap: 4px;
+
+            .nav-link {
+                color: $tk-muted;
+                font-weight: 500;
+                border: none;
+                border-radius: 8px 8px 0 0;
+                padding: 10px 16px;
+                transition: all 0.15s ease;
+
+                &:hover {
+                    color: $tk-primary;
+                    background: $tk-soft;
+                }
+                &.active {
+                    color: #ffffff !important;
+                    background: linear-gradient(135deg, $tk-primary, $tk-accent) !important;
+                    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+                }
+            }
+        }
+    }
+
+    .o_list_view {
+        thead {
+            background: $tk-soft;
+            th {
+                color: $tk-ink;
+                font-weight: 600;
+            }
+        }
+        tbody tr:hover {
+            background: #f8fafc !important;
+        }
+    }
+}
+
 
 .o_action_manager {
     overflow: auto !important;

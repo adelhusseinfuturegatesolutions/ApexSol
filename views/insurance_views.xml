@@ -42,7 +42,7 @@
             <field name="name">insurance.information.view.form</field>
             <field name="model">insurance.information</field>
             <field name="arch" type="xml">
-                <form>
+                <form class="tk_insurance_form">
                     <header>
                         <field name="instalment_complete" invisible="1"/>
                         <field name="renew_insurance_id" invisible="1"/>
@@ -127,7 +127,10 @@
                                 <widget name="web_ribbon" title="Renew" bg_color="bg-success"/>
                             </div>
                         </div>
-                        <separator string="Policy Holder Details" name="policy_holder_details"/>
+                        <div class="tk_section_header tk_header_holder">
+                            <i class="fa fa-user-circle"/>
+                            <span>Policy Holder Details</span>
+                        </div>
                         <group>
                             <group>
                                 <field name="crm_lead_id" invisible="crm_lead_id == False" readonly="1"/>
@@ -169,7 +172,10 @@
                                 </div>
                             </group>
                         </group>
-                        <separator string="Policy Details" name="policy_details"/>
+                        <div class="tk_section_header tk_header_policy">
+                            <i class="fa fa-file-text-o"/>
+                            <span>Policy Details</span>
+                        </div>
                         <group>
                             <group>
                                 <field name="insurance_category_id" options="{'no_edit': True, 'no_create': True}"
@@ -242,8 +248,11 @@
                                 <field name="agent_bill_id" invisible="agent_bill_id == False" readonly="1"/>
                             </group>
                         </group>
-                        <separator string="Insured Details" name="insured_details"
-                                   invisible="category != 'health'"/>
+                        <div class="tk_section_header tk_header_insured"
+                             invisible="category != 'health'">
+                            <i class="fa fa-users"/>
+                            <span>Insured Details</span>
+                        </div>
                         <group invisible="category != 'health'">
                             <group invisible="desired_coverage_type != 'individual'">
                                 <field name="insured_id" readonly="state not in 'draft'"
@@ -589,7 +598,7 @@
                             </group>
                         </group>
 
-                        <notebook>
+                        <notebook class="tk_insurance_notebook">
                             <page name="payment_details" string="Payment Details">
                                 <group>
                                     <group string="Types of Payments">
