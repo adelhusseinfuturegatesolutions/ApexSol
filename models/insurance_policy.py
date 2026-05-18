@@ -307,7 +307,7 @@ class FamilyMemberAmounts(models.Model):
     _description = __doc__
     _rec_name = 'relation_type'
 
-    relation_type = fields.Selection([('spouse','Spouse'),('son','Son'),('daughter','Daughter'),('father','Father'),('mother','Mother')],string="Family Member")
+    relation_type = fields.Selection([('spouse','Spouse'),('wife','Wife'),('husband','Husband'),('son','Son'),('daughter','Daughter'),('father','Father'),('mother','Mother')],string="Family Member")
     insurance_amount = fields.Float(string="Insurance Amount", readonly=False)
     insurance_policy_id = fields.Many2one('insurance.policy')
 
