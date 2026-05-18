@@ -110,6 +110,23 @@ class InsuranceInformation(models.Model):
     policy_terms_and_conditions = fields.Text(string="Terms & Conditions", translate=True)
 
     policy_amount = fields.Monetary(string="Policy Amount")
+    insured_premium_total = fields.Monetary(
+        string="Insureds Premium Total",
+        compute="_compute_insured_premium_total",
+        store=True)
+
+    @api.depends('insured_details_ids.gender_premium')
+    def _compute_insured_premium_total(self):
+        """Sum of per-insured gender-based premiums."""
+        for rec in self:
+            rec.insured_premium_total = sum(rec.insured_details_ids.mapped('gender_premium'))
+
+    @api.onchange('insured_details_ids')
+    def _onchange_insured_details_apply_premium(self):
+        """When insureds exist, drive policy_amount from gender-based pricing."""
+        for rec in self:
+            if rec.insured_details_ids:
+                rec.policy_amount = sum(rec.insured_details_ids.mapped('gender_premium'))
     commission_type = fields.Selection([
         ('fixed', "Fixed"),
         ('percentage', "Percentage")],

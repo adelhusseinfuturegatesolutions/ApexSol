@@ -46,6 +46,31 @@ class InsuredDetails(models.Model):
     insurance_information_id = fields.Many2one('insurance.information', ondelete='cascade')
     claim_information_id = fields.Many2one('claim.information', ondelete='cascade')
 
+    currency_id = fields.Many2one(
+        'res.currency',
+        related='insurance_information_id.currency_id',
+        string='Currency')
+    gender_premium = fields.Monetary(
+        string="Premium",
+        compute="_compute_gender_premium",
+        store=True,
+        currency_field='currency_id')
+
+    @api.depends('insured_gender',
+                 'insurance_information_id.policy_price_list_id.male_premium',
+                 'insurance_information_id.policy_price_list_id.female_premium',
+                 'insurance_information_id.policy_price_list_id.policy_premium')
+    def _compute_gender_premium(self):
+        """Premium per insured driven by gender pricing on the policy pricelist."""
+        for rec in self:
+            pricelist = rec.insurance_information_id.policy_price_list_id
+            if rec.insured_gender == 'male':
+                rec.gender_premium = pricelist.male_premium or pricelist.policy_premium
+            elif rec.insured_gender == 'female':
+                rec.gender_premium = pricelist.female_premium or pricelist.policy_premium
+            else:
+                rec.gender_premium = pricelist.policy_premium
+
     @api.depends('insured_dob')
     def _compute_insured_ages_count(self):
         """Insured age count"""

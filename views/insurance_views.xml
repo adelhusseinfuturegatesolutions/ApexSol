@@ -263,20 +263,24 @@
                                 <field name="insured_weight" readonly="state not in 'draft'"/>
                                 <field name="insured_birthmark" readonly="state not in 'draft'"/>
                             </group>
-                            <!-- <field name="insured_details_ids" readonly="state not in 'draft'"
-                                   invisible="desired_coverage_type not in ['family', 'group']">
+                            <field name="insured_details_ids" readonly="state not in 'draft'">
                                 <list editable="bottom">
                                     <field name="partner_id"/>
                                     <field name="insured_dob"/>
                                     <field name="insured_ages"/>
                                     <field name="insured_gender"/>
+                                    <field name="gender_premium" sum="Total"/>
+                                    <field name="currency_id" column_invisible="True"/>
                                     <field name="insured_blood_group"/>
                                     <field name="insured_heights"/>
                                     <field name="insured_weights"/>
                                     <field name="insured_birthmarks"/>
                                     <field name="insured_marital_status"/>
                                 </list>
-                            </field> -->
+                            </field>
+                            <group>
+                                <field name="insured_premium_total" readonly="1"/>
+                            </group>
                         </group>
                         <separator string="Life Insurance Policy Details" name="life_insurance_policy_details"
                                    invisible="category != 'life'"/>

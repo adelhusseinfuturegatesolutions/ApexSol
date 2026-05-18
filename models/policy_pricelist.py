@@ -15,6 +15,8 @@ class PolicyPriceList(models.Model):
     duration = fields.Integer(related="insurance_time_period_id.duration",
                               string="Duration (Months)")
     policy_premium = fields.Monetary(string="Premium")
+    male_premium = fields.Monetary(string="Male Premium")
+    female_premium = fields.Monetary(string="Female Premium")
     currency_id = fields.Many2one('res.currency', string='Currency',
                                   related="company_id.currency_id")
     company_id = fields.Many2one('res.company', default=lambda self: self.env.company,
