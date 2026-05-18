@@ -58,18 +58,17 @@ class InsuredDetails(models.Model):
 
     @api.depends('insured_gender',
                  'insurance_information_id.policy_price_list_id.male_premium',
-                 'insurance_information_id.policy_price_list_id.female_premium',
-                 'insurance_information_id.policy_price_list_id.policy_premium')
+                 'insurance_information_id.policy_price_list_id.female_premium')
     def _compute_gender_premium(self):
-        """Premium per insured driven by gender pricing on the policy pricelist."""
+        """Premium per insured driven only by gender pricing on the pricelist."""
         for rec in self:
             pricelist = rec.insurance_information_id.policy_price_list_id
             if rec.insured_gender == 'male':
-                rec.gender_premium = pricelist.male_premium or pricelist.policy_premium
+                rec.gender_premium = pricelist.male_premium
             elif rec.insured_gender == 'female':
-                rec.gender_premium = pricelist.female_premium or pricelist.policy_premium
+                rec.gender_premium = pricelist.female_premium
             else:
-                rec.gender_premium = pricelist.policy_premium
+                rec.gender_premium = 0.0
 
     @api.depends('insured_dob')
     def _compute_insured_ages_count(self):

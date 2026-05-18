@@ -24,10 +24,10 @@ class PolicyPriceList(models.Model):
     insurance_policy_id = fields.Many2one('insurance.policy', string="Insurance Policy",
                                           ondelete='cascade')
 
-    @api.constrains('policy_premium')
-    def _check_premium_amount(self):
-        """Check premium amount"""
+    @api.constrains('male_premium', 'female_premium')
+    def _check_gender_premium_amount(self):
+        """Require at least one gender-based premium per pricelist line."""
         for record in self:
-            if not record.policy_premium:
+            if not record.male_premium and not record.female_premium:
                 raise ValidationError(
-                    _("Include valid policy premium amounts in the policy price list tab"))
+                    _("Set the Male and/or Female premium on each policy pricelist line."))
