@@ -86,14 +86,6 @@ class CrmInsurance(models.TransientModel):
             if not record.policy_holder_gender:
                 raise ValidationError(_("Please select a gender: Male, Female or Others"))
 
-    @api.constrains('issue_date')
-    def _check_issue_date(self):
-        """Check that the issue date is not before today"""
-        today = fields.Date.today()
-        for record in self:
-            if record.issue_date and record.issue_date < today:
-                raise ValidationError(_("The issue date cannot be earlier than today."))
-
     @api.depends('policy_holder_dob')
     def _compute_policy_holder_age_count(self):
         """Policyholder age count"""

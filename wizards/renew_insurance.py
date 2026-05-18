@@ -105,14 +105,6 @@ class RenewInsurance(models.TransientModel):
         for rec in self:
             rec.policy_amount = rec.policy_price_list_id.policy_premium
 
-    @api.constrains('issue_date')
-    def _check_issue_date(self):
-        """Check that the issue date is not before today"""
-        today = fields.Date.today()
-        for record in self:
-            if record.issue_date and record.issue_date < today:
-                raise ValidationError(_("The issue date cannot be earlier than today."))
-
     @api.onchange('policy_holder_id')
     def onchange_policy_holder_details(self):
         """Onchange policy holder details"""
