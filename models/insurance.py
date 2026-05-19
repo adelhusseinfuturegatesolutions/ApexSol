@@ -1012,13 +1012,11 @@ class InsuranceInformation(models.Model):
             }
 
             def employee_amount(nominee):
-                amount = role_amount.get(nominee.relation_type, 0.0)
-                if not amount:
-                    if nominee.insured_gender == 'male':
-                        amount = category.employee_male_amount
-                    elif nominee.insured_gender == 'female':
-                        amount = category.employee_female_amount
-                return amount
+                if nominee.insured_gender == 'male':
+                    return category.employee_male_amount
+                if nominee.insured_gender == 'female':
+                    return category.employee_female_amount
+                return 0.0
 
             total_base_amount = 0.0
             main_nominees = rec.insurance_nominee_ids.filtered(lambda n: not n.parent_nominee_id)
