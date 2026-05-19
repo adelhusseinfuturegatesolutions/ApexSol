@@ -69,6 +69,18 @@ class InsuranceNominee(models.Model):
     amount_factor = fields.Float(string='Amount Factor')
     claims_count = fields.Integer(compute='_compute_claim_count')
 
+    family_head_name = fields.Char(
+        string="Family",
+        compute='_compute_family_head_name',
+        store=True,
+        index=True)
+
+    @api.depends('parent_nominee_id.name', 'name')
+    def _compute_family_head_name(self):
+        """Group key: own name for employees, parent's name for family members."""
+        for rec in self:
+            rec.family_head_name = rec.parent_nominee_id.name or rec.name
+
 
     # policy details
     insurance_category_id = fields.Many2one('insurance.category', string="Policy Category" , related='insurance_information_id.insurance_category_id')
