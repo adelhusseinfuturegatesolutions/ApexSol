@@ -73,9 +73,33 @@ class InsuranceNominee(models.Model):
         [('active', 'Active'),
          ('inactive', 'Inactive')],
         string="Status",
-        default='active',
-        required=True,
-        tracking=True)
+        compute='_compute_nominee_status',
+        inverse='_inverse_nominee_status',
+        search='_search_nominee_status')
+
+    @api.depends('active')
+    def _compute_nominee_status(self):
+        for rec in self:
+            rec.nominee_status = 'active' if rec.active else 'inactive'
+
+    def _inverse_nominee_status(self):
+        for rec in self:
+            rec.active = (rec.nominee_status != 'inactive')
+
+    def _search_nominee_status(self, operator, value):
+        if operator not in ('=', '!=', 'in', 'not in'):
+            return []
+        if isinstance(value, str):
+            value = [value]
+        wants_inactive = ('inactive' in value)
+        wants_active = ('active' in value)
+        if operator in ('!=', 'not in'):
+            wants_inactive, wants_active = not wants_inactive, not wants_active
+        if wants_active and not wants_inactive:
+            return [('active', '=', True)]
+        if wants_inactive and not wants_active:
+            return [('active', '=', False)]
+        return []
 
     family_head_name = fields.Char(
         string="Family",
