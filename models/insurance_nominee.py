@@ -71,9 +71,7 @@ class InsuranceNominee(models.Model):
 
     family_head_name = fields.Char(
         string="Family",
-        compute='_compute_family_head_name',
-        store=True,
-        index=True)
+        compute='_compute_family_head_name')
 
     @api.depends('parent_nominee_id.name', 'name')
     def _compute_family_head_name(self):

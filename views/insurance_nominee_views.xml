@@ -111,9 +111,8 @@
             <field name="name">insurance.nominee.view.list</field>
             <field name="model">insurance.nominee</field>
             <field name="arch" type="xml">
-                <list default_order="family_head_name asc, parent_nominee_id asc, id asc">
-                    <field name="family_head_name" column_invisible="True"/>
-                    <field name="parent_nominee_id" column_invisible="True"/>
+                <list default_order="parent_nominee_id asc, id asc">
+                    <field name="parent_nominee_id" string="Main Employee" optional="show"/>
                     <field name="name"/>
                     <field name="nominee_id"/>
                     <field name="relation_type"/>
@@ -131,14 +130,14 @@
                 <search>
                     <field name="name"/>
                     <field name="nominee_id"/>
-                    <field name="family_head_name"/>
+                    <field name="parent_nominee_id" string="Main Employee"/>
                     <filter name="employees_only" string="Employees Only"
                             domain="[('parent_nominee_id','=',False)]"/>
                     <filter name="family_only" string="Family Members"
                             domain="[('parent_nominee_id','!=',False)]"/>
                     <group expand="1" string="Group By">
-                        <filter name="group_family_head" string="Family"
-                                context="{'group_by': 'family_head_name'}"/>
+                        <filter name="group_main_employee" string="Main Employee"
+                                context="{'group_by': 'parent_nominee_id'}"/>
                         <filter name="group_relation" string="Relationship"
                                 context="{'group_by': 'relation_type'}"/>
                     </group>
@@ -151,7 +150,7 @@
             <field name="res_model">insurance.nominee</field>
             <field name="view_mode">list,form</field>
             <field name="search_view_id" ref="insurance_nominee_view_search"/>
-            <field name="context">{'search_default_group_family_head': 1}</field>
+            <field name="context">{'search_default_group_main_employee': 1}</field>
         </record>
 
         <!-- Insurance Nominee Relation-->
