@@ -168,12 +168,11 @@
                             domain="[('parent_nominee_id','=',False)]"/>
                     <filter name="family_only" string="Family Members"
                             domain="[('parent_nominee_id','!=',False)]"/>
-                    <group expand="1" string="Group By">
-                        <filter name="group_main_employee" string="Main Employee"
-                                context="{'group_by': 'parent_nominee_id'}"/>
-                        <filter name="group_relation" string="Relationship"
-                                context="{'group_by': 'relation_type'}"/>
-                    </group>
+                    <separator/>
+                    <filter name="group_main_employee" string="Main Employee"
+                            context="{'group_by': 'parent_nominee_id'}"/>
+                    <filter name="group_relation" string="Relationship"
+                            context="{'group_by': 'relation_type'}"/>
                 </search>
             </field>
         </record>
