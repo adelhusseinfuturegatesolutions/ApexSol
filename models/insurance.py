@@ -985,37 +985,35 @@ class InsuranceInformation(models.Model):
                  'insurance_nominee_ids.insured_gender',
                  'insurance_nominee_ids.family_member_ids.relation_type',
                  'commission_type', 'total_commission', 'fixed_commission',
-                 'insurance_category_id.employee_male_amount',
-                 'insurance_category_id.employee_female_amount',
-                 'insurance_category_id.wife_amount',
-                 'insurance_category_id.husband_amount',
-                 'insurance_category_id.son_amount',
-                 'insurance_category_id.daughter_amount',
-                 'insurance_category_id.father_amount',
-                 'insurance_category_id.mother_amount')
+                 'policy_price_list_id.male_premium',
+                 'policy_price_list_id.female_premium',
+                 'policy_price_list_id.wife_premium',
+                 'policy_price_list_id.husband_premium',
+                 'policy_price_list_id.son_premium',
+                 'policy_price_list_id.daughter_premium',
+                 'policy_price_list_id.father_premium',
+                 'policy_price_list_id.mother_premium')
     def _compute_total_policy_amount(self):
-        """Total = sum of per-nominee amounts pulled from the Policy Category."""
+        """Total = sum of per-nominee amounts pulled from the selected Policy Pricelist row."""
         for rec in self:
-            category = rec.insurance_category_id
+            pricelist = rec.policy_price_list_id
             role_amount = {
-                'Employee-Male': category.employee_male_amount,
-                'Employee-Female': category.employee_female_amount,
-                'Wife': category.wife_amount,
-                'wife': category.wife_amount,
-                'Husband': category.husband_amount,
-                'husband': category.husband_amount,
-                'spouse': category.wife_amount or category.husband_amount,
-                'son': category.son_amount,
-                'daughter': category.daughter_amount,
-                'father': category.father_amount,
-                'mother': category.mother_amount,
+                'Wife': pricelist.wife_premium,
+                'wife': pricelist.wife_premium,
+                'Husband': pricelist.husband_premium,
+                'husband': pricelist.husband_premium,
+                'spouse': pricelist.wife_premium or pricelist.husband_premium,
+                'son': pricelist.son_premium,
+                'daughter': pricelist.daughter_premium,
+                'father': pricelist.father_premium,
+                'mother': pricelist.mother_premium,
             }
 
             def employee_amount(nominee):
                 if nominee.insured_gender == 'male':
-                    return category.employee_male_amount
+                    return pricelist.male_premium
                 if nominee.insured_gender == 'female':
-                    return category.employee_female_amount
+                    return pricelist.female_premium
                 return 0.0
 
             total_base_amount = 0.0
