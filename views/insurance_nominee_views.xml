@@ -45,6 +45,10 @@
 
                             </group>
                             <group>
+                                <field name="relation_type"/>
+                                <field name="parent_nominee_id"
+                                       options="{'no_create': True}"
+                                       invisible="relation_type in ('Employee-Male','Employee-Female',False)"/>
                                 <field name="insured_gender"/>
                                 <field name="insured_blood_group"/>
                                 <field name="insured_heights"/>
@@ -98,6 +102,8 @@
                 <list>
                     <field name="name"/>
                     <field name="nominee_id"/>
+                    <field name="relation_type"/>
+                    <field name="insured_gender"/>
                     <field name="nominee_dob"/>
                     <field name="nominee_age"/>
                 </list>
