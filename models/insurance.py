@@ -982,6 +982,7 @@ class InsuranceInformation(models.Model):
     #         else:
     #             rec.total_policy_amount = base_multiplied_amount + rec.fixed_commission
     @api.depends('insurance_nominee_ids', 'insurance_nominee_ids.relation_type',
+                 'insurance_nominee_ids.insured_gender',
                  'insurance_nominee_ids.family_member_ids.relation_type',
                  'commission_type', 'total_commission', 'fixed_commission',
                  'insurance_category_id.employee_male_amount',
@@ -1010,10 +1011,19 @@ class InsuranceInformation(models.Model):
                 'mother': category.mother_amount,
             }
 
+            def employee_amount(nominee):
+                amount = role_amount.get(nominee.relation_type, 0.0)
+                if not amount:
+                    if nominee.insured_gender == 'male':
+                        amount = category.employee_male_amount
+                    elif nominee.insured_gender == 'female':
+                        amount = category.employee_female_amount
+                return amount
+
             total_base_amount = 0.0
             main_nominees = rec.insurance_nominee_ids.filtered(lambda n: not n.parent_nominee_id)
             for main in main_nominees:
-                total_base_amount += role_amount.get(main.relation_type, 0.0)
+                total_base_amount += employee_amount(main)
                 for member in main.family_member_ids:
                     total_base_amount += role_amount.get(member.relation_type, 0.0)
 
