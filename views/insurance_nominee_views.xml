@@ -5,7 +5,7 @@
             <field name="name">insurance.nominee.view.form</field>
             <field name="model">insurance.nominee</field>
             <field name="arch" type="xml">
-                <form>
+                <form class="tk_insurance_form">
                 <header>
                 <button name="%(action_insurance_claim)d" string="Create Claim" type="action" class="oe_highlight"
                                 groups="tk_insurance_management.insurance_manager"/>
@@ -22,7 +22,11 @@
                     <div class="oe_avatar">
                         <field name="image_1920" widget="image"/>
                     </div>
-                        <group string="Nominee Details">
+                        <div class="tk_section_header tk_header_holder">
+                            <i class="fa fa-id-badge"/>
+                            <span>Nominee Details</span>
+                        </div>
+                        <group>
                             <group>
                                 <label for="name"/>
                                 <h3>
@@ -44,6 +48,12 @@
                                
 
                             </group>
+                        </group>
+                        <div class="tk_section_header tk_header_insured">
+                            <i class="fa fa-heartbeat"/>
+                            <span>Personal &amp; Medical Info</span>
+                        </div>
+                        <group>
                             <group>
                                 <field name="relation_type"/>
                                 <field name="parent_nominee_id"
@@ -51,10 +61,12 @@
                                        invisible="relation_type in ('Employee-Male','Employee-Female',False)"/>
                                 <field name="insured_gender"/>
                                 <field name="insured_blood_group"/>
+                                <field name="insured_marital_status"/>
+                            </group>
+                            <group>
                                 <field name="insured_heights"/>
                                 <field name="insured_weights"/>
                                 <field name="insured_birthmarks"/>
-                                <field name="insured_marital_status"/>
                             </group>
                             <group string="Policy Details" invisible="1">
                                         <field name="insurance_category_id"/>
@@ -66,7 +78,7 @@
                                         <field name="expiry_date"/>
                             </group>
                         </group>
-                        <notebook>
+                        <notebook class="tk_insurance_notebook">
                             <page string="Medical History">
                                 <field name="medical_history_ids" >
                                     <list editable="bottom">
