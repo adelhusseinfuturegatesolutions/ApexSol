@@ -105,7 +105,28 @@ class ClaimInformation(models.Model):
     agent_id = fields.Many2one('res.partner', string='Agent', domain=[('is_agent', '=', True)])
     policy_amount = fields.Monetary(string="Policy Amount")
     amount_paid = fields.Monetary(string="Claim Amount",compute="_compute_total_amount", store=True)
-    due_amount = fields.Monetary(string="Remaining Amount")
+    due_amount = fields.Monetary(
+        string="Remaining Amount",
+        compute='_compute_due_amount',
+        store=False,
+        help="Sum Insured of the nominee minus the total amount paid on their approved claims")
+
+    @api.depends('insurance_nominee_id', 'amount_paid', 'state',
+                 'insurance_nominee_id.sum_assured')
+    def _compute_due_amount(self):
+        approved_states = ('approved', 'settled', 'closed')
+        for rec in self:
+            nominee = rec.insurance_nominee_id
+            if not nominee:
+                rec.due_amount = 0.0
+                continue
+            other_claims = self.search([
+                ('insurance_nominee_id', '=', nominee.id),
+                ('state', 'in', approved_states),
+                ('id', '!=', rec.id),
+            ])
+            consumed = sum(other_claims.mapped('amount_paid'))
+            rec.due_amount = (nominee.sum_assured or 0.0) - consumed
 
     policy_provider_cmp_id = fields.Many2one('res.partner', string='Service Provider',
                                              domain=[('is_company', '=', True),
