@@ -1009,7 +1009,9 @@ class InsuranceInformation(models.Model):
                 'mother': pricelist.mother_premium,
             }
 
-            def employee_amount(nominee):
+            def nominee_amount(nominee):
+                if nominee.relation_type in role_amount:
+                    return role_amount[nominee.relation_type]
                 if nominee.insured_gender == 'male':
                     return pricelist.male_premium
                 if nominee.insured_gender == 'female':
@@ -1017,11 +1019,17 @@ class InsuranceInformation(models.Model):
                 return 0.0
 
             total_base_amount = 0.0
-            main_nominees = rec.insurance_nominee_ids.filtered(lambda n: not n.parent_nominee_id)
-            for main in main_nominees:
-                total_base_amount += employee_amount(main)
-                for member in main.family_member_ids:
-                    total_base_amount += role_amount.get(member.relation_type, 0.0)
+            seen = set()
+            for nominee in rec.insurance_nominee_ids:
+                if nominee.id in seen:
+                    continue
+                seen.add(nominee.id)
+                total_base_amount += nominee_amount(nominee)
+                for member in nominee.family_member_ids:
+                    if member.id in seen:
+                        continue
+                    seen.add(member.id)
+                    total_base_amount += nominee_amount(member)
 
             if rec.commission_type == "percentage":
                 rec.total_policy_amount = total_base_amount + rec.total_commission
