@@ -644,12 +644,26 @@ class ClaimServicesCeiling(models.Model):
     service_price = fields.Float(string="Service Amount", readonly=False)
     provider_service_amount = fields.Float(string="Service Amount By Provider")
     difference_amount = fields.Float(string="Difference Amount", compute="_compute_difference")
+    is_provider_exceeding = fields.Boolean(
+        string="Provider Exceeds Service",
+        compute="_compute_difference")
+    excess_reason = fields.Char(string="Excess Reason")
     claim_information_id = fields.Many2one('claim.information')
 
     @api.depends('provider_service_amount','service_price')
     def _compute_difference(self):
         for rec in self:
             rec.difference_amount = rec.service_price - rec.provider_service_amount
+            rec.is_provider_exceeding = rec.provider_service_amount > rec.service_price
+
+    @api.constrains('provider_service_amount', 'service_price', 'excess_reason')
+    def _check_excess_reason(self):
+        for rec in self:
+            if rec.provider_service_amount > rec.service_price and not rec.excess_reason:
+                raise ValidationError(_(
+                    "Please provide an Excess Reason when the Provider amount (%s) "
+                    "exceeds the Service Amount (%s)."
+                ) % (rec.provider_service_amount, rec.service_price))
 
     # @api.constrains('provider_service_amount', 'service_price')
     # def _check_provider_amount(self):

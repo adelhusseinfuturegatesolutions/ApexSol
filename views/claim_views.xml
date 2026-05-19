@@ -364,8 +364,11 @@
                                         <field name="service_price"/>
                                         <field name="provider_service_amount"/>
                                         <field name="difference_amount"/>
-
-
+                                        <field name="is_provider_exceeding" column_invisible="True"/>
+                                        <field name="excess_reason"
+                                               required="is_provider_exceeding"
+                                               readonly="not is_provider_exceeding"
+                                               placeholder="Required when provider exceeds service amount"/>
                                     </list>
                                 </field>
                             </page>
