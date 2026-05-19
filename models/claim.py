@@ -246,16 +246,16 @@ class ClaimInformation(models.Model):
             record.access_token = token
         return records
 
-    @api.depends('claim_service_ids.service_price', 'claim_service_ceiling_ids.service_price')
+    @api.depends('claim_service_ids.service_price',
+                 'claim_service_ceiling_ids.service_price',
+                 'claim_service_ceiling_ids.provider_service_amount')
     def _compute_total_amount(self):
         for rec in self:
-            # 1. Sum service_price from the first One2many
             total_services = sum(rec.claim_service_ids.mapped('service_price'))
-            
-            # 2. Sum service_price from the second One2many (ceiling lines)
-            total_ceilings = sum(rec.claim_service_ceiling_ids.mapped('provider_service_amount'))
-            
-            # 3. Combine both for the final paid amount
+            total_ceilings = sum(
+                min(line.provider_service_amount, line.service_price)
+                for line in rec.claim_service_ceiling_ids
+            )
             rec.amount_paid = total_services + total_ceilings
 
 
