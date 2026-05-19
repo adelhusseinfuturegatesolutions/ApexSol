@@ -987,31 +987,23 @@ class InsuranceInformation(models.Model):
                  'commission_type', 'total_commission', 'fixed_commission',
                  'policy_price_list_id.male_premium',
                  'policy_price_list_id.female_premium',
-                 'policy_price_list_id.wife_premium',
-                 'policy_price_list_id.husband_premium',
-                 'policy_price_list_id.son_premium',
-                 'policy_price_list_id.daughter_premium',
-                 'policy_price_list_id.father_premium',
-                 'policy_price_list_id.mother_premium')
+                 'insurance_policy_id.family_member_ids.relation_type',
+                 'insurance_policy_id.family_member_ids.insurance_amount')
     def _compute_total_policy_amount(self):
-        """Total = sum of per-nominee amounts pulled from the selected Policy Pricelist row."""
+        """Employees from selected Pricelist (male/female_premium); family members
+        from insurance_policy_id.family_member_ids by relation_type."""
         for rec in self:
             pricelist = rec.policy_price_list_id
-            role_amount = {
-                'Wife': pricelist.wife_premium,
-                'wife': pricelist.wife_premium,
-                'Husband': pricelist.husband_premium,
-                'husband': pricelist.husband_premium,
-                'spouse': pricelist.wife_premium or pricelist.husband_premium,
-                'son': pricelist.son_premium,
-                'daughter': pricelist.daughter_premium,
-                'father': pricelist.father_premium,
-                'mother': pricelist.mother_premium,
+            family_amount = {
+                line.relation_type: line.insurance_amount
+                for line in rec.insurance_policy_id.family_member_ids
             }
+            family_roles = set(family_amount.keys())
 
             def nominee_amount(nominee):
-                if nominee.relation_type in role_amount:
-                    return role_amount[nominee.relation_type]
+                relation_key = (nominee.relation_type or '').lower()
+                if relation_key in family_roles:
+                    return family_amount[relation_key]
                 if nominee.insured_gender == 'male':
                     return pricelist.male_premium
                 if nominee.insured_gender == 'female':
