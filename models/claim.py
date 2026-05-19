@@ -283,12 +283,6 @@ class ClaimInformation(models.Model):
 
     def under_review_to_approved(self):
         """Under review to approved"""
-        documents_verified = all(rec.state == 'verified' for rec in self.claim_documents_ids)
-        if not documents_verified:
-            message = _display_notification(
-                message='Please ensure the pending claim documents are verified.',
-                message_type='info')
-            return message
         self.state = 'approved'
         return True
 
