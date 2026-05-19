@@ -79,6 +79,47 @@ class InsuranceNominee(models.Model):
         for rec in self:
             rec.family_head_name = rec.parent_nominee_id.name or rec.name
 
+    sum_assured = fields.Monetary(
+        string="Sum Insured",
+        related='insurance_policy_id.sum_assured',
+        currency_field='currency_id')
+    currency_id = fields.Many2one(
+        'res.currency',
+        related='insurance_information_id.currency_id')
+    total_claimed = fields.Monetary(
+        string="Total Claimed",
+        compute='_compute_claim_summary',
+        currency_field='currency_id')
+    remaining_consumption = fields.Monetary(
+        string="Remaining Coverage",
+        compute='_compute_claim_summary',
+        currency_field='currency_id')
+    approved_claims_count = fields.Integer(
+        string="Approved Claims",
+        compute='_compute_claim_summary')
+    last_claim_amount = fields.Monetary(
+        string="Last Claim Amount",
+        compute='_compute_claim_summary',
+        currency_field='currency_id')
+
+    def _compute_claim_summary(self):
+        approved_states = ('approved', 'settled', 'closed')
+        Claim = self.env['claim.information']
+        for rec in self:
+            claims = Claim.search([
+                ('insurance_nominee_id', '=', rec.id),
+                ('state', 'in', approved_states),
+            ])
+            rec.total_claimed = sum(claims.mapped('amount_paid'))
+            rec.approved_claims_count = len(claims)
+            rec.remaining_consumption = (rec.sum_assured or 0.0) - rec.total_claimed
+            last_claim = Claim.search(
+                [('insurance_nominee_id', '=', rec.id)],
+                order='claim_date desc, id desc',
+                limit=1,
+            )
+            rec.last_claim_amount = last_claim.amount_paid if last_claim else 0.0
+
 
     # policy details
     insurance_category_id = fields.Many2one('insurance.category', string="Policy Category" , related='insurance_information_id.insurance_category_id')

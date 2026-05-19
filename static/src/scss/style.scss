@@ -70,6 +70,50 @@ $tk-soft: #f1f5f9;
         }
     }
 
+    .tk_policy_summary {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin: 0 0 16px;
+        padding: 14px 16px;
+        background: #f6f9fc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+
+        .tk_summary_item {
+            flex: 1 1 200px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            background: #ffffff;
+            border: 1px solid #e6ebf1;
+            border-radius: 8px;
+
+            > i {
+                font-size: 18px;
+                color: #7a93c2;
+                background: #eef4fb;
+                width: 36px;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 8px;
+            }
+            .tk_summary_label {
+                color: #64748b;
+                font-size: 12px;
+                font-weight: 500;
+            }
+            .tk_summary_value {
+                color: #1e293b;
+                font-weight: 600;
+                font-size: 15px;
+            }
+        }
+    }
+
     .tk_section_header {
         display: flex;
         align-items: center;

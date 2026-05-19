@@ -22,6 +22,39 @@
                     <div class="oe_avatar">
                         <field name="image_1920" widget="image"/>
                     </div>
+                        <div class="tk_policy_summary" invisible="not insurance_information_id">
+                            <div class="tk_summary_item">
+                                <i class="fa fa-shield"/>
+                                <div>
+                                    <div class="tk_summary_label">Remaining Coverage</div>
+                                    <div class="tk_summary_value">
+                                        <field name="remaining_consumption" readonly="1" nolabel="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tk_summary_item">
+                                <i class="fa fa-bars"/>
+                                <div>
+                                    <div class="tk_summary_label">Approved Claims</div>
+                                    <div class="tk_summary_value">
+                                        <field name="approved_claims_count" readonly="1" nolabel="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tk_summary_item">
+                                <i class="fa fa-money"/>
+                                <div>
+                                    <div class="tk_summary_label">Last Claim</div>
+                                    <div class="tk_summary_value">
+                                        <field name="last_claim_amount" readonly="1" nolabel="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <field name="sum_assured" invisible="1"/>
+                            <field name="total_claimed" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="insurance_information_id" invisible="1"/>
+                        </div>
                         <div class="tk_section_header tk_header_holder">
                             <i class="fa fa-id-badge"/>
                             <span>Nominee Details</span>
