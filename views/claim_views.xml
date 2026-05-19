@@ -87,6 +87,7 @@
                             </group>
                             <group string="Claim Date Details">
                                 <field name="claim_date" readonly="insurance_id != False" required="1"/>
+                                <field name="insurance_expiry_date"/>
                             </group>
                         </group>
                         <div class="tk_section_header tk_header_holder">

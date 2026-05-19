@@ -91,6 +91,10 @@ class ClaimInformation(models.Model):
         domain="[('insurance_policy_id', '=', insurance_policy_id)]")
     policy_durations = fields.Integer(related='policy_price_list_id.duration',
                                       string="Duration (Months)")
+    insurance_expiry_date = fields.Date(
+        related='insurance_id.expiry_date',
+        string="Policy Expiry Date",
+        readonly=True)
 
     insurance_category_id = fields.Many2one('insurance.category', string="Policy Category")
     category = fields.Selection(related="insurance_category_id.category")
