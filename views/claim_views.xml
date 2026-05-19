@@ -5,7 +5,7 @@
             <field name="name">claim.information.view.form</field>
             <field name="model">claim.information</field>
             <field name="arch" type="xml">
-                <form create="false">
+                <form create="false" class="tk_insurance_form">
                     <header>
                         <field name="reinsurer_invoice_id" invisible="1"/>
                         <field name="invoice_id" invisible="1"/>
@@ -75,6 +75,10 @@
                                 <field name="claim_number"/>
                             </h1>
                         </div>
+                        <div class="tk_section_header tk_header_policy">
+                            <i class="fa fa-file-text-o"/>
+                            <span>Claim Overview</span>
+                        </div>
                         <group>
                             <group string="Insurance Details">
                                 <field name="insurance_id" readonly="1"/>
@@ -85,7 +89,10 @@
                                 <field name="claim_date" readonly="insurance_id != False" required="1"/>
                             </group>
                         </group>
-                        <separator string="Policy Holder Details" name="policy_holder_details"/>
+                        <div class="tk_section_header tk_header_holder">
+                            <i class="fa fa-user-circle"/>
+                            <span>Policy Holder Details</span>
+                        </div>
                         <group>
                             <group>
                                 <field name="policy_holder_id" readonly="insurance_id != False"/>
@@ -140,8 +147,11 @@
                             </group>
                         </group>
 
-                        <separator string="Insured Details" name="claim_insured_details"
-                                   invisible="category != 'health'"/>
+                        <div class="tk_section_header tk_header_insured"
+                             invisible="category != 'health'">
+                            <i class="fa fa-users"/>
+                            <span>Insured Details</span>
+                        </div>
                         <group invisible="category != 'health'">
                             <group invisible="desired_coverage_type != 'individual'">
                                 <field name="insured_id" readonly="insurance_id != False"/>
@@ -186,7 +196,10 @@
                                 <field name="reinsurance_company_id" readonly="1"/>
                             </group>
                         </group>
-                        <separator string="Claim Financial Overview" name="claim_financial_overview"/>
+                        <div class="tk_section_header tk_header_policy">
+                            <i class="fa fa-money"/>
+                            <span>Claim Financial Overview</span>
+                        </div>
                         <group>
                             <group>
                                 <field name="policy_amount" readonly="1"/>
@@ -223,7 +236,7 @@
                                        readonly="insurance_id != False"/>
                             </group>
                         </group>
-                        <notebook>
+                        <notebook class="tk_insurance_notebook">
                             <page name="reason_claim_application" string="Reason For Claim Application">
                                 <group>
                                     <group string="Reason for Filing the Claim Application">
