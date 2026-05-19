@@ -182,6 +182,14 @@ class ClaimInformation(models.Model):
     furnish_date_of_death = fields.Date(string="Date of Death")
     insurance_time_period = fields.Char(string=" Policy Time Period", translate=True)
     insurance_nominee_id = fields.Many2one('insurance.nominee', string="Nominee")
+
+    @api.constrains('insurance_nominee_id')
+    def _check_nominee_active(self):
+        for rec in self:
+            if rec.insurance_nominee_id and rec.insurance_nominee_id.nominee_status == 'inactive':
+                raise ValidationError(_(
+                    "Nominee '%s' is inactive. Claims cannot be created for an inactive nominee.",
+                    rec.insurance_nominee_id.name))
     insurance_nominee_relation_id = fields.Many2one('insurance.nominee.relation',
                                                     string="Your Nominee is Your")
     nominee_dob = fields.Date()

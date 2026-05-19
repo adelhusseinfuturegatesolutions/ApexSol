@@ -69,6 +69,14 @@ class InsuranceNominee(models.Model):
     amount_factor = fields.Float(string='Amount Factor')
     claims_count = fields.Integer(compute='_compute_claim_count')
 
+    nominee_status = fields.Selection(
+        [('active', 'Active'),
+         ('inactive', 'Inactive')],
+        string="Status",
+        default='active',
+        required=True,
+        tracking=True)
+
     family_head_name = fields.Char(
         string="Family",
         compute='_compute_family_head_name')

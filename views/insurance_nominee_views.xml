@@ -8,7 +8,11 @@
                 <form class="tk_insurance_form">
                 <header>
                 <button name="%(action_insurance_claim)d" string="Create Claim" type="action" class="oe_highlight"
-                                groups="tk_insurance_management.insurance_manager"/>
+                                groups="tk_insurance_management.insurance_manager"
+                                invisible="nominee_status == 'inactive'"/>
+                <field name="nominee_status" widget="badge"
+                       decoration-success="nominee_status == 'active'"
+                       decoration-danger="nominee_status == 'inactive'"/>
                 </header>
                     <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -94,7 +98,6 @@
                                        invisible="relation_type in ('Employee-Male','Employee-Female',False)"/>
                                 <field name="insured_gender"/>
                                 <field name="insured_blood_group"/>
-                                <field name="insured_marital_status"/>
                             </group>
                             <group>
                                 <field name="insured_heights"/>
@@ -144,12 +147,16 @@
             <field name="name">insurance.nominee.view.list</field>
             <field name="model">insurance.nominee</field>
             <field name="arch" type="xml">
-                <list default_order="parent_nominee_id asc, id asc">
+                <list default_order="parent_nominee_id asc, id asc"
+                      decoration-danger="nominee_status == 'inactive'">
                     <field name="parent_nominee_id" string="Main Employee" optional="show"/>
                     <field name="name"/>
                     <field name="nominee_id"/>
                     <field name="relation_type"/>
                     <field name="insured_gender"/>
+                    <field name="nominee_status" widget="badge"
+                           decoration-success="nominee_status == 'active'"
+                           decoration-danger="nominee_status == 'inactive'"/>
                     <field name="nominee_dob"/>
                     <field name="nominee_age"/>
                 </list>
