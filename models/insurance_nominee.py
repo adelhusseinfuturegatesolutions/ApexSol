@@ -86,6 +86,19 @@ class InsuranceNominee(models.Model):
         for rec in self:
             rec.active = (rec.nominee_status != 'inactive')
 
+    def write(self, vals):
+        """When a main employee is (de)activated, cascade to family members."""
+        result = super().write(vals)
+        if 'active' in vals:
+            new_active = vals['active']
+            for rec in self.with_context(active_test=False):
+                if not rec.parent_nominee_id and rec.family_member_ids:
+                    members = rec.family_member_ids.with_context(active_test=False).filtered(
+                        lambda m: m.active != new_active)
+                    if members:
+                        members.write({'active': new_active})
+        return result
+
     def _search_nominee_status(self, operator, value):
         if operator not in ('=', '!=', 'in', 'not in'):
             return []
