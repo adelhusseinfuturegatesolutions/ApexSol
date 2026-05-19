@@ -51,7 +51,7 @@
                                 <field name="insurance_category_id"/>
                                 <field name="issue_date"/>
                                 <field name="expiry_date"/>
-                                <field name="agent_bill_id" readonly="1" widget="many2one_button"/>
+                                <field name="agent_bill_id" readonly="1"/>
                             </list>
                         </field>
                     </page>

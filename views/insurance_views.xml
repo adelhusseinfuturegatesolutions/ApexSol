@@ -650,7 +650,7 @@
                                         <field name="installment_date" readonly="1"/>
                                         <field name="premium_type" column_invisible="True"/>
                                         <field name="installment_amount" sum="installment_amount" readonly="1"/>
-                                        <field name="invoice_id" readonly="1" widget="many2one_button"/>
+                                        <field name="invoice_id" readonly="1"/>
                                         <field name="payment_state" widget="badge"
                                                decoration-success="payment_state=='paid'"
                                                decoration-danger="payment_state=='not_paid'"
