@@ -981,34 +981,42 @@ class InsuranceInformation(models.Model):
     #             rec.total_policy_amount = base_multiplied_amount + rec.total_commission
     #         else:
     #             rec.total_policy_amount = base_multiplied_amount + rec.fixed_commission
-    @api.depends('policy_amount', 'insurance_nominee_ids', 'insurance_nominee_ids.family_member_ids.relation_type', 
-             'commission_type', 'total_commission', 'fixed_commission', 'insurance_policy_id.family_member_ids')
+    @api.depends('insurance_nominee_ids', 'insurance_nominee_ids.relation_type',
+                 'insurance_nominee_ids.family_member_ids.relation_type',
+                 'commission_type', 'total_commission', 'fixed_commission',
+                 'insurance_category_id.employee_male_amount',
+                 'insurance_category_id.employee_female_amount',
+                 'insurance_category_id.wife_amount',
+                 'insurance_category_id.husband_amount',
+                 'insurance_category_id.son_amount',
+                 'insurance_category_id.daughter_amount',
+                 'insurance_category_id.father_amount',
+                 'insurance_category_id.mother_amount')
     def _compute_total_policy_amount(self):
+        """Total = sum of per-nominee amounts pulled from the Policy Category."""
         for rec in self:
-            total_base_amount = 0.0
-            
-            # 1. Map the policy's predefined amounts by relation type for quick lookup
-            # Expects insurance_policy_id to have a o2m 'family_member_ids' with 'relation_type' and 'insurance_amount'
-            policy_amounts = {
-                line.relation_type: line.insurance_amount 
-                for line in rec.insurance_policy_id.family_member_ids
+            category = rec.insurance_category_id
+            role_amount = {
+                'Employee-Male': category.employee_male_amount,
+                'Employee-Female': category.employee_female_amount,
+                'Wife': category.wife_amount,
+                'wife': category.wife_amount,
+                'Husband': category.husband_amount,
+                'husband': category.husband_amount,
+                'spouse': category.wife_amount or category.husband_amount,
+                'son': category.son_amount,
+                'daughter': category.daughter_amount,
+                'father': category.father_amount,
+                'mother': category.mother_amount,
             }
-            
-            main_nominees = rec.insurance_nominee_ids.filtered(lambda n: not n.parent_nominee_id)
-            
-            for main in main_nominees:
-                # Add Base Policy Amount for the Main Nominee
-                total_base_amount += rec.policy_amount
-                
-                # 2. Process Family Members based on Policy Settings
-                for member in main.family_member_ids:
-                    # Check if this member's relation exists in the Insurance Policy configuration
-                    extra_amount = policy_amounts.get(member.relation_type, 0.0)
-                    
-                    # Add the specific insurance_amount found in the policy to the base
-                    total_base_amount += extra_amount
 
-            # Apply Commission
+            total_base_amount = 0.0
+            main_nominees = rec.insurance_nominee_ids.filtered(lambda n: not n.parent_nominee_id)
+            for main in main_nominees:
+                total_base_amount += role_amount.get(main.relation_type, 0.0)
+                for member in main.family_member_ids:
+                    total_base_amount += role_amount.get(member.relation_type, 0.0)
+
             if rec.commission_type == "percentage":
                 rec.total_policy_amount = total_base_amount + rec.total_commission
             else:

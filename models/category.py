@@ -77,6 +77,16 @@ class InsuranceCategory(models.Model):
                                   related="company_id.currency_id")
     is_displayed_on_website = fields.Boolean(string="Displayed on Website", default=True)
 
+    # Per-role premium amounts driving Total Policy Amount
+    employee_male_amount = fields.Monetary(string="Employee (Male) Amount")
+    employee_female_amount = fields.Monetary(string="Employee (Female) Amount")
+    wife_amount = fields.Monetary(string="Wife Amount")
+    husband_amount = fields.Monetary(string="Husband Amount")
+    son_amount = fields.Monetary(string="Son Amount")
+    daughter_amount = fields.Monetary(string="Daughter Amount")
+    father_amount = fields.Monetary(string="Father Amount")
+    mother_amount = fields.Monetary(string="Mother Amount")
+
     # Life Insurance:
     length_of_coverage_term = fields.Text(string="Length of Coverage Terms", translate=True)
     life_health_history = fields.Text(string="Insured Health History", translate=True)

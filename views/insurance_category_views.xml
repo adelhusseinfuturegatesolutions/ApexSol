@@ -28,6 +28,23 @@
                                        options="{'no_create': True, 'no_create_edit': True}"/>
                             </group>
                         </group>
+                        <group string="Per-Role Premium Amounts">
+                            <group string="Employee">
+                                <field name="employee_male_amount"/>
+                                <field name="employee_female_amount"/>
+                            </group>
+                            <group string="Spouse / Parents">
+                                <field name="wife_amount"/>
+                                <field name="husband_amount"/>
+                                <field name="father_amount"/>
+                                <field name="mother_amount"/>
+                            </group>
+                            <group string="Children">
+                                <field name="son_amount"/>
+                                <field name="daughter_amount"/>
+                            </group>
+                            <group/>
+                        </group>
                         <notebook>
                             <page name="life_insurance" string="Life Insurance Policy Details"
                                   invisible="category != 'life'">
