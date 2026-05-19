@@ -124,12 +124,11 @@ class ClaimInformation(models.Model):
             if not nominee:
                 rec.due_amount = 0.0
                 continue
-            other_claims = self.search([
+            approved_claims = self.search([
                 ('insurance_nominee_id', '=', nominee.id),
                 ('state', 'in', approved_states),
-                ('id', '!=', rec.id),
             ])
-            consumed = sum(other_claims.mapped('amount_paid'))
+            consumed = sum(approved_claims.mapped('amount_paid'))
             rec.due_amount = (nominee.sum_assured or 0.0) - consumed
 
     policy_provider_cmp_id = fields.Many2one('res.partner', string='Service Provider',
