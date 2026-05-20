@@ -215,6 +215,23 @@ class ClaimInformation(models.Model):
                 raise ValidationError(_(
                     "Nominee '%s' is inactive. Claims cannot be created for an inactive nominee.",
                     nominee.name))
+
+    @api.constrains('insurance_id')
+    def _check_insurance_running(self):
+        today = fields.Date.context_today(self)
+        for rec in self:
+            insurance = rec.insurance_id
+            if not insurance:
+                continue
+            if insurance.state != 'running':
+                raise ValidationError(_(
+                    "Claims can only be issued on a Running insurance policy. "
+                    "Current state of '%s' is '%s'.",
+                    insurance.insurance_number, insurance.state))
+            if insurance.expiry_date and insurance.expiry_date < today:
+                raise ValidationError(_(
+                    "Insurance policy '%s' expired on %s. Claims cannot be issued.",
+                    insurance.insurance_number, insurance.expiry_date))
     insurance_nominee_relation_id = fields.Many2one('insurance.nominee.relation',
                                                     string="Your Nominee is Your")
     nominee_dob = fields.Date()
