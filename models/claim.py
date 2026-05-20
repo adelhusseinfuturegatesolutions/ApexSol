@@ -419,13 +419,36 @@ class ClaimInformation(models.Model):
                         message_type='warning')
                     return message
                 amount = record.amount_paid
-            # Prepare invoice line
-            invoice_lines = [(0, 0, {
-                'name': 'Claim Amount Paid by Ceding Company',
-                'quantity': 1,
-                'price_unit': amount,
-                'tax_ids': False,
-            })]
+            # Prepare invoice lines: one per service so the bill lists each
+            # service and totals to the claim amount.
+            invoice_lines = []
+            if not record.is_reinsurance_required:
+                for line in record.claim_service_ids:
+                    if not line.service_price:
+                        continue
+                    invoice_lines.append((0, 0, {
+                        'name': line.product_service_id.display_name or _('Claim Service'),
+                        'quantity': 1,
+                        'price_unit': line.service_price,
+                        'tax_ids': False,
+                    }))
+                for line in record.claim_service_ceiling_ids:
+                    capped = min(line.provider_service_amount, line.service_price)
+                    if not capped:
+                        continue
+                    invoice_lines.append((0, 0, {
+                        'name': line.product_service_id.display_name or _('Claim Service'),
+                        'quantity': 1,
+                        'price_unit': capped,
+                        'tax_ids': False,
+                    }))
+            if not invoice_lines:
+                invoice_lines = [(0, 0, {
+                    'name': 'Claim Amount Paid by Ceding Company',
+                    'quantity': 1,
+                    'price_unit': amount,
+                    'tax_ids': False,
+                })]
             # Prepare invoice values
             invoice_vals = {
                 'partner_id': record.policy_provider_cmp_id.id,
