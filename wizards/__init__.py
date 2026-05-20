@@ -9,4 +9,5 @@ from . import re_insurance_reject_reason
 from . import insurance_expiry_report
 from . import insurance_report
 from . import claim_report
+from . import extend_insurance
 # from . import patient_contract_claim_report

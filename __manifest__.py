@@ -43,6 +43,7 @@
         'wizards/insurance_expiry_report_views.xml',
         'wizards/insurance_report_views.xml',
         'wizards/claim_report_views.xml',
+        'wizards/extend_insurance_views.xml',
         # 'wizards/patient_contract_claim_report,xml',
         # Views
         'views/assets.xml',

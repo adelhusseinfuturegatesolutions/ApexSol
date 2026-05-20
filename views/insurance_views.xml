@@ -79,6 +79,11 @@
                                 class="btn btn-info" invisible="state not in ['expired'] or renew_insurance_id != False"
                                 groups="tk_insurance_management.insurance_manager"/>
 
+                        <button string="Extend Policy" name="%(action_extend_insurance)d" type="action"
+                                class="oe_highlight" invisible="state != 'expired'"
+                                groups="tk_insurance_management.insurance_manager"
+                                context="{'default_insurance_id': id}"/>
+
                         <button string="Cancel" name="renew_to_cancel" type="object" class="btn btn-danger"
                                 groups="tk_insurance_management.insurance_manager"
                                 invisible="state in ['draft', 'cancel', 'expired']"/>
