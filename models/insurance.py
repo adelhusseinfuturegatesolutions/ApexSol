@@ -1163,6 +1163,7 @@ class InsuranceInformation(models.Model):
                 'default_insurance_information_id': self.id,
                 'default_policy_holder_id': self.policy_holder_id.id,
                 'search_default_group_main_employee': 1,
+                'active_test': False,
             },
             'view_mode': 'list,form',
             'target': 'current',

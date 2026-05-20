@@ -206,6 +206,11 @@
                     <filter name="family_only" string="Family Members"
                             domain="[('parent_nominee_id','!=',False)]"/>
                     <separator/>
+                    <filter name="active_only" string="Active Only"
+                            domain="[('active','=',True)]"/>
+                    <filter name="inactive_only" string="Inactive Only"
+                            domain="[('active','=',False)]"/>
+                    <separator/>
                     <filter name="group_main_employee" string="Main Employee"
                             context="{'group_by': 'parent_nominee_id'}"/>
                     <filter name="group_relation" string="Relationship"
@@ -219,7 +224,7 @@
             <field name="res_model">insurance.nominee</field>
             <field name="view_mode">list,form</field>
             <field name="search_view_id" ref="insurance_nominee_view_search"/>
-            <field name="context">{'search_default_group_main_employee': 1}</field>
+            <field name="context">{'search_default_group_main_employee': 1, 'active_test': False}</field>
         </record>
 
         <!-- Insurance Nominee Relation-->
