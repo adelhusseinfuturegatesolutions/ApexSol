@@ -119,11 +119,6 @@ class InsuranceNominee(models.Model):
             if not members:
                 continue
             members.write({'active': new_active})
-            verb = _("activated") if new_active else _("deactivated")
-            names = ", ".join(members.mapped('name'))
-            rec.message_post(body=_(
-                "Employee %s — %s family member(s) %s: %s",
-                rec.name, len(members), verb, names))
 
     def _search_nominee_status(self, operator, value):
         if operator not in ('=', '!=', 'in', 'not in'):
