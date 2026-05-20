@@ -203,8 +203,15 @@ class InsuranceNominee(models.Model):
         related='insurance_information_id.state')
     addition_date = fields.Date(
         string="Addition Date",
-        default=fields.Date.context_today,
-        help="Date this nominee was added to the policy; drives pro-rated premium.")
+        compute='_compute_addition_date',
+        help="Date this nominee was added to the policy; drives pro-rated premium. "
+             "Currently derived from the record creation date until the DB column is migrated.")
+
+    @api.depends('create_date')
+    def _compute_addition_date(self):
+        for rec in self:
+            rec.addition_date = (rec.create_date.date()
+                                 if rec.create_date else fields.Date.context_today(rec))
 
 
     @api.constrains('nominee_dob')
