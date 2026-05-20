@@ -239,8 +239,15 @@ class InsuranceNominee(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
+        ICP = self.env['ir.config_parameter'].sudo()
+        today_str = fields.Date.to_string(fields.Date.context_today(self))
         for rec in records:
-            if rec.insurance_information_id.state == 'running':
+            insurance = rec.insurance_information_id \
+                or rec.parent_nominee_id.insurance_information_id
+            if insurance and insurance.state == 'running':
+                # Stamp today as the addition date so quarter pro-rating kicks in.
+                ICP.set_param(
+                    f'tk_insurance.nominee.addition_date.{rec.id}', today_str)
                 rec._update_subscription_invoice()
         return records
 
