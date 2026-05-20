@@ -804,9 +804,7 @@ class InsuranceInformation(models.Model):
         for record in self:
             if record.state != 'draft':
 
-                # Basic common fields
-                if record.policy_amount <= 0:
-                    raise ValidationError(_("The policy amount must be greater than zero."))
+                # Policy amount check removed: zero is allowed.
 
                 # Agent details
                 if record.agent_required:
