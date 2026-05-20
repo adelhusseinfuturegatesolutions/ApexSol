@@ -102,22 +102,19 @@
                             <group>
                                 <label for="name"/>
                                 <h3>
-                                    <field name="name"/>
+                                    <field name="name" required="1"/>
                                 </h3>
-                                <field name="nominee_id" />
+                                <field name="nominee_id" required="1"/>
                                 <field name="policy_holder_id"/>
-
-
-
                             </group>
                             <group>
                                 <label for="nominee_dob" string="Date of Birth"/>
                                 <div class="address_format">
-                                    <field name="nominee_dob" style="width: auto"/>
+                                    <field name="nominee_dob" style="width: auto" required="1"/>
                                     <strong>&#160;Age</strong>
                                     <field name="nominee_age" style="width: auto; margin-left: 5px;"/>
                                 </div>
-                                <field name="addition_date"/>
+                                <field name="addition_date" required="1"/>
                             </group>
                         </group>
                         <div class="tk_section_header tk_header_insured">
@@ -126,11 +123,11 @@
                         </div>
                         <group>
                             <group>
-                                <field name="relation_type"/>
+                                <field name="relation_type" required="1"/>
                                 <field name="parent_nominee_id"
                                        options="{'no_create': True}"
                                        invisible="relation_type in ('Employee-Male','Employee-Female',False)"/>
-                                <field name="insured_gender"/>
+                                <field name="insured_gender" required="1"/>
                                 <field name="insured_blood_group"/>
                             </group>
                             <group>
