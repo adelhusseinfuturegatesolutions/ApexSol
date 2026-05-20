@@ -1015,18 +1015,14 @@ class InsuranceInformation(models.Model):
         return 0.0
 
     def _nominee_prorated_amount(self, nominee):
-        """Apply quarter pro-rating based on the nominee's addition_date."""
+        """Quarter-based pro-rating using the calendar month of addition_date:
+        months 1-3 = Q1 (4 quarters charged), 4-6 = Q2 (3), 7-9 = Q3 (2),
+        10-12 = Q4 (1)."""
         self.ensure_one()
         full = self._nominee_base_amount(nominee)
-        if not full or not self.issue_date or not nominee.addition_date:
+        if not full or not nominee.addition_date:
             return full
-        if nominee.addition_date <= self.issue_date:
-            return full
-        months_in = (nominee.addition_date.year - self.issue_date.year) * 12 \
-                    + (nominee.addition_date.month - self.issue_date.month)
-        quarter_index = months_in // 3
-        if quarter_index >= 4:
-            return 0.0
+        quarter_index = (nominee.addition_date.month - 1) // 3
         remaining_quarters = 4 - quarter_index
         return (full / 4.0) * remaining_quarters
 
