@@ -229,53 +229,98 @@ class InsuranceNominee(models.Model):
                 existing = ICP.search([('key', '=', key)], limit=1)
                 if existing:
                     existing.unlink()
-        # Trigger recompute on parent insurance.information totals
         insurances = self.mapped('insurance_information_id')
         if insurances:
             insurances.invalidate_recordset(['total_policy_amount'])
-        # Re-issue subscription invoice for each nominee with the new date.
         for rec in self:
             if rec.insurance_information_id.state == 'running':
-                rec._create_subscription_invoice()
+                rec._update_subscription_invoice()
 
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
         for rec in records:
             if rec.insurance_information_id.state == 'running':
-                rec._create_subscription_invoice()
+                rec._update_subscription_invoice()
         return records
 
-    def _create_subscription_invoice(self):
-        """Create a customer invoice on the policy holder for this nominee's
-        pro-rated subscription. Returns the created move (or False)."""
+    def _get_main_nominee(self):
         self.ensure_one()
-        insurance = self.insurance_information_id
-        if not insurance or not insurance.policy_holder_id:
+        return self.parent_nominee_id or self
+
+    def _subscription_invoice_key(self):
+        return f'tk_insurance.subscription_invoice.{self._get_main_nominee().id}'
+
+    def _get_existing_subscription_invoice(self):
+        ICP = self.env['ir.config_parameter'].sudo()
+        invoice_id = ICP.get_param(self._subscription_invoice_key())
+        if not invoice_id:
             return False
-        amount = insurance._nominee_prorated_amount(self)
-        if not amount or amount <= 0:
+        try:
+            move = self.env['account.move'].sudo().browse(int(invoice_id))
+        except (TypeError, ValueError):
             return False
-        label = _("Subscription — %s (%s)",
-                  self.name or _("Nominee"),
-                  self.relation_type or self.insured_gender or '')
-        invoice_vals = {
-            'partner_id': insurance.policy_holder_id.id,
-            'move_type': 'out_invoice',
-            'invoice_date': fields.Date.context_today(self),
-            'invoice_line_ids': [(0, 0, {
+        return move if move.exists() else False
+
+    def _subscription_invoice_lines(self):
+        """Return invoice line vals for the employee + their family members."""
+        main = self._get_main_nominee()
+        insurance = main.insurance_information_id
+        if not insurance:
+            return []
+        unit = main.with_context(active_test=False) \
+                   | main.family_member_ids.with_context(active_test=False)
+        lines = []
+        for nominee in unit:
+            if not nominee.active:
+                continue
+            amount = insurance._nominee_prorated_amount(nominee)
+            if not amount or amount <= 0:
+                continue
+            label = _("Subscription — %s (%s)",
+                      nominee.name or _("Nominee"),
+                      nominee.relation_type or nominee.insured_gender or '')
+            lines.append({
                 'name': label,
                 'quantity': 1,
                 'price_unit': amount,
                 'tax_ids': False,
-            })],
-        }
-        return self.env['account.move'].sudo().create(invoice_vals)
+            })
+        return lines
+
+    def _update_subscription_invoice(self):
+        """Create or refresh a single invoice that covers the employee and
+        all their family members. If an existing invoice is still in draft
+        it is updated in place; otherwise a new invoice is created."""
+        self.ensure_one()
+        main = self._get_main_nominee()
+        insurance = main.insurance_information_id
+        if not insurance or not insurance.policy_holder_id:
+            return False
+        lines = main._subscription_invoice_lines()
+        if not lines:
+            return False
+        existing = main._get_existing_subscription_invoice()
+        if existing and existing.state == 'draft':
+            existing.invoice_line_ids.unlink()
+            existing.write({
+                'invoice_line_ids': [(0, 0, l) for l in lines],
+            })
+            return existing
+        move = self.env['account.move'].sudo().create({
+            'partner_id': insurance.policy_holder_id.id,
+            'move_type': 'out_invoice',
+            'invoice_date': fields.Date.context_today(self),
+            'invoice_line_ids': [(0, 0, l) for l in lines],
+        })
+        self.env['ir.config_parameter'].sudo().set_param(
+            main._subscription_invoice_key(), str(move.id))
+        return move
 
     def action_create_subscription_invoice(self):
-        """Manually trigger the subscription invoice for the selected nominee."""
+        """Manually refresh / create the subscription invoice for the unit."""
         for rec in self:
-            move = rec._create_subscription_invoice()
+            move = rec._update_subscription_invoice()
             if move:
                 return {
                     'type': 'ir.actions.act_window',
