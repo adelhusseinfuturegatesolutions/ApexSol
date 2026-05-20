@@ -161,6 +161,24 @@ class InsuranceInformation(models.Model):
     nominees_count = fields.Integer(compute='_compute_nominee_count')
 
     claim_count = fields.Integer(compute='_compute_claim_count')
+    claims_total_amount = fields.Monetary(
+        string="Total Claims Amount",
+        compute='_compute_claim_stats')
+    highest_claim_amount = fields.Monetary(
+        string="Highest Claim",
+        compute='_compute_claim_stats')
+
+    def _compute_claim_stats(self):
+        approved_states = ('approved', 'settled', 'closed')
+        Claim = self.env['claim.information']
+        for rec in self:
+            claims = Claim.search([
+                ('insurance_id', '=', rec.id),
+                ('state', 'in', approved_states),
+            ])
+            amounts = claims.mapped('amount_paid')
+            rec.claims_total_amount = sum(amounts)
+            rec.highest_claim_amount = max(amounts) if amounts else 0.0
 
     responsible_id = fields.Many2one(
         'res.users', default=lambda self: self.env.user, string="Manager",

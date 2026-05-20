@@ -94,10 +94,28 @@
                                     icon="fa-fw o_button_icon fa-id-card-o">
                                 <field string="Documents" name="document_count" widget="statinfo"/>
                             </button>
-                            <!-- <button class="oe_stat_button" type="object" name="action_insured_claim"
+                            <button class="oe_stat_button" type="object" name="action_insured_claim"
                                     icon="fa-bars" invisible="claim_count == 0">
                                 <field string="Claims" name="claim_count" widget="statinfo"/>
-                            </button> -->
+                            </button>
+                            <button class="oe_stat_button" type="object" name="action_insured_claim"
+                                    icon="fa-money" invisible="claims_total_amount == 0">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="claims_total_amount"/>
+                                    </span>
+                                    <span class="o_stat_text">Total Claims</span>
+                                </div>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="action_insured_claim"
+                                    icon="fa-trophy" invisible="highest_claim_amount == 0">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="highest_claim_amount"/>
+                                    </span>
+                                    <span class="o_stat_text">Highest Claim</span>
+                                </div>
+                            </button>
                             <button class="oe_stat_button" type="object" name="action_remaining_amount" icon="fa-money"
                                     invisible="claim_count == 0 or total_due_amount == 0">
                                 <div class="o_stat_info">
