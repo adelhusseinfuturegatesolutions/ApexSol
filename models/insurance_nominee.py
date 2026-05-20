@@ -100,6 +100,14 @@ class InsuranceNominee(models.Model):
             rec._cascade_active_to_family(rec.active)
         return result
 
+    def action_set_inactive(self):
+        self.with_context(active_test=False).write({'active': False})
+        return True
+
+    def action_set_active(self):
+        self.with_context(active_test=False).write({'active': True})
+        return True
+
     def _cascade_active_to_family(self, new_active):
         """Apply the given active state to all family members of any main
         employee in self. Posts a message on the employee chatter."""
