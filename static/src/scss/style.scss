@@ -54,19 +54,37 @@ $tk-soft: #f1f5f9;
         font-size: 22px;
         letter-spacing: 0.2px;
     }
-    .oe_button_box .oe_stat_button {
-        border-radius: 8px;
-        margin: 3px;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-        background: #ffffff;
-        border: 1px solid #e6ebf1;
+    .oe_button_box {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        max-width: none !important;
+        overflow: visible !important;
+        gap: 4px;
 
-        &:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
+        .o_button_more,
+        .dropdown {
+            display: none !important;
         }
-        .o_button_icon {
-            color: #7a93c2;
+        > .oe_stat_button,
+        > button.oe_stat_button {
+            display: inline-flex !important;
+        }
+
+        .oe_stat_button {
+            border-radius: 8px;
+            margin: 3px;
+            min-width: 110px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            background: #ffffff;
+            border: 1px solid #e6ebf1;
+
+            &:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
+            }
+            .o_button_icon {
+                color: #7a93c2;
+            }
         }
     }
 
