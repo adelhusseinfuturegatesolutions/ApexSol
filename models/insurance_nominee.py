@@ -174,6 +174,12 @@ class InsuranceNominee(models.Model):
     policy_provider_cmp_id = fields.Many2one('res.partner', string='Policy Provider',related='insurance_information_id.policy_provider_cmp_id')
     issue_date = fields.Date(string="Issue Date", related='insurance_information_id.issue_date')
     expiry_date = fields.Date(string="Expiry Date", related='insurance_information_id.expiry_date')
+    insurance_number = fields.Char(
+        string="Policy Number",
+        related='insurance_information_id.insurance_number')
+    insurance_state = fields.Selection(
+        string="Policy Status",
+        related='insurance_information_id.state')
 
 
     @api.constrains('nominee_dob')

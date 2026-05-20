@@ -59,6 +59,27 @@
                             <field name="currency_id" invisible="1"/>
                             <field name="insurance_information_id" invisible="1"/>
                         </div>
+                        <div class="tk_section_header tk_header_policy"
+                             invisible="not insurance_information_id">
+                            <i class="fa fa-file-text-o"/>
+                            <span>Policy Details</span>
+                        </div>
+                        <group invisible="not insurance_information_id">
+                            <group>
+                                <field name="insurance_information_id" string="Policy" readonly="1"/>
+                                <field name="insurance_number" readonly="1"/>
+                                <field name="insurance_state" widget="badge"
+                                       decoration-success="insurance_state == 'running'"
+                                       decoration-info="insurance_state == 'confirmed'"
+                                       decoration-warning="insurance_state == 'renew'"
+                                       decoration-danger="insurance_state in ('expired','cancel')"/>
+                            </group>
+                            <group>
+                                <field name="issue_date" readonly="1"/>
+                                <field name="expiry_date" readonly="1"/>
+                                <field name="sum_assured" readonly="1"/>
+                            </group>
+                        </group>
                         <div class="tk_section_header tk_header_holder">
                             <i class="fa fa-id-badge"/>
                             <span>Nominee Details</span>
