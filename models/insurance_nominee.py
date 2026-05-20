@@ -229,11 +229,14 @@ class InsuranceNominee(models.Model):
                 existing = ICP.search([('key', '=', key)], limit=1)
                 if existing:
                     existing.unlink()
-        insurances = self.mapped('insurance_information_id')
+        insurances = self.mapped('insurance_information_id') \
+            | self.mapped('parent_nominee_id.insurance_information_id')
         if insurances:
             insurances.invalidate_recordset(['total_policy_amount'])
         for rec in self:
-            if rec.insurance_information_id.state == 'running':
+            insurance = rec.insurance_information_id \
+                or rec.parent_nominee_id.insurance_information_id
+            if insurance and insurance.state == 'running':
                 rec._update_subscription_invoice()
 
     @api.model_create_multi
