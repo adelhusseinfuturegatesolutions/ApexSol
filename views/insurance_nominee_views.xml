@@ -112,7 +112,7 @@
                                     <strong>&#160;Age</strong>
                                     <field name="nominee_age" style="width: auto; margin-left: 5px;"/>
                                 </div>
-                                <field name="addition_date" readonly="1"/>
+                                <field name="addition_date" required="1"/>
                             </group>
                         </group>
                         <div class="tk_section_header tk_header_insured">
