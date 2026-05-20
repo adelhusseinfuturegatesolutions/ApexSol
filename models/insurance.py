@@ -997,6 +997,39 @@ class InsuranceInformation(models.Model):
     #             rec.total_policy_amount = base_multiplied_amount + rec.total_commission
     #         else:
     #             rec.total_policy_amount = base_multiplied_amount + rec.fixed_commission
+    def _nominee_base_amount(self, nominee):
+        """Base annual premium for a nominee, before pro-rating."""
+        self.ensure_one()
+        family_amount = {
+            line.relation_type: line.insurance_amount
+            for line in self.insurance_policy_id.family_member_ids
+        }
+        relation_key = (nominee.relation_type or '').lower()
+        if relation_key in family_amount:
+            return family_amount[relation_key]
+        pricelist = self.policy_price_list_id
+        if nominee.insured_gender == 'male':
+            return pricelist.male_premium
+        if nominee.insured_gender == 'female':
+            return pricelist.female_premium
+        return 0.0
+
+    def _nominee_prorated_amount(self, nominee):
+        """Apply quarter pro-rating based on the nominee's addition_date."""
+        self.ensure_one()
+        full = self._nominee_base_amount(nominee)
+        if not full or not self.issue_date or not nominee.addition_date:
+            return full
+        if nominee.addition_date <= self.issue_date:
+            return full
+        months_in = (nominee.addition_date.year - self.issue_date.year) * 12 \
+                    + (nominee.addition_date.month - self.issue_date.month)
+        quarter_index = months_in // 3
+        if quarter_index >= 4:
+            return 0.0
+        remaining_quarters = 4 - quarter_index
+        return (full / 4.0) * remaining_quarters
+
     @api.depends('insurance_nominee_ids', 'insurance_nominee_ids.relation_type',
                  'insurance_nominee_ids.insured_gender',
                  'insurance_nominee_ids.addition_date',
@@ -1013,49 +1046,18 @@ class InsuranceInformation(models.Model):
         nominee's amount is pro-rated by quarter of the policy year based on
         their addition_date (4 quarters per year)."""
         for rec in self:
-            pricelist = rec.policy_price_list_id
-            family_amount = {
-                line.relation_type: line.insurance_amount
-                for line in rec.insurance_policy_id.family_member_ids
-            }
-            family_roles = set(family_amount.keys())
-
-            def base_amount(nominee):
-                relation_key = (nominee.relation_type or '').lower()
-                if relation_key in family_roles:
-                    return family_amount[relation_key]
-                if nominee.insured_gender == 'male':
-                    return pricelist.male_premium
-                if nominee.insured_gender == 'female':
-                    return pricelist.female_premium
-                return 0.0
-
-            def nominee_amount(nominee):
-                full = base_amount(nominee)
-                if not full or not rec.issue_date or not nominee.addition_date:
-                    return full
-                if nominee.addition_date <= rec.issue_date:
-                    return full
-                months_in = (nominee.addition_date.year - rec.issue_date.year) * 12 \
-                            + (nominee.addition_date.month - rec.issue_date.month)
-                quarter_index = months_in // 3
-                if quarter_index >= 4:
-                    return 0.0
-                remaining_quarters = 4 - quarter_index
-                return (full / 4.0) * remaining_quarters
-
             total_base_amount = 0.0
             seen = set()
             for nominee in rec.insurance_nominee_ids:
                 if nominee.id in seen:
                     continue
                 seen.add(nominee.id)
-                total_base_amount += nominee_amount(nominee)
+                total_base_amount += rec._nominee_prorated_amount(nominee)
                 for member in nominee.family_member_ids:
                     if member.id in seen:
                         continue
                     seen.add(member.id)
-                    total_base_amount += nominee_amount(member)
+                    total_base_amount += rec._nominee_prorated_amount(member)
 
             if rec.commission_type == "percentage":
                 rec.total_policy_amount = total_base_amount + rec.total_commission

@@ -19,6 +19,11 @@
                         class="btn btn-success"
                         invisible="nominee_status == 'active'"
                         groups="tk_insurance_management.insurance_manager"/>
+                <button name="action_create_subscription_invoice" type="object"
+                        string="Issue Subscription Invoice"
+                        class="btn btn-secondary"
+                        invisible="insurance_state != 'running' or nominee_status == 'inactive'"
+                        groups="tk_insurance_management.insurance_manager"/>
                 <field name="nominee_status" widget="badge"
                        decoration-success="nominee_status == 'active'"
                        decoration-danger="nominee_status == 'inactive'"/>

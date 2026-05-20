@@ -233,6 +233,59 @@ class InsuranceNominee(models.Model):
         insurances = self.mapped('insurance_information_id')
         if insurances:
             insurances.invalidate_recordset(['total_policy_amount'])
+        # Re-issue subscription invoice for each nominee with the new date.
+        for rec in self:
+            if rec.insurance_information_id.state == 'running':
+                rec._create_subscription_invoice()
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        for rec in records:
+            if rec.insurance_information_id.state == 'running':
+                rec._create_subscription_invoice()
+        return records
+
+    def _create_subscription_invoice(self):
+        """Create a customer invoice on the policy holder for this nominee's
+        pro-rated subscription. Returns the created move (or False)."""
+        self.ensure_one()
+        insurance = self.insurance_information_id
+        if not insurance or not insurance.policy_holder_id:
+            return False
+        amount = insurance._nominee_prorated_amount(self)
+        if not amount or amount <= 0:
+            return False
+        label = _("Subscription — %s (%s)",
+                  self.name or _("Nominee"),
+                  self.relation_type or self.insured_gender or '')
+        invoice_vals = {
+            'partner_id': insurance.policy_holder_id.id,
+            'move_type': 'out_invoice',
+            'invoice_date': fields.Date.context_today(self),
+            'invoice_line_ids': [(0, 0, {
+                'name': label,
+                'quantity': 1,
+                'price_unit': amount,
+                'tax_ids': False,
+            })],
+        }
+        return self.env['account.move'].sudo().create(invoice_vals)
+
+    def action_create_subscription_invoice(self):
+        """Manually trigger the subscription invoice for the selected nominee."""
+        for rec in self:
+            move = rec._create_subscription_invoice()
+            if move:
+                return {
+                    'type': 'ir.actions.act_window',
+                    'name': _('Subscription Invoice'),
+                    'res_model': 'account.move',
+                    'res_id': move.id,
+                    'view_mode': 'form',
+                    'target': 'current',
+                }
+        return True
 
 
     @api.constrains('nominee_dob')
