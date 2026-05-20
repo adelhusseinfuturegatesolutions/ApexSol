@@ -201,6 +201,10 @@ class InsuranceNominee(models.Model):
     insurance_state = fields.Selection(
         string="Policy Status",
         related='insurance_information_id.state')
+    addition_date = fields.Date(
+        string="Addition Date",
+        default=fields.Date.context_today,
+        help="Date this nominee was added to the policy; drives pro-rated premium.")
 
 
     @api.constrains('nominee_dob')

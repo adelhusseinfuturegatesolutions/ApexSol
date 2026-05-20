@@ -999,15 +999,19 @@ class InsuranceInformation(models.Model):
     #             rec.total_policy_amount = base_multiplied_amount + rec.fixed_commission
     @api.depends('insurance_nominee_ids', 'insurance_nominee_ids.relation_type',
                  'insurance_nominee_ids.insured_gender',
+                 'insurance_nominee_ids.addition_date',
                  'insurance_nominee_ids.family_member_ids.relation_type',
                  'commission_type', 'total_commission', 'fixed_commission',
+                 'issue_date',
                  'policy_price_list_id.male_premium',
                  'policy_price_list_id.female_premium',
                  'insurance_policy_id.family_member_ids.relation_type',
                  'insurance_policy_id.family_member_ids.insurance_amount')
     def _compute_total_policy_amount(self):
         """Employees from selected Pricelist (male/female_premium); family members
-        from insurance_policy_id.family_member_ids by relation_type."""
+        from insurance_policy_id.family_member_ids by relation_type. Each
+        nominee's amount is pro-rated by quarter of the policy year based on
+        their addition_date (4 quarters per year)."""
         for rec in self:
             pricelist = rec.policy_price_list_id
             family_amount = {
@@ -1016,7 +1020,7 @@ class InsuranceInformation(models.Model):
             }
             family_roles = set(family_amount.keys())
 
-            def nominee_amount(nominee):
+            def base_amount(nominee):
                 relation_key = (nominee.relation_type or '').lower()
                 if relation_key in family_roles:
                     return family_amount[relation_key]
@@ -1025,6 +1029,20 @@ class InsuranceInformation(models.Model):
                 if nominee.insured_gender == 'female':
                     return pricelist.female_premium
                 return 0.0
+
+            def nominee_amount(nominee):
+                full = base_amount(nominee)
+                if not full or not rec.issue_date or not nominee.addition_date:
+                    return full
+                if nominee.addition_date <= rec.issue_date:
+                    return full
+                months_in = (nominee.addition_date.year - rec.issue_date.year) * 12 \
+                            + (nominee.addition_date.month - rec.issue_date.month)
+                quarter_index = months_in // 3
+                if quarter_index >= 4:
+                    return 0.0
+                remaining_quarters = 4 - quarter_index
+                return (full / 4.0) * remaining_quarters
 
             total_base_amount = 0.0
             seen = set()
