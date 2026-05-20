@@ -90,14 +90,32 @@ class InsuranceNominee(models.Model):
         """When a main employee is (de)activated, cascade to family members."""
         result = super().write(vals)
         if 'active' in vals:
-            new_active = vals['active']
-            for rec in self.with_context(active_test=False):
-                if not rec.parent_nominee_id and rec.family_member_ids:
-                    members = rec.family_member_ids.with_context(active_test=False).filtered(
-                        lambda m: m.active != new_active)
-                    if members:
-                        members.write({'active': new_active})
+            self._cascade_active_to_family(vals['active'])
         return result
+
+    def toggle_active(self):
+        """Force cascade also when toggled via the standard Archive action."""
+        result = super().toggle_active()
+        for rec in self.with_context(active_test=False):
+            rec._cascade_active_to_family(rec.active)
+        return result
+
+    def _cascade_active_to_family(self, new_active):
+        """Apply the given active state to all family members of any main
+        employee in self. Posts a message on the employee chatter."""
+        for rec in self.with_context(active_test=False):
+            if rec.parent_nominee_id:
+                continue
+            members = rec.family_member_ids.with_context(active_test=False).filtered(
+                lambda m: m.active != new_active)
+            if not members:
+                continue
+            members.write({'active': new_active})
+            verb = _("activated") if new_active else _("deactivated")
+            names = ", ".join(members.mapped('name'))
+            rec.message_post(body=_(
+                "Employee %s — %s family member(s) %s: %s",
+                rec.name, len(members), verb, names))
 
     def _search_nominee_status(self, operator, value):
         if operator not in ('=', '!=', 'in', 'not in'):
