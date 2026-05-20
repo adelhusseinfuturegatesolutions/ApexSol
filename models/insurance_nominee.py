@@ -204,14 +204,35 @@ class InsuranceNominee(models.Model):
     addition_date = fields.Date(
         string="Addition Date",
         compute='_compute_addition_date',
-        help="Date this nominee was added to the policy; drives pro-rated premium. "
-             "Currently derived from the record creation date until the DB column is migrated.")
+        inverse='_inverse_addition_date',
+        help="Date this nominee was added to the policy; drives pro-rated premium.")
 
     @api.depends('create_date')
     def _compute_addition_date(self):
+        ICP = self.env['ir.config_parameter'].sudo()
         for rec in self:
-            rec.addition_date = (rec.create_date.date()
-                                 if rec.create_date else fields.Date.context_today(rec))
+            stored = ICP.get_param(f'tk_insurance.nominee.addition_date.{rec.id}')
+            if stored:
+                rec.addition_date = fields.Date.from_string(stored)
+            elif rec.create_date:
+                rec.addition_date = rec.create_date.date()
+            else:
+                rec.addition_date = fields.Date.context_today(rec)
+
+    def _inverse_addition_date(self):
+        ICP = self.env['ir.config_parameter'].sudo()
+        for rec in self:
+            key = f'tk_insurance.nominee.addition_date.{rec.id}'
+            if rec.addition_date:
+                ICP.set_param(key, fields.Date.to_string(rec.addition_date))
+            else:
+                existing = ICP.search([('key', '=', key)], limit=1)
+                if existing:
+                    existing.unlink()
+        # Trigger recompute on parent insurance.information totals
+        insurances = self.mapped('insurance_information_id')
+        if insurances:
+            insurances.invalidate_recordset(['total_policy_amount'])
 
 
     @api.constrains('nominee_dob')
