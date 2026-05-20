@@ -203,28 +203,8 @@ class InsuranceNominee(models.Model):
         related='insurance_information_id.state')
     addition_date = fields.Date(
         string="Addition Date",
-        compute='_compute_addition_date',
-        inverse='_inverse_addition_date',
-        search='_search_addition_date',
+        default=fields.Date.context_today,
         help="Date this nominee was added to the policy; drives pro-rated premium.")
-
-    @api.depends('create_date')
-    def _compute_addition_date(self):
-        for rec in self:
-            override = (rec.env.context.get('addition_date_override') or {}).get(rec.id)
-            if override:
-                rec.addition_date = override
-            elif rec.create_date:
-                rec.addition_date = rec.create_date.date()
-            else:
-                rec.addition_date = fields.Date.context_today(rec)
-
-    def _inverse_addition_date(self):
-        """Stash user-entered addition_date into context (no DB column yet)."""
-        return
-
-    def _search_addition_date(self, operator, value):
-        return [('create_date', operator, value)]
 
 
     @api.constrains('nominee_dob')
