@@ -106,6 +106,12 @@
                                 </h3>
                                 <field name="nominee_id" required="1"/>
                                 <field name="policy_holder_id"/>
+                                <field name="relation_type" required="1"/>
+                                <field name="parent_nominee_id"
+                                       options="{'no_create': True}"
+                                       invisible="relation_type in ('Employee-Male','Employee-Female',False)"/>
+                                <field name="insured_gender" required="1"/>
+                                <field name="insured_blood_group"/>
                             </group>
                             <group>
                                 <label for="nominee_dob" string="Date of Birth"/>
@@ -117,34 +123,18 @@
                                 <field name="addition_date" required="1"/>
                                 <field name="subscription_amount" readonly="1"/>
                                 <field name="currency_id" invisible="1"/>
-                            </group>
-                        </group>
-                        <div class="tk_section_header tk_header_insured">
-                            <i class="fa fa-heartbeat"/>
-                            <span>Personal &amp; Medical Info</span>
-                        </div>
-                        <group>
-                            <group>
-                                <field name="relation_type" required="1"/>
-                                <field name="parent_nominee_id"
-                                       options="{'no_create': True}"
-                                       invisible="relation_type in ('Employee-Male','Employee-Female',False)"/>
-                                <field name="insured_gender" required="1"/>
-                                <field name="insured_blood_group"/>
-                            </group>
-                            <group>
                                 <field name="insured_heights"/>
                                 <field name="insured_weights"/>
                                 <field name="insured_birthmarks"/>
                             </group>
                             <group string="Policy Details" invisible="1">
-                                        <field name="insurance_category_id"/>
-                                        <field name="insurance_sub_category_id"/>
-                                        <field name="insurance_policy_id"/>
-                                        <field name="policy_price_list_id"/>
-                                        <field name="policy_provider_cmp_id"/>
-                                        <field name="issue_date"/>
-                                        <field name="expiry_date"/>
+                                <field name="insurance_category_id"/>
+                                <field name="insurance_sub_category_id"/>
+                                <field name="insurance_policy_id"/>
+                                <field name="policy_price_list_id"/>
+                                <field name="policy_provider_cmp_id"/>
+                                <field name="issue_date"/>
+                                <field name="expiry_date"/>
                             </group>
                         </group>
                         <notebook class="tk_insurance_notebook">
