@@ -223,6 +223,7 @@ class InsuranceNominee(models.Model):
         string="Subscription Invoice",
         compute='_compute_subscription_invoice_id')
 
+    @api.depends('parent_nominee_id')
     def _compute_subscription_invoice_id(self):
         ICP = self.env['ir.config_parameter'].sudo()
         Move = self.env['account.move'].sudo()
@@ -252,6 +253,7 @@ class InsuranceNominee(models.Model):
             'target': 'current',
         }
 
+    @api.depends('parent_nominee_id')
     def _compute_subscription_state(self):
         ICP = self.env['ir.config_parameter'].sudo()
         for rec in self:
