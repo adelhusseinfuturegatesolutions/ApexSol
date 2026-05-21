@@ -206,6 +206,29 @@ class InsuranceNominee(models.Model):
         compute='_compute_addition_date',
         inverse='_inverse_addition_date',
         help="Date this nominee was added to the policy; drives pro-rated premium.")
+    subscription_amount = fields.Monetary(
+        string="Insur Amount",
+        compute='_compute_subscription_amount',
+        currency_field='currency_id',
+        help="Quarter pro-rated subscription amount for this nominee.")
+
+    @api.depends('addition_date', 'insured_gender', 'relation_type',
+                 'insurance_information_id.issue_date',
+                 'insurance_information_id.policy_price_list_id.male_premium',
+                 'insurance_information_id.policy_price_list_id.female_premium',
+                 'insurance_information_id.insurance_policy_id.family_member_ids.relation_type',
+                 'insurance_information_id.insurance_policy_id.family_member_ids.insurance_amount',
+                 'parent_nominee_id.insurance_information_id.policy_price_list_id.male_premium',
+                 'parent_nominee_id.insurance_information_id.policy_price_list_id.female_premium',
+                 'parent_nominee_id.insurance_information_id.insurance_policy_id.family_member_ids.insurance_amount')
+    def _compute_subscription_amount(self):
+        for rec in self:
+            insurance = rec.insurance_information_id \
+                or rec.parent_nominee_id.insurance_information_id
+            if insurance:
+                rec.subscription_amount = insurance._nominee_prorated_amount(rec)
+            else:
+                rec.subscription_amount = 0.0
 
     @api.depends('create_date')
     def _compute_addition_date(self):
@@ -233,6 +256,10 @@ class InsuranceNominee(models.Model):
             | self.mapped('parent_nominee_id.insurance_information_id')
         if insurances:
             insurances.invalidate_recordset(['total_policy_amount'])
+        # Force re-read of subscription_amount for this nominee and siblings.
+        siblings = self | self.mapped('parent_nominee_id.family_member_ids') \
+                        | self.mapped('family_member_ids')
+        siblings.invalidate_recordset(['subscription_amount'])
         for rec in self:
             insurance = rec.insurance_information_id \
                 or rec.parent_nominee_id.insurance_information_id

@@ -115,6 +115,8 @@
                                     <field name="nominee_age" style="width: auto; margin-left: 5px;"/>
                                 </div>
                                 <field name="addition_date" required="1"/>
+                                <field name="subscription_amount" readonly="1"/>
+                                <field name="currency_id" invisible="1"/>
                             </group>
                         </group>
                         <div class="tk_section_header tk_header_insured">
@@ -163,8 +165,11 @@
                                         <field name="relation_type"/>
                                         <field name="insured_gender"/>
                                         <field name="nominee_dob"/>
+                                        <field name="addition_date"/>
                                         <field name="insured_blood_group"/>
-                                        <field name="amount_factor"/>
+                                        <field name="subscription_amount" sum="Total"/>
+                                        <field name="currency_id" column_invisible="True"/>
+                                        <field name="amount_factor" optional="hide"/>
                                     </list>
                                 </field>
                             </page>
