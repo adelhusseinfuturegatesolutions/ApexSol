@@ -1014,15 +1014,32 @@ class InsuranceInformation(models.Model):
             return pricelist.female_premium
         return 0.0
 
+    def _nominee_effective_addition_date(self, nominee):
+        """Read the most up-to-date addition_date from ICP (override) or fall
+        back to create_date, bypassing the computed field cache."""
+        ICP = self.env['ir.config_parameter'].sudo()
+        stored = ICP.get_param(f'tk_insurance.nominee.addition_date.{nominee.id}')
+        if stored:
+            try:
+                return fields.Date.from_string(stored)
+            except Exception:
+                pass
+        if nominee.create_date:
+            return nominee.create_date.date()
+        return fields.Date.context_today(self)
+
     def _nominee_prorated_amount(self, nominee):
         """Quarter-based pro-rating using the calendar month of addition_date:
         months 1-3 = Q1 (4 quarters charged), 4-6 = Q2 (3), 7-9 = Q3 (2),
         10-12 = Q4 (1)."""
         self.ensure_one()
         full = self._nominee_base_amount(nominee)
-        if not full or not nominee.addition_date:
+        if not full:
             return full
-        quarter_index = (nominee.addition_date.month - 1) // 3
+        addition = self._nominee_effective_addition_date(nominee)
+        if not addition:
+            return full
+        quarter_index = (addition.month - 1) // 3
         remaining_quarters = 4 - quarter_index
         return (full / 4.0) * remaining_quarters
 
