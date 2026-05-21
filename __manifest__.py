@@ -2,7 +2,7 @@
 # Part of TechKhedut. See LICENSE file for full copyright and licensing details.
 {
     'name': "All in one Insurance Management | All types Insurance Management",
-    'version': "3.0",
+    'version': "3.1.0",
     'description': """All in one Insurance Management""",
     'summary': "Insurance Management",
     'author': 'TechKhedut Inc.',
