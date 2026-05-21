@@ -304,12 +304,16 @@ class InsuranceNominee(models.Model):
 
     def _inverse_addition_date(self):
         ICP = self.env['ir.config_parameter'].sudo()
+        Nominee = self.env['insurance.nominee'].with_context(active_test=False)
         for rec in self:
             value_str = fields.Date.to_string(rec.addition_date) if rec.addition_date else None
-            # Apply the date to the nominee itself and (if it is a main
-            # employee) to every linked family member so they stay in sync.
-            scope = rec | rec.family_member_ids.with_context(active_test=False)
-            for member in scope:
+            # Fetch self + all linked family members directly from DB so we do
+            # not depend on the One2many cache.
+            targets = Nominee.search([
+                '|', ('id', '=', rec.id),
+                ('parent_nominee_id', '=', rec.id),
+            ])
+            for member in targets:
                 key = f'tk_insurance.nominee.addition_date.{member.id}'
                 if value_str:
                     ICP.set_param(key, value_str)
