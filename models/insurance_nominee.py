@@ -211,6 +211,28 @@ class InsuranceNominee(models.Model):
         compute='_compute_subscription_amount',
         currency_field='currency_id',
         help="Quarter pro-rated subscription amount for this nominee.")
+    subscription_state = fields.Selection(
+        [('pending', 'Pending'),
+         ('subscribed', 'Subscribed')],
+        string="Subscription Status",
+        compute='_compute_subscription_state',
+        help="Subscribed once the consolidated subscription invoice for the "
+             "employee unit has been posted.")
+
+    def _compute_subscription_state(self):
+        ICP = self.env['ir.config_parameter'].sudo()
+        for rec in self:
+            main = rec._get_main_nominee()
+            invoice_id = ICP.get_param(f'tk_insurance.subscription_invoice.{main.id}')
+            state = 'pending'
+            if invoice_id:
+                try:
+                    move = self.env['account.move'].sudo().browse(int(invoice_id))
+                    if move.exists() and move.state == 'posted':
+                        state = 'subscribed'
+                except (TypeError, ValueError):
+                    pass
+            rec.subscription_state = state
 
     @api.depends('addition_date', 'insured_gender', 'relation_type',
                  'insurance_information_id.issue_date',
@@ -356,6 +378,9 @@ class InsuranceNominee(models.Model):
             existing.write({
                 'invoice_line_ids': [(0, 0, l) for l in lines],
             })
+            return existing
+        if existing and existing.state == 'posted':
+            # Subscription already locked in — do not issue another invoice.
             return existing
         move = self.env['account.move'].sudo().create({
             'partner_id': insurance.policy_holder_id.id,
