@@ -81,20 +81,19 @@ class InsuranceNominee(models.Model):
         ICP = self.env['ir.config_parameter'].sudo()
         Move = self.env['account.move'].sudo()
         for rec in self:
-            if not rec.active:
-                rec.nominee_status = 'inactive'
-                continue
-            main = rec._get_main_nominee()
-            invoice_id = ICP.get_param(f'tk_insurance.subscription_invoice.{main.id}')
-            confirmed = False
-            if invoice_id:
-                try:
+            rec.nominee_status = 'pending'
+            try:
+                if not rec.active:
+                    rec.nominee_status = 'inactive'
+                    continue
+                main_id = rec.parent_nominee_id.id or rec.id
+                invoice_id = ICP.get_param(f'tk_insurance.subscription_invoice.{main_id}')
+                if invoice_id:
                     move = Move.browse(int(invoice_id))
                     if move.exists() and move.state == 'posted':
-                        confirmed = True
-                except (TypeError, ValueError):
-                    pass
-            rec.nominee_status = 'active' if confirmed else 'pending'
+                        rec.nominee_status = 'active'
+            except Exception:
+                rec.nominee_status = 'pending'
 
     def write(self, vals):
         """When a main employee is (de)activated, cascade to family members."""
