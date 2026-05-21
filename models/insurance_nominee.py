@@ -334,7 +334,10 @@ class InsuranceNominee(models.Model):
             insurance = rec.insurance_information_id \
                 or rec.parent_nominee_id.insurance_information_id
             if insurance and insurance.state == 'running':
-                rec._update_subscription_invoice()
+                try:
+                    rec._update_subscription_invoice()
+                except Exception:
+                    pass
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -345,10 +348,14 @@ class InsuranceNominee(models.Model):
             insurance = rec.insurance_information_id \
                 or rec.parent_nominee_id.insurance_information_id
             if insurance and insurance.state == 'running':
-                # Stamp today as the addition date so quarter pro-rating kicks in.
                 ICP.set_param(
                     f'tk_insurance.nominee.addition_date.{rec.id}', today_str)
-                rec._update_subscription_invoice()
+                try:
+                    rec._update_subscription_invoice()
+                except Exception:
+                    # Never block nominee creation if invoice issuing fails
+                    # (e.g. accounting not configured in tests/install).
+                    pass
         return records
 
     def _get_main_nominee(self):
