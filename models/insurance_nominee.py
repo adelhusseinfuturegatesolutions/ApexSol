@@ -218,6 +218,39 @@ class InsuranceNominee(models.Model):
         compute='_compute_subscription_state',
         help="Subscribed once the consolidated subscription invoice for the "
              "employee unit has been posted.")
+    subscription_invoice_id = fields.Many2one(
+        'account.move',
+        string="Subscription Invoice",
+        compute='_compute_subscription_invoice_id')
+
+    def _compute_subscription_invoice_id(self):
+        ICP = self.env['ir.config_parameter'].sudo()
+        Move = self.env['account.move'].sudo()
+        for rec in self:
+            main = rec._get_main_nominee()
+            invoice_id = ICP.get_param(f'tk_insurance.subscription_invoice.{main.id}')
+            move = False
+            if invoice_id:
+                try:
+                    candidate = Move.browse(int(invoice_id))
+                    if candidate.exists():
+                        move = candidate
+                except (TypeError, ValueError):
+                    pass
+            rec.subscription_invoice_id = move
+
+    def action_open_subscription_invoice(self):
+        self.ensure_one()
+        if not self.subscription_invoice_id:
+            return False
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Subscription Invoice'),
+            'res_model': 'account.move',
+            'res_id': self.subscription_invoice_id.id,
+            'view_mode': 'form',
+            'target': 'current',
+        }
 
     def _compute_subscription_state(self):
         ICP = self.env['ir.config_parameter'].sudo()

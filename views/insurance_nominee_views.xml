@@ -37,6 +37,14 @@
                                     icon="fa-bars">
                                 <field string="Claims" name="claims_count" widget="statinfo"/>
                             </button>
+                       <button class="oe_stat_button" type="object" name="action_open_subscription_invoice"
+                                icon="fa-file-text-o" invisible="not subscription_invoice_id">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Subscription</span>
+                                    <span class="o_stat_text">Invoice</span>
+                                </div>
+                            </button>
+                       <field name="subscription_invoice_id" invisible="1"/>
                     </div>
 
                     <!-- Add this block for the image and basic info -->
