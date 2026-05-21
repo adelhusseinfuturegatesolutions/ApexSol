@@ -211,10 +211,13 @@ class ClaimInformation(models.Model):
     def _check_nominee_active(self):
         for rec in self:
             nominee = rec.insurance_nominee_id.sudo().with_context(active_test=False)
-            if nominee and not nominee.active:
+            if not nominee:
+                continue
+            if nominee.nominee_status != 'active':
                 raise ValidationError(_(
-                    "Nominee '%s' is inactive. Claims cannot be created for an inactive nominee.",
-                    nominee.name))
+                    "Nominee '%s' is %s. Claims can only be created for Active nominees "
+                    "(after the subscription invoice has been confirmed).",
+                    nominee.name, nominee.nominee_status))
 
     @api.constrains('insurance_id')
     def _check_insurance_running(self):

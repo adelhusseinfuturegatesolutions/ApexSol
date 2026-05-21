@@ -70,21 +70,31 @@ class InsuranceNominee(models.Model):
     claims_count = fields.Integer(compute='_compute_claim_count')
 
     nominee_status = fields.Selection(
-        [('active', 'Active'),
+        [('pending', 'Pending'),
+         ('active', 'Active'),
          ('inactive', 'Inactive')],
         string="Status",
-        compute='_compute_nominee_status',
-        inverse='_inverse_nominee_status',
-        search='_search_nominee_status')
+        compute='_compute_nominee_status')
 
-    @api.depends('active')
+    @api.depends('active', 'parent_nominee_id')
     def _compute_nominee_status(self):
+        ICP = self.env['ir.config_parameter'].sudo()
+        Move = self.env['account.move'].sudo()
         for rec in self:
-            rec.nominee_status = 'active' if rec.active else 'inactive'
-
-    def _inverse_nominee_status(self):
-        for rec in self:
-            rec.active = (rec.nominee_status != 'inactive')
+            if not rec.active:
+                rec.nominee_status = 'inactive'
+                continue
+            main = rec._get_main_nominee()
+            invoice_id = ICP.get_param(f'tk_insurance.subscription_invoice.{main.id}')
+            confirmed = False
+            if invoice_id:
+                try:
+                    move = Move.browse(int(invoice_id))
+                    if move.exists() and move.state == 'posted':
+                        confirmed = True
+                except (TypeError, ValueError):
+                    pass
+            rec.nominee_status = 'active' if confirmed else 'pending'
 
     def write(self, vals):
         """When a main employee is (de)activated, cascade to family members."""
@@ -119,21 +129,6 @@ class InsuranceNominee(models.Model):
             if not members:
                 continue
             members.write({'active': new_active})
-
-    def _search_nominee_status(self, operator, value):
-        if operator not in ('=', '!=', 'in', 'not in'):
-            return []
-        if isinstance(value, str):
-            value = [value]
-        wants_inactive = ('inactive' in value)
-        wants_active = ('active' in value)
-        if operator in ('!=', 'not in'):
-            wants_inactive, wants_active = not wants_inactive, not wants_active
-        if wants_active and not wants_inactive:
-            return [('active', '=', True)]
-        if wants_inactive and not wants_active:
-            return [('active', '=', False)]
-        return []
 
     family_head_name = fields.Char(
         string="Family",
@@ -217,7 +212,8 @@ class InsuranceNominee(models.Model):
         string="Subscription Status",
         compute='_compute_subscription_state',
         help="Confirmed once the consolidated subscription invoice for the "
-             "employee unit has been posted.")
+             "employee unit has been posted. Kept for backward compatibility "
+             "— prefer nominee_status which combines this with Inactive.")
     subscription_invoice_id = fields.Many2one(
         'account.move',
         string="Subscription Invoice",

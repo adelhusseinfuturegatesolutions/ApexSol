@@ -9,7 +9,7 @@
                 <header>
                 <button name="%(action_insurance_claim)d" string="Create Claim" type="action" class="oe_highlight"
                                 groups="tk_insurance_management.insurance_manager"
-                                invisible="nominee_status == 'inactive'"/>
+                                invisible="nominee_status != 'active'"/>
                 <button name="action_set_inactive" type="object" string="Deactivate"
                         class="btn btn-danger"
                         invisible="nominee_status == 'inactive'"
@@ -17,19 +17,17 @@
                         groups="tk_insurance_management.insurance_manager"/>
                 <button name="action_set_active" type="object" string="Activate"
                         class="btn btn-success"
-                        invisible="nominee_status == 'active'"
+                        invisible="nominee_status != 'inactive'"
                         groups="tk_insurance_management.insurance_manager"/>
                 <button name="action_create_subscription_invoice" type="object"
                         string="Issue Subscription Invoice"
                         class="btn btn-secondary"
-                        invisible="insurance_state != 'running' or nominee_status == 'inactive' or subscription_state == 'confirmed'"
+                        invisible="insurance_state != 'running' or nominee_status != 'pending'"
                         groups="tk_insurance_management.insurance_manager"/>
                 <field name="nominee_status" widget="badge"
                        decoration-success="nominee_status == 'active'"
+                       decoration-warning="nominee_status == 'pending'"
                        decoration-danger="nominee_status == 'inactive'"/>
-                <field name="subscription_state" widget="badge"
-                       decoration-success="subscription_state == 'confirmed'"
-                       decoration-warning="subscription_state == 'pending'"/>
                 </header>
                     <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -185,19 +183,17 @@
             <field name="model">insurance.nominee</field>
             <field name="arch" type="xml">
                 <list default_order="parent_nominee_id asc, id asc"
-                      decoration-danger="nominee_status == 'inactive'">
+                      decoration-danger="nominee_status == 'inactive'"
+                      decoration-warning="nominee_status == 'pending'">
                     <field name="parent_nominee_id" string="Main Employee" optional="show"/>
                     <field name="name"/>
                     <field name="nominee_id"/>
                     <field name="relation_type"/>
                     <field name="insured_gender"/>
-                    <field name="subscription_state" widget="badge"
-                           decoration-success="subscription_state == 'confirmed'"
-                           decoration-warning="subscription_state == 'pending'"/>
                     <field name="nominee_status" widget="badge"
                            decoration-success="nominee_status == 'active'"
-                           decoration-danger="nominee_status == 'inactive'"
-                           optional="hide"/>
+                           decoration-warning="nominee_status == 'pending'"
+                           decoration-danger="nominee_status == 'inactive'"/>
                     <field name="nominee_dob"/>
                     <field name="nominee_age"/>
                 </list>
