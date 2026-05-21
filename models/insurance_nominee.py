@@ -253,21 +253,26 @@ class InsuranceNominee(models.Model):
     def _inverse_addition_date(self):
         ICP = self.env['ir.config_parameter'].sudo()
         for rec in self:
-            key = f'tk_insurance.nominee.addition_date.{rec.id}'
-            if rec.addition_date:
-                ICP.set_param(key, fields.Date.to_string(rec.addition_date))
-            else:
-                existing = ICP.search([('key', '=', key)], limit=1)
-                if existing:
-                    existing.unlink()
+            value_str = fields.Date.to_string(rec.addition_date) if rec.addition_date else None
+            # Apply the date to the nominee itself and (if it is a main
+            # employee) to every linked family member so they stay in sync.
+            scope = rec | rec.family_member_ids.with_context(active_test=False)
+            for member in scope:
+                key = f'tk_insurance.nominee.addition_date.{member.id}'
+                if value_str:
+                    ICP.set_param(key, value_str)
+                else:
+                    existing = ICP.search([('key', '=', key)], limit=1)
+                    if existing:
+                        existing.unlink()
         insurances = self.mapped('insurance_information_id') \
             | self.mapped('parent_nominee_id.insurance_information_id')
         if insurances:
             insurances.invalidate_recordset(['total_policy_amount'])
-        # Force re-read of subscription_amount for this nominee and siblings.
-        siblings = self | self.mapped('parent_nominee_id.family_member_ids') \
-                        | self.mapped('family_member_ids')
-        siblings.invalidate_recordset(['subscription_amount'])
+        siblings = self \
+            | self.mapped('parent_nominee_id.family_member_ids') \
+            | self.mapped('family_member_ids')
+        siblings.invalidate_recordset(['subscription_amount', 'addition_date'])
         for rec in self:
             insurance = rec.insurance_information_id \
                 or rec.parent_nominee_id.insurance_information_id
