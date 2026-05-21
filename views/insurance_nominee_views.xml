@@ -153,12 +153,12 @@
                             <page string="Family Members" invisible="parent_nominee_id != False">
                                 <field name="family_member_ids">
                                     <list editable="bottom">
-                                        <field name="nominee_id"/>
-                                        <field name="name"/>
-                                        <field name="relation_type"/>
-                                        <field name="insured_gender"/>
-                                        <field name="nominee_dob"/>
-                                        <field name="addition_date"/>
+                                        <field name="nominee_id" required="1"/>
+                                        <field name="name" required="1"/>
+                                        <field name="relation_type" required="1"/>
+                                        <field name="insured_gender" required="1"/>
+                                        <field name="nominee_dob" required="1"/>
+                                        <field name="addition_date" required="1"/>
                                         <field name="insured_blood_group"/>
                                         <field name="subscription_amount" sum="Total"/>
                                         <field name="currency_id" column_invisible="True"/>
