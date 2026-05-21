@@ -1015,8 +1015,11 @@ class InsuranceInformation(models.Model):
         return 0.0
 
     def _nominee_effective_addition_date(self, nominee):
-        """Read the most up-to-date addition_date from ICP (override) or fall
-        back to create_date, bypassing the computed field cache."""
+        """Resolve addition_date prioritising the in-memory value (live form
+        edits via onchange) and falling back to ir.config_parameter or
+        create_date when called outside the form."""
+        if nominee.addition_date:
+            return nominee.addition_date
         ICP = self.env['ir.config_parameter'].sudo()
         stored = ICP.get_param(f'tk_insurance.nominee.addition_date.{nominee.id}')
         if stored:
@@ -1035,7 +1038,7 @@ class InsuranceInformation(models.Model):
         self.ensure_one()
         full = self._nominee_base_amount(nominee)
         if not full:
-            return full
+            return 0.0
         addition = self._nominee_effective_addition_date(nominee)
         if not addition:
             return full

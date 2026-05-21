@@ -230,6 +230,14 @@ class InsuranceNominee(models.Model):
             else:
                 rec.subscription_amount = 0.0
 
+    @api.onchange('addition_date', 'insured_gender', 'relation_type')
+    def _onchange_recompute_subscription(self):
+        for rec in self:
+            insurance = rec.insurance_information_id \
+                or rec.parent_nominee_id.insurance_information_id
+            if insurance:
+                rec.subscription_amount = insurance._nominee_prorated_amount(rec)
+
     @api.depends('create_date')
     def _compute_addition_date(self):
         ICP = self.env['ir.config_parameter'].sudo()
