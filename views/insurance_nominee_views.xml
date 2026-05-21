@@ -22,14 +22,14 @@
                 <button name="action_create_subscription_invoice" type="object"
                         string="Issue Subscription Invoice"
                         class="btn btn-secondary"
-                        invisible="insurance_state != 'running' or nominee_status == 'inactive' or subscription_state == 'subscribed'"
+                        invisible="insurance_state != 'running' or nominee_status == 'inactive' or subscription_state == 'confirmed'"
                         groups="tk_insurance_management.insurance_manager"/>
                 <field name="nominee_status" widget="badge"
                        decoration-success="nominee_status == 'active'"
                        decoration-danger="nominee_status == 'inactive'"/>
                 <field name="subscription_state" widget="badge"
-                       decoration-success="subscription_state == 'subscribed'"
-                       decoration-muted="subscription_state == 'pending'"/>
+                       decoration-success="subscription_state == 'confirmed'"
+                       decoration-warning="subscription_state == 'pending'"/>
                 </header>
                     <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -191,9 +191,13 @@
                     <field name="nominee_id"/>
                     <field name="relation_type"/>
                     <field name="insured_gender"/>
+                    <field name="subscription_state" widget="badge"
+                           decoration-success="subscription_state == 'confirmed'"
+                           decoration-warning="subscription_state == 'pending'"/>
                     <field name="nominee_status" widget="badge"
                            decoration-success="nominee_status == 'active'"
-                           decoration-danger="nominee_status == 'inactive'"/>
+                           decoration-danger="nominee_status == 'inactive'"
+                           optional="hide"/>
                     <field name="nominee_dob"/>
                     <field name="nominee_age"/>
                 </list>

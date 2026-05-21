@@ -213,10 +213,10 @@ class InsuranceNominee(models.Model):
         help="Quarter pro-rated subscription amount for this nominee.")
     subscription_state = fields.Selection(
         [('pending', 'Pending'),
-         ('subscribed', 'Subscribed')],
+         ('confirmed', 'Confirmed')],
         string="Subscription Status",
         compute='_compute_subscription_state',
-        help="Subscribed once the consolidated subscription invoice for the "
+        help="Confirmed once the consolidated subscription invoice for the "
              "employee unit has been posted.")
     subscription_invoice_id = fields.Many2one(
         'account.move',
@@ -264,7 +264,7 @@ class InsuranceNominee(models.Model):
                 try:
                     move = self.env['account.move'].sudo().browse(int(invoice_id))
                     if move.exists() and move.state == 'posted':
-                        state = 'subscribed'
+                        state = 'confirmed'
                 except (TypeError, ValueError):
                     pass
             rec.subscription_state = state
