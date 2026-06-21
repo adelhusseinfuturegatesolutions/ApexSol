@@ -365,24 +365,6 @@
                                 <field name="currency_id" invisible="1"/>
                             </group>
                         </group>
-                        <div class="row" invisible="category != 'health'">
-                            <br/>
-                            <hr/>
-                            <div class="col-6">
-                                <h5>Out of Pocket Maximum</h5>
-                                <field name="out_of_pocket_maximum" readonly="state not in 'draft'"/>
-                                <h5>Health History of Insured</h5>
-                                <field name="health_history_of_insured" readonly="state not in 'draft'"/>
-                            </div>
-                            <div class="col-6">
-                                <h5>Prescription Drug Coverage</h5>
-                                <field name="drug_coverage" readonly="state not in 'draft'"/>
-                                <h5>Preferred Healthcare Provider Network</h5>
-                                <field name="healthcare_provider_network" readonly="state not in 'draft'"/>
-                            </div>
-                            <hr/>
-                        </div>
-
                         <separator string="Property Insurance Policy Details" name="property_insurance_policy_details"
                                    invisible="category != 'property'"/>
                         <group invisible="category != 'property'">
