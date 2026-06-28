@@ -1,0 +1,1316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="vehicle_rental.rental_dashboard" owl="1">
+        <div class="vr-dashboard">
+            <t t-if="!state.data">
+                <div class="vr-loading">
+                    <div class="vr-spinner"/>
+                    <span>Loading FleetOS…</span>
+                </div>
+            </t>
+            <t t-if="state.data">
+                <!-- ═══ SIDEBAR ═══ -->
+                <nav class="vr-sidebar">
+                    <div class="vr-sb-logo">
+                        <div>
+                            <div class="vr-sb-logo-text">
+                                Vehicle Rental Dashboard
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vr-glance">
+                        <div class="vr-glance-hdr">
+                            <span class="vr-glance-month"><t t-esc="currentMonthYear()"/></span>
+                            <span class="vr-glance-tag">Snapshot</span>
+                        </div>
+                        <div class="vr-glance-grid">
+                            <div class="vr-gcard c-brand"
+                                 t-on-click="() => this.viewVehicleContractStatus('b_in_progress')">
+                                <div class="vr-gcard-val"><t t-esc="state.data.in_progress_vehicle or 0"/></div>
+                                <div class="vr-gcard-lbl">Active Contracts</div>
+                            </div>
+                            <div class="vr-gcard c-green"
+                                 t-on-click="() => this.viewFleetVehicleDetails('available')">
+                                <div class="vr-gcard-val"><t t-esc="state.data.available_vehicle or 0"/></div>
+                                <div class="vr-gcard-lbl">Available</div>
+                            </div>
+                            <div class="vr-gcard c-rose" t-on-click="openExpiringToday">
+                                <div class="vr-gcard-val vr-gcard-val-alert">
+                                    <t t-esc="state.data.expiring_today or 0"/>
+                                </div>
+                                <div class="vr-gcard-lbl">Expiring Today</div>
+                            </div>
+                            <div class="vr-gcard c-amber" t-on-click="viewPendingInvoices">
+                                <div class="vr-gcard-val"><t t-esc="state.data.pending_invoices or 0"/></div>
+                                <div class="vr-gcard-lbl">Pending Invoices</div>
+                            </div>
+                            <div class="vr-gcard c-violet"
+                                 t-on-click="() => this.viewFleetVehicleDetails('in_maintenance')">
+                                <div class="vr-gcard-val"><t t-esc="state.data.under_maintenance_vehicle or 0"/></div>
+                                <div class="vr-gcard-lbl">Maintenance</div>
+                            </div>
+                            <div class="vr-gcard c-teal" t-on-click="viewVehicleCustomers">
+                                <div class="vr-gcard-val"><t t-esc="state.data.customers or 0"/></div>
+                                <div class="vr-gcard-lbl">Customers</div>
+                            </div>
+                            <div class="vr-gcard c-sky vr-gcard-wide" t-on-click="viewCustomerInvoices">
+                                <div class="vr-gcard-val vr-gcard-val-lg">
+                                    <t t-esc="formatCurrency(state.data.total_revenue)"/>
+                                </div>
+                                <div class="vr-gcard-lbl">Total Revenue (Paid)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vr-sb-nav">
+                        <div class="vr-sb-nav-sec">Main</div>
+                        <div t-att-class="'vr-nav-item'+(state.sec==='overview'?' active':'')"
+                             t-on-click="() => this.switchSection('overview')">
+                            <div class="vr-nav-icon">
+                                <svg style="width:15px;height:15px;flex-shrink:0;" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <rect x="3" y="3" width="7" height="7"/>
+                                    <rect x="14" y="3" width="7" height="7"/>
+                                    <rect x="14" y="14" width="7" height="7"/>
+                                    <rect x="3" y="14" width="7" height="7"/>
+                                </svg>
+                            </div>
+                            <div class="vr-nav-lbl">Overview</div>
+                        </div>
+                        <div t-att-class="'vr-nav-item'+(state.sec==='fleet'?' active':'')"
+                             t-on-click="() => this.switchSection('fleet')">
+                            <div class="vr-nav-icon">
+                                <svg style="width:15px;height:15px;flex-shrink:0;" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                            </div>
+                            <div class="vr-nav-lbl">Fleet</div>
+                        </div>
+                        <div t-att-class="'vr-nav-item'+(state.sec==='contracts'?' active':'')"
+                             t-on-click="() => this.switchSection('contracts')">
+                            <div class="vr-nav-icon">
+                                <svg style="width:15px;height:15px;flex-shrink:0;" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10 9 9 9 8 9"/>
+                                </svg>
+                            </div>
+                            <div class="vr-nav-lbl">Contracts</div>
+                        </div>
+                        <div t-att-class="'vr-nav-item'+(state.sec==='gantt'?' active':'')"
+                             t-on-click="() => this.switchSection('gantt')">
+                            <div class="vr-nav-icon">
+                                <svg style="width:15px;height:15px;flex-shrink:0;" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <line x1="8" y1="6" x2="21" y2="6"/>
+                                    <line x1="8" y1="12" x2="21" y2="12"/>
+                                    <line x1="8" y1="18" x2="21" y2="18"/>
+                                    <line x1="3" y1="6" x2="3.01" y2="6"/>
+                                    <line x1="3" y1="12" x2="3.01" y2="12"/>
+                                    <line x1="3" y1="18" x2="3.01" y2="18"/>
+                                </svg>
+                            </div>
+                            <div class="vr-nav-lbl">Contract Gantt</div>
+                        </div>
+                        <div t-att-class="'vr-nav-item'+(state.sec==='availability'?' active':'')"
+                             t-on-click="() => this.switchSection('availability')">
+                            <div class="vr-nav-icon">
+                                <svg style="width:15px;height:15px;flex-shrink:0;" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path d="M5 17H3a2 2 0 01-2-2v-4l2.5-6h13l2.5 6v4a2 2 0 01-2 2h-2"/>
+                                    <circle cx="7.5" cy="17.5" r="2.5"/>
+                                    <circle cx="16.5" cy="17.5" r="2.5"/>
+                                </svg>
+                            </div>
+                            <div class="vr-nav-lbl">Vehicle Availability</div>
+                        </div>
+                        <div t-att-class="'vr-nav-item'+(state.sec==='financial'?' active':'')"
+                             t-on-click="() => this.switchSection('financial')">
+                            <div class="vr-nav-icon">
+                                <svg style="width:15px;height:15px;flex-shrink:0;" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                                </svg>
+                            </div>
+                            <div class="vr-nav-lbl">Financial</div>
+                        </div>
+                        <div class="vr-sb-nav-sec" style="margin-top:4px;">More</div>
+                        <div t-att-class="'vr-nav-item'+(state.sec==='crm'?' active':'')"
+                             t-on-click="() => this.switchSection('crm')">
+                            <div class="vr-nav-icon">
+                                <svg style="width:15px;height:15px;flex-shrink:0;" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                </svg>
+                            </div>
+                            <div class="vr-nav-lbl">CRM / Leads</div>
+                        </div>
+                        <div t-att-class="'vr-nav-item'+(state.sec==='alerts'?' active':'')"
+                             t-on-click="() => this.switchSection('alerts')">
+                            <div class="vr-nav-icon">
+                                <svg style="width:15px;height:15px;flex-shrink:0;" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                    <path d="M13.73 21a2 2 0 01-3.46 0"/>
+                                </svg>
+                            </div>
+                            <div class="vr-nav-lbl">Alerts</div>
+                            <t t-if="state.data.alerts">
+                                <t t-set="_n"
+                                   t-value="(state.data.alerts.expiring_today||0)+(state.data.alerts.overdue_invoices||0)"/>
+                                <div t-if="_n>0" class="vr-nav-badge">
+                                    <t t-esc="_n"/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="vr-sb-footer">
+                        <div class="vr-sb-user">
+                            <div class="vr-sb-avatar">
+                                <img t-attf-src="data:image/png;base64,{{state.data.adv_admin_avatar}}"
+                                     style="max-height:120px; max-width: 100%; width:auto; border-radius: 5px;"/>
+                            </div>
+                            <div>
+                                <div class="vr-sb-uname"><span t-esc="state.data.adv_admin"/></div>
+                                <div class="vr-sb-urole">Vehicle Rental ERP</div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- ═══ MAIN ═══ -->
+                <div class="vr-main">
+                    <div class="vr-topbar">
+                        <div class="vr-tb-brand">
+                            <div class="vr-tb-title">
+                                <t t-if="state.sec==='overview'">Overview Dashboard</t>
+                                <t t-elif="state.sec==='fleet'">Fleet Management</t>
+                                <t t-elif="state.sec==='contracts'">Contracts &amp; Timeline</t>
+                                <t t-elif="state.sec==='gantt'">Contract Gantt</t>
+                                <t t-elif="state.sec==='availability'">Vehicle Availability</t>
+                                <t t-elif="state.sec==='financial'">Financial Analytics</t>
+                                <t t-elif="state.sec==='crm'">CRM &amp; Leads</t>
+                                <t t-elif="state.sec==='alerts'">System Alerts</t>
+                            </div>
+                            <div class="vr-tb-sub">
+                                <t t-if="state.sec==='overview'">FleetOS · Real-time · All data from live records</t>
+                                <t t-if="state.sec==='fleet'">Vehicles, composition and performance metrics</t>
+                                <t t-if="state.sec==='contracts'">All contracts, Gantt timeline and vehicle availability</t>
+                                <t t-if="state.sec==='gantt'">
+                                    <t t-esc="(state.data.gantt_data and state.data.gantt_data.length) or 0"/>
+                                    contracts · Click bar to open · Red line = Today</t>
+                                <t t-if="state.sec==='availability'">
+                                    45-day vehicle availability: orange booked, green available; click bars for contracts.</t>
+                                <t t-if="state.sec==='financial'">Revenue, receivables and payment health</t>
+                                <t t-if="state.sec==='crm'">From inquiry to signed contract</t>
+                                <t t-if="state.sec==='alerts'">Items requiring immediate attention</t>
+                            </div>
+                        </div>
+                        <div class="vr-tb-acts">
+                            <div class="vr-live-pill">
+                                <div class="vr-live-dot"/>Live
+                            </div>
+                            <div class="vr-tb-div"/>
+                            <button class="vr-btn" t-on-click="refresh" style="gap:6px;">
+                                <svg style="width:15px;height:15px;flex-shrink:0;" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="23 4 23 10 17 10"/>
+                                    <polyline points="1 20 1 14 7 14"/>
+                                    <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+                                </svg>
+                                Refresh
+                            </button>
+                            <button class="vr-btn primary" t-on-click="createNewContract" style="gap:6px;">
+                                <svg style="width:15px;height:15px;flex-shrink:0;" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"/>
+                                    <line x1="5" y1="12" x2="19" y2="12"/>
+                                </svg>
+                                New Contract
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="vr-content-wrap">
+                        <div t-att-class="'vr-content' + ((state.sec === 'gantt' || state.sec === 'availability') ? ' vr-content-full' : '')">
+                            <!-- ════ OVERVIEW ════ -->
+                            <t t-if="state.sec==='overview'">
+                                <div class="vr-section">
+                                    <div class="vr-kpi-row">
+                                        <div class="vr-kpi-card" t-on-click="() => this.viewFleetVehicleDetails('all')">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24"
+                                                         fill="none" stroke="currentColor" stroke-width="2"
+                                                         stroke-linecap="round"
+                                                         stroke-linejoin="round">
+                                                        <rect x="1" y="3" width="15" height="13"/>
+                                                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                                        <circle cx="5.5" cy="18.5" r="2.5"/>
+                                                        <circle cx="18.5" cy="18.5" r="2.5"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="vr-kpi-trend up">Fleet</span>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.total_vehicle or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Total Vehicles</div>
+                                            <div class="vr-kpi-sub">
+                                                <t t-esc="state.data.available_vehicle or 0"/>
+                                                available
+                                            </div>
+                                        </div>
+                                        <div class="vr-kpi-card ks"
+                                             t-on-click="() => this.viewVehicleContractStatus('b_in_progress')">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon s">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                                        <polyline points="14 2 14 8 20 8"/>
+                                                        <line x1="16" y1="13" x2="8" y2="13"/>
+                                                        <line x1="16" y1="17" x2="8" y2="17"/>
+                                                        <polyline points="10 9 9 9 8 9"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="vr-kpi-trend up">Active</span>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.in_progress_vehicle or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Active Contracts</div>
+                                            <div class="vr-kpi-sub">
+                                                <t t-esc="state.data.return_contract or 0"/>
+                                                returned
+                                            </div>
+                                        </div>
+                                        <div class="vr-kpi-card" t-on-click="viewCustomerInvoices">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24"
+                                                         fill="none" stroke="currentColor" stroke-width="2"
+                                                         stroke-linecap="round"
+                                                         stroke-linejoin="round">
+                                                        <line x1="12" y1="1" x2="12" y2="23"/>
+                                                        <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="vr-kpi-trend up">↑</span>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="formatCurrency(state.data.total_revenue)"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Total Revenue</div>
+                                            <div class="vr-kpi-sub">Paid invoices</div>
+                                        </div>
+                                        <div class="vr-kpi-card kw" t-on-click="viewPendingInvoices">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon w">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <circle cx="12" cy="12" r="10"/>
+                                                        <polyline points="12 6 12 12 16 14"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="vr-kpi-trend flat">Pending</span>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="formatCurrency(state.data.total_receivables)"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Receivables</div>
+                                            <div class="vr-kpi-sub">
+                                                <t t-esc="state.data.pending_invoices or 0"/>
+                                                invoices
+                                            </div>
+                                        </div>
+                                        <div class="vr-kpi-card kd" t-on-click="openExpiringToday">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon d">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2" stroke-linecap="round"
+                                                         stroke-linejoin="round">
+                                                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                                                        <line x1="12" y1="9" x2="12" y2="13"/>
+                                                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="vr-kpi-trend down">Urgent</span>
+                                            </div>
+                                            <div class="vr-kpi-value"><t t-esc="state.data.expiring_today or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Expiring Today</div>
+                                            <div class="vr-kpi-sub">Act now</div>
+                                        </div>
+                                    </div>
+                                    <div class="vr-cg3">
+                                        <div class="vr-gc">
+                                            <div class="vr-gc-head">
+                                                <div>
+                                                    <div class="vr-gc-title">Revenue vs Maintenance</div>
+                                                    <div class="vr-gc-sub">Monthly trend</div>
+                                                </div>
+                                                <div class="vr-togs">
+                                                    <button t-att-class="'vr-tog'+(state.revMode==='monthly'?' on':'')"
+                                                            t-on-click="() => this.toggleRevMode('monthly')">Monthly
+                                                    </button>
+                                                    <button t-att-class="'vr-tog'+(state.revMode==='quarterly'?' on':'')"
+                                                            t-on-click="() => this.toggleRevMode('quarterly')">Quarterly
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="vr-gc-body"><canvas id="vr-revenueChart"/>
+                                            </div>
+                                        </div>
+                                        <div class="vr-gc">
+                                            <div class="vr-gc-head">
+                                                <div>
+                                                    <div class="vr-gc-title">Fleet Composition</div>
+                                                    <div class="vr-gc-sub">By type</div>
+                                                </div>
+                                            </div>
+                                            <div class="vr-gc-body">
+                                                <t t-if="state.data.fleet_comp and state.data.fleet_comp.labels and state.data.fleet_comp.labels.length">
+                                                    <canvas id="vr-fleetDonut"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <div class="vr-empty">
+                                                        <div class="vr-empty-icon">🚗</div>
+                                                        <div class="vr-empty-text">No vehicle data</div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                        <div class="vr-gc">
+                                            <div class="vr-gc-head">
+                                                <div>
+                                                    <div class="vr-gc-title">Rental Type Split</div>
+                                                    <div class="vr-gc-sub">By contract type</div>
+                                                </div>
+                                            </div>
+                                            <div class="vr-gc-body">
+                                                <t t-if="state.data.rental_type_split and state.data.rental_type_split.labels and state.data.rental_type_split.labels.length">
+                                                    <canvas id="vr-rentalPie"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <div class="vr-empty">
+                                                        <div class="vr-empty-icon">📊</div>
+                                                        <div class="vr-empty-text">No contracts yet</div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="vr-cg2">
+                                        <div class="vr-gc">
+                                            <div class="vr-gc-head">
+                                                <div>
+                                                    <div class="vr-gc-title">Top Vehicles by Revenue</div>
+                                                    <div class="vr-gc-sub">All-time paid</div>
+                                                </div>
+                                            </div>
+                                            <div class="vr-gc-body">
+                                                <t t-if="state.data.top_vehicles and state.data.top_vehicles.labels and state.data.top_vehicles.labels.length">
+                                                    <canvas id="vr-vehicleBar"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <div class="vr-empty">
+                                                        <div class="vr-empty-icon">🏆</div>
+                                                        <div class="vr-empty-text">No revenue data</div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                        <div class="vr-tc">
+                                            <div class="vr-tc-head">
+                                                <div class="vr-tc-title">Contracts Ending This Week</div>
+                                                <span class="vr-tbadge w">
+                                                    <t t-esc="(state.data.ending_soon and state.data.ending_soon.length) or 0"/>
+                                                    this week
+                                                </span>
+                                            </div>
+                                            <div class="vr-tw">
+                                                <t t-if="state.data.ending_soon and state.data.ending_soon.length">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Reference</th>
+                                                                <th>Customer</th>
+                                                                <th>Vehicle</th>
+                                                                <th>End Date</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr t-foreach="state.data.ending_soon" t-as="c" t-key="c.id"
+                                                                t-on-click="() => this.openContractRecord(c.id)">
+                                                                <td><b>
+                                                                    <t t-esc="c.reference"/>
+                                                                </b></td>
+                                                                <td>
+                                                                    <t t-esc="c.customer"/>
+                                                                </td>
+                                                                <td>
+                                                                    <t t-esc="c.vehicle"/>
+                                                                </td>
+                                                                <td>
+                                                                    <t t-esc="c.end_date"/>
+                                                                </td>
+                                                                <td>
+                                                                    <span t-att-class="'vr-badge '+statusBadgeClass(c.status)">
+                                                                    <t t-esc="statusLabel(c.status)"/>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </t>
+                                                <t t-else="">
+                                                    <div class="vr-empty">
+                                                        <div class="vr-empty-icon">✅</div>
+                                                        <div class="vr-empty-text">No contracts ending this week</div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                            <!-- ════ FLEET ════ -->
+                            <t t-if="state.sec==='fleet'">
+                                <div class="vr-section">
+                                    <div class="vr-kpi-row-4">
+                                        <div class="vr-kpi-card" t-on-click="() => this.viewFleetVehicleDetails('all')">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24"
+                                                         fill="none" stroke="currentColor" stroke-width="2"
+                                                         stroke-linecap="round"
+                                                         stroke-linejoin="round">
+                                                        <rect x="1" y="3" width="15" height="13"/>
+                                                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                                        <circle cx="5.5" cy="18.5" r="2.5"/>
+                                                        <circle cx="18.5" cy="18.5" r="2.5"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.total_vehicle or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Total Vehicles</div>
+                                        </div>
+                                        <div class="vr-kpi-card ks"
+                                             t-on-click="() => this.viewFleetVehicleDetails('available')">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon s">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M5 17H3a2 2 0 01-2-2v-4l2.5-6h13l2.5 6v4a2 2 0 01-2 2h-2"/>
+                                                        <circle cx="7.5" cy="17.5" r="2.5"/>
+                                                        <circle cx="16.5" cy="17.5" r="2.5"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.available_vehicle or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Available</div>
+                                        </div>
+                                        <div class="vr-kpi-card"
+                                             t-on-click="() => this.viewVehicleContractStatus('b_in_progress')">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24"
+                                                         fill="none" stroke="currentColor" stroke-width="2"
+                                                         stroke-linecap="round"
+                                                         stroke-linejoin="round">
+                                                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                                        <polyline points="14 2 14 8 20 8"/>
+                                                        <line x1="16" y1="13" x2="8" y2="13"/>
+                                                        <line x1="16" y1="17" x2="8" y2="17"/>
+                                                        <polyline points="10 9 9 9 8 9"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.in_progress_vehicle or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Rented Out</div>
+                                        </div>
+                                        <div class="vr-kpi-card kd"
+                                             t-on-click="() => this.viewFleetVehicleDetails('in_maintenance')">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon d">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.under_maintenance_vehicle or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">In Maintenance</div>
+                                        </div>
+                                    </div>
+                                    <div class="vr-cg2">
+                                        <div class="vr-gc">
+                                            <div class="vr-gc-head">
+                                                <div>
+                                                    <div class="vr-gc-title">Fleet Composition</div>
+                                                </div>
+                                            </div>
+                                            <div class="vr-gc-body">
+                                                <t t-if="state.data.fleet_comp and state.data.fleet_comp.labels and state.data.fleet_comp.labels.length">
+                                                    <canvas id="vr-fleetDonut"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <div class="vr-empty">
+                                                        <div class="vr-empty-icon">🚗</div>
+                                                        <div class="vr-empty-text">No data</div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                        <div class="vr-gc">
+                                            <div class="vr-gc-head">
+                                                <div>
+                                                    <div class="vr-gc-title">Top Vehicles by Revenue</div>
+                                                </div>
+                                            </div>
+                                            <div class="vr-gc-body">
+                                                <t t-if="state.data.top_vehicles and state.data.top_vehicles.labels and state.data.top_vehicles.labels.length">
+                                                    <canvas id="vr-vehicleBar"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <div class="vr-empty">
+                                                        <div class="vr-empty-icon">🏆</div>
+                                                        <div class="vr-empty-text">No revenue data</div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                            <!-- ════ CONTRACTS (includes Timeline + Availability Gantt) ════ -->
+                            <t t-if="state.sec==='contracts'">
+                                <div class="vr-section">
+                                    <!-- KPIs -->
+                                    <div class="vr-kpi-row-4">
+                                        <div class="vr-kpi-card ks"
+                                             t-on-click="() => this.viewVehicleContractStatus('b_in_progress')">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon s">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                                        <polyline points="14 2 14 8 20 8"/>
+                                                        <line x1="16" y1="13" x2="8" y2="13"/>
+                                                        <line x1="16" y1="17" x2="8" y2="17"/>
+                                                        <polyline points="10 9 9 9 8 9"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.in_progress_vehicle or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Active</div>
+                                            <div class="vr-kpi-sub">In progress</div>
+                                        </div>
+                                        <div class="vr-kpi-card"
+                                             t-on-click="() => this.viewVehicleContractStatus('c_return')">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24"
+                                                         fill="none" stroke="currentColor" stroke-width="2"
+                                                         stroke-linecap="round"
+                                                         stroke-linejoin="round">
+                                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.return_contract or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Returned</div>
+                                        </div>
+                                        <div class="vr-kpi-card kd"
+                                             t-on-click="() => this.viewVehicleContractStatus('d_cancel')">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon d">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                                                        <line x1="12" y1="9" x2="12" y2="13"/>
+                                                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.cancel_contract or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Cancelled</div>
+                                        </div>
+                                        <div class="vr-kpi-card kd" t-on-click="openExpiringToday">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon d">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <circle cx="12" cy="12" r="10"/>
+                                                        <polyline points="12 6 12 12 16 14"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.expiring_today or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Expiring Today</div>
+                                        </div>
+                                    </div>
+                                    <!-- Contract activity chart + rental split -->
+                                    <div class="vr-cg2">
+                                        <div class="vr-gc">
+                                            <div class="vr-gc-head">
+                                                <div>
+                                                    <div class="vr-gc-title">Contract Activity by Month</div>
+                                                    <div class="vr-gc-sub">New · Active · Closed (stacked)</div>
+                                                </div>
+                                            </div>
+                                            <div class="vr-gc-body"><canvas id="vr-contractTimeline" class="tall" /></div>
+                                        </div>
+                                        <div class="vr-gc">
+                                            <div class="vr-gc-head">
+                                                <div>
+                                                    <div class="vr-gc-title">Rental Type Distribution</div>
+                                                    <div class="vr-gc-sub">By contract category</div>
+                                                </div>
+                                            </div>
+                                            <div class="vr-gc-body">
+                                                <t t-if="state.data.rental_type_split and state.data.rental_type_split.labels and state.data.rental_type_split.labels.length">
+                                                    <canvas id="vr-rentalPie" class="tall"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <div class="vr-empty">
+                                                        <div class="vr-empty-icon">📊</div>
+                                                        <div class="vr-empty-text">No data</div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Ending soon table -->
+                                    <div class="vr-tc">
+                                        <div class="vr-tc-head">
+                                            <div class="vr-tc-title">Contracts Ending This Week</div>
+                                            <span class="vr-tbadge w">
+                                                <t t-esc="(state.data.ending_soon and state.data.ending_soon.length) or 0"/>
+                                                contracts
+                                            </span>
+                                        </div>
+                                        <div class="vr-tw">
+                                            <t t-if="state.data.ending_soon and state.data.ending_soon.length">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Reference</th>
+                                                            <th>Customer</th>
+                                                            <th>Vehicle</th>
+                                                            <th>End Date</th>
+                                                            <th>Value</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr t-foreach="state.data.ending_soon" t-as="c" t-key="c.id"
+                                                            t-on-click="() => this.openContractRecord(c.id)">
+                                                            <td>
+                                                                <b>
+                                                                    <t t-esc="c.reference"/>
+                                                                </b></td>
+                                                            <td>
+                                                                <t t-esc="c.customer"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="c.vehicle"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="c.end_date"/>
+                                                            </td>
+                                                            <td>
+                                                                <b>
+                                                                    <t t-esc="formatCurrency(c.rent)"/>
+                                                                </b>
+                                                            </td>
+                                                            <td>
+                                                                <span t-att-class="'vr-badge '+statusBadgeClass(c.status)">
+                                                                    <t t-esc="statusLabel(c.status)"/>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </t>
+                                            <t t-else="">
+                                                <div class="vr-empty">
+                                                    <div class="vr-empty-icon">✅</div>
+                                                    <div class="vr-empty-text">No contracts ending this week</div>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                            <!-- ════ CONTRACT GANTT ════ -->
+                            <t t-if="state.sec==='gantt'">
+                                <div class="vr-section vr-section-fill">
+                                    <div class="vr-gantt-section vr-gantt-fill">
+                                        <div class="vr-gantt-header">
+                                            <div class="vr-gantt-controls">
+                                                <span style="font-size:9.5px;color:var(--vrd-tx3);margin-right:4px;">Zoom:</span>
+                                                <button t-att-class="'vr-zoom-btn'+(state.ganttZoom==='day'?' active':'')"
+                                                        t-on-click="() => this.setGanttZoom('day')">Day</button>
+                                                <button t-att-class="'vr-zoom-btn'+(state.ganttZoom==='week'?' active':'')"
+                                                        t-on-click="() => this.setGanttZoom('week')">Week</button>
+                                                <button t-att-class="'vr-zoom-btn'+(state.ganttZoom==='month'?' active':'')"
+                                                        t-on-click="() => this.setGanttZoom('month')">Month</button>
+                                            </div>
+                                        </div>
+                                        <t t-if="state.data.gantt_data and state.data.gantt_data.length">
+                                            <div id="vr-ganttChart2" class="vr-gantt-chart-body"/>
+                                        </t>
+                                        <t t-else="">
+                                            <div class="vr-empty vr-gantt-chart-body" style="justify-content:center;">
+                                                <div class="vr-empty-icon">📅</div>
+                                                <div class="vr-empty-text">No contracts with dates found.
+                                                    <br/>Set start &amp; end dates on contracts to see them here.</div>
+                                            </div>
+                                        </t>
+                                        <div class="vr-gantt-legend">
+                                            <div class="vr-gantt-legend-item"><div class="vr-gantt-dot active"/>Active</div>
+                                            <div class="vr-gantt-legend-item"><div class="vr-gantt-dot upcoming"/>
+                                                Upcoming</div>
+                                            <div class="vr-gantt-legend-item"><div class="vr-gantt-dot completed"/>
+                                                Completed</div>
+                                            <div class="vr-gantt-legend-item"><div class="vr-gantt-dot cancelled"/>
+                                                Cancelled</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+
+                            <!-- ════ VEHICLE AVAILABILITY ════ -->
+                            <t t-if="state.sec==='availability'">
+                                <div class="vr-section vr-section-fill">
+                                    <div class="vr-gantt-section vr-gantt-fill">
+                                        <div id="vr-availChart2" class="vr-avail-chart-body"/>
+                                        <div class="vr-gantt-legend">
+                                            <div class="vr-gantt-legend-item"><div class="vr-gantt-dot booked"/>Booked /
+                                                In Contract</div>
+                                            <div class="vr-gantt-legend-item"><div class="vr-gantt-dot free"/>Available
+                                                (Free)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                            <!-- ════ FINANCIAL ════ -->
+                            <t t-if="state.sec==='financial'">
+                                <div class="vr-section">
+                                    <div class="vr-kpi-row-3">
+                                        <div class="vr-kpi-card" t-on-click="viewCustomerInvoices">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24"
+                                                         fill="none" stroke="currentColor" stroke-width="2"
+                                                         stroke-linecap="round"
+                                                         stroke-linejoin="round">
+                                                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                                        <polyline points="17 6 23 6 23 12"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="vr-kpi-trend up">Paid</span>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="formatCurrency(state.data.total_revenue)"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Total Revenue</div>
+                                            <div class="vr-kpi-sub">All paid invoices</div>
+                                        </div>
+                                        <div class="vr-kpi-card kw" t-on-click="viewPendingInvoices">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon w">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                                        <polyline points="14 2 14 8 20 8"/>
+                                                        <line x1="16" y1="13" x2="8" y2="13"/>
+                                                        <line x1="16" y1="17" x2="8" y2="17"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="vr-kpi-trend flat">Pending</span>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="formatCurrency(state.data.total_receivables)"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Receivables</div>
+                                            <div class="vr-kpi-sub">
+                                                <t t-esc="state.data.pending_invoices or 0"/>
+                                                invoices
+                                            </div>
+                                        </div>
+                                        <div class="vr-kpi-card kd" t-on-click="viewPendingInvoices">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon d">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                                                        <line x1="12" y1="9" x2="12" y2="13"/>
+                                                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="vr-kpi-trend down">Overdue</span>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.overdue_invoices or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Overdue Invoices</div>
+                                            <div class="vr-kpi-sub">Past due date</div>
+                                        </div>
+                                    </div>
+                                    <div class="vr-cg2">
+                                        <div class="vr-gc">
+                                            <div class="vr-gc-head">
+                                                <div>
+                                                    <div class="vr-gc-title">Revenue Trend</div>
+                                                    <div class="vr-gc-sub">vs Maintenance cost</div>
+                                                </div>
+                                                <div class="vr-togs">
+                                                    <button t-att-class="'vr-tog'+(state.revMode==='monthly'?' on':'')"
+                                                            t-on-click="() => this.toggleRevMode('monthly')">Monthly
+                                                    </button>
+                                                    <button t-att-class="'vr-tog'+(state.revMode==='quarterly'?' on':'')"
+                                                            t-on-click="() => this.toggleRevMode('quarterly')">Quarterly
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="vr-gc-body">
+                                                <canvas id="vr-revenueChart" class="tall"/>
+                                            </div>
+                                        </div>
+                                        <div class="vr-gc">
+                                            <div class="vr-gc-head">
+                                                <div>
+                                                    <div class="vr-gc-title">Receivables Aging</div>
+                                                    <div class="vr-gc-sub">Overdue buckets</div>
+                                                </div>
+                                            </div>
+                                            <div class="vr-gc-body">
+                                                <t t-if="state.data.aging">
+                                                    <canvas id="vr-agingChart" class="tall"/></t>
+                                                <t t-else="">
+                                                    <div class="vr-empty">
+                                                        <div class="vr-empty-icon">💳</div>
+                                                        <div class="vr-empty-text">No aging data</div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                            <!-- ════ CRM ════ -->
+                            <t t-if="state.sec==='crm'">
+                                <div class="vr-section">
+                                    <div class="vr-kpi-row-3">
+                                        <div class="vr-kpi-card" t-on-click="openLeads">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24"
+                                                         fill="none" stroke="currentColor" stroke-width="2"
+                                                         stroke-linecap="round"
+                                                         stroke-linejoin="round">
+                                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="(state.data.crm_data and state.data.crm_data.total_leads) or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Total Leads</div>
+                                            <div class="vr-kpi-sub">In pipeline</div>
+                                        </div>
+                                        <div class="vr-kpi-card ks" t-on-click="openLeads">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon s">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                                        <polyline points="17 6 23 6 23 12"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="(state.data.crm_data and state.data.crm_data.won_leads) or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Won Leads</div>
+                                            <div class="vr-kpi-sub">Converted</div>
+                                        </div>
+                                        <div class="vr-kpi-card" t-on-click="viewVehicleCustomers">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24"
+                                                         fill="none" stroke="currentColor" stroke-width="2"
+                                                         stroke-linecap="round"
+                                                         stroke-linejoin="round">
+                                                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                                                        <circle cx="9" cy="7" r="4"/>
+                                                        <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                                                        <path d="M16 3.13a4 4 0 010 7.75"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.customers or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Total Customers</div>
+                                            <div class="vr-kpi-sub">Registered</div>
+                                        </div>
+                                    </div>
+                                    <div class="vr-gc">
+                                        <div class="vr-gc-head">
+                                            <div>
+                                                <div class="vr-gc-title">Lead Pipeline by Stage</div>
+                                                <div class="vr-gc-sub">Count per CRM stage · click to open leads</div>
+                                            </div>
+                                        </div>
+                                        <div class="vr-gc-body" style="padding-bottom:16px;">
+                                            <t t-if="state.data.crm_data and state.data.crm_data.funnel and state.data.crm_data.funnel.length">
+                                                <canvas id="vr-crmFunnel" class="tall"/>
+                                            </t>
+                                            <t t-else="">
+                                                <div class="vr-empty">
+                                                    <div class="vr-empty-icon">◈</div>
+                                                    <div class="vr-empty-text">No leads yet</div>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                            <!-- ════ ALERTS ════ -->
+                            <t t-if="state.sec==='alerts'">
+                                <div class="vr-section">
+                                    <t t-set="al" t-value="state.data.alerts or {}"/>
+                                    <div class="vr-kpi-row-3">
+                                        <div class="vr-kpi-card kd" t-on-click="openExpiringToday">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon d">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                                                        <line x1="12" y1="9" x2="12" y2="13"/>
+                                                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="vr-kpi-trend down">Urgent</span>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="al.expiring_today or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Expiring Today</div>
+                                        </div>
+                                        <div class="vr-kpi-card kw" t-on-click="viewPendingInvoices">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon w">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                                        <polyline points="14 2 14 8 20 8"/>
+                                                        <line x1="16" y1="13" x2="8" y2="13"/>
+                                                        <line x1="16" y1="17" x2="8" y2="17"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="vr-kpi-trend flat">Overdue</span>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="al.overdue_invoices or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Overdue Invoices</div>
+                                        </div>
+                                        <div class="vr-kpi-card kd"
+                                             t-on-click="() => this.viewFleetVehicleDetails('in_maintenance')">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon d">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="al.under_maintenance or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">In Maintenance</div>
+                                        </div>
+                                    </div>
+                                    <div class="vr-kpi-row-3">
+                                        <div class="vr-kpi-card kw" t-on-click="openExpiringToday">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon w">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="al.expiring_week or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Expiring This Week</div>
+                                        </div>
+                                        <div class="vr-kpi-card kd"
+                                             t-on-click="() => this.viewVehicleContractStatus('d_cancel')">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon d">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                                                        <line x1="12" y1="9" x2="12" y2="13"/>
+                                                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="al.cancelled_contracts or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Cancelled</div>
+                                        </div>
+                                        <div class="vr-kpi-card" t-on-click="viewPendingInvoices">
+                                            <div class="vr-kpi-top">
+                                                <div class="vr-kpi-icon">
+                                                    <svg style="width:15px;height:15px;flex-shrink:0;"
+                                                         viewBox="0 0 24 24"
+                                                         fill="none" stroke="currentColor" stroke-width="2"
+                                                         stroke-linecap="round"
+                                                         stroke-linejoin="round">
+                                                        <circle cx="12" cy="12" r="10"/>
+                                                        <polyline points="12 6 12 12 16 14"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="vr-kpi-value">
+                                                <t t-esc="state.data.pending_invoices or 0"/>
+                                            </div>
+                                            <div class="vr-kpi-label">Pending Payments</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                        <!-- /vr-content -->
+                        <!-- ════ RIGHT PANEL ════ -->
+                        <div class="vr-right-panel">
+                            <t t-set="rp" t-value="state.data.right_panel or {}"/>
+                            <div class="vr-rp-title">🔴 Critical Alerts</div>
+                            <div t-att-class="'vr-rp-alert '+ ((rp.exp_today||0)>0 ? 'urgent' : 'ok')"
+                                 t-on-click="openExpiringToday">
+                                <div class="vr-rpa-title">
+                                    <t t-if="(rp.exp_today||0)>0">Contract Expiring Today</t>
+                                    <t t-else="">No Expiries Today</t>
+                                </div>
+                                <div class="vr-rpa-sub">
+                                    <t t-if="(rp.exp_today||0)>0">Requires immediate action</t>
+                                    <t t-else="">All clear ✓</t>
+                                </div>
+                                <div class="vr-rpa-val">
+                                    <t t-esc="rp.exp_today or 0"/>
+                                    contract(s)
+                                </div>
+                            </div>
+                            <div class="vr-rp-alert warn" t-if="(state.data.overdue_invoices or 0) > 0"
+                                 t-on-click="viewPendingInvoices">
+                                <div class="vr-rpa-title">Overdue Invoices</div>
+                                <div class="vr-rpa-sub">Past payment due date</div>
+                                <div class="vr-rpa-val">
+                                    <t t-esc="state.data.overdue_invoices or 0"/>
+                                    invoice(s)
+                                </div>
+                            </div>
+                            <div class="vr-rp-alert warn" t-if="(state.data.under_maintenance_vehicle or 0) > 0"
+                                 t-on-click="() => this.viewFleetVehicleDetails('in_maintenance')">
+                                <div class="vr-rpa-title">Vehicles In Service</div>
+                                <div class="vr-rpa-sub">Off-road vehicles</div>
+                                <div class="vr-rpa-val">
+                                    <t t-esc="state.data.under_maintenance_vehicle or 0"/>
+                                    vehicle(s)
+                                </div>
+                            </div>
+                            <div class="vr-rp-title">📅 Ending Soon</div>
+                            <div class="vr-rp-stat">
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">Today</div>
+                                    <div t-att-class="'vr-rp-v '+((rp.exp_today||0)>0?'d':'s')">
+                                        <t t-esc="rp.exp_today or 0"/>
+                                    </div>
+                                </div>
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">Tomorrow</div>
+                                    <div t-att-class="'vr-rp-v '+((rp.exp_tomorrow||0)>0?'w':'')">
+                                        <t t-esc="rp.exp_tomorrow or 0"/>
+                                    </div>
+                                </div>
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">This Week</div>
+                                    <div class="vr-rp-v b">
+                                        <t t-esc="rp.exp_week or 0"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="vr-rp-title">💰 Receivables Aging</div>
+                            <div class="vr-rp-stat">
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">0–30 days</div>
+                                    <div class="vr-rp-v w">
+                                        <t t-esc="formatCurrency(rp.aging_30 or 0)"/>
+                                    </div>
+                                </div>
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">31–60 days</div>
+                                    <div class="vr-rp-v">
+                                        <t t-esc="formatCurrency(rp.aging_60 or 0)"/>
+                                    </div>
+                                </div>
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">60+ days</div>
+                                    <div class="vr-rp-v d">
+                                        <t t-esc="formatCurrency(rp.aging_90p or 0)"/>
+                                    </div>
+                                </div>
+                                <div class="vr-rp-row"
+                                     style="border-top:1px solid var(--vrd-bdr);margin-top:4px;padding-top:6px;">
+                                    <div class="vr-rp-k" style="font-weight:700;color:var(--vrd-tx);">Total</div>
+                                    <div class="vr-rp-v b">
+                                        <t t-esc="formatCurrency(rp.total_recv or 0)"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="vr-rp-title">🔧 Maintenance</div>
+                            <div class="vr-rp-stat">
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">Overdue Jobs</div>
+                                    <div t-att-class="'vr-rp-v '+((rp.maint_overdue||0)>0?'d':'s')">
+                                        <t t-esc="rp.maint_overdue or 0"/>
+                                    </div>
+                                </div>
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">Due This Week</div>
+                                    <div class="vr-rp-v w">
+                                        <t t-esc="rp.maint_upcoming or 0"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="vr-rp-title">📊 Quick Stats</div>
+                            <div class="vr-rp-stat">
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">Active Contracts</div>
+                                    <div class="vr-rp-v s">
+                                        <t t-esc="rp.active_contracts or 0"/>
+                                    </div>
+                                </div>
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">Pending Renewals</div>
+                                    <div class="vr-rp-v w">
+                                        <t t-esc="rp.pending_renewals or 0"/>
+                                    </div>
+                                </div>
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">Total Invoices</div>
+                                    <div class="vr-rp-v b">
+                                        <t t-esc="state.data.customer_invoice or 0"/>
+                                    </div>
+                                </div>
+                                <div class="vr-rp-row">
+                                    <div class="vr-rp-k">Customers</div>
+                                    <div class="vr-rp-v">
+                                        <t t-esc="state.data.customers or 0"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /content-wrap -->
+                </div>
+                <!-- /vr-main -->
+            </t>
+        </div>
+    </t>
+</templates>

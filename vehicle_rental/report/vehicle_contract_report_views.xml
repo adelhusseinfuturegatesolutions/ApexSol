@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="vehicle_contract_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page-content" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                        <style>
+                            :root {
+                            --primary: #1e3a8a; /* Deep Professional Blue */
+                            --bg-light: #f8fafc; /* Light Section Background */
+                            --border: #e2e8f0; /* Subtle Borders */
+                            --text-main: #1f2937; /* Primary Text */
+                            --text-muted: #6b7280; /* Muted Labels */
+                            --white: #ffffff;
+
+                            --page-width: 210mm;
+                            --page-padding: 12mm;
+                            --spacing-sm: 8px;
+                            --spacing-md: 16px;
+                            --spacing-lg: 24px;
+                            }
+
+                            * {
+                            box-sizing: border-box;
+                            margin: 0;
+                            padding: 0;
+                            -webkit-print-color-adjust: exact !important;
+                            print-color-adjust: exact !important;
+                            }
+
+                            body {
+                            font-family: 'Inter', Helvetica, Arial, sans-serif;
+                            color: var(--text-main);
+                            font-size: 11px;
+                            line-height: 1.4;
+                            }
+
+                            .label {
+                            font-size: 11px;
+                            text-transform: uppercase;
+                            color: var(--text-muted);
+                            font-weight: 600;
+                            letter-spacing: 0.5px;
+                            margin-bottom: 2px;
+                            display: block;
+                            }
+
+                            .value {
+                            font-size: 12px;
+                            font-weight: 500;
+                            color: var(--text-main);
+                            min-height: 16px;
+                            }
+
+                            .row:after {
+                            content: "";
+                            display: table;
+                            clear: both;
+                            }
+
+                            .col {
+                            float: left;
+                            width: 48%;
+                            margin-right: 4%;
+                            }
+
+                            .col:last-child {
+                            margin-right: 0;
+                            }
+
+                            .grid-2:after,
+                            .grid-3:after,
+                            .grid-4:after {
+                            content: "";
+                            display: table;
+                            clear: both;
+                            }
+
+                            .grid-2 > div {
+                            float: left;
+                            width: 48%;
+                            margin-right: 4%;
+                            margin-bottom: 10px;
+                            }
+
+                            .grid-2 > div:nth-child(2n) {
+                            margin-right: 0;
+                            }
+
+                            .grid-3 > div {
+                            float: left;
+                            width: 31.33%;
+                            margin-right: 3%;
+                            margin-bottom: 10px;
+                            }
+
+                            .grid-3 > div:nth-child(3n) {
+                            margin-right: 0;
+                            }
+
+                            .grid-4 > div {
+                            float: left;
+                            width: 23%;
+                            margin-right: 2.66%;
+                            margin-bottom: 10px;
+                            }
+
+                            .grid-4 > div:nth-child(4n) {
+                            margin-right: 0;
+                            }
+
+                            .card {
+                            border: 1px solid var(--border);
+                            border-radius: 6px;
+                            padding: 10px;
+                            overflow: hidden;
+                            }
+
+                            .card:after {
+                            content: "";
+                            display: table;
+                            clear: both;
+                            }
+
+                            table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            font-size: 10px;
+                            margin-bottom: 10px;
+                            }
+
+                            td {
+                            padding: 6px 8px;
+                            border-bottom: 1px solid var(--border);
+                            color: var(--text-main);
+                            }
+
+                            .total-row td {
+                            background-color: #eff6ff;
+                            color: var(--primary);
+                            font-weight: 700;
+                            border-top: 2px solid var(--border);
+                            }
+
+                            .card-header {
+                            font-weight: 700;
+                            color: var(--primary);
+                            margin-bottom: 8px;
+                            border-bottom: 1px solid #ccc;
+                            padding-bottom: 4px;
+                            }
+
+                            .card-content {
+                            margin-top: 8px;
+                            }
+
+                            .two-col-card {
+                            width: 48%;
+                            float: left;
+                            margin-right: 4%;
+                            }
+
+                            .two-col-card:last-child {
+                            margin-right: 0;
+                            }
+
+                            .image-placeholder {
+                            height: 80px;
+                            border: 2px dashed var(--border);
+                            background: var(--bg-light);
+                            color: var(--text-muted);
+                            border-radius: 6px;
+                            font-weight: 500;
+                            text-align: center;
+                            line-height: 80px;
+                            }
+
+                            .terms-box {
+                            border: 1px solid var(--border);
+                            padding: 10px;
+                            font-size: 9px;
+                            text-align: justify;
+                            color: #4b5563;
+                            border-radius: 6px;
+                            height: 100px;
+                            overflow: hidden;
+                            }
+
+                            .terms-box p {
+                            margin-bottom: 8px;
+                            }
+
+                            .checkbox-item {
+                            margin-bottom: 4px;
+                            overflow: hidden;
+                            }
+
+                            .checkbox-box {
+                            width: 12px;
+                            height: 12px;
+                            border: 1px solid var(--text-muted);
+                            border-radius: 2px;
+                            float: left;
+                            margin-right: 8px;
+                            margin-top: 2px;
+                            }
+
+                            .checkbox-item span {
+                            display: block;
+                            overflow: hidden;
+                            }
+
+                            .inline-space {
+                            margin: 0 8px;
+                            }
+
+                            @media print {
+                            body {
+                            background: none;
+                            margin: 0;
+                            }
+                        </style>
+
+                        <t t-set="index" t-value="1"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px;">
+                            0<t t-esc="index"/>. Customer Information
+                        </h5>
+                        <div class="grid-3 section">
+                            <div>
+                                <span class="label">Customer</span>
+                                <div class="value">
+                                    <span t-field="doc.customer_id"/>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="label">Phone Number</span>
+                                <div class="value">
+                                    <span t-field="doc.customer_phone"/>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="label">Email Address</span>
+                                <div class="value">
+                                    <span t-field="doc.customer_email"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <t t-set="index" t-value="index + 1"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px;">
+                            0<span t-esc="index"/>. Schedule &amp; Location
+                        </h5>
+                        <div style="overflow: hidden;">
+                            <div class="two-col-card">
+                                <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px;">
+                                    PICK-UP
+                                </h5>
+                                <div class="grid-2">
+                                    <div>
+                                        <span class="label">Date</span>
+                                        <div class="value">
+                                            <span t-field="doc.start_date"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">Location</span>
+                                        <div class="value">
+                                            <t t-if="doc.pick_up_street">
+                                                <span t-field="doc.pick_up_street"/>
+                                                <br/>
+                                            </t>
+                                            <t t-if="doc.pick_up_street2">
+                                                <span t-field="doc.pick_up_street2"/>
+                                                <br/>
+                                            </t>
+                                            <t t-if="doc.pick_up_city">
+                                                <span t-field="doc.pick_up_city" class="me-1"/>
+                                                <span t-field="doc.pick_up_state_id.name" class="me-1"/>
+                                                <span t-field="doc.pick_up_zip"/>
+                                                <br/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="two-col-card">
+                                <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px;">
+                                    DROP-OFF
+                                </h5>
+                                <div class="grid-2">
+                                    <div>
+                                        <span class="label">Date</span>
+                                        <div class="value">
+                                            <span t-field="doc.end_date"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">Location</span>
+                                        <div class="value">
+                                            <t t-if="doc.drop_off_street">
+                                                <span t-field="doc.drop_off_street"/>
+                                                <br/>
+                                            </t>
+                                            <t t-if="doc.drop_off_street2">
+                                                <span t-field="doc.drop_off_street2"/>
+                                                <br/>
+                                            </t>
+                                            <t t-if="doc.drop_off_city">
+                                                <span t-field="doc.drop_off_city" class="me-1"/>
+                                                <span t-field="doc.drop_off_state_id.name" class="me-1"/>
+                                                <span t-field="doc.drop_off_zip"/>
+                                                <br/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <t t-set="index" t-value="index + 1"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px;">
+                            0<span t-esc="index"/>. Vehicle Details
+                        </h5>
+                        <div class="grid-3 section">
+                            <div>
+                                <span class="label">Vehicle</span>
+                                <div class="value">
+                                    <span t-field="doc.vehicle_id.name"/>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="label">License Plate</span>
+                                <div class="value">
+                                    <span t-field="doc.vehicle_id.license_plate"/>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="label">Model Year</span>
+                                <div class="value">
+                                    <span t-field="doc.vehicle_model_year"/>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="label">Last Odometer</span>
+                                <div class="value">
+                                    <span t-field="doc.last_odometer" class="me-1"/>
+                                    <span t-field="doc.odometer_unit"/>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="label">Fuel Type</span>
+                                <div class="value">
+                                    <span t-field="doc.fuel_type"/>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="label">Transmission</span>
+                                <div class="value">
+                                    <span t-field="doc.transmission"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <t t-set="index" t-value="index + 1" t-if="doc.is_driver_required"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px;"
+                            t-if="doc.is_driver_required">
+                            0<span t-esc="index"/>. Driver Details
+                        </h5>
+                        <div class="grid-4 section" t-if="doc.is_driver_required">
+                            <div>
+                                <span class="label">Driver Required?</span>
+                                <div class="value">
+                                    <t t-if="doc.is_driver_required">Yes</t>
+                                    <t t-else="">No</t>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="label">Charge Type</span>
+                                <div class="value">
+                                    <span t-field="doc.driver_charge_type"/>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="label">Driver Name</span>
+                                <div class="value">
+                                    <span t-field="doc.driver_id.name"/>
+                                </div>
+                            </div>
+                            <div t-if="doc.driver_charge_type == 'excluding'">
+                                <span class="label">Driver Charges</span>
+                                <div class="value">
+                                    <span t-field="doc.driver_charge"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <t t-set="index" t-value="index + 1"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px; margin-top: 5px;">
+                            0<span t-esc="index"/>. Rent &amp; Payment Information
+                        </h5>
+                        <div style="overflow: hidden;">
+                            <div class="two-col-card">
+                                <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px;">
+                                    Rent Information
+                                </h5>
+                                <div class="grid-2">
+                                    <div>
+                                        <span class="label">Rent Type</span>
+                                        <div class="value">
+                                            <span t-field="doc.rent_type"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">Rent per</span>
+                                        <div class="value">
+                                            <t t-esc="doc.rent_type.capitalize() if doc.rent_type else ''"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">Total
+                                            <t t-esc="doc.rent_type.capitalize() if doc.rent_type else ''"/>
+                                        </span>
+                                        <div class="value">
+                                            <span t-if="doc.rent_type in ('hour', 'days')"
+                                                  t-field="doc.total_days"/>
+                                            <t t-elif="doc.rent_type in ('week', 'month', 'year')"
+                                               t-esc="'%.2f' % doc.total_days"/>
+                                            <span t-elif="doc.rent_type in ['km', 'mi']"
+                                                  t-field="doc.minimum_km_per_day"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">Total</span>
+                                        <div class="value">
+                                            <span t-field="doc.total_vehicle_rent"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="two-col-card">
+                                <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px;">
+                                    Payment Information
+                                </h5>
+                                <div class="grid-2">
+                                    <div>
+                                        <span class="label">Payment Type</span>
+                                        <div class="value">
+                                            <span t-field="doc.payment_type"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">Invoice Item</span>
+                                        <div class="value">
+                                            <span t-field="doc.invoice_item_id"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">If Any Deposit</span>
+                                        <div class="value">
+                                            <t t-if="doc.if_any_deposit">Yes</t>
+                                            <t t-else="">No</t>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">Deposit Journal</span>
+                                        <div class="value">
+                                            <span t-field="doc.journal_id" class="me-1"/>
+                                            <span t-field="doc.deposit" t-if="doc.deposit"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <t t-set="index" t-value="index + 1"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px; margin-top: 5px;">
+                            0<span t-esc="index"/>. Additional Charges &amp; Company Information
+                        </h5>
+                        <div style="overflow: hidden;">
+                            <div class="two-col-card">
+                                <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px;">
+                                    Additional Charges
+                                </h5>
+                                <div class="grid-2">
+                                    <div>
+                                        <span class="label">If Any Extra Charges</span>
+                                        <div class="value">
+                                            <t t-if="doc.is_any_extra_charges">Yes</t>
+                                            <t t-else="">No</t>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">
+                                            <span class="label" t-if="doc.is_any_extra_charges">Total Extra
+                                                <t t-esc="doc.rent_type.capitalize() if doc.rent_type else ''"/>
+                                            </span>
+                                        </span>
+                                        <div class="value">
+                                            <span t-if="doc.is_any_extra_charges">
+                                                <t t-if="doc.rent_type == 'hour'">
+                                                    <span t-field="doc.total_extra_hour"/>
+                                                </t>
+                                                <t t-if="doc.rent_type == 'days'">
+                                                    <span t-field="doc.total_extra_days"/>
+                                                </t>
+                                                <t t-if="doc.rent_type == 'week'">
+                                                    <span t-field="doc.total_extra_week"/>
+                                                </t>
+                                                <t t-if="doc.rent_type == 'month'">
+                                                    <span t-field="doc.total_extra_month"/>
+                                                </t>
+                                                <t t-if="doc.rent_type == 'year'">
+                                                    <span t-field="doc.total_extra_year"/>
+                                                </t>
+                                                <t t-if="doc.rent_type == 'km'">
+                                                    <span t-field="doc.total_extra_km"/>
+                                                </t>
+                                                <t t-if="doc.rent_type == 'mi'">
+                                                    <span t-field="doc.total_extra_mi"/>
+                                                </t>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">
+                                            <span class="label">Extra Charge per
+                                                <t t-esc="doc.rent_type.capitalize() if doc.rent_type else ''"/>
+                                            </span>
+                                        </span>
+                                        <div class="value">
+                                            <span t-field="doc.extra_charge"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">Total Extra Charges</span>
+                                        <div class="value">
+                                            <span t-field="doc.total_extra_charges"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="two-col-card">
+                                <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px;">
+                                    Company Information
+                                </h5>
+                                <div class="grid-2">
+                                    <div>
+                                        <span class="label">Company</span>
+                                        <div class="value">
+                                            <span t-field="doc.company_id"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="label">Responsible</span>
+                                        <div class="value">
+                                            <span t-field="doc.responsible_id"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <t t-set="index" t-value="index + 1" t-if="doc.vehicle_payment_option_ids"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px; margin-top: 5px;"
+                            t-if="doc.vehicle_payment_option_ids">
+                            0<span t-esc="index"/>. Vehicle Payment Details
+                        </h5>
+                        <table class="table table-borderless table-sm" style="font-size: 12px;"
+                               t-if="doc.vehicle_payment_option_ids">
+                            <tr style="border-bottom: 2px solid #ccc; font-size: 14px;">
+                                <td style="padding: 2px;">
+                                    <strong>Name</strong>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <strong>Payment Date</strong>
+                                </td>
+                                <td style="padding: 2px; text-align: right;">
+                                    <strong>Payment Amount</strong>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <strong>Invoice</strong>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <strong>Payment Status</strong>
+                                </td>
+                            </tr>
+                            <tr t-foreach="doc.vehicle_payment_option_ids" t-as="payment"
+                                style="border-bottom: 1px solid #cdc2c2;">
+                                <td style="padding: 2px;">
+                                    <span t-field="payment.name"/>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <span t-field="payment.payment_date"/>
+                                </td>
+                                <td style="padding: 2px; text-align: right;">
+                                    <span t-field="payment.payment_amount"/>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <span t-field="payment.invoice_id"/>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <span t-field="payment.payment_state"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <t t-set="index" t-value="index + 1" t-if="doc.insurance_policy_ids"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px; margin-top: 5px;"
+                            t-if="doc.insurance_policy_ids">
+                            0<span t-esc="index"/>. Insurance
+                        </h5>
+                        <table class="table table-borderless table-sm" style="font-size: 12px;"
+                               t-if="doc.insurance_policy_ids">
+                            <tr style="border-bottom: 2px solid #ccc; font-size: 14px;">
+                                <td style="padding: 2px;">
+                                    <strong>Policy Number</strong>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <strong>Name</strong>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <strong>Description</strong>
+                                </td>
+                                <td style="padding: 2px; text-align: right;">
+                                    <strong>Policy Amount</strong>
+                                </td>
+                            </tr>
+                            <tr t-foreach="doc.insurance_policy_ids" t-as="policy"
+                                style="border-bottom: 1px solid #cdc2c2;">
+                                <td style="padding: 2px;">
+                                    <span t-field="policy.policy_number"/>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <span t-field="policy.policy_name"/>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <span t-field="policy.description"/>
+                                </td>
+                                <td style="padding: 2px; text-align: right;">
+                                    <span t-field="policy.policy_amount"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <t t-set="index" t-value="index + 1" t-if="doc.extra_service_ids"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px; margin-top: 5px;"
+                            t-if="doc.extra_service_ids">
+                            0<span t-esc="index"/>. Extra Services
+                        </h5>
+                        <table class="table table-borderless table-sm" style="font-size: 12px;"
+                               t-if="doc.extra_service_ids">
+                            <tr style="border-bottom: 2px solid #ccc; font-size: 14px;">
+                                <td style="padding: 2px;">
+                                    <strong>Product</strong>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <strong>Description</strong>
+                                </td>
+                                <td style="padding: 2px; text-align: right;">
+                                    <strong>Qty</strong>
+                                </td>
+                                <td style="padding: 2px; text-align: right;">
+                                    <strong>Amount</strong>
+                                </td>
+                                <td style="padding: 2px; text-align: right;">
+                                    <strong>Sub Total</strong>
+                                </td>
+                            </tr>
+                            <tr t-foreach="doc.extra_service_ids" t-as="extra"
+                                style="border-bottom: 1px solid #cdc2c2;">
+                                <td style="padding: 2px;">
+                                    <span t-field="extra.product_id"/>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <span t-field="extra.description"/>
+                                </td>
+                                <td style="text-align: right; padding: 2px;">
+                                    <span t-field="extra.product_qty"/>
+                                </td>
+                                <td style="text-align: right; padding: 2px;">
+                                    <span t-field="extra.amount"/>
+                                </td>
+                                <td style="text-align: right; padding: 2px;">
+                                    <span t-field="extra.total_service_charge"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <t t-set="index" t-value="index + 1" t-if="doc.rental_vehicle_image_ids"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px; margin-top: 5px;"
+                            t-if="doc.rental_vehicle_image_ids">
+                            <span t-esc="index"/>. Vehicle Images
+                        </h5>
+                        <table class="table table-borderless" style="font-size: 12px; margin: 0px;"
+                               t-if="doc.rental_vehicle_image_ids">
+                            <t t-set="img_count" t-value="0"/>
+                            <tr>
+                                <td>
+                                    <t t-foreach="doc.rental_vehicle_image_ids" t-as="img">
+                                        <t t-set="img_count" t-value="img_count + 1"/>
+                                        <div style="display: inline-block; margin: 5px;">
+                                            <t t-if="img.avatar">
+                                                <img t-att-src="image_data_uri(img.avatar)"
+                                                     style="width: 193px; height: 193px;"/>
+                                            </t>
+                                        </div>
+                                        <t t-if="img_count % 5 == 0">
+                                            <br/>
+                                        </t>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <t t-set="index" t-value="index + 1" t-if="doc.vehicle_damage_image_ids"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px; margin-top: 5px;"
+                            t-if="doc.damage_amount or doc.vehicle_damage_image_ids">
+                            <span t-esc="index"/>. Vehicle Damages
+                        </h5>
+                        <div class="grid-3 section" t-if="doc.damage_amount">
+                            <div>
+                                <span class="label">Total Damage Amount</span>
+                                <div class="value">
+                                    <span t-field="doc.damage_amount"/>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="label">Descriptions</span>
+                                <div class="value">
+                                    <span t-field="doc.description"/>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-borderless" style="font-size: 12px; margin: 0px;"
+                               t-if="doc.vehicle_damage_image_ids">
+                            <t t-set="img_count" t-value="0"/>
+                            <tr>
+                                <td>
+                                    <t t-foreach="doc.vehicle_damage_image_ids" t-as="img">
+                                        <t t-set="img_count" t-value="img_count + 1"/>
+                                        <div style="display: inline-block; margin: 5px;">
+                                            <t t-if="img.avatar">
+                                                <img t-att-src="image_data_uri(img.avatar)"
+                                                     style="width: 193px; height: 193px;"/>
+                                            </t>
+                                        </div>
+                                        <t t-if="img_count % 5 == 0">
+                                            <br/>
+                                        </t>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <t t-set="index" t-value="index + 1" t-if="doc.cancellation_policy_id"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px; margin-top: 5px;"
+                            t-if="doc.cancellation_policy_id">
+                            <span t-esc="index"/>. Cancellation Policy
+                        </h5>
+                        <div class="grid-3 section" t-if="doc.cancellation_policy_id">
+                            <div t-if="doc.cancellation_policy_id">
+                                <span class="label">Policy</span>
+                                <div class="value">
+                                    <span t-field="doc.cancellation_policy_id"/>
+                                </div>
+                            </div>
+                            <div t-if="doc.terms_and_conditions">
+                                <span class="label">Terms &amp; Conditions</span>
+                                <div class="value">
+                                    <span t-field="doc.terms_and_conditions"/>
+                                </div>
+                            </div>
+                            <div t-if="doc.cancellation_reason">
+                                <span class="label">Cancellation Reasons</span>
+                                <div class="value">
+                                    <span t-field="doc.cancellation_reason"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <t t-set="index" t-value="index + 1" t-if="doc.rental_agreement_terms_id"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px; margin-top: 5px;"
+                            t-if="doc.rental_agreement_terms_id">
+                            <span t-esc="index"/>. Terms &amp; Condition
+                        </h5>
+                        <table class="table table-borderless" t-if="doc.rental_agreement_terms_id"
+                               style="font-size: 12px; width: 100%; margin-top: 15px; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 2px;">
+                                    <strong>Rental Agreement</strong>
+                                    <span t-field="doc.rental_agreement_terms_id"/>
+                                </td>
+                            </tr>
+                            <tr t-if="doc.rental_terms">
+                                <td style="padding: 2px;">
+                                    <strong>Terms &amp; Conditions</strong>
+                                    <br/>
+                                    <span t-field="doc.rental_terms"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <t t-set="index" t-value="index + 1"/>
+                        <h5 style="font-size: 14px; padding: 2px; font-weight:bold; border-bottom:1px solid; margin-bottom: 5px;">
+                            <span t-esc="index"/>. Self Declaration
+                        </h5>
+                        <div class="card">
+                            <div class="grid-3 section">
+                                <div t-if="doc.reference_no">
+                                    <span class="label">Reference Number</span>
+                                    <div class="value">
+                                        <span t-field="doc.reference_no"/>
+                                    </div>
+                                </div>
+                                <div t-if="doc.customer_id">
+                                    <span class="label">Full Name</span>
+                                    <div class="value">
+                                        <span t-field="doc.customer_id"/>
+                                    </div>
+                                </div>
+                                <div t-if="doc.date">
+                                    <span class="label">Date</span>
+                                    <div class="value">
+                                        <span t-field="doc.date"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid-2">
+                                <div>
+                                    <div class="checkbox-item">
+                                        <span>☐ I possess a valid driver's license.</span>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <span>☐ I agree to all traffic laws.</span>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <span>☐ I acknowledge damage responsibility.</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="checkbox-item">
+                                        <span>☐ I will not operate under influence.</span>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <span>☐ I accept penalties for late return.</span>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <span>☐ I have inspected the vehicle.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid-2">
+                                <div t-if="doc.customer_id">
+                                    I,
+                                    <strong>
+                                        <span t-field="doc.customer_id"/>
+                                    </strong>
+                                    ,
+                                    hereby declare that:
+                                </div>
+                                <div t-if="doc.customer_id">
+                                    <span class="label">Signature</span>
+                                    <div class="value">
+                                        <t t-if="doc.signature">
+                                            <img t-att-src="image_data_uri(doc.signature)" att="Logo"
+                                                 style="width: 100px; height: 40px;"/>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="action_vehicle_contract_report" model="ir.actions.report">
+        <field name="name">Vehicle Contract</field>
+        <field name="model">vehicle.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">vehicle_rental.vehicle_contract_report_template</field>
+        <field name="report_file">vehicle_rental.vehicle_contract_report_template</field>
+        <field name="binding_model_id" ref="model_vehicle_contract"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

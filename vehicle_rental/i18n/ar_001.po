@@ -1,0 +1,4907 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* vehicle_rental
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-12 12:43+0000\n"
+"PO-Revision-Date: 2026-02-12 12:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__rental_contract_count
+msgid " Contracts"
+msgstr "العقود"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__currency_id
+msgid " Currency"
+msgstr "عملة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__deposit_payment_state
+msgid " Payment State"
+msgstr "دولة الدفع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__authorized_sign_by_id
+msgid " Sign By"
+msgstr "التوقيع بواسطة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__drop_off_state_id
+msgid " State"
+msgstr "ولاية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid ""
+"$0 -\n"
+"                                    $50"
+msgstr ""
+"$0 -\n"
+"                                    50 دولارًا"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "$100+"
+msgstr "100 دولار+"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid ""
+"$50\n"
+"                                    - $100"
+msgstr ""
+"50 دولارًا\n"
+"                                    - 100 دولار"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "%1 hidden"
+msgstr "%1 مخفي"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "%1 shown"
+msgstr "تم عرض %1"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "(829)-386-3277"
+msgstr "(829)-386-3277"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "(incl"
+msgstr "(بما في ذلك"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ""
+",\n"
+"                                    hereby declare that:"
+msgstr ""
+",\n"
+"                                    أعلن بموجب هذا أن:"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_contract_scratch_customer_sign_template
+msgid ""
+",\n"
+"                    please review the scratch report below and provide your approval by signing."
+msgstr ""
+",\n"
+"                    يرجى مراجعة تقرير الصفر أدناه وتقديم موافقتك عن طريق التوقيع."
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Additional Charges &amp; Company Information"
+msgstr ". رسوم إضافية وأمبير. معلومات الشركة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Cancellation Policy"
+msgstr ". سياسة الإلغاء"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Customer Information"
+msgstr ". معلومات العملاء"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Driver Details"
+msgstr ". تفاصيل السائق"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Extra Services"
+msgstr ". خدمات إضافية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Insurance"
+msgstr ". تأمين"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Rent &amp; Payment Information"
+msgstr ". الإيجار &; معلومات الدفع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Schedule &amp; Location"
+msgstr ". الجدول الزمني & أمبير؛ موقع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Self Declaration"
+msgstr ". إعلان الذات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Terms &amp; Condition"
+msgstr ". الشروط والأحكام حالة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Vehicle Damages"
+msgstr ". أضرار المركبات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Vehicle Details"
+msgstr ". تفاصيل المركبة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Vehicle Images"
+msgstr ". صور المركبات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ". Vehicle Payment Details"
+msgstr ". تفاصيل دفع المركبة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid ""
+"2+\n"
+"                                    Seats"
+msgstr ""
+"2+\n"
+"                                    مقاعد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "2024 Nissan Versa"
+msgstr "نيسان فيرسا 2024"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid ""
+"4+\n"
+"                                    Seats"
+msgstr ""
+"4+\n"
+"                                    مقاعد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid ""
+"5+\n"
+"                                    Seats"
+msgstr ""
+"5+\n"
+"                                    مقاعد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid ""
+"7+\n"
+"                                    Seats"
+msgstr ""
+"7+\n"
+"                                    مقاعد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_booking_enquiry_success
+msgid ""
+"<br/>\n"
+"                                        has been successfully submitted."
+msgstr ""
+"<br/>\n"
+"                                        تم تقديمه بنجاح."
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_request_inherit_form_view
+msgid ""
+"<br/>\n"
+"                                Service Charges:"
+msgstr ""
+"<br/>\n"
+"                                رسوم الخدمة:"
+
+#. module: vehicle_rental
+#: model:mail.template,body_html:vehicle_rental.scratch_report_review_signature_required_mail_template
+msgid ""
+"<h4>\n"
+"                    Dear\n"
+"                    <strong>\n"
+"                        <t t-out=\"object.customer_id.name\"/>\n"
+"                    </strong>\n"
+"                    ,\n"
+"                </h4>\n"
+"                <hr style=\"margin: 0; padding: 0;\"/>\n"
+"                <h4>\n"
+"                    Greetings from\n"
+"                    <strong>\n"
+"                        <t t-out=\"object.company_id.name\"/>\n"
+"                    </strong>\n"
+"                </h4>\n"
+"                <p>\n"
+"                    This email is regarding your recently completed rental contract\n"
+"                    <strong>\n"
+"                        <t t-out=\"object.reference_no\"/>\n"
+"                    </strong>\n"
+"                    for the\n"
+"                    <strong>\n"
+"                        <t t-out=\"object.vehicle_id.name\"/>\n"
+"                    </strong>\n"
+"                    .\n"
+"                </p>\n"
+"                <p>\n"
+"                    During the return inspection, our team identified scratch damage on the vehicle. A detailed Scratch\n"
+"                    Report has been prepared.\n"
+"                </p>\n"
+"                <p>\n"
+"                    To review the scratch details and provide your confirmation signature, please click the button\n"
+"                    below:\n"
+"                </p>\n"
+"\n"
+"                <a t-att-href=\"object.get_scratch_report_url()\" target=\"_blank\" class=\"btn btn-primary\">\n"
+"                    View &amp; Sign Scratch Report\n"
+"                </a>\n"
+"                <p>\n"
+"                    Kindly review the report carefully and submit your digital signature to complete the verification\n"
+"                    process. This will allow us to proceed with the final settlement as per the rental agreement terms.\n"
+"                </p>\n"
+"                <p>\n"
+"                    If you have any questions or require clarification regarding the report, please contact us at your\n"
+"                    convenience.\n"
+"                </p>\n"
+"                <p>\n"
+"                    Thank you for your prompt cooperation.\n"
+"                </p>\n"
+"                <hr style=\"margin: 0; padding: 0;\"/>\n"
+"                <div>\n"
+"                    <strong>\n"
+"                        Best regards,\n"
+"                        <br/>\n"
+"                        <t t-out=\"object.responsible_id.name\"/>\n"
+"                    </strong>\n"
+"                    <br/>\n"
+"                    <t t-out=\"object.company_id.name\"/>\n"
+"                    <br/>\n"
+"                    <t t-out=\"object.company_id.phone\"/>\n"
+"                    <br/>\n"
+"                    <t t-out=\"object.company_id.email\"/>\n"
+"                    <br/>\n"
+"                    <t t-out=\"object.company_id.website\"/>\n"
+"                </div>\n"
+"            "
+msgstr ""
+"<h4>\n"
+"                    عزيزي\n"
+"                    <strong>\n"
+"<t t-out=\"object.customer_id.name\"></t>\n"
+"</strong>\n"
+"                    ,\n"
+"                </h4>\n"
+"<hr style=\"margin: 0; padding: 0;\"/>\n"
+"<h4>\n"
+"                    تحيات\n"
+"                    <strong>\n"
+"<t t-out=\"object.company_id.name\"></t>\n"
+"</strong>\n"
+"</h4>\n"
+"<p>\n"
+"                    تتعلق هذه الرسالة الإلكترونية بعقد الإيجار المكتمل مؤخرًا\n"
+"                    <strong>\n"
+"<t t-out=\"object.reference_no\"></t>\n"
+"</strong>\n"
+"                    ل\n"
+"                    <strong>\n"
+"<t t-out=\"object.vehicle_id.name\"></t>\n"
+"</strong>\n"
+"                    .\n"
+"                </p>\n"
+"<p>\n"
+"                    أثناء فحص الإرجاع، حدد فريقنا وجود خدش في السيارة. خدش مفصل\n"
+"                    تم إعداد التقرير.\n"
+"                </p>\n"
+"<p>\n"
+"                    لمراجعة تفاصيل التسويد وتقديم توقيع التأكيد الخاص بك، يرجى النقر فوق الزر\n"
+"                    أدناه:\n"
+"                </p>\n"
+"<a class=\"btn btn-primary\" t-att-href=\"object.get_scratch_report_url()\" target=\"_blank\">\n"
+"                    عرض وتوقيع تقرير الصفر\n"
+"                </a>\n"
+"<p>\n"
+"                    يرجى مراجعة التقرير بعناية وإرسال توقيعك الرقمي لإكمال عملية التحقق\n"
+"                    عملية. سيسمح لنا ذلك بالمضي قدمًا في التسوية النهائية وفقًا لشروط اتفاقية الإيجار.\n"
+"                </p>\n"
+"<p>\n"
+"                    إذا كان لديك أي أسئلة أو كنت بحاجة إلى توضيح بخصوص التقرير، يرجى الاتصال بنا على\n"
+"                    الراحة.\n"
+"                </p>\n"
+"<p>\n"
+"                    نشكركم على تعاونكم السريع.\n"
+"                </p>\n"
+"<hr style=\"margin: 0; padding: 0;\"/>\n"
+"<div>\n"
+"<strong>\n"
+"                        أطيب التحيات،\n"
+"                        <br/>\n"
+"<t t-out=\"object.responsible_id.name\"></t>\n"
+"</strong>\n"
+"<br/>\n"
+"<t t-out=\"object.company_id.name\"></t>\n"
+"<br/>\n"
+"<t t-out=\"object.company_id.phone\"></t>\n"
+"<br/>\n"
+"<t t-out=\"object.company_id.email\"></t>\n"
+"<br/>\n"
+"<t t-out=\"object.company_id.website\"></t>\n"
+"</div>\n"
+
+#. module: vehicle_rental
+#: model:mail.template,body_html:vehicle_rental.vehicle_rental_booking_confirmation_mail_template
+msgid ""
+"<h4>\n"
+"                    Dear\n"
+"                    <strong>\n"
+"                        <t t-out=\"object.customer_id.name\"/>\n"
+"                    </strong>\n"
+"                    ,\n"
+"                </h4>\n"
+"                <hr style=\"margin: 0; padding: 0;\"/>\n"
+"                <p>\n"
+"                    Thank you for booking with\n"
+"                    <strong>\n"
+"                        <t t-out=\"object.company_id.name\"/>\n"
+"                    </strong>\n"
+"                    . Below are your rental details:\n"
+"                </p>\n"
+"                <hr style=\"margin: 5px;\"/>\n"
+"                <table class=\"table table-bordered\" style=\"width:100%; border-collapse:collapse;\">\n"
+"                    <!-- Reference & Vehicle -->\n"
+"                    <tr>\n"
+"                        <td style=\"width: 35%; padding: 5px;\">\n"
+"                            <strong>Reference No.</strong>\n"
+"                        </td>\n"
+"                        <td style=\"width: 65%; padding: 5px;\">\n"
+"                            <span t-field=\"object.reference_no\"/>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"width: 35%; padding: 5px;\">\n"
+"                            <strong>Vehicle</strong>\n"
+"                        </td>\n"
+"                        <td style=\"width: 65%; padding: 5px;\">\n"
+"                            <span t-field=\"object.vehicle_id.name\"/>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <!-- Pickup Section -->\n"
+"                    <tr>\n"
+"                        <td colspan=\"2\" style=\"width: 100%; background-color:#f2f2f2; padding: 5px;\">\n"
+"                            <strong>Pickup Details</strong>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"width: 35%; padding: 5px;\">\n"
+"                            <strong>Pickup Date</strong>\n"
+"                        </td>\n"
+"                        <td style=\"width: 65%; padding: 5px;\">\n"
+"                            <span t-field=\"object.start_date\"/>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"vertical-align: middle; width: 35%; padding: 5px;\">\n"
+"                            <strong>Pickup Address</strong>\n"
+"                        </td>\n"
+"                        <td style=\"width: 65%; padding: 5px;\">\n"
+"                            <t t-if=\"object.pick_up_street\">\n"
+"                                <span t-field=\"object.pick_up_street\"/>\n"
+"                                <br/>\n"
+"                            </t>\n"
+"                            <t t-if=\"object.pick_up_street2\">\n"
+"                                <span t-field=\"object.pick_up_street2\"/>\n"
+"                                <br/>\n"
+"                            </t>\n"
+"                            <t t-if=\"object.pick_up_city\">\n"
+"                                <span t-field=\"object.pick_up_city\"/>\n"
+"                                <span t-field=\"object.pick_up_state_id.name\"/>\n"
+"                                <span t-field=\"object.pick_up_zip\"/>\n"
+"                                <br/>\n"
+"                            </t>\n"
+"                            <t t-if=\"object.pick_up_country_id\">\n"
+"                                <span t-field=\"object.pick_up_country_id.name\"/>\n"
+"                            </t>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <!-- Return Section -->\n"
+"                    <tr>\n"
+"                        <td colspan=\"2\" style=\"width: 100%; background-color:#f2f2f2; padding: 5px;\">\n"
+"                            <strong>Return Details</strong>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"width: 35%; padding: 5px;\">\n"
+"                            <strong>Drop-off Date</strong>\n"
+"                        </td>\n"
+"                        <td style=\"width: 65%; padding: 5px;\">\n"
+"                            <span t-field=\"object.end_date\"/>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td style=\"vertical-align: middle; padding: 5px;\">\n"
+"                            <strong>Drop-off Address</strong>\n"
+"                        </td>\n"
+"                        <td style=\"width: 65%; padding: 5px;\">\n"
+"                            <t t-if=\"object.drop_off_street\">\n"
+"                                <span t-field=\"object.drop_off_street\"/>\n"
+"                                <br/>\n"
+"                            </t>\n"
+"                            <t t-if=\"object.drop_off_street2\">\n"
+"                                <span t-field=\"object.drop_off_street2\"/>\n"
+"                                <br/>\n"
+"                            </t>\n"
+"                            <t t-if=\"object.drop_off_city\">\n"
+"                                <span t-field=\"object.drop_off_city\"/>\n"
+"                                <span t-field=\"object.drop_off_state_id.name\"/>\n"
+"                                <span t-field=\"object.drop_off_zip\"/>\n"
+"                                <br/>\n"
+"                            </t>\n"
+"                            <t t-if=\"object.drop_off_country_id\">\n"
+"                                <span t-field=\"object.drop_off_country_id.name\"/>\n"
+"                            </t>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                </table>\n"
+"                <hr style=\"margin: 5px;\"/>\n"
+"                <p>\n"
+"                    Please be available at the pickup location on time and carry your required documents.\n"
+"                </p>\n"
+"                <p>\n"
+"                    For any support or changes, feel free to contact us.\n"
+"                </p>\n"
+"                <p>\n"
+"                    Have a great trip!\n"
+"                </p>\n"
+"                <hr style=\"margin: 0; padding: 0;\"/>\n"
+"                <span>\n"
+"                    <strong>\n"
+"                        Best regards,\n"
+"                        <br/>\n"
+"                        <t t-out=\"object.responsible_id.name\"/>\n"
+"                    </strong>\n"
+"                    <br/>\n"
+"                    <t t-out=\"object.company_id.name\"/>\n"
+"                    <br/>\n"
+"                    <t t-out=\"object.company_id.phone\"/>\n"
+"                    <br/>\n"
+"                    <t t-out=\"object.company_id.email\"/>\n"
+"                    <br/>\n"
+"                    <t t-out=\"object.company_id.website\"/>\n"
+"                </span>\n"
+"            "
+msgstr ""
+"<h4>\n"
+"                    عزيزي\n"
+"                    <strong>\n"
+"<t t-out=\"object.customer_id.name\"></t>\n"
+"</strong>\n"
+"                    ,\n"
+"                </h4>\n"
+"<hr style=\"margin: 0; padding: 0;\"/>\n"
+"<p>\n"
+"                    شكرا لك على الحجز مع\n"
+"                    <strong>\n"
+"<t t-out=\"object.company_id.name\"></t>\n"
+"</strong>\n"
+"                    . فيما يلي تفاصيل الإيجار الخاصة بك:\n"
+"                </p>\n"
+"<hr style=\"margin: 5px;\"/>\n"
+"<table class=\"table table-bordered\" style=\"width:100%; border-collapse:collapse;\">\n"
+" المرجع والمركبة \n"
+"<tr>\n"
+"<td style=\"width: 35%; padding: 5px;\">\n"
+"<strong>الرقم المرجعي</strong>\n"
+"</td>\n"
+"<td style=\"width: 65%; padding: 5px;\">\n"
+"<span t-field=\"object.reference_no\"></span>\n"
+"</td>\n"
+"</tr>\n"
+"<tr>\n"
+"<td style=\"width: 35%; padding: 5px;\">\n"
+"<strong>عربة</strong>\n"
+"</td>\n"
+"<td style=\"width: 65%; padding: 5px;\">\n"
+"<span t-field=\"object.vehicle_id.name\"></span>\n"
+"</td>\n"
+"</tr>\n"
+" قسم الالتقاط \n"
+"<tr>\n"
+"<td colspan=\"2\" style=\"width: 100%; background-color:#f2f2f2; padding: 5px;\">\n"
+"<strong>تفاصيل الاستلام</strong>\n"
+"</td>\n"
+"</tr>\n"
+"<tr>\n"
+"<td style=\"width: 35%; padding: 5px;\">\n"
+"<strong>تاريخ الاستلام</strong>\n"
+"</td>\n"
+"<td style=\"width: 65%; padding: 5px;\">\n"
+"<span t-field=\"object.start_date\"></span>\n"
+"</td>\n"
+"</tr>\n"
+"<tr>\n"
+"<td style=\"vertical-align: middle; width: 35%; padding: 5px;\">\n"
+"<strong>عنوان الاستلام</strong>\n"
+"</td>\n"
+"<td style=\"width: 65%; padding: 5px;\">\n"
+"<t t-if=\"object.pick_up_street\">\n"
+"<span t-field=\"object.pick_up_street\"></span>\n"
+"<br/>\n"
+"</t>\n"
+"<t t-if=\"object.pick_up_street2\">\n"
+"<span t-field=\"object.pick_up_street2\"></span>\n"
+"<br/>\n"
+"</t>\n"
+"<t t-if=\"object.pick_up_city\">\n"
+"<span t-field=\"object.pick_up_city\"></span>\n"
+"<span t-field=\"object.pick_up_state_id.name\"></span>\n"
+"<span t-field=\"object.pick_up_zip\"></span>\n"
+"<br/>\n"
+"</t>\n"
+"<t t-if=\"object.pick_up_country_id\">\n"
+"<span t-field=\"object.pick_up_country_id.name\"></span>\n"
+"</t>\n"
+"</td>\n"
+"</tr>\n"
+" قسم العودة \n"
+"<tr>\n"
+"<td colspan=\"2\" style=\"width: 100%; background-color:#f2f2f2; padding: 5px;\">\n"
+"<strong>تفاصيل العودة</strong>\n"
+"</td>\n"
+"</tr>\n"
+"<tr>\n"
+"<td style=\"width: 35%; padding: 5px;\">\n"
+"<strong>تاريخ النزول</strong>\n"
+"</td>\n"
+"<td style=\"width: 65%; padding: 5px;\">\n"
+"<span t-field=\"object.end_date\"></span>\n"
+"</td>\n"
+"</tr>\n"
+"<tr>\n"
+"<td style=\"vertical-align: middle; padding: 5px;\">\n"
+"<strong>عنوان التسليم</strong>\n"
+"</td>\n"
+"<td style=\"width: 65%; padding: 5px;\">\n"
+"<t t-if=\"object.drop_off_street\">\n"
+"<span t-field=\"object.drop_off_street\"></span>\n"
+"<br/>\n"
+"</t>\n"
+"<t t-if=\"object.drop_off_street2\">\n"
+"<span t-field=\"object.drop_off_street2\"></span>\n"
+"<br/>\n"
+"</t>\n"
+"<t t-if=\"object.drop_off_city\">\n"
+"<span t-field=\"object.drop_off_city\"></span>\n"
+"<span t-field=\"object.drop_off_state_id.name\"></span>\n"
+"<span t-field=\"object.drop_off_zip\"></span>\n"
+"<br/>\n"
+"</t>\n"
+"<t t-if=\"object.drop_off_country_id\">\n"
+"<span t-field=\"object.drop_off_country_id.name\"></span>\n"
+"</t>\n"
+"</td>\n"
+"</tr>\n"
+"</table>\n"
+"<hr style=\"margin: 5px;\"/>\n"
+"<p>\n"
+"                    يرجى التواجد في موقع الاستلام في الوقت المحدد وحمل المستندات المطلوبة.\n"
+"                </p>\n"
+"<p>\n"
+"                    للحصول على أي دعم أو تغييرات، لا تتردد في الاتصال بنا.\n"
+"                </p>\n"
+"<p>\n"
+"                    أتمنى لك رحلة عظيمة!\n"
+"                </p>\n"
+"<hr style=\"margin: 0; padding: 0;\"/>\n"
+"<span>\n"
+"<strong>\n"
+"                        أطيب التحيات،\n"
+"                        <br/>\n"
+"<t t-out=\"object.responsible_id.name\"></t>\n"
+"</strong>\n"
+"<br/>\n"
+"<t t-out=\"object.company_id.name\"></t>\n"
+"<br/>\n"
+"<t t-out=\"object.company_id.phone\"></t>\n"
+"<br/>\n"
+"<t t-out=\"object.company_id.email\"></t>\n"
+"<br/>\n"
+"<t t-out=\"object.company_id.website\"></t>\n"
+"</span>\n"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_web_template
+msgid "<i class=\"bi bi-search me-2\"/>Search"
+msgstr "<i class=\"bi bi-search me-2\"></i>يبحث"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_kanban_view
+msgid "<i class=\"fa fa-calendar me-1\" title=\"Durations\"/>"
+msgstr "<i class=\"fa fa-calendar me-1\" title=\"Durations\"></i>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+msgid ""
+"<i class=\"fa fa-calendar-check-o me-2\"/>\n"
+"                                        Booking Enquiry Details"
+msgstr ""
+"<i class=\"fa fa-calendar-check-o me-2\"></i>\n"
+"                                        تفاصيل الاستعلام عن الحجز"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_kanban_view
+msgid "<i class=\"fa fa-car me-1\" title=\"Vehicle\"/>"
+msgstr "<i class=\"fa fa-car me-1\" title=\"Vehicle\"></i>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+msgid ""
+"<i class=\"fa fa-credit-card me-2\"/>\n"
+"                                        Pricing Details"
+msgstr ""
+"<i class=\"fa fa-credit-card me-2\"></i>\n"
+"                                        تفاصيل التسعير"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_contract_scratch_customer_sign_template
+msgid "<i class=\"fa fa-pen me-2\"/>Accept &amp; Sign Report"
+msgstr "<i class=\"fa fa-pen me-2\"></i>قبول وتوقيع التقرير"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_kanban_view
+msgid "<i class=\"fa fa-user me-1\" title=\"Customer\"/>"
+msgstr "<i class=\"fa fa-user me-1\" title=\"Customer\"></i>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid ""
+"<span class=\"badge bg-success fs-6 px-3 py-2\" "
+"id=\"vehicleStatus\">Available</span>"
+msgstr ""
+"<span class=\"badge bg-success fs-6 px-3 py-2\" "
+"id=\"vehicleStatus\">متاح</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "<span class=\"badge bg-success\">Available</span>"
+msgstr "<span class=\"badge bg-success\">متاح</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid ""
+"<span class=\"carousel-control-next-icon\" aria-hidden=\"true\"/>\n"
+"                                                    <span class=\"visually-hidden\">Next</span>"
+msgstr ""
+"<span aria-hidden=\"true\" class=\"carousel-control-next-icon\"></span>\n"
+"<span class=\"visually-hidden\">التالي</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid ""
+"<span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"/>\n"
+"                                                    <span class=\"visually-hidden\">Previous</span>"
+msgstr ""
+"<span aria-hidden=\"true\" class=\"carousel-control-prev-icon\"></span>\n"
+"<span class=\"visually-hidden\">سابق</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "<span class=\"fw-bold\">Total</span>"
+msgstr "<span class=\"fw-bold\">المجموع</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_web_template
+msgid ""
+"<span class=\"input-group-text\">\n"
+"                                                            <i class=\"fa fa-money\"/>\n"
+"                                                        </span>\n"
+"                                                        <select name=\"vehicle_price_type_id\" id=\"vehicle_price_type_id\" class=\"form-select fs-small\">\n"
+"                                                            <option value=\"\">Price Type</option>\n"
+"                                                            <option value=\"hour\">Price per Hours</option>\n"
+"                                                            <option value=\"day\">Price per Day</option>\n"
+"                                                            <option value=\"week\">Price per Week</option>\n"
+"                                                            <option value=\"month\">Price per Month</option>\n"
+"                                                            <option value=\"year\">Price per Year</option>\n"
+"                                                            <option value=\"kilometer\">Price per Kilometer</option>\n"
+"                                                            <option value=\"mile\">Price per Mile</option>\n"
+"                                                        </select>"
+msgstr ""
+"<span class=\"input-group-text\">\n"
+"<i class=\"fa fa-money\"></i>\n"
+"</span>\n"
+"<select class=\"form-select fs-small\" id=\"vehicle_price_type_id\" name=\"vehicle_price_type_id\">\n"
+"<option value=\"\">نوع السعر</option>\n"
+"<option value=\"hour\">السعر لكل ساعة</option>\n"
+"<option value=\"day\">السعر في اليوم الواحد</option>\n"
+"<option value=\"week\">السعر في الأسبوع</option>\n"
+"<option value=\"month\">السعر شهريا</option>\n"
+"<option value=\"year\">السعر في السنة</option>\n"
+"<option value=\"kilometer\">السعر للكيلومتر الواحد</option>\n"
+"<option value=\"mile\">السعر لكل ميل</option>\n"
+"</select>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Cancellation Reasons</span>"
+msgstr "<span class=\"label\">أسباب الإلغاء</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Charge Type</span>"
+msgstr "<span class=\"label\">نوع الشحن</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Company</span>"
+msgstr "<span class=\"label\">شركة</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Customer</span>"
+msgstr "<span class=\"label\">عميل</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Date</span>"
+msgstr "<span class=\"label\">تاريخ</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Deposit Journal</span>"
+msgstr "<span class=\"label\">مجلة الإيداع</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Descriptions</span>"
+msgstr "<span class=\"label\">الأوصاف</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Driver Charges</span>"
+msgstr "<span class=\"label\">رسوم السائق</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Driver Name</span>"
+msgstr "<span class=\"label\">اسم السائق</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Driver Required?</span>"
+msgstr "<span class=\"label\">مطلوب سائق؟</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Email Address</span>"
+msgstr "<span class=\"label\">عنوان البريد الإلكتروني</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Fuel Type</span>"
+msgstr "<span class=\"label\">نوع الوقود</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Full Name</span>"
+msgstr "<span class=\"label\">الاسم الكامل</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">If Any Deposit</span>"
+msgstr "<span class=\"label\">إذا كان هناك أي إيداع</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">If any extra charges</span>"
+msgstr "<span class=\"label\">إذا كان هناك أي رسوم إضافية</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Invoice Item</span>"
+msgstr "<span class=\"label\">عنصر الفاتورة</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Last Odometer</span>"
+msgstr "<span class=\"label\">عداد المسافات الأخير</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">License Plate</span>"
+msgstr "<span class=\"label\">لوحة الترخيص</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Location</span>"
+msgstr "<span class=\"label\">موقع</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Model Year</span>"
+msgstr "<span class=\"label\">سنة الموديل</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Payment Type</span>"
+msgstr "<span class=\"label\">نوع الدفع</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Phone Number</span>"
+msgstr "<span class=\"label\">رقم التليفون</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Policy</span>"
+msgstr "<span class=\"label\">سياسة</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Reference Number</span>"
+msgstr "<span class=\"label\">الرقم المرجعي</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Rent Type</span>"
+msgstr "<span class=\"label\">نوع الإيجار</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Rent per</span>"
+msgstr "<span class=\"label\">الإيجار لكل</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Responsible</span>"
+msgstr "<span class=\"label\">مسؤول</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Signature</span>"
+msgstr "<span class=\"label\">إمضاء</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Terms &amp; Conditions</span>"
+msgstr "<span class=\"label\">الشروط والأحكام</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Total Damage Amount</span>"
+msgstr "<span class=\"label\">إجمالي مبلغ الضرر</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Total Extra Charges</span>"
+msgstr "<span class=\"label\">إجمالي الرسوم الإضافية</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Total</span>"
+msgstr "<span class=\"label\">المجموع</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Transmission</span>"
+msgstr "<span class=\"label\">الانتقال</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span class=\"label\">Vehicle</span>"
+msgstr "<span class=\"label\">عربة</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid ""
+"<span class=\"o_form_label o_td_label\" name=\"address_name\">Drop-Off "
+"Location</span>"
+msgstr ""
+"<span class=\"o_form_label o_td_label\" name=\"address_name\">موقع "
+"الإنزال</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid ""
+"<span class=\"o_form_label o_td_label\" name=\"address_name\">Pick-Up "
+"Location</span>"
+msgstr ""
+"<span class=\"o_form_label o_td_label\" name=\"address_name\">موقع البيك "
+"اب</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "<span class=\"o_stat_text\">Journal Entry</span>"
+msgstr "<span class=\"o_stat_text\">إدخال دفتر اليومية</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "<span class=\"small\">Days</span>"
+msgstr "<span class=\"small\">أيام</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid ""
+"<span class=\"spinner-border spinner-border-sm me-2 d-none\" id=\"bookingSpinner\">\n"
+"                                                    </span>\n"
+"                                                    Submit Enquiry"
+msgstr ""
+"<span class=\"spinner-border spinner-border-sm me-2 d-none\" id=\"bookingSpinner\">\n"
+"</span>\n"
+"                                                    إرسال الاستفسار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span>☐ I accept penalties for late return.</span>"
+msgstr "<span>☐ أقبل العقوبات المفروضة على العودة المتأخرة.</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span>☐ I acknowledge damage responsibility.</span>"
+msgstr "<span>☐ أقر بمسؤولية الضرر.</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span>☐ I agree to all traffic laws.</span>"
+msgstr "<span>☐ أوافق على كافة قوانين المرور.</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span>☐ I have inspected the vehicle.</span>"
+msgstr "<span>☐ لقد قمت بفحص السيارة.</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span>☐ I possess a valid driver's license.</span>"
+msgstr "<span>☐ لدي رخصة قيادة سارية المفعول.</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<span>☐ I will not operate under influence.</span>"
+msgstr "<span>☐ لن أعمل تحت التأثير.</span>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_contract_scratch_report_template
+msgid ""
+"<strong>\n"
+"                                            Authorized Signature\n"
+"                                        </strong>"
+msgstr ""
+"<strong>\n"
+"                                            التوقيع المعتمد\n"
+"                                        </strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_contract_scratch_report_template
+msgid ""
+"<strong>\n"
+"                                            Customer Signature\n"
+"                                        </strong>"
+msgstr ""
+"<strong>\n"
+"                                            توقيع العميل\n"
+"                                        </strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_request_inherit_form_view
+msgid ""
+"<strong>\n"
+"                                    Total:\n"
+"                                </strong>"
+msgstr ""
+"<strong>\n"
+"                                    المجموع:\n"
+"                                </strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_booking_enquiry_list
+msgid ""
+"<strong>\n"
+"                        There are currently no enquiries for your account.\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        لا يوجد حاليا أي استفسارات لحسابك.\n"
+"                    </strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_contract_scratch_customer_sign_template
+msgid "<strong>Accepted on behalf of:</strong>"
+msgstr "<strong>تم قبوله نيابة عن:</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Amount</strong>"
+msgstr "<strong>كمية</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_contract_scratch_report_template
+msgid "<strong>Customer</strong>"
+msgstr "<strong>عميل</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Description</strong>"
+msgstr "<strong>وصف</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_contract_scratch_report_template
+msgid "<strong>Email</strong>"
+msgstr "<strong>بريد إلكتروني</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_contract_scratch_report_template
+msgid "<strong>Fuel Type</strong>"
+msgstr "<strong>نوع الوقود</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Invoice</strong>"
+msgstr "<strong>فاتورة</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_contract_scratch_report_template
+msgid "<strong>Model</strong>"
+msgstr "<strong>نموذج</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Name</strong>"
+msgstr "<strong>اسم</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Payment Amount</strong>"
+msgstr "<strong>مبلغ الدفع</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Payment Date</strong>"
+msgstr "<strong>تاريخ الدفع</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Payment Status</strong>"
+msgstr "<strong>حالة الدفع</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_contract_scratch_report_template
+msgid "<strong>Phone</strong>"
+msgstr "<strong>هاتف</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Policy Amount</strong>"
+msgstr "<strong>مبلغ السياسة</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Policy Number</strong>"
+msgstr "<strong>رقم السياسة</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Product</strong>"
+msgstr "<strong>منتج</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Qty</strong>"
+msgstr "<strong>الكمية</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_contract_scratch_report_template
+msgid "<strong>Reference Number</strong>"
+msgstr "<strong>الرقم المرجعي</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Rental Agreement</strong>"
+msgstr "<strong>اتفاقية الإيجار</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "<strong>Sub Total</strong>"
+msgstr "<strong>المجموع الفرعي</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_contract_scratch_report_template
+msgid "<strong>Terms &amp; Conditions</strong>"
+msgstr "<strong>الشروط والأحكام</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid ""
+"<strong>Terms &amp; Conditions</strong>\n"
+"                                    <br/>"
+msgstr ""
+"<strong>الشروط والأحكام</strong>\n"
+"<br/>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_contract_scratch_report_template
+msgid "<strong>Transmission</strong>"
+msgstr "<strong>الانتقال</strong>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_contract_scratch_report_template
+msgid "<strong>Vehicle</strong>"
+msgstr "<strong>عربة</strong>"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "A.M."
+msgstr "أكون."
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "AM"
+msgstr "أكون"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__customer_documents__document_type__aadhaar_card
+msgid "Aadhaar card"
+msgstr "بطاقة أدهار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid ""
+"Acceptable file\n"
+"                                                        size"
+msgstr ""
+"ملف مقبول\n"
+"                                                        الحجم"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__access_token
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__access_token
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__access_token
+msgid "Access Token"
+msgstr "رمز الوصول"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__account_payment_state
+msgid "Account Payment State"
+msgstr "حالة دفع الحساب"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__message_needaction
+msgid "Action Needed"
+msgstr "الإجراء مطلوب"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__activity_ids
+msgid "Activities"
+msgstr "أنشطة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "زخرفة استثناء النشاط"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "رمز نوع النشاط"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Add Arrow"
+msgstr "إضافة سهم"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Add Rectangle"
+msgstr "إضافة مستطيل"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Add Text"
+msgstr "إضافة نص"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "Additional Charges"
+msgstr "رسوم إضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__additional_info_ids
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Additional Information"
+msgstr "معلومات إضافية"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+msgid "All"
+msgstr "الجميع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid ""
+"All\n"
+"                                    Prices"
+msgstr ""
+"الكل\n"
+"                                    الأسعار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid ""
+"All\n"
+"                                    Seats"
+msgstr ""
+"الكل\n"
+"                                    مقاعد"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+msgid "All Customers"
+msgstr "جميع العملاء"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+msgid "All Statistics"
+msgstr "جميع الإحصائيات"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__amount
+msgid "Amount"
+msgstr "كمية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_return_deposit__return_deposit
+msgid "Amount to Return"
+msgstr "المبلغ المراد إرجاعه"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage__is_any_damage
+msgid "Any Damage"
+msgstr "أي ضرر"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Approve"
+msgstr "يعتمد"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "Are you sure you want to delete this image?"
+msgstr "هل أنت متأكد أنك تريد حذف هذه الصورة؟"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Arrow"
+msgstr "سهم"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Attach Receipt"
+msgstr "إرفاق الإيصال"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Authorization Details"
+msgstr "تفاصيل التفويض"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Authorized Signature"
+msgstr "التوقيع المعتمد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Auto-validation"
+msgstr "التحقق التلقائي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__transmission__automatic
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Automatic"
+msgstr "تلقائي"
+
+#. module: vehicle_rental
+#: model:ir.ui.menu,name:vehicle_rental.menu_vehicle_availability
+msgid "Availability"
+msgstr "التوفر"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Available Vehicles"
+msgstr "المركبات المتاحة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__avatar
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_scratch_report__avatar
+msgid "Avatar"
+msgstr "الصورة الرمزية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__bevrage
+msgid "Bevrage"
+msgstr "سؤال"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__bill_id
+msgid "Bill"
+msgstr "فاتورة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_contract_booking_form_view
+msgid "Book"
+msgstr "كتاب"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Book Now"
+msgstr "احجز الآن"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid "Book This Vehicle"
+msgstr "احجز هذه السيارة"
+
+#. module: vehicle_rental
+#: model:ir.ui.menu,name:vehicle_rental.menu_contract_booking
+msgid "Book Vehicle"
+msgstr "كتاب مركبة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "Book Your Vehicle"
+msgstr "احجز سيارتك"
+
+#. module: vehicle_rental
+#: model:ir.ui.menu,name:vehicle_rental.menu_crm_lead_booking_enquiry
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.portal_rental_booking_enquiry
+msgid "Booking Enquiries"
+msgstr "استفسارات الحجز"
+
+#. module: vehicle_rental
+#: model:website.menu,name:vehicle_rental.menu_web_booking_enquiry
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_crm_lead_inherit_form_view
+msgid "Booking Enquiry"
+msgstr "الاستعلام عن الحجز"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_crm_lead_inherit_form_view
+msgid "Booking Enquiry Details"
+msgstr "تفاصيل الاستعلام عن الحجز"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_crm_lead
+msgid "Booking Enquiry Lead"
+msgstr "قائد الاستعلام عن الحجز"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Browse Files"
+msgstr "تصفح الملفات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_contract_scratch_customer_sign_template
+msgid ""
+"By signing this scratch report, I confirm that the details have been reviewed and\n"
+"                                    accepted."
+msgstr ""
+"من خلال التوقيع على هذا التقرير الأولي، أؤكد أن التفاصيل قد تمت مراجعتها و\n"
+"                                    مقبول."
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__fuel_type__cng
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "CNG"
+msgstr "الغاز الطبيعي المضغوط"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__rental_vehicle_image__capture_method__camera
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_damage_image__capture_method__camera
+msgid "Camera Capture"
+msgstr "التقاط الكاميرا"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid ""
+"Camera access denied. Please allow camera access in your browser settings."
+msgstr ""
+"تم رفض الوصول إلى الكاميرا. يرجى السماح بالوصول إلى الكاميرا في إعدادات "
+"المتصفح الخاص بك."
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "Camera is in use by another application."
+msgstr ""
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__status__d_cancel
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.lead_rental_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.maintenance_request_bill_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_contract_booking_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.return_deposit_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_damage_form_view
+msgid "Cancel"
+msgstr "يلغي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__cancellation_charge
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Cancellation Charge"
+msgstr "رسوم الإلغاء"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__cancellation_invoice_id
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Cancellation Invoice"
+msgstr "فاتورة الإلغاء"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__cancellation_invoice_state
+msgid "Cancellation Invoice State"
+msgstr "حالة فاتورة الإلغاء"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_cancellation_policy
+#: model:ir.ui.menu,name:vehicle_rental.menu_cancellation_policy
+msgid "Cancellation Policies"
+msgstr "سياسات الإلغاء"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_cancellation_policy
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Cancellation Policy"
+msgstr "سياسة الإلغاء"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__cancellation_reason
+msgid "Cancellation Reason"
+msgstr "سبب الإلغاء"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Cancellation Reasons"
+msgstr "أسباب الإلغاء"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+msgid "Cancelled"
+msgstr "تم الإلغاء"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__capture_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__capture_date
+msgid "Capture Date"
+msgstr "تاريخ الالتقاط"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__capture_method
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__capture_method
+msgid "Capture Method"
+msgstr "طريقة الالتقاط"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Capture Photo"
+msgstr "التقاط الصورة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Captured image"
+msgstr "الصورة الملتقطة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__category_id
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_web_template
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_booking_enquiry_list
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+msgid "Category"
+msgstr "فئة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__extra_charge_day
+msgid "Charge per Day"
+msgstr "تهمة في اليوم الواحد"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__extra_charge_hour
+msgid "Charge per Hour"
+msgstr "تهمة لكل ساعة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__extra_charge_km
+msgid "Charge per Kilometer"
+msgstr "الرسوم لكل كيلومتر"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__extra_charge_mi
+msgid "Charge per Mile"
+msgstr "الرسوم لكل ميل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__extra_charge_month
+msgid "Charge per Month"
+msgstr "الرسوم شهريا"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__extra_charge_week
+msgid "Charge per Week"
+msgstr "تهمة في الأسبوع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__extra_charge_year
+msgid "Charge per Year"
+msgstr "الرسوم في السنة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__driver_charge
+msgid "Charges"
+msgstr "رسوم"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__driver_charge_type
+msgid "Charges Type"
+msgstr "نوع الرسوم"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Choose from our premium fleet of well-maintained vehicles"
+msgstr "اختر من بين أسطولنا المتميز من المركبات التي تتم صيانتها جيدًا"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "City"
+msgstr "مدينة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+msgid "Communication"
+msgstr "تواصل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_cancellation_policy__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_schedule__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_agreement_terms__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_contract_booking__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_return_deposit__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__company_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_scratch_report__company_id
+msgid "Company"
+msgstr "شركة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Company Details"
+msgstr "تفاصيل الشركة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "Company Information"
+msgstr "معلومات الشركة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "Complete your reservation details"
+msgstr "أكمل تفاصيل الحجز الخاص بك"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_res_config_settings
+msgid "Config Settings"
+msgstr "إعدادات التكوين"
+
+#. module: vehicle_rental
+#: model:ir.ui.menu,name:vehicle_rental.menu_configuration
+msgid "Configurations"
+msgstr "التكوينات"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__contract_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_return_deposit__contract_id
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_hr_expense_inherit_search_view
+msgid "Contract"
+msgstr "عقد"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_rental_contract_booking
+msgid "Contract Booking"
+msgstr "حجز العقد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.customer_documents_form_view
+msgid "Contract Document Details"
+msgstr "تفاصيل وثيقة العقد"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__contract_expense_ids
+msgid "Contract Expense"
+msgstr "نفقات العقد"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+#: model:ir.actions.act_window,name:vehicle_rental.action_vehicle_contract
+#: model:ir.ui.menu,name:vehicle_rental.menu_vehicle_contract
+msgid "Contracts"
+msgstr "العقود"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+msgid "Contract’s Details"
+msgstr "تفاصيل العقد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Country"
+msgstr "دولة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.maintenance_request_bill_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_request_inherit_form_view
+msgid "Create Bill"
+msgstr "إنشاء بيل"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_lead_rental_contract
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_crm_lead_inherit_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.lead_rental_contract_form_view
+msgid "Create Contract"
+msgstr "إنشاء العقد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Create Extra Service Invoice"
+msgstr "إنشاء فاتورة خدمة إضافية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Create Installment"
+msgstr "إنشاء التقسيط"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.return_deposit_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_damage_form_view
+msgid "Create Invoice"
+msgstr "إنشاء فاتورة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Create Maintenance Request"
+msgstr "إنشاء طلب صيانة"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_return_deposit
+msgid "Create Return Deposit Invoice"
+msgstr "إنشاء فاتورة إيداع الإرجاع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Create Trip Expense Reports"
+msgstr "إنشاء تقارير نفقات الرحلة"
+
+#. module: vehicle_rental
+#: model:ir.model,website_form_label:vehicle_rental.model_crm_lead
+msgid "Create an Opportunity"
+msgstr "خلق فرصة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_cancellation_policy__created_on
+msgid "Created On"
+msgstr "تم الإنشاء بتاريخ"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_cancellation_policy__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_customer_documents__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_additional_info__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_features__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_inclusions__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_rental_policy__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_lead_rental_contract__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request_bill__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_schedule__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_agreement_terms__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_contract_booking__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_return_deposit__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_rental_dashboard__create_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_scratch_report__create_uid
+msgid "Created by"
+msgstr "تم إنشاؤها بواسطة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_cancellation_policy__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_customer_documents__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_additional_info__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_features__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_inclusions__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_rental_policy__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_lead_rental_contract__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request_bill__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_schedule__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_agreement_terms__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_contract_booking__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_return_deposit__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_rental_dashboard__create_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_scratch_report__create_date
+msgid "Created on"
+msgstr "تم الإنشاء بتاريخ"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__currency_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__currency_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__currency_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_return_deposit__currency_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__currency_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage__currency_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__currency_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__currency_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__currency_id
+msgid "Currency"
+msgstr "عملة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__is_scratch_report
+msgid "Custom Scratch Report"
+msgstr "تقرير الصفر المخصص"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_lead_rental_contract__partner_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_contract_booking__customer_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__customer_id
+msgid "Customer"
+msgstr "عميل"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Customer Details"
+msgstr "تفاصيل العميل"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_customer_documents
+#: model:ir.model,name:vehicle_rental.model_customer_documents
+msgid "Customer Documents"
+msgstr "وثائق العملاء"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "Customer Information"
+msgstr "معلومات العملاء"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__customer_signature
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Customer Signature"
+msgstr "توقيع العميل"
+
+#. module: vehicle_rental
+#: model:ir.ui.menu,name:vehicle_rental.menu_fleet_vehicle_customer
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_search_view
+msgid "Customers"
+msgstr "عملاء"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "DROP-OFF"
+msgstr "الانقطاع عن العمل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__crm_lead__fleet_price_type__day
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__payment_type__daily
+msgid "Daily"
+msgstr "يوميًا"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__damage_amount
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage__damage_amount
+msgid "Damage Amount"
+msgstr "مبلغ الضرر"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Damage Images"
+msgstr "صور الضرر"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_vehicle_damage
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Damage Invoice"
+msgstr "فاتورة الأضرار"
+
+#. module: vehicle_rental
+#: model:ir.ui.menu,name:vehicle_rental.menu_vehicle_dashboard
+msgid "Dashboard"
+msgstr "لوحة القيادة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__date
+msgid "Date"
+msgstr "تاريخ"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "Day"
+msgstr "يوم"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__fleet_renting_days
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__rent_type__days
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+msgid "Days"
+msgstr "أيام"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Delete"
+msgstr "يمسح"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Delete Selected"
+msgstr "حذف المحدد"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__deposit
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Deposit"
+msgstr "إيداع"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__deposit_invoice_id
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Deposit Invoice"
+msgstr "فاتورة الإيداع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__journal_id
+msgid "Deposit Journal"
+msgstr "مجلة الإيداع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__account_payment_id
+msgid "Deposit Payment"
+msgstr "دفع الودائع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__description
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_additional_info__description
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__description
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__description
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage__description
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__description
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__description
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Description"
+msgstr "وصف"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_damage_form_view
+msgid "Descriptions"
+msgstr "الأوصاف"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__fuel_type__diesel
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Diesel"
+msgstr "ديزل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_account_move__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_account_payment__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_cancellation_policy__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_customer_documents__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_additional_info__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_features__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_inclusions__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_rental_policy__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle_log_contract__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_hr_expense__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_lead_rental_contract__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request_bill__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_schedule__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_agreement_terms__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_contract_booking__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_return_deposit__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_rental_dashboard__display_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_scratch_report__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_customer_documents__avatar
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__avatar
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__customer_document_id
+msgid "Document"
+msgstr "وثيقة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__document_count
+msgid "Document Count"
+msgstr "عدد المستندات"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_customer_documents__document_type
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.customer_documents_search_view
+msgid "Document Type"
+msgstr "نوع الوثيقة"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Documents"
+msgstr "وثائق"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Download"
+msgstr "تحميل"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Draw"
+msgstr "يرسم"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_hr_expense__driver_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__driver_id
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_hr_expense_inherit_search_view
+msgid "Driver"
+msgstr "سائق"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__is_driver_required
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_search_view
+msgid "Driver Required"
+msgstr "مطلوب سائق"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__customer_documents__document_type__dl
+msgid "Driving license"
+msgstr "رخصة القيادة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__drop_off_city
+msgid "Drop Off City"
+msgstr "مدينة النزول"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__drop_off_country_id
+msgid "Drop Off Country"
+msgstr "إنزال البلد"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__drop_off_street
+msgid "Drop Off Street"
+msgstr "إنزال الشارع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__drop_off_street2
+msgid "Drop Off Street2"
+msgstr "إنزال الشارع2"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__drop_off_zip
+msgid "Drop Off Zip"
+msgstr "إسقاط الرمز البريدي"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Drop your images here"
+msgstr "أسقط صورك هنا"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_contract_booking__end_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__end_date
+msgid "Drop-off Date"
+msgstr "تاريخ النزول"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+msgid "Durations of In-Progress Rental Contracts"
+msgstr "مدة عقود الإيجار قيد التنفيذ"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Edit Scratch Image"
+msgstr "تحرير صورة الصفر"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__fuel_type__electric
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Electric"
+msgstr "كهربائي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__customer_email
+msgid "Email"
+msgstr "بريد إلكتروني"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid ""
+"Email\n"
+"                                                        <span class=\"text-danger\">*</span>"
+msgstr ""
+"بريد إلكتروني\n"
+"                                                        <span class=\"text-danger\">*</span>"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_hr_expense__employee_ids
+msgid "Employees"
+msgstr "موظفين"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_web_template
+msgid ""
+"End\n"
+"                                                        Date"
+msgstr ""
+"نهاية\n"
+"                                                        التاريخ"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/availability_template.xml:0
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__end_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_lead_rental_contract__end_date
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_booking_enquiry_list
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.portal_rental_breadcrumbs
+msgid "Enquiries"
+msgstr "الاستفسارات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "Enquiry"
+msgstr "سؤال"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "Ensure start date is greater than or equal to today's date."
+msgstr "تأكد من أن تاريخ البدء أكبر من أو يساوي تاريخ اليوم."
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.res_config_settings_view_form_vehicle_rental
+msgid "Enter link to see privacy policies"
+msgstr "أدخل الرابط لرؤية سياسات الخصوصية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.res_config_settings_view_form_vehicle_rental
+msgid "Enter link to see terms & conditions"
+msgstr "أدخل الرابط لمعرفة الشروط والأحكام"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__driver_charge_type__excluding
+msgid "Excluding in rent charge"
+msgstr "باستثناء رسوم الإيجار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Expenses"
+msgstr "نفقات"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__extra_charge
+msgid "Extra Charge"
+msgstr "رسوم إضافية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Extra Charge Details"
+msgstr "تفاصيل الرسوم الإضافية"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__extra_charge_invoice_id
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Extra Charge Invoice"
+msgstr "فاتورة الرسوم الإضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__extra_charge_payment_state
+msgid "Extra Charge Payment State"
+msgstr "حالة دفع الرسوم الإضافية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "Extra Charge per"
+msgstr "رسوم إضافية لكل"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Extra Charge per Day"
+msgstr "رسوم إضافية في اليوم الواحد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Extra Charge per Hour"
+msgstr "رسوم إضافية لكل ساعة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Extra Charge per KM"
+msgstr "رسوم إضافية لكل كيلومتر"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Extra Charge per MI"
+msgstr "رسوم إضافية لكل MI"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Extra Charge per Month"
+msgstr "رسوم إضافية شهريا"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Extra Charge per Week"
+msgstr "رسوم إضافية في الأسبوع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Extra Charge per Year"
+msgstr "رسوم إضافية في السنة"
+
+#. module: vehicle_rental
+#: model:product.template,name:vehicle_rental.vehicle_rent_extra_charge_product_template
+msgid "Extra Charges"
+msgstr "رسوم إضافية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Extra Charges Details"
+msgstr "تفاصيل الرسوم الإضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__extra_service_ids
+msgid "Extra Service"
+msgstr "خدمة اضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__extra_service_charge
+msgid "Extra Service Charge"
+msgstr "رسوم الخدمة الإضافية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.extra_service_form_view
+msgid "Extra Service Details"
+msgstr "تفاصيل الخدمة الإضافية"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__extra_service_invoice_id
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Extra Service Invoice"
+msgstr "فاتورة الخدمة الإضافية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Extra Services"
+msgstr "خدمات إضافية"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "Failed to add image: "
+msgstr "فشلت إضافة الصورة:"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "Failed to download image"
+msgstr "فشل تحميل الصورة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "Failed to remove image"
+msgstr "فشلت إزالة الصورة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__features_ids
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid "Features"
+msgstr "سمات"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "File '%s' is not an image"
+msgstr "الملف '%s' ليس صورة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "File '%s' is too large (max 10MB)"
+msgstr "الملف '%s' كبير جدًا (الحد الأقصى 10 ميغابايت)"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_customer_documents__file_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__file_name
+msgid "File Name"
+msgstr "اسم الملف"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__file_size
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__file_size
+msgid "File Size (bytes)"
+msgstr "حجم الملف (بايت)"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__image_filename
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__image_filename
+msgid "Filename"
+msgstr "اسم الملف"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_web_template
+msgid "Find Your Perfect Ride"
+msgstr "اعثر على رحلتك المثالية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__fleet_id
+msgid "Fleet"
+msgstr "أسطول"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_fleet_additional_info
+msgid "Fleet Additional Info"
+msgstr "معلومات الأسطول الإضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__fleet_expense_ids
+msgid "Fleet Expense"
+msgstr "نفقات الأسطول"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_fleet_features
+#: model:ir.model,name:vehicle_rental.model_fleet_features
+#: model:ir.ui.menu,name:vehicle_rental.menu_fleet_features
+msgid "Fleet Features"
+msgstr "ميزات الأسطول"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__fleet_image_ids
+msgid "Fleet Image"
+msgstr "صورة الأسطول"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.fleet_images_action
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Fleet Images"
+msgstr "صور الأسطول"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_fleet_images
+msgid "Fleet Images "
+msgstr "صور الأسطول"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_fleet_inclusions
+msgid "Fleet Inclusions"
+msgstr "ادراج الأسطول"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_fleet_rental_policy
+msgid "Fleet Rental Policies"
+msgstr "سياسات تأجير الأسطول"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_fleet_vehicle
+#: model:ir.model.fields,field_description:vehicle_rental.field_account_bank_statement_line__fleet_vehicle_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_account_move__fleet_vehicle_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_hr_expense__fleet_vehicle_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__fleet_vehicle_id
+msgid "Fleet Vehicle"
+msgstr "مركبة الأسطول"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_fleet_vehicle_log_contract
+msgid "Fleet Vehicle Log Contract"
+msgstr "عقد سجل مركبات الأسطول"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_contract_booking_form_view
+msgid "Fleet Vehicles"
+msgstr "مركبات الأسطول"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.portal_rental_booking_enquiry
+msgid "Follow, view booking enquires"
+msgstr "متابعة، عرض استفسارات الحجز"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__message_follower_ids
+msgid "Followers"
+msgstr "المتابعون"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعون (الشركاء)"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,help:vehicle_rental.field_vehicle_contract__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "رمز الخط الرائع على سبيل المثال. مهام كرة القدم"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Free Drawing"
+msgstr "الرسم الحر"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "From %1"
+msgstr "من %1"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "From %1 to %2"
+msgstr "من %1 إلى %2"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid "Fuel"
+msgstr "وقود"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid ""
+"Fuel\n"
+"                                    Type"
+msgstr ""
+"الوقود\n"
+"                                    اكتب"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__fuel_type
+msgid "Fuel Type"
+msgstr "نوع الوقود"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_search_view
+msgid "Fuel Types"
+msgstr "أنواع الوقود"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__fuel_type__full_hybrid
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Full Hybrid"
+msgstr "هجين كامل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__payment_type__full_payment
+msgid "Full Payment"
+msgstr "الدفع الكامل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__fuel_type__gasoline
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Gasoline"
+msgstr "الغازولين"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__has_message
+msgid "Has Message"
+msgstr "لديه رسالة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_contract_scratch_customer_sign_template
+msgid "Hello"
+msgstr "مرحبًا"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "Home"
+msgstr "بيت"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "Hour"
+msgstr "ساعة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__crm_lead__fleet_price_type__hour
+msgid "Hourly"
+msgstr "كل ساعة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__rent_type__hour
+msgid "Hours"
+msgstr "ساعات"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_hr_expense
+msgid "Hr Expense"
+msgstr "حساب الموارد البشرية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid ""
+"Huge file size.\n"
+"                                                        The image\n"
+"                                                        should be optimized/reduced."
+msgstr ""
+"حجم ملف ضخم.\n"
+"                                                        الصورة\n"
+"                                                        ينبغي تحسينها/تخفيضها."
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__fuel_type__hydrogen
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Hydrogen"
+msgstr "هيدروجين"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "I accept the"
+msgstr "أنا أقبل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_account_move__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_account_payment__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_cancellation_policy__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_customer_documents__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_additional_info__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_features__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_inclusions__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_rental_policy__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle_log_contract__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_hr_expense__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_lead_rental_contract__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request_bill__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_schedule__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_agreement_terms__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_contract_booking__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_res_config_settings__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_return_deposit__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_rental_dashboard__id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_scratch_report__id
+msgid "ID"
+msgstr "بطاقة تعريف"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__activity_exception_icon
+msgid "Icon"
+msgstr "رمز"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,help:vehicle_rental.field_vehicle_contract__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "أيقونة للإشارة إلى نشاط الاستثناء."
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__if_any_deposit
+msgid "If Any Deposit"
+msgstr "إذا كان هناك أي إيداع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__is_any_extra_charges
+msgid "If any extra charges"
+msgstr "إذا كان هناك أي رسوم إضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,help:vehicle_rental.field_vehicle_contract__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "إذا تم تحديدها، فإن الرسائل الجديدة تتطلب انتباهك."
+
+#. module: vehicle_rental
+#: model:ir.model.fields,help:vehicle_rental.field_vehicle_contract__message_has_error
+#: model:ir.model.fields,help:vehicle_rental.field_vehicle_contract__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا تم تحديده، فإن بعض الرسائل تحتوي على خطأ في التسليم."
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__image_1920
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__avatar
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__scratch_image
+msgid "Image"
+msgstr "صورة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__image_1024
+msgid "Image 1024"
+msgstr "الصورة 1024"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__image_128
+msgid "Image 128"
+msgstr "الصورة 128"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__image_256
+msgid "Image 256"
+msgstr "الصورة 256"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__image_512
+msgid "Image 512"
+msgstr "الصورة 512"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "Image Capture One2Many"
+msgstr "التقاط الصور One2Many"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.view_fleet_images_form
+msgid "Image Name"
+msgstr "اسم الصورة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "Image added successfully"
+msgstr "تمت إضافة الصورة بنجاح"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "Image downloaded"
+msgstr "تم تنزيل الصورة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "Image removed"
+msgstr "تمت إزالة الصورة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__image
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Images"
+msgstr "الصور"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "In Maintenance"
+msgstr "في الصيانة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__status__b_in_progress
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "In Progress"
+msgstr "في تَقَدم"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__driver_charge_type__including
+msgid "Including in rent charge"
+msgstr "بما في ذلك رسوم الإيجار"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_inclusions__inclusion
+msgid "Inclusion"
+msgstr "الشمول"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__inclusion_ids
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Inclusions"
+msgstr "الادراج"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Initializing camera..."
+msgstr "جارٍ تهيئة الكاميرا..."
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__installment_created
+msgid "Installment Created"
+msgstr "تم إنشاء القسط"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_insurance_policy
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__insurance_policy_ids
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Insurance Policy"
+msgstr "بوليصة التأمين"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.insurance_policy_form_view
+msgid "Insurance Policy Details"
+msgstr "تفاصيل وثيقة التأمين"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_payment_option.py:0
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__invoice_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__invoice_id
+msgid "Invoice"
+msgstr "فاتورة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__invoice_count
+msgid "Invoice Count"
+msgstr "عدد الفواتير"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Invoice Details"
+msgstr "تفاصيل الفاتورة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__invoice_item_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__invoice_item_id
+msgid "Invoice Item"
+msgstr "عنصر الفاتورة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Invoices"
+msgstr "الفواتير"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__is_any_trip_expense
+msgid "Is Any Trip Expense"
+msgstr "هي أي نفقات الرحلة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__is_any_vehicle_expense
+msgid "Is Any Vehicle Expense"
+msgstr "هل أي تكلفة مركبة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__message_is_follower
+msgid "Is Follower"
+msgstr "هو تابع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__is_invoice_done
+msgid "Is Invoice Done"
+msgstr "هل تم الفاتورة"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "KM"
+msgstr "كم"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__crm_lead__fleet_price_type__kilometer
+msgid "Kilometer"
+msgstr "كيلومتر"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__rent_type__km
+msgid "Kilometers"
+msgstr "كيلومترات"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__fuel_type__lpg
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "LPG"
+msgstr "غاز البترول المسال"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__last_odometer
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Last Odometer"
+msgstr "عداد المسافات الأخير"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_cancellation_policy__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_customer_documents__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_additional_info__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_features__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_inclusions__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_rental_policy__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_lead_rental_contract__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request_bill__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_schedule__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_agreement_terms__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_contract_booking__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_return_deposit__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_rental_dashboard__write_uid
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_scratch_report__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_cancellation_policy__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_customer_documents__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_additional_info__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_features__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_inclusions__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_rental_policy__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_lead_rental_contract__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request_bill__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_schedule__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_agreement_terms__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_contract_booking__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_return_deposit__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_rental_dashboard__write_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_scratch_report__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث بتاريخ"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_lead_rental_contract__crm_lead_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__crm_lead_id
+msgid "Lead"
+msgstr "يقود"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_booking_enquiry_list
+msgid "Lead #"
+msgstr "يقود #"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_lead_rental_contract
+msgid "Lead Rental Contract"
+msgstr "عقد تأجير الرصاص"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle_log_contract__license_plate
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__license_plate
+msgid "License Plate"
+msgstr "لوحة الترخيص"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.res_config_settings_view_form_vehicle_rental
+msgid "Links of Terms and Policies"
+msgstr "روابط الشروط والسياسات"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Loading..."
+msgstr "تحميل..."
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "M. Requests"
+msgstr "م. الطلبات"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "MI"
+msgstr "مي"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_request_inherit_form_view
+msgid "Maintenance Bill"
+msgstr "فاتورة الصيانة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__maintenance_bill_count
+msgid "Maintenance Bill Count"
+msgstr "عدد فاتورة الصيانة"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Maintenance Bills"
+msgstr "فواتير الصيانة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_schedule__maintenance_days
+msgid "Maintenance Days"
+msgstr "أيام الصيانة"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+#: model:ir.model.fields,field_description:vehicle_rental.field_account_bank_statement_line__maintenance_request_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_account_move__maintenance_request_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__maintenance_request_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request_bill__maintenance_request_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__maintenance_request_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__maintenance_request_id
+msgid "Maintenance Request"
+msgstr "طلب الصيانة"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_maintenance_request_bill
+#: model:ir.model,name:vehicle_rental.model_maintenance_request_bill
+msgid "Maintenance Request Bill"
+msgstr "فاتورة طلب الصيانة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__maintenance_request_count
+msgid "Maintenance Request Count"
+msgstr "عدد طلبات الصيانة"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+#: model:ir.actions.act_window,name:vehicle_rental.action_maintenance_requests
+#: model:ir.ui.menu,name:vehicle_rental.menu_maintenance_requests
+msgid "Maintenance Requests"
+msgstr "طلبات الصيانة"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_maintenance_schedule
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__maintenance_schedule_id
+msgid "Maintenance Schedule"
+msgstr "جدول الصيانة"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_maintenance_schedule
+#: model:ir.ui.menu,name:vehicle_rental.menu_maintenance_schedule
+msgid "Maintenance Schedules"
+msgstr "جداول الصيانة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__transmission__manual
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Manual"
+msgstr "يدوي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسالة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__message_ids
+msgid "Messages"
+msgstr "رسائل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__crm_lead__fleet_price_type__mile
+msgid "Mile"
+msgstr "ميل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__rent_type__mi
+msgid "Miles"
+msgstr "مايلز"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__minimum_km_per_day
+msgid "Min KM per Day"
+msgstr "الحد الأدنى كم في اليوم"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+msgid "Minimum km per day must be greater than 0"
+msgstr "يجب أن يكون الحد الأدنى للكيلومتر في اليوم أكبر من 0"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__model_year
+msgid "Model"
+msgstr "نموذج"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "Month"
+msgstr "شهر"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__crm_lead__fleet_price_type__month
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__payment_type__monthly
+msgid "Monthly"
+msgstr "شهريا"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+msgid "Monthly Contract Invoice Revenue"
+msgstr "إيرادات فاتورة العقد الشهرية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__rent_type__month
+msgid "Months"
+msgstr "شهور"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "الموعد النهائي لنشاطي"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/hr_expense.py:0
+msgid "My Expenses"
+msgstr "نفقاتي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_additional_info__name
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_features__name
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__policy_name
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_schedule__name
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__name
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__name
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__name
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_scratch_report__name
+msgid "Name"
+msgstr "اسم"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid ""
+"Name\n"
+"                                                        <span class=\"text-danger\">*</span>"
+msgstr ""
+"اسم\n"
+"                                                        <span class=\"text-danger\">*</span>"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__status__a_draft
+msgid "New"
+msgstr "جديد"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "حدث تقويم النشاط التالي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط التالي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__maintenance_schedule_id
+msgid "Next Maintenance Schedule"
+msgstr "جدول الصيانة القادم"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "No"
+msgstr "لا"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "No camera found. Please connect a camera and try again."
+msgstr "لم يتم العثور على كاميرا. الرجاء توصيل الكاميرا والمحاولة مرة أخرى."
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "No images available"
+msgstr "لا توجد صور متاحة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Notes..."
+msgstr "ملحوظات..."
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__seats
+msgid "Number of Seats"
+msgstr "عدد المقاعد"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الأخطاء"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.res_config_settings_view_form_vehicle_rental
+msgid "Number of items or vehicles to display per page in paginated views."
+msgstr ""
+"عدد العناصر أو المركبات المطلوب عرضها في كل صفحة في طرق العرض المرقّمة."
+
+#. module: vehicle_rental
+#: model:ir.model.fields,help:vehicle_rental.field_vehicle_contract__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "عدد الرسائل التي تتطلب اتخاذ إجراء"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,help:vehicle_rental.field_vehicle_contract__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل التي بها خطأ في التسليم"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,help:vehicle_rental.field_crm_lead__seats
+msgid "Number of seats of the vehicle"
+msgstr "عدد مقاعد المركبة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__odometer_unit
+msgid "Odometer Unit"
+msgstr "وحدة عداد المسافات"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__fleet_vehicle__status__available
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Operational"
+msgstr "التشغيلية"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+msgid "Operational Vehicles"
+msgstr "المركبات التشغيلية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid ""
+"Optimization\n"
+"                                                        required!\n"
+"                                                        Reduce the image size or\n"
+"                                                        increase your\n"
+"                                                        compression settings."
+msgstr ""
+"التحسين\n"
+"                                                        مطلوب!\n"
+"                                                        تقليل حجم الصورة أو\n"
+"                                                        زيادة الخاص بك\n"
+"                                                        إعدادات الضغط."
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.res_config_settings_view_form_vehicle_rental
+msgid "Other"
+msgstr "آخر"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "P.M."
+msgstr "مساءً."
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "PICK-UP"
+msgstr "يلتقط"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "PM"
+msgstr "مساءً"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.pager
+msgid "Page navigation"
+msgstr "التنقل في الصفحة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__product_id
+msgid "Part"
+msgstr "جزء"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__part_price
+msgid "Part Price"
+msgstr "سعر القطعة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_request_inherit_form_view
+msgid "Parts Price:"
+msgstr "سعر قطع الغيار:"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid "Passengers"
+msgstr "الركاب"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__customer_documents__document_type__passport
+msgid "Passport"
+msgstr "جواز سفر"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__payment_amount
+msgid "Payment Amount"
+msgstr "مبلغ الدفع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__payment_date
+msgid "Payment Date"
+msgstr "تاريخ الدفع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Payment Details"
+msgstr "تفاصيل الدفع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "Payment Information"
+msgstr "معلومات الدفع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__payment_state
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__payment_state
+msgid "Payment State"
+msgstr "دولة الدفع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__payment_type
+msgid "Payment Type"
+msgstr "نوع الدفع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_search_view
+msgid "Payment Types"
+msgstr "أنواع الدفع"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+msgid "Pending Invoices"
+msgstr "الفواتير المعلقة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__customer_phone
+msgid "Phone"
+msgstr "هاتف"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid ""
+"Phone\n"
+"                                                        <span class=\"text-danger\">*</span>"
+msgstr ""
+"هاتف\n"
+"                                                        <span class=\"text-danger\">*</span>"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__customer_documents__document_type__photo_id
+msgid "Photo ID card"
+msgstr "بطاقة هوية تحمل صورة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__pick_up_city
+msgid "Pick Up City"
+msgstr "التقاط المدينة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__pick_up_country_id
+msgid "Pick Up Country"
+msgstr "التقط البلد"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__pick_up_street
+msgid "Pick Up Street"
+msgstr "التقاط الشارع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__pick_up_street2
+msgid "Pick Up Street2"
+msgstr "التقاط الشارع2"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__pick_up_zip
+msgid "Pick Up Zip"
+msgstr "التقط الرمز البريدي"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Pick-Up & Drop-Off Details"
+msgstr "تفاصيل الاستلام والتسليم"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_contract_booking__start_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__start_date
+msgid "Pick-up Date"
+msgstr "تاريخ الاستلام"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/maintenance_schedule.py:0
+msgid "Please add a Maintenance Days greater than zero."
+msgstr "الرجاء إضافة أيام صيانة أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "Please ensure that the Drop-off Date is greater than the Pick-up Date"
+msgstr "يرجى التأكد من أن تاريخ التسليم أكبر من تاريخ الاستلام"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/wizards/return_deposit.py:0
+msgid "Please note: A return deposit amount is required."
+msgstr "يرجى ملاحظة: مطلوب مبلغ إيداع العودة."
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__fuel_type__plug_in_hybrid_diesel
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Plug-in Hybrid Diesel"
+msgstr "المكونات في الديزل الهجين"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__fuel_type__plug_in_hybrid_gasoline
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Plug-in Hybrid Gasoline"
+msgstr "بلج إن هجين بنزين"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_rental_policy__policy
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__cancellation_policy_id
+msgid "Policy"
+msgstr "سياسة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__policy_amount
+msgid "Policy Amount"
+msgstr "مبلغ السياسة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Policy Details"
+msgstr "تفاصيل السياسة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__policy_number
+msgid "Policy Number"
+msgstr "رقم السياسة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Post Journal Entries"
+msgstr "نشر إدخالات دفتر اليومية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_web_template
+msgid ""
+"Premium vehicle rentals for every journey. From economy cars\n"
+"                                    to luxury SUVs, we have the perfect vehicle waiting for you."
+msgstr ""
+"تأجير سيارات متميزة لكل رحلة. من السيارات الاقتصادية\n"
+"                                    إلى سيارات الدفع الرباعي الفاخرة، لدينا السيارة المثالية في انتظارك."
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "Press ENTER to toggle"
+msgstr "اضغط على ENTER للتبديل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__rent_price
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__price_unit
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_web_template
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+msgid "Price"
+msgstr "سعر"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "Price Breakdown"
+msgstr "انهيار الأسعار"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__fleet_price_type
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+msgid "Price Type"
+msgstr "نوع السعر"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Price per Day"
+msgstr "السعر في اليوم الواحد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Price per Hours"
+msgstr "السعر لكل ساعة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Price per Kilometer"
+msgstr "السعر للكيلومتر الواحد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Price per Mile"
+msgstr "السعر لكل ميل"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Price per Month"
+msgstr "السعر شهريا"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Price per Week"
+msgstr "السعر في الأسبوع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Price per Year"
+msgstr "السعر في السنة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_crm_lead_inherit_form_view
+msgid "Pricing Details"
+msgstr "تفاصيل التسعير"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "Privacy Policy"
+msgstr "سياسة الخصوصية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_res_config_settings__privacy_policy_link
+msgid "Privacy Policy Link"
+msgstr "رابط سياسة الخصوصية"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Processing image..."
+msgstr "جارٍ معالجة الصورة..."
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__product_id
+msgid "Product"
+msgstr "منتج"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.view_fleet_images_form
+msgid "Property Images"
+msgstr "صور الملكية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__product_qty
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__quantity
+msgid "Quantity"
+msgstr "كمية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__payment_type__quarterly
+msgid "Quarterly"
+msgstr "ربع سنوية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "Rate"
+msgstr "معدل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__customer_documents__document_type__ration_card
+msgid "Ration card"
+msgstr "البطاقة التموينية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_res_config_settings__pagination_item_per_page
+msgid "Records Per Page"
+msgstr "السجلات لكل صفحة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__reference_no
+msgid "Reference No"
+msgstr "الرقم المرجعي"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Refuse"
+msgstr "رفض"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__rent
+msgid "Rent"
+msgstr "إيجار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Rent Details"
+msgstr "تفاصيل الإيجار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "Rent Information"
+msgstr "معلومات الإيجار"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__rent_type
+msgid "Rent Type"
+msgstr "نوع الإيجار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_search_view
+msgid "Rent Types"
+msgstr "أنواع الإيجار"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__rent_day
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Rent per Day"
+msgstr "الإيجار يوميا"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+msgid "Rent per Day must be greater than 0"
+msgstr "يجب أن يكون الإيجار اليومي أكبر من 0"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__rent_hour
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Rent per Hour"
+msgstr "الإيجار لكل ساعة"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+msgid "Rent per Hour must be greater than 0"
+msgstr "يجب أن يكون الإيجار لكل ساعة أكبر من 0"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Rent per KM"
+msgstr "الإيجار لكل كيلومتر"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__rent_km
+msgid "Rent per Kilometer"
+msgstr "الإيجار لكل كيلومتر"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+msgid "Rent per Kilometer must be greater than 0"
+msgstr "يجب أن يكون الإيجار لكل كيلومتر أكبر من 0"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Rent per MI"
+msgstr "الإيجار لكل MI"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__rent_mi
+msgid "Rent per Mile"
+msgstr "الإيجار لكل ميل"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+msgid "Rent per Mile must be greater than 0"
+msgstr "يجب أن يكون الإيجار لكل ميل أكبر من 0"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__rent_month
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Rent per Month"
+msgstr "الإيجار شهريا"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+msgid "Rent per Month must be greater than 0"
+msgstr "يجب أن يكون الإيجار الشهري أكبر من 0"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__rent_week
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Rent per Week"
+msgstr "الإيجار في الأسبوع"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+msgid "Rent per Week must be greater than 0"
+msgstr "يجب أن يكون الإيجار في الأسبوع أكبر من 0"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__rent_year
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Rent per Year"
+msgstr "الإيجار في السنة"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+msgid "Rent per Year must be greater than 0"
+msgstr "يجب أن يكون الإيجار في السنة أكبر من 0"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__rental_agreement_terms_id
+msgid "Rental Agreement"
+msgstr "اتفاقية الإيجار"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_rental_agreement_terms
+#: model:ir.model,name:vehicle_rental.model_rental_agreement_terms
+#: model:ir.ui.menu,name:vehicle_rental.menu_rental_agreement_terms
+msgid "Rental Agreement Terms"
+msgstr "شروط اتفاقية الإيجار"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_rental_contract_booking
+msgid "Rental Contract Booking"
+msgstr "حجز عقد الإيجار"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Rental Contracts"
+msgstr "عقود الإيجار"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_account_payment
+msgid "Rental Deposit"
+msgstr "وديعة الإيجار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "Rental Details"
+msgstr "تفاصيل الإيجار"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_account_move
+msgid "Rental Invoice"
+msgstr "فاتورة الإيجار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Rental Policies"
+msgstr "سياسات الإيجار"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__rental_policy_ids
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.view_fleet_additional_info_form
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.view_fleet_inclusions_form
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.view_fleet_rental_policy_form
+msgid "Rental Policy"
+msgstr "سياسة الإيجار"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__rental_terms
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Rental Terms"
+msgstr "شروط الإيجار"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_rental_vehicle_image
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__rental_vehicle_image_ids
+msgid "Rental Vehicle Image"
+msgstr "صورة مركبة الإيجار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_request_inherit_form_view
+msgid "Required Vehicle Services"
+msgstr "خدمات المركبات المطلوبة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_request_inherit_form_view
+msgid "Required Vehicle Spare Parts"
+msgstr "قطع غيار المركبات المطلوبة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Reset"
+msgstr "إعادة ضبط"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__responsible_id
+msgid "Responsible"
+msgstr "مسؤول"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Retake"
+msgstr "إعادة الالتقاط"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Retry"
+msgstr "أعد المحاولة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__status__c_return
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Return"
+msgstr "يعود"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_return_deposit
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Return Deposit"
+msgstr "إيداع العودة"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/wizards/return_deposit.py:0
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__return_deposit_invoice_id
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Return Deposit Invoice"
+msgstr "فاتورة إيداع العودة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__return_deposit_state
+msgid "Return Payment State"
+msgstr "حالة دفع الإرجاع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم الرسائل القصيرة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Save"
+msgstr "يحفظ"
+
+#. module: vehicle_rental
+#: model:ir.actions.report,name:vehicle_rental.action_rental_scratch_report_template
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__vehicle_scratch_report_id
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Scratch Report"
+msgstr "تقرير الصفر"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_contract_scratch_customer_sign_template
+msgid "Scratch Report Approval"
+msgstr "الموافقة على تقرير الصفر"
+
+#. module: vehicle_rental
+#: model:mail.template,name:vehicle_rental.scratch_report_review_signature_required_mail_template
+msgid "Scratch Report Review & Signature Required Mail Template"
+msgstr "مراجعة تقرير الصفر ونموذج البريد المطلوب للتوقيع"
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_vehicle_scratch_report
+#: model:ir.ui.menu,name:vehicle_rental.menu_vehicle_scratch_report
+msgid "Scratch Reports"
+msgstr "تقارير الصفر"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/availability_template.xml:0
+msgid "Search"
+msgstr "يبحث"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.portal_rental_breadcrumbs
+msgid "Search by lead, vehicle, category, seats..."
+msgstr "البحث حسب الرصاص، السيارة، الفئة، المقاعد ..."
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Searched vehicle not found"
+msgstr "لم يتم العثور على مركبة تم البحث عنها"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Seaters"
+msgstr "مقاعد"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_booking_enquiry_list
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+msgid "Seats"
+msgstr "مقاعد"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Select"
+msgstr "يختار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid ""
+"Select\n"
+"                                    Category"
+msgstr ""
+"اختر\n"
+"                                    الفئة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+msgid "Select Price Type"
+msgstr "حدد نوع السعر"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Select/Move Objects"
+msgstr "تحديد/نقل الكائنات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Send Scratch Approval Mail"
+msgstr "إرسال بريد الموافقة على الصفر"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_additional_info__sequence
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__sequence
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_inclusions__sequence
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_rental_policy__sequence
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__sequence
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__sequence
+msgid "Sequence"
+msgstr "تسلسل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__product_id
+msgid "Service"
+msgstr "خدمة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_service__service_charge
+msgid "Service Charge"
+msgstr "رسوم الخدمة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__service_charge
+msgid "Service Charges"
+msgstr "رسوم الخدمة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_service_form_view
+msgid "Service Details"
+msgstr "تفاصيل الخدمة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Shape"
+msgstr "شكل"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__customer_signed_by
+msgid "Sign By"
+msgstr "التوقيع بواسطة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__signature
+msgid "Signature"
+msgstr "إمضاء"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__customer_signed_date
+msgid "Signed Date"
+msgstr "تاريخ التوقيع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Size"
+msgstr "مقاس"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_part_form_view
+msgid "Spare Part Details"
+msgstr "تفاصيل قطع الغيار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Split"
+msgstr "ينقسم"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Split Expense"
+msgstr "تقسيم النفقات"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/availability_template.xml:0
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__start_date
+#: model:ir.model.fields,field_description:vehicle_rental.field_lead_rental_contract__start_date
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.booking_enquiry_web_template
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_booking_enquiry_list
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "Start Date"
+msgstr "تاريخ البدء"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__pick_up_state_id
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "State"
+msgstr "ولاية"
+
+#. module: vehicle_rental
+#: model:ir.actions.client,name:vehicle_rental.action_vehicle_rental_dashboard
+msgid "Statistics"
+msgstr "إحصائيات"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_vehicle__status
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__status
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_search_view
+msgid "Status"
+msgstr "حالة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,help:vehicle_rental.field_vehicle_contract__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الحالة على أساس الأنشطة\n"
+"متأخر: لقد مر تاريخ الاستحقاق بالفعل\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"المخطط: الأنشطة المستقبلية."
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Street 2..."
+msgstr "شارع 2..."
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Street..."
+msgstr "شارع..."
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__total_service_charge
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__sub_total
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_maintenance_part__price_sub_total
+msgid "Sub Total"
+msgstr "المجموع الفرعي"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Submit"
+msgstr "يُقدِّم"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Supports JPG, PNG, GIF up to 10MB"
+msgstr "يدعم JPG، PNG، GIF حتى 10 ميجابايت"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Switch Camera"
+msgstr "تبديل الكاميرا"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Take Photo"
+msgstr "التقط صورة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__tax_ids
+msgid "Taxes"
+msgstr "الضرائب"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.cancellation_policy_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_agreement_terms_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.res_config_settings_view_form_vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Terms & Conditions"
+msgstr "الشروط والأحكام"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_res_config_settings__terms_conditions_link
+msgid "Terms Conditions Link"
+msgstr "رابط الشروط والأحكام"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid ""
+"Terms and\n"
+"                                                        Conditions"
+msgstr ""
+"الشروط و\n"
+"                                                        الشروط"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_cancellation_policy__terms_and_conditions
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_agreement_terms__rental_terms
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__terms_and_conditions
+msgid "Terms and Conditions"
+msgstr "الشروط والأحكام"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_editor_template.xml:0
+msgid "Text"
+msgstr "نص"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_booking_enquiry_success
+msgid "Thank You!"
+msgstr "شكرًا لك!"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The Rent per %s must be greater than zero."
+msgstr "يجب أن يكون الإيجار لكل %s أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The driver charges must be greater than zero."
+msgstr "يجب أن تكون رسوم السائق أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The extra charge per %s must be greater than zero."
+msgstr "يجب أن تكون الرسوم الإضافية لكل %s أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/insurance_policy.py:0
+msgid "The policy amount must be greater than zero."
+msgstr "يجب أن يكون مبلغ السياسة أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The selected driver must be one of the allowed employees."
+msgstr "يجب أن يكون السائق المختار أحد الموظفين المسموح لهم."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The sign date cannot be earlier than today."
+msgstr "لا يمكن أن يكون تاريخ التوقيع أقدم من اليوم."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The total extra days must be greater than zero."
+msgstr "يجب أن يكون إجمالي الأيام الإضافية أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The total extra hours must be greater than zero."
+msgstr "يجب أن يكون إجمالي الساعات الإضافية أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The total extra km must be greater than zero."
+msgstr "يجب أن يكون إجمالي الكيلومترات الإضافية أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The total extra miles must be greater than zero."
+msgstr "يجب أن يكون مجموع الأميال الإضافية أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The total extra months must be greater than zero."
+msgstr "يجب أن يكون إجمالي الأشهر الإضافية أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The total extra weeks must be greater than zero."
+msgstr "يجب أن يكون إجمالي الأسابيع الإضافية أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The total extra years must be greater than zero."
+msgstr "يجب أن يكون إجمالي السنوات الإضافية أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The total kilometers must be greater than zero."
+msgstr "يجب أن يكون مجموع الكيلومترات أكبر من الصفر."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "The total miles must be greater than zero."
+msgstr "يجب أن يكون مجموع الأميال أكبر من الصفر."
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_cancellation_policy__title
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_images__title
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_agreement_terms__name
+msgid "Title"
+msgstr "عنوان"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "To %1"
+msgstr "إلى %1"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Total"
+msgstr "المجموع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Total Amount"
+msgstr "المبلغ الإجمالي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_day_rent
+msgid "Total Day Rent"
+msgstr "إجمالي الإيجار اليومي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_days
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Total Days"
+msgstr "إجمالي الأيام"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_return_deposit__total_deposit
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_deposit
+msgid "Total Deposit"
+msgstr "إجمالي الإيداع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_request_inherit_form_view
+msgid "Total Estimations"
+msgstr "إجمالي التقديرات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "Total Extra"
+msgstr "مجموع اضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_extra_charges
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Total Extra Charges"
+msgstr "إجمالي الرسوم الإضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_extra_days
+msgid "Total Extra Days"
+msgstr "إجمالي الأيام الإضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_extra_hour
+msgid "Total Extra Hours"
+msgstr "إجمالي الساعات الإضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_extra_km
+msgid "Total Extra KM"
+msgstr "إجمالي الكيلومترات الإضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_extra_mi
+msgid "Total Extra Miles"
+msgstr "إجمالي الأميال الإضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_extra_month
+msgid "Total Extra Months"
+msgstr "إجمالي الأشهر الإضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_extra_week
+msgid "Total Extra Weeks"
+msgstr "إجمالي الأسابيع الإضافية"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_extra_year
+msgid "Total Extra Years"
+msgstr "إجمالي السنوات الإضافية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Total Hours"
+msgstr "إجمالي الساعات"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_km
+msgid "Total Kilometers"
+msgstr "إجمالي الكيلومترات"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_km_rent
+msgid "Total Km Rent"
+msgstr "إجمالي الإيجار بالكيلومتر"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_mi_rent
+msgid "Total Mi Rent"
+msgstr "إجمالي إيجار مي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_mi
+msgid "Total Miles"
+msgstr "إجمالي الأميال"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Total Months"
+msgstr "مجموع الأشهر"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__total_price
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+msgid "Total Price"
+msgstr "السعر الإجمالي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__total_vehicle_rent
+msgid "Total Rental Charges"
+msgstr "إجمالي رسوم الإيجار"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Total Service Charge"
+msgstr "إجمالي رسوم الخدمة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Total Taxes"
+msgstr "إجمالي الضرائب"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+msgid "Total Vehicles"
+msgstr "إجمالي المركبات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Total Weeks"
+msgstr "إجمالي الأسابيع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Total Years"
+msgstr "إجمالي السنوات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Total:"
+msgstr "المجموع:"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__transmission
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.searched_fleet_vehicles
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid "Transmission"
+msgstr "الانتقال"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_search_view
+msgid "Transmission Types"
+msgstr "أنواع ناقل الحركة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Trip Expenses"
+msgstr "مصاريف الرحلة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,help:vehicle_rental.field_vehicle_contract__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "نوع نشاط الاستثناء المسجل."
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/image_capture_field.js:0
+msgid "Unable to access camera: "
+msgstr "غير قادر على الوصول إلى الكاميرا:"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__fleet_vehicle__status__in_maintenance
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Under Maintenance"
+msgstr "تحت الصيانة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Unit Price"
+msgstr "سعر الوحدة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__upcoming_maintenance_date
+msgid "Upcoming Maintenance Date"
+msgstr "تاريخ الصيانة القادم"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Update Vehicle Data"
+msgstr "تحديث بيانات المركبة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__rental_vehicle_image__capture_method__upload
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_damage_image__capture_method__upload
+msgid "Uploaded"
+msgstr "تم الرفع"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "Use This Photo"
+msgstr "استخدم هذه الصورة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_request_inherit_form_view
+msgid "Used Parts & Services"
+msgstr "قطع الغيار والخدمات المستعملة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_contract_scratch_customer_sign_template
+msgid "Validate Scratch Report"
+msgstr "التحقق من صحة تقرير الصفر"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_crm_lead__vehicle_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_customer_documents__vehicle_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_additional_info__fleet_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_inclusions__fleet_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_fleet_rental_policy__fleet_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_lead_rental_contract__vehicle_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_contract_booking__fleet_vehicle_ids
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__vehicle_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_scratch_report__vehicle_id
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_booking_enquiry_list
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_booking_enquiry_detail
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_hr_expense_inherit_search_view
+msgid "Vehicle"
+msgstr "عربة"
+
+#. module: vehicle_rental
+#: model:ir.actions.client,name:vehicle_rental.action_vehicle_availability
+msgid "Vehicle Availability"
+msgstr "توفر السيارة"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+#: model:ir.actions.report,name:vehicle_rental.action_vehicle_contract_report
+#: model:ir.model,name:vehicle_rental.model_vehicle_contract
+#: model:ir.model.fields,field_description:vehicle_rental.field_account_bank_statement_line__vehicle_contract_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_account_move__vehicle_contract_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_account_payment__vehicle_contract_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_customer_documents__vehicle_contract_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_extra_service__vehicle_contract_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_hr_expense__vehicle_contract_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_insurance_policy__vehicle_contract_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_rental_vehicle_image__vehicle_contract_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_damage_image__vehicle_contract_id
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_payment_option__vehicle_contract_id
+msgid "Vehicle Contract"
+msgstr "عقد المركبة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_calendar_view
+msgid "Vehicle Contract Calendar"
+msgstr "تقويم عقود المركبات"
+
+#. module: vehicle_rental
+#: model:product.template,name:vehicle_rental.vehicle_contract_cancellation_charge_product_template
+msgid "Vehicle Contract Cancellation Charges"
+msgstr "رسوم إلغاء عقد المركبة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_pivot_view
+msgid "Vehicle Contract Details"
+msgstr "تفاصيل عقد المركبة"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/availability_template.xml:0
+msgid "Vehicle Contracts"
+msgstr "عقود المركبات"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_vehicle_damage
+#: model:product.template,name:vehicle_rental.vehicle_damage_amount_product_template
+msgid "Vehicle Damage"
+msgstr "تلف السيارة"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_vehicle_damage_image
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__vehicle_damage_image_ids
+msgid "Vehicle Damage Image"
+msgstr "صورة أضرار السيارة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Vehicle Damages"
+msgstr "أضرار المركبات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_scratch_report_form_view
+msgid "Vehicle Details"
+msgstr "تفاصيل المركبة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "Vehicle Expenses"
+msgstr "مصاريف المركبات"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_extra_service
+msgid "Vehicle Extra Service"
+msgstr "خدمة السيارة الإضافية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid "Vehicle Image"
+msgstr "صورة المركبة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "Vehicle Images"
+msgstr "صور المركبات"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_vehicle_maintenance_part
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__vehicle_maintenance_part_ids
+msgid "Vehicle Maintenance Part"
+msgstr "جزء صيانة المركبات"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_maintenance_request
+msgid "Vehicle Maintenance Request"
+msgstr "طلب صيانة المركبة"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_vehicle_maintenance_service
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__vehicle_maintenance_service_ids
+msgid "Vehicle Maintenance Service"
+msgstr "خدمة صيانة المركبات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_payment_option_form_view
+msgid "Vehicle Payment Details"
+msgstr "تفاصيل دفع المركبة"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_vehicle_payment_option
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__vehicle_payment_option_ids
+msgid "Vehicle Payment Option"
+msgstr "خيار الدفع للمركبة"
+
+#. module: vehicle_rental
+#: model:product.template,name:vehicle_rental.vehicle_rent_charge_product_template
+msgid "Vehicle Rent Charges"
+msgstr "رسوم استئجار المركبات"
+
+#. module: vehicle_rental
+#: model:product.template,name:vehicle_rental.vehicle_rent_deposit_product_template
+msgid "Vehicle Rent Deposit"
+msgstr "وديعة إيجار السيارة"
+
+#. module: vehicle_rental
+#: model:product.template,name:vehicle_rental.vehicle_day_wise_rent_product_template
+msgid "Vehicle Rent/Day Charges"
+msgstr "إيجار السيارة / رسوم اليوم"
+
+#. module: vehicle_rental
+#: model:product.template,name:vehicle_rental.vehicle_km_wise_rent_product_template
+msgid "Vehicle Rent/Km Charges"
+msgstr "رسوم إيجار السيارة/الكيلومتر"
+
+#. module: vehicle_rental
+#: model:product.template,name:vehicle_rental.vehicle_mi_wise_rent_product_template
+msgid "Vehicle Rent/Mi Charges"
+msgstr "رسوم إيجار السيارة/مي"
+
+#. module: vehicle_rental
+#: model:mail.template,name:vehicle_rental.vehicle_rental_booking_confirmation_mail_template
+msgid "Vehicle Rental Booking Confirmation Mail Template"
+msgstr "نموذج بريد تأكيد حجز استئجار مركبة"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_vehicle_rental_dashboard
+msgid "Vehicle Rental Dashboard"
+msgstr "لوحة القيادة لتأجير المركبات"
+
+#. module: vehicle_rental
+#: model:ir.actions.server,name:vehicle_rental.ir_cron_generate_missing_fleet_vehicle_access_tokens_ir_actions_server
+msgid "Vehicle Rental: Generate Access Tokens for Fleet Vehicles"
+msgstr "تأجير المركبات: إنشاء رموز الوصول لمركبات الأسطول"
+
+#. module: vehicle_rental
+#: model:ir.actions.server,name:vehicle_rental.ir_cron_generate_missing_access_token_vehicle_contract_ir_actions_server
+msgid "Vehicle Rental: Generate Access Tokens for Vehicle Contracts"
+msgstr "تأجير المركبات: إنشاء رموز الوصول لعقود المركبات"
+
+#. module: vehicle_rental
+#: model:ir.actions.server,name:vehicle_rental.vehicle_contract_invoice_ir_actions_server
+msgid "Vehicle Rental: Vehicle Contract Invoice"
+msgstr "تأجير المركبة: فاتورة عقد المركبة"
+
+#. module: vehicle_rental
+#: model:ir.actions.server,name:vehicle_rental.vehicle_schedule_maintenance_ir_actions_server
+msgid "Vehicle Rental: Vehicle Maintenance Schedule"
+msgstr "تأجير المركبات: جدول صيانة المركبات"
+
+#. module: vehicle_rental
+#: model:ir.model,name:vehicle_rental.model_vehicle_scratch_report
+msgid "Vehicle Scratch Report"
+msgstr "تقرير خدش السيارة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid "Vehicle Specifications"
+msgstr "مواصفات السيارة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "Vehicle Summary"
+msgstr "ملخص المركبة"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid ""
+"Vehicle description will appear\n"
+"                                    here."
+msgstr ""
+"سيظهر وصف السيارة\n"
+"                                    هنا."
+
+#. module: vehicle_rental
+#: model:ir.actions.act_window,name:vehicle_rental.action_fleet_vehicle
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__vehicle_ids
+#: model:ir.ui.menu,name:vehicle_rental.menu_fleet_vehicle
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_search_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_scratch_report_search_view
+msgid "Vehicles"
+msgstr "المركبات"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.res_config_settings_view_form_vehicle_rental
+msgid "Vehicles Renal"
+msgstr "المركبات الكلوية"
+
+#. module: vehicle_rental
+#: model:ir.ui.menu,name:vehicle_rental.main_menu_vehicle_rental
+msgid "Vehicles Rental"
+msgstr "تأجير المركبات"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request_bill__vendor_id
+msgid "Vendor"
+msgstr "بائع"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/maintenance_inherit.py:0
+#: code:addons/vehicle_rental/wizards/maintenance_request_bill.py:0
+#: model:ir.model.fields,field_description:vehicle_rental.field_maintenance_request__bill_count
+msgid "Vendor Bill"
+msgstr "فاتورة البائع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__customer_documents__document_type__voter_id
+msgid "Voter ID card"
+msgstr "بطاقة هوية الناخب"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,field_description:vehicle_rental.field_vehicle_contract__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields,help:vehicle_rental.field_vehicle_contract__website_message_ids
+msgid "Website communication history"
+msgstr "تاريخ اتصالات الموقع"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "Week"
+msgstr "أسبوع"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__crm_lead__fleet_price_type__week
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__payment_type__weekly
+msgid "Weekly"
+msgstr "أسبوعي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__rent_type__week
+msgid "Weeks"
+msgstr "أسابيع"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid "What's Included"
+msgstr "ما هو مدرج"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "Year"
+msgstr "سنة"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__crm_lead__fleet_price_type__year
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__payment_type__yearly
+msgid "Yearly"
+msgstr "سنوي"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__rent_type__year
+msgid "Years"
+msgstr "سنين"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_report_template
+msgid "Yes"
+msgstr "نعم"
+
+#. module: vehicle_rental
+#: model:mail.template,subject:vehicle_rental.vehicle_rental_booking_confirmation_mail_template
+msgid "Your Vehicle Rental Booking Confirmation"
+msgstr "تأكيد حجز استئجار سيارتك"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_booking_enquiry_success
+msgid ""
+"Your vehicle booking enquiry for\n"
+"                                        <br/>"
+msgstr ""
+"الاستعلام عن حجز سيارتك ل\n"
+"                                        <br/>"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "ZIP"
+msgstr "أَزِيز"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "_duration_year"
+msgstr "_duration_year"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/js/lib/index.js:0
+msgid "_second"
+msgstr "_ثانية"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "and"
+msgstr "و"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "breadcrumb"
+msgstr "فتات الخبز"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "e.g. 1st Installment"
+msgstr "على سبيل المثال القسط الأول"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.maintenance_schedule_form_view
+msgid "e.g. 30 Days"
+msgstr "على سبيل المثال 30 يوما"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "e.g. Brandon Freeman"
+msgstr "على سبيل المثال براندون فريمان"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.cancellation_policy_form_view
+msgid "e.g. Flexible Cancellation Policy.."
+msgstr "على سبيل المثال سياسة إلغاء مرنة.."
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "e.g. Lunch with Customer"
+msgstr "على سبيل المثال الغداء مع العملاء"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.fleet_features_form_view
+msgid "e.g. Safety & Driver‑Assistance"
+msgstr "على سبيل المثال السلامة ومساعدة السائق"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "e.g. Third party insurance"
+msgstr "على سبيل المثال تأمين الطرف الثالث"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.rental_agreement_terms_form_view
+msgid "e.g. Vehicle Rental Terms and Conditions.."
+msgstr "على سبيل المثال شروط وأحكام تأجير المركبات.."
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+msgid "fleet_vehicle_id"
+msgstr "fleet_vehicle_id"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__odometer_unit__kilometers
+msgid "km"
+msgstr "كم"
+
+#. module: vehicle_rental
+#: model:ir.model.fields.selection,name:vehicle_rental.selection__vehicle_contract__odometer_unit__miles
+msgid "mi"
+msgstr "mi"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_enquiry_booking
+msgid "name@example.com"
+msgstr "name@example.com"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/image_capture_field.xml:0
+msgid "or use the buttons below to add images"
+msgstr "أو استخدم الأزرار أدناه لإضافة الصور"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+msgid "payment_amount"
+msgstr "Payment_amount"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid "people"
+msgstr "الناس"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_details_template
+msgid "per"
+msgstr "لكل"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_maintenance_request_inherit_form_view
+msgid "sub_total"
+msgstr "sub_total"
+
+#. module: vehicle_rental
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_contract_form_view
+#: model_terms:ir.ui.view,arch_db:vehicle_rental.vehicle_rental_form_view
+msgid "tax)"
+msgstr "ضريبة)"
+
+#. module: vehicle_rental
+#. odoo-javascript
+#: code:addons/vehicle_rental/static/src/xml/template.xml:0
+msgid "users"
+msgstr "المستخدمين"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/vehicle_contract.py:0
+msgid "vehicle_contract_id"
+msgstr "مركبة_عقد_معرف"
+
+#. module: vehicle_rental
+#. odoo-python
+#: code:addons/vehicle_rental/models/fleet_inherit.py:0
+msgid "vehicle_id"
+msgstr "مركبة_id"
+
+#. module: vehicle_rental
+#: model:mail.template,subject:vehicle_rental.scratch_report_review_signature_required_mail_template
+msgid "{{ object.vehicle_id.name}} Scratch Report Review & Signature Required"
+msgstr "{{object.vehicle_id.name}} مطلوب مراجعة التقرير الأولي والتوقيع"
