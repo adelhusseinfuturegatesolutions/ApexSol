@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============== Customers ============== -->
+        <record id="demo_customer_1" model="res.partner">
+            <field name="name">Ahmed Al-Saleh</field>
+            <field name="email">ahmed.saleh@example.com</field>
+            <field name="phone">+966 50 111 2233</field>
+            <field name="mobile">+966 50 111 2233</field>
+            <field name="street">King Fahd Road</field>
+            <field name="city">Riyadh</field>
+            <field name="zip">11564</field>
+            <field name="company_type">person</field>
+        </record>
+
+        <record id="demo_customer_2" model="res.partner">
+            <field name="name">Sara Al-Mansouri</field>
+            <field name="email">sara.mansouri@example.com</field>
+            <field name="phone">+971 55 222 3344</field>
+            <field name="street">Sheikh Zayed Road</field>
+            <field name="city">Dubai</field>
+            <field name="zip">00000</field>
+            <field name="company_type">person</field>
+        </record>
+
+        <record id="demo_customer_3" model="res.partner">
+            <field name="name">Khalid Al-Otaibi</field>
+            <field name="email">khalid.otaibi@example.com</field>
+            <field name="phone">+966 55 333 4455</field>
+            <field name="street">Olaya Street</field>
+            <field name="city">Riyadh</field>
+            <field name="zip">12345</field>
+            <field name="company_type">person</field>
+        </record>
+
+        <record id="demo_customer_4" model="res.partner">
+            <field name="name">Layla Al-Najjar</field>
+            <field name="email">layla.najjar@example.com</field>
+            <field name="phone">+962 79 444 5566</field>
+            <field name="street">Rainbow Street</field>
+            <field name="city">Amman</field>
+            <field name="company_type">person</field>
+        </record>
+
+        <record id="demo_customer_company" model="res.partner">
+            <field name="name">Apex Solutions LLC</field>
+            <field name="email">contact@apexsol.com</field>
+            <field name="phone">+966 11 555 6677</field>
+            <field name="city">Riyadh</field>
+            <field name="company_type">company</field>
+        </record>
+
+        <!-- ============== Drivers (Employees + Partners) ============== -->
+        <record id="demo_driver_employee_1" model="hr.employee">
+            <field name="name">Mohammed Hassan</field>
+            <field name="work_email">m.hassan@apexsol.com</field>
+            <field name="work_phone">+966 50 777 8899</field>
+            <field name="job_title">Senior Driver</field>
+        </record>
+
+        <record id="demo_driver_employee_2" model="hr.employee">
+            <field name="name">Omar Al-Rashid</field>
+            <field name="work_email">o.rashid@apexsol.com</field>
+            <field name="work_phone">+966 50 888 9900</field>
+            <field name="job_title">Driver</field>
+        </record>
+
+        <record id="demo_driver_partner_1" model="res.partner">
+            <field name="name">Mohammed Hassan</field>
+            <field name="email">m.hassan@apexsol.com</field>
+            <field name="phone">+966 50 777 8899</field>
+            <field name="employee_ids" eval="[(6, 0, [ref('demo_driver_employee_1')])]"/>
+        </record>
+
+        <record id="demo_driver_partner_2" model="res.partner">
+            <field name="name">Omar Al-Rashid</field>
+            <field name="email">o.rashid@apexsol.com</field>
+            <field name="phone">+966 50 888 9900</field>
+            <field name="employee_ids" eval="[(6, 0, [ref('demo_driver_employee_2')])]"/>
+        </record>
+
+    </data>
+</odoo>

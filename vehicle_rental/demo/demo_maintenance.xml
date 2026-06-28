@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============== Maintenance Requests ============== -->
+
+        <record id="demo_maint_request_1" model="maintenance.request">
+            <field name="name">Maintenance Request - Hyundai RUH-5005</field>
+            <field name="description">Scheduled monthly maintenance and oil change.</field>
+            <field name="fleet_vehicle_id" ref="demo_vehicle_hyundai"/>
+            <field name="maintenance_schedule_id" ref="demo_maint_schedule_monthly"/>
+            <field name="request_date" eval="(DateTime.now() - relativedelta(days=3)).strftime('%Y-%m-%d')"/>
+            <field name="upcoming_maintenance_date" eval="(DateTime.now() + relativedelta(days=27)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <record id="demo_maint_part_1" model="vehicle.maintenance.part">
+            <field name="product_id" ref="demo_part_engine_oil"/>
+            <field name="description">Engine oil replacement</field>
+            <field name="quantity">1</field>
+            <field name="price_unit">80.0</field>
+            <field name="maintenance_request_id" ref="demo_maint_request_1"/>
+        </record>
+
+        <record id="demo_maint_part_2" model="vehicle.maintenance.part">
+            <field name="product_id" ref="demo_part_brake_pads"/>
+            <field name="description">Front brake pads</field>
+            <field name="quantity">1</field>
+            <field name="price_unit">220.0</field>
+            <field name="maintenance_request_id" ref="demo_maint_request_1"/>
+        </record>
+
+        <record id="demo_maint_service_1" model="vehicle.maintenance.service">
+            <field name="product_id" ref="demo_service_labor"/>
+            <field name="description">2 hours mechanic labor</field>
+            <field name="service_charge">240.0</field>
+            <field name="maintenance_request_id" ref="demo_maint_request_1"/>
+        </record>
+
+        <record id="demo_maint_service_2" model="vehicle.maintenance.service">
+            <field name="product_id" ref="demo_service_wash"/>
+            <field name="description">Exterior wash &amp; interior detail</field>
+            <field name="service_charge">60.0</field>
+            <field name="maintenance_request_id" ref="demo_maint_request_1"/>
+        </record>
+
+        <record id="demo_maint_request_2" model="maintenance.request">
+            <field name="name">Maintenance Request - Audi A3 RUH-2002</field>
+            <field name="description">Quarterly service check.</field>
+            <field name="fleet_vehicle_id" ref="demo_vehicle_audi_a3"/>
+            <field name="maintenance_schedule_id" ref="demo_maint_schedule_quarterly"/>
+            <field name="request_date" eval="(DateTime.now() + relativedelta(days=15)).strftime('%Y-%m-%d')"/>
+            <field name="upcoming_maintenance_date" eval="(DateTime.now() + relativedelta(days=105)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <record id="demo_maint_request_3" model="maintenance.request">
+            <field name="name">Maintenance Request - BMW X5 RUH-3003</field>
+            <field name="description">Tire rotation and inspection.</field>
+            <field name="fleet_vehicle_id" ref="demo_vehicle_bmw_x5"/>
+            <field name="maintenance_schedule_id" ref="demo_maint_schedule_quarterly"/>
+            <field name="request_date" eval="(DateTime.now() + relativedelta(days=20)).strftime('%Y-%m-%d')"/>
+            <field name="upcoming_maintenance_date" eval="(DateTime.now() + relativedelta(days=110)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <record id="demo_maint_part_3" model="vehicle.maintenance.part">
+            <field name="product_id" ref="demo_part_tires"/>
+            <field name="description">Tire replacement (front)</field>
+            <field name="quantity">2</field>
+            <field name="price_unit">350.0</field>
+            <field name="maintenance_request_id" ref="demo_maint_request_3"/>
+        </record>
+
+        <!-- ============== HR Expenses (Vehicle/Contract) ============== -->
+
+        <record id="demo_expense_1" model="hr.expense">
+            <field name="name">Fuel - Audi A3 trip</field>
+            <field name="employee_id" ref="demo_driver_employee_1"/>
+            <field name="product_id" ref="hr_expense.expense_product_travel_accommodations"/>
+            <field name="total_amount_currency">220.0</field>
+            <field name="date" eval="(DateTime.now() - relativedelta(days=1)).strftime('%Y-%m-%d')"/>
+            <field name="fleet_vehicle_id" ref="demo_vehicle_audi_a3"/>
+            <field name="vehicle_contract_id" ref="demo_contract_1"/>
+            <field name="driver_id" ref="demo_driver_partner_1"/>
+        </record>
+
+        <record id="demo_expense_2" model="hr.expense">
+            <field name="name">Toll &amp; Parking - BMW X5</field>
+            <field name="employee_id" ref="demo_driver_employee_2"/>
+            <field name="product_id" ref="hr_expense.expense_product_travel_accommodations"/>
+            <field name="total_amount_currency">85.0</field>
+            <field name="date" eval="DateTime.now().strftime('%Y-%m-%d')"/>
+            <field name="fleet_vehicle_id" ref="demo_vehicle_bmw_x5"/>
+            <field name="driver_id" ref="demo_driver_partner_2"/>
+        </record>
+
+    </data>
+</odoo>

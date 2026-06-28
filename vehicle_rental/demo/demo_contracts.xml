@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============== Vehicle Contract 1: In Progress - Daily Rental ============== -->
+        <record id="demo_contract_1" model="vehicle.contract">
+            <field name="vehicle_id" ref="demo_vehicle_audi_a3"/>
+            <field name="license_plate">RUH-2002</field>
+            <field name="last_odometer">28000</field>
+            <field name="odometer_unit">kilometers</field>
+            <field name="fuel_type">gasoline</field>
+            <field name="transmission">automatic</field>
+            <field name="model_year">2023</field>
+            <field name="is_driver_required">1</field>
+            <field name="driver_id" ref="demo_driver_partner_1"/>
+            <field name="driver_charge_type">excluding</field>
+            <field name="driver_charge">120.0</field>
+            <field name="customer_id" ref="demo_customer_1"/>
+            <field name="customer_phone">+966 50 111 2233</field>
+            <field name="customer_email">ahmed.saleh@example.com</field>
+            <field name="rent_type">days</field>
+            <field name="rent">280.0</field>
+            <field name="start_date" eval="(DateTime.now() - relativedelta(days=2)).strftime('%Y-%m-%d 09:00:00')"/>
+            <field name="end_date" eval="(DateTime.now() + relativedelta(days=5)).strftime('%Y-%m-%d 09:00:00')"/>
+            <field name="pick_up_street">King Fahd Road</field>
+            <field name="pick_up_city">Riyadh</field>
+            <field name="pick_up_zip">11564</field>
+            <field name="drop_off_street">King Fahd Road</field>
+            <field name="drop_off_city">Riyadh</field>
+            <field name="drop_off_zip">11564</field>
+            <field name="cancellation_policy_id" ref="demo_cancel_policy_standard"/>
+            <field name="rental_agreement_terms_id" ref="demo_agreement_terms_standard"/>
+            <field name="payment_type">full_payment</field>
+            <field name="if_any_deposit">1</field>
+            <field name="deposit">2000.0</field>
+            <field name="is_any_extra_charges">1</field>
+            <field name="extra_charge">75.0</field>
+            <field name="vehicle_rental_checklist_id" ref="demo_checklist_standard"/>
+            <field name="status">b_in_progress</field>
+            <field name="description"><![CDATA[<p>Business trip rental - Riyadh.</p>]]></field>
+        </record>
+
+        <record id="demo_contract_1_extra_1" model="extra.service">
+            <field name="product_id" ref="demo_service_gps"/>
+            <field name="description">GPS device for navigation</field>
+            <field name="product_qty">1</field>
+            <field name="amount">25.0</field>
+            <field name="vehicle_contract_id" ref="demo_contract_1"/>
+        </record>
+        <record id="demo_contract_1_extra_2" model="extra.service">
+            <field name="product_id" ref="demo_service_wifi"/>
+            <field name="description">Mobile Wi-Fi for trip</field>
+            <field name="product_qty">1</field>
+            <field name="amount">20.0</field>
+            <field name="vehicle_contract_id" ref="demo_contract_1"/>
+        </record>
+
+        <record id="demo_contract_1_insurance" model="insurance.policy">
+            <field name="policy_number">INS-2024-1001</field>
+            <field name="policy_name">Comprehensive Coverage</field>
+            <field name="description">Full coverage including collision, theft, and third-party.</field>
+            <field name="policy_amount">350.0</field>
+            <field name="vehicle_contract_id" ref="demo_contract_1"/>
+        </record>
+
+        <record id="demo_contract_1_payment_1" model="vehicle.payment.option">
+            <field name="name">Full Payment - Contract 1</field>
+            <field name="payment_date" eval="DateTime.now().strftime('%Y-%m-%d')"/>
+            <field name="payment_amount">1960.0</field>
+            <field name="invoice_item_id" ref="vehicle_rent_charge"/>
+            <field name="vehicle_contract_id" ref="demo_contract_1"/>
+        </record>
+
+        <record id="demo_contract_1_checklist_1" model="rental.contract.checklist">
+            <field name="sequence">1</field>
+            <field name="name">Pickup Inspection</field>
+            <field name="display_type">line_section</field>
+            <field name="vehicle_contract_id" ref="demo_contract_1"/>
+        </record>
+        <record id="demo_contract_1_checklist_2" model="rental.contract.checklist">
+            <field name="sequence">2</field>
+            <field name="name">Body condition verified</field>
+            <field name="is_checkin_item">1</field>
+            <field name="vehicle_contract_id" ref="demo_contract_1"/>
+        </record>
+        <record id="demo_contract_1_checklist_3" model="rental.contract.checklist">
+            <field name="sequence">3</field>
+            <field name="name">Fuel: Full tank</field>
+            <field name="is_checkin_item">1</field>
+            <field name="vehicle_contract_id" ref="demo_contract_1"/>
+        </record>
+        <record id="demo_contract_1_checklist_4" model="rental.contract.checklist">
+            <field name="sequence">4</field>
+            <field name="name">Spare key handed</field>
+            <field name="is_checkin_item">1</field>
+            <field name="vehicle_contract_id" ref="demo_contract_1"/>
+        </record>
+
+        <!-- Customer Documents linked to contract 1 -->
+        <record id="demo_doc_customer_1_dl" model="customer.documents">
+            <field name="vehicle_contract_id" ref="demo_contract_1"/>
+            <field name="file_name">driving_license_ahmed.pdf</field>
+            <field name="document_type">dl</field>
+            <field name="avatar">iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=</field>
+        </record>
+        <record id="demo_doc_customer_1_pp" model="customer.documents">
+            <field name="vehicle_contract_id" ref="demo_contract_1"/>
+            <field name="file_name">passport_ahmed.pdf</field>
+            <field name="document_type">passport</field>
+            <field name="avatar">iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=</field>
+        </record>
+
+        <!-- ============== Vehicle Contract 2: Draft - Monthly Rental ============== -->
+        <record id="demo_contract_2" model="vehicle.contract">
+            <field name="vehicle_id" ref="demo_vehicle_bmw_x5"/>
+            <field name="license_plate">RUH-3003</field>
+            <field name="last_odometer">8500</field>
+            <field name="odometer_unit">kilometers</field>
+            <field name="fuel_type">diesel</field>
+            <field name="transmission">automatic</field>
+            <field name="model_year">2024</field>
+            <field name="customer_id" ref="demo_customer_company"/>
+            <field name="customer_phone">+966 11 555 6677</field>
+            <field name="customer_email">contact@apexsol.com</field>
+            <field name="rent_type">month</field>
+            <field name="rent">10500.0</field>
+            <field name="start_date" eval="(DateTime.now() + relativedelta(days=10)).strftime('%Y-%m-%d 08:00:00')"/>
+            <field name="end_date" eval="(DateTime.now() + relativedelta(days=40)).strftime('%Y-%m-%d 08:00:00')"/>
+            <field name="pick_up_street">Olaya District</field>
+            <field name="pick_up_city">Riyadh</field>
+            <field name="drop_off_street">Olaya District</field>
+            <field name="drop_off_city">Riyadh</field>
+            <field name="cancellation_policy_id" ref="demo_cancel_policy_flexible"/>
+            <field name="rental_agreement_terms_id" ref="demo_agreement_terms_corporate"/>
+            <field name="payment_type">monthly</field>
+            <field name="if_any_deposit">1</field>
+            <field name="deposit">5000.0</field>
+            <field name="vehicle_rental_checklist_id" ref="demo_checklist_standard"/>
+            <field name="status">a_draft</field>
+        </record>
+
+        <record id="demo_contract_2_extra_1" model="extra.service">
+            <field name="product_id" ref="demo_service_additional_driver"/>
+            <field name="product_qty">1</field>
+            <field name="amount">50.0</field>
+            <field name="vehicle_contract_id" ref="demo_contract_2"/>
+        </record>
+        <record id="demo_contract_2_extra_2" model="extra.service">
+            <field name="product_id" ref="demo_service_roadside"/>
+            <field name="product_qty">1</field>
+            <field name="amount">30.0</field>
+            <field name="vehicle_contract_id" ref="demo_contract_2"/>
+        </record>
+
+        <record id="demo_contract_2_insurance" model="insurance.policy">
+            <field name="policy_number">INS-2024-1002</field>
+            <field name="policy_name">Premium Corporate Coverage</field>
+            <field name="description">Zero deductible, full coverage with replacement vehicle.</field>
+            <field name="policy_amount">800.0</field>
+            <field name="vehicle_contract_id" ref="demo_contract_2"/>
+        </record>
+
+        <!-- ============== Vehicle Contract 3: Returned - Weekly Rental ============== -->
+        <record id="demo_contract_3" model="vehicle.contract">
+            <field name="vehicle_id" ref="demo_vehicle_camry"/>
+            <field name="license_plate">RUH-1001</field>
+            <field name="last_odometer">12500</field>
+            <field name="odometer_unit">kilometers</field>
+            <field name="fuel_type">gasoline</field>
+            <field name="transmission">automatic</field>
+            <field name="model_year">2024</field>
+            <field name="customer_id" ref="demo_customer_2"/>
+            <field name="customer_phone">+971 55 222 3344</field>
+            <field name="customer_email">sara.mansouri@example.com</field>
+            <field name="rent_type">week</field>
+            <field name="rent">1100.0</field>
+            <field name="start_date" eval="(DateTime.now() - relativedelta(days=25)).strftime('%Y-%m-%d 10:00:00')"/>
+            <field name="end_date" eval="(DateTime.now() - relativedelta(days=18)).strftime('%Y-%m-%d 10:00:00')"/>
+            <field name="pick_up_street">Sheikh Zayed Road</field>
+            <field name="pick_up_city">Dubai</field>
+            <field name="drop_off_street">Sheikh Zayed Road</field>
+            <field name="drop_off_city">Dubai</field>
+            <field name="cancellation_policy_id" ref="demo_cancel_policy_standard"/>
+            <field name="rental_agreement_terms_id" ref="demo_agreement_terms_standard"/>
+            <field name="payment_type">weekly</field>
+            <field name="if_any_deposit">1</field>
+            <field name="deposit">1500.0</field>
+            <field name="damage_amount">150.0</field>
+            <field name="status">c_return</field>
+        </record>
+
+        <!-- ============== Vehicle Contract 4: Cancelled ============== -->
+        <record id="demo_contract_4" model="vehicle.contract">
+            <field name="vehicle_id" ref="demo_vehicle_tesla"/>
+            <field name="license_plate">RUH-4004</field>
+            <field name="last_odometer">5200</field>
+            <field name="odometer_unit">kilometers</field>
+            <field name="fuel_type">electric</field>
+            <field name="transmission">automatic</field>
+            <field name="model_year">2024</field>
+            <field name="customer_id" ref="demo_customer_3"/>
+            <field name="customer_phone">+966 55 333 4455</field>
+            <field name="customer_email">khalid.otaibi@example.com</field>
+            <field name="rent_type">days</field>
+            <field name="rent">380.0</field>
+            <field name="start_date" eval="(DateTime.now() - relativedelta(days=10)).strftime('%Y-%m-%d 14:00:00')"/>
+            <field name="end_date" eval="(DateTime.now() - relativedelta(days=7)).strftime('%Y-%m-%d 14:00:00')"/>
+            <field name="pick_up_city">Riyadh</field>
+            <field name="drop_off_city">Riyadh</field>
+            <field name="cancellation_policy_id" ref="demo_cancel_policy_flexible"/>
+            <field name="cancellation_reason"><![CDATA[<p>Customer requested cancellation due to trip postponement.</p>]]></field>
+            <field name="cancellation_charge">100.0</field>
+            <field name="status">d_cancel</field>
+        </record>
+
+        <!-- ============== Vehicle Contract 5: Hourly rental ============== -->
+        <record id="demo_contract_5" model="vehicle.contract">
+            <field name="vehicle_id" ref="demo_vehicle_camry"/>
+            <field name="license_plate">RUH-1001</field>
+            <field name="last_odometer">12500</field>
+            <field name="odometer_unit">kilometers</field>
+            <field name="fuel_type">gasoline</field>
+            <field name="transmission">automatic</field>
+            <field name="model_year">2024</field>
+            <field name="customer_id" ref="demo_customer_4"/>
+            <field name="customer_phone">+962 79 444 5566</field>
+            <field name="customer_email">layla.najjar@example.com</field>
+            <field name="rent_type">hour</field>
+            <field name="rent">15.0</field>
+            <field name="start_date" eval="(DateTime.now() + relativedelta(days=1)).strftime('%Y-%m-%d 08:00:00')"/>
+            <field name="end_date" eval="(DateTime.now() + relativedelta(days=1)).strftime('%Y-%m-%d 18:00:00')"/>
+            <field name="pick_up_city">Amman</field>
+            <field name="drop_off_city">Amman</field>
+            <field name="cancellation_policy_id" ref="demo_cancel_policy_flexible"/>
+            <field name="payment_type">full_payment</field>
+            <field name="status">a_draft</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============== Fleet Vehicles ============== -->
+
+        <record id="demo_vehicle_camry" model="fleet.vehicle">
+            <field name="model_id" ref="fleet.vehicle_model_corolla"/>
+            <field name="license_plate">RUH-1001</field>
+            <field name="model_year">2024</field>
+            <field name="vin_sn">JT2BG22K1W0123456</field>
+            <field name="color">Pearl White</field>
+            <field name="seats">5</field>
+            <field name="doors">4</field>
+            <field name="odometer">12500</field>
+            <field name="odometer_unit">kilometers</field>
+            <field name="fuel_type">gasoline</field>
+            <field name="transmission">automatic</field>
+            <field name="status">available</field>
+            <field name="rent_hour">15.0</field>
+            <field name="rent_day">180.0</field>
+            <field name="rent_week">1100.0</field>
+            <field name="rent_month">4200.0</field>
+            <field name="rent_year">45000.0</field>
+            <field name="rent_km">2.0</field>
+            <field name="rent_mi">3.2</field>
+            <field name="extra_charge_hour">5.0</field>
+            <field name="extra_charge_day">50.0</field>
+            <field name="extra_charge_week">300.0</field>
+            <field name="extra_charge_month">1000.0</field>
+            <field name="extra_charge_year">5000.0</field>
+            <field name="extra_charge_km">0.5</field>
+            <field name="extra_charge_mi">0.8</field>
+            <field name="minimum_km_per_day">150.0</field>
+            <field name="maintenance_schedule_id" ref="demo_maint_schedule_quarterly"/>
+            <field name="features_ids" eval="[(6, 0, [ref('demo_feature_ac'), ref('demo_feature_bluetooth'), ref('demo_feature_camera'), ref('demo_feature_apple_carplay')])]"/>
+        </record>
+
+        <record id="demo_vehicle_audi_a3" model="fleet.vehicle">
+            <field name="model_id" ref="fleet.vehicle_model_a3"/>
+            <field name="license_plate">RUH-2002</field>
+            <field name="model_year">2023</field>
+            <field name="vin_sn">WAUZZZ8V5JA001234</field>
+            <field name="color">Mythos Black</field>
+            <field name="seats">5</field>
+            <field name="doors">4</field>
+            <field name="odometer">28000</field>
+            <field name="odometer_unit">kilometers</field>
+            <field name="fuel_type">gasoline</field>
+            <field name="transmission">automatic</field>
+            <field name="status">available</field>
+            <field name="rent_hour">22.0</field>
+            <field name="rent_day">280.0</field>
+            <field name="rent_week">1700.0</field>
+            <field name="rent_month">6300.0</field>
+            <field name="rent_year">68000.0</field>
+            <field name="rent_km">2.8</field>
+            <field name="rent_mi">4.5</field>
+            <field name="extra_charge_hour">8.0</field>
+            <field name="extra_charge_day">75.0</field>
+            <field name="extra_charge_week">450.0</field>
+            <field name="extra_charge_month">1500.0</field>
+            <field name="extra_charge_year">7500.0</field>
+            <field name="extra_charge_km">0.8</field>
+            <field name="extra_charge_mi">1.2</field>
+            <field name="minimum_km_per_day">200.0</field>
+            <field name="maintenance_schedule_id" ref="demo_maint_schedule_monthly"/>
+            <field name="features_ids" eval="[(6, 0, [ref('demo_feature_ac'), ref('demo_feature_bluetooth'), ref('demo_feature_gps'), ref('demo_feature_sunroof'), ref('demo_feature_leather'), ref('demo_feature_cruise')])]"/>
+        </record>
+
+        <record id="demo_vehicle_bmw_x5" model="fleet.vehicle">
+            <field name="model_id" ref="fleet.vehicle_model_serie5"/>
+            <field name="license_plate">RUH-3003</field>
+            <field name="model_year">2024</field>
+            <field name="vin_sn">5UXKR0C50J0K12345</field>
+            <field name="color">Alpine White</field>
+            <field name="seats">7</field>
+            <field name="doors">5</field>
+            <field name="odometer">8500</field>
+            <field name="odometer_unit">kilometers</field>
+            <field name="fuel_type">diesel</field>
+            <field name="transmission">automatic</field>
+            <field name="status">available</field>
+            <field name="rent_hour">35.0</field>
+            <field name="rent_day">450.0</field>
+            <field name="rent_week">2800.0</field>
+            <field name="rent_month">10500.0</field>
+            <field name="rent_year">110000.0</field>
+            <field name="rent_km">4.0</field>
+            <field name="rent_mi">6.5</field>
+            <field name="extra_charge_hour">12.0</field>
+            <field name="extra_charge_day">120.0</field>
+            <field name="extra_charge_week">700.0</field>
+            <field name="extra_charge_month">2500.0</field>
+            <field name="extra_charge_year">12000.0</field>
+            <field name="extra_charge_km">1.2</field>
+            <field name="extra_charge_mi">1.9</field>
+            <field name="minimum_km_per_day">250.0</field>
+            <field name="maintenance_schedule_id" ref="demo_maint_schedule_quarterly"/>
+            <field name="features_ids" eval="[(6, 0, [ref('demo_feature_ac'), ref('demo_feature_bluetooth'), ref('demo_feature_gps'), ref('demo_feature_sunroof'), ref('demo_feature_leather'), ref('demo_feature_cruise'), ref('demo_feature_camera')])]"/>
+        </record>
+
+        <record id="demo_vehicle_tesla" model="fleet.vehicle">
+            <field name="model_id" ref="fleet.vehicle_model_a3"/>
+            <field name="license_plate">RUH-4004</field>
+            <field name="model_year">2024</field>
+            <field name="vin_sn">5YJSA1E2XJF123456</field>
+            <field name="color">Midnight Silver</field>
+            <field name="seats">5</field>
+            <field name="doors">4</field>
+            <field name="odometer">5200</field>
+            <field name="odometer_unit">kilometers</field>
+            <field name="fuel_type">electric</field>
+            <field name="transmission">automatic</field>
+            <field name="status">available</field>
+            <field name="rent_hour">30.0</field>
+            <field name="rent_day">380.0</field>
+            <field name="rent_week">2300.0</field>
+            <field name="rent_month">8800.0</field>
+            <field name="rent_year">95000.0</field>
+            <field name="rent_km">3.5</field>
+            <field name="rent_mi">5.6</field>
+            <field name="extra_charge_hour">10.0</field>
+            <field name="extra_charge_day">100.0</field>
+            <field name="extra_charge_week">600.0</field>
+            <field name="extra_charge_month">2000.0</field>
+            <field name="extra_charge_year">10000.0</field>
+            <field name="extra_charge_km">1.0</field>
+            <field name="extra_charge_mi">1.5</field>
+            <field name="minimum_km_per_day">200.0</field>
+            <field name="maintenance_schedule_id" ref="demo_maint_schedule_yearly"/>
+            <field name="features_ids" eval="[(6, 0, [ref('demo_feature_ac'), ref('demo_feature_bluetooth'), ref('demo_feature_gps'), ref('demo_feature_leather'), ref('demo_feature_cruise'), ref('demo_feature_camera')])]"/>
+        </record>
+
+        <record id="demo_vehicle_hyundai" model="fleet.vehicle">
+            <field name="model_id" ref="fleet.vehicle_model_corolla"/>
+            <field name="license_plate">RUH-5005</field>
+            <field name="model_year">2022</field>
+            <field name="vin_sn">KMHCT4AE5DU123456</field>
+            <field name="color">Silver</field>
+            <field name="seats">5</field>
+            <field name="doors">4</field>
+            <field name="odometer">45000</field>
+            <field name="odometer_unit">kilometers</field>
+            <field name="fuel_type">gasoline</field>
+            <field name="transmission">manual</field>
+            <field name="status">in_maintenance</field>
+            <field name="rent_hour">12.0</field>
+            <field name="rent_day">140.0</field>
+            <field name="rent_week">850.0</field>
+            <field name="rent_month">3300.0</field>
+            <field name="rent_year">36000.0</field>
+            <field name="rent_km">1.5</field>
+            <field name="rent_mi">2.4</field>
+            <field name="extra_charge_hour">4.0</field>
+            <field name="extra_charge_day">40.0</field>
+            <field name="extra_charge_week">240.0</field>
+            <field name="extra_charge_month">800.0</field>
+            <field name="extra_charge_year">4000.0</field>
+            <field name="extra_charge_km">0.4</field>
+            <field name="extra_charge_mi">0.6</field>
+            <field name="minimum_km_per_day">100.0</field>
+            <field name="maintenance_schedule_id" ref="demo_maint_schedule_monthly"/>
+            <field name="features_ids" eval="[(6, 0, [ref('demo_feature_ac'), ref('demo_feature_bluetooth')])]"/>
+        </record>
+
+        <!-- ============== Fleet Rental Policies (per vehicle) ============== -->
+        <record id="demo_policy_audi_1" model="fleet.rental.policy">
+            <field name="sequence">1</field>
+            <field name="policy">Minimum rental age: 25 years</field>
+            <field name="fleet_id" ref="demo_vehicle_audi_a3"/>
+        </record>
+        <record id="demo_policy_audi_2" model="fleet.rental.policy">
+            <field name="sequence">2</field>
+            <field name="policy">International driving license required for non-residents</field>
+            <field name="fleet_id" ref="demo_vehicle_audi_a3"/>
+        </record>
+        <record id="demo_policy_audi_3" model="fleet.rental.policy">
+            <field name="sequence">3</field>
+            <field name="policy">Refundable security deposit of 2000</field>
+            <field name="fleet_id" ref="demo_vehicle_audi_a3"/>
+        </record>
+
+        <record id="demo_policy_bmw_1" model="fleet.rental.policy">
+            <field name="sequence">1</field>
+            <field name="policy">Minimum rental age: 28 years</field>
+            <field name="fleet_id" ref="demo_vehicle_bmw_x5"/>
+        </record>
+        <record id="demo_policy_bmw_2" model="fleet.rental.policy">
+            <field name="sequence">2</field>
+            <field name="policy">Refundable security deposit of 5000</field>
+            <field name="fleet_id" ref="demo_vehicle_bmw_x5"/>
+        </record>
+
+        <!-- ============== Fleet Inclusions ============== -->
+        <record id="demo_inclusion_audi_1" model="fleet.inclusions">
+            <field name="sequence">1</field>
+            <field name="inclusion">Comprehensive insurance</field>
+            <field name="fleet_id" ref="demo_vehicle_audi_a3"/>
+        </record>
+        <record id="demo_inclusion_audi_2" model="fleet.inclusions">
+            <field name="sequence">2</field>
+            <field name="inclusion">250 km/day free mileage</field>
+            <field name="fleet_id" ref="demo_vehicle_audi_a3"/>
+        </record>
+        <record id="demo_inclusion_audi_3" model="fleet.inclusions">
+            <field name="sequence">3</field>
+            <field name="inclusion">24/7 roadside assistance</field>
+            <field name="fleet_id" ref="demo_vehicle_audi_a3"/>
+        </record>
+
+        <record id="demo_inclusion_bmw_1" model="fleet.inclusions">
+            <field name="sequence">1</field>
+            <field name="inclusion">Full insurance with zero deductible</field>
+            <field name="fleet_id" ref="demo_vehicle_bmw_x5"/>
+        </record>
+        <record id="demo_inclusion_bmw_2" model="fleet.inclusions">
+            <field name="sequence">2</field>
+            <field name="inclusion">Unlimited mileage</field>
+            <field name="fleet_id" ref="demo_vehicle_bmw_x5"/>
+        </record>
+
+        <!-- ============== Fleet Additional Info ============== -->
+        <record id="demo_addinfo_audi_1" model="fleet.additional.info">
+            <field name="sequence">1</field>
+            <field name="name">Top Speed</field>
+            <field name="description">250 km/h</field>
+            <field name="fleet_id" ref="demo_vehicle_audi_a3"/>
+        </record>
+        <record id="demo_addinfo_audi_2" model="fleet.additional.info">
+            <field name="sequence">2</field>
+            <field name="name">Fuel Tank Capacity</field>
+            <field name="description">50 Liters</field>
+            <field name="fleet_id" ref="demo_vehicle_audi_a3"/>
+        </record>
+        <record id="demo_addinfo_audi_3" model="fleet.additional.info">
+            <field name="sequence">3</field>
+            <field name="name">Luggage Capacity</field>
+            <field name="description">425 Liters</field>
+            <field name="fleet_id" ref="demo_vehicle_audi_a3"/>
+        </record>
+
+        <record id="demo_addinfo_bmw_1" model="fleet.additional.info">
+            <field name="sequence">1</field>
+            <field name="name">Engine</field>
+            <field name="description">3.0L Inline-6 Turbo</field>
+            <field name="fleet_id" ref="demo_vehicle_bmw_x5"/>
+        </record>
+        <record id="demo_addinfo_bmw_2" model="fleet.additional.info">
+            <field name="sequence">2</field>
+            <field name="name">Drive Type</field>
+            <field name="description">All Wheel Drive (xDrive)</field>
+            <field name="fleet_id" ref="demo_vehicle_bmw_x5"/>
+        </record>
+
+        <!-- ============== Vehicle Scratch Reports ============== -->
+        <record id="demo_scratch_audi" model="vehicle.scratch.report">
+            <field name="name">Audi A3 - Standard Inspection Diagram</field>
+            <field name="vehicle_id" ref="demo_vehicle_audi_a3"/>
+        </record>
+        <record id="demo_scratch_bmw" model="vehicle.scratch.report">
+            <field name="name">BMW X5 - Standard Inspection Diagram</field>
+            <field name="vehicle_id" ref="demo_vehicle_bmw_x5"/>
+        </record>
+
+    </data>
+</odoo>

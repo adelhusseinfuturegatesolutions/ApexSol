@@ -68,6 +68,14 @@
         # Menus
         'views/menus.xml',
     ],
+    'demo': [
+        'demo/demo_partners.xml',
+        'demo/demo_setup.xml',
+        'demo/demo_fleet.xml',
+        'demo/demo_contracts.xml',
+        'demo/demo_crm_leads.xml',
+        'demo/demo_maintenance.xml',
+    ],
     'assets': {
         'web.assets_backend': [
             'https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js',
