@@ -67,14 +67,13 @@
         'views/templates/scratch_report_approval_template.xml',
         # Menus
         'views/menus.xml',
-    ],
-    'demo': [
-        'demo/demo_partners.xml',
-        'demo/demo_setup.xml',
-        'demo/demo_fleet.xml',
-        'demo/demo_contracts.xml',
-        'demo/demo_crm_leads.xml',
-        'demo/demo_maintenance.xml',
+        # Demo Data (loaded as regular data so it appears in all DBs)
+        'data_demo/demo_partners.xml',
+        'data_demo/demo_setup.xml',
+        'data_demo/demo_fleet.xml',
+        'data_demo/demo_contracts.xml',
+        'data_demo/demo_crm_leads.xml',
+        'data_demo/demo_maintenance.xml',
     ],
     'assets': {
         'web.assets_backend': [
