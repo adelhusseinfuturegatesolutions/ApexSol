@@ -74,7 +74,7 @@
         'report/insurance_report.xml',
         'report/insurance_claim_report.xml',
         'report/vehicle_insurance_report.xml',
-        'report/provider_service_report.xml',
+        # 'report/provider_service_report.xml',  # requires OCA report_xlsx (not available on Odoo SaaS)
         # 'report/patient_claim_contract.xml',
         # data
         'data/insurance_expired_mail.xml',
