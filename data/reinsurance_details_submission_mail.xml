@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="reinsurance_details_submit_mail_template" model="mail.template">
+            <field name="name">Reinsurance Details Submission Mail Template</field>
+            <field name="model_id" ref="tk_insurance_management.model_re_insurance"/>
+            <field name="subject">Reinsurance Details Submission for {{ object.insurance_policy_id.policy_name }} -
+                [{{ object.policy_number }}]
+            </field>
+            <field name="email_from">{{object.policy_provider_cmp_id.email}}</field>
+            <field name="partner_to">{{ object.reinsurance_company_id.id }}</field>
+            <field name="body_html" type="html">
+                <p>
+                    <h4>
+                        Dear
+                        <strong>
+                            <t t-out="object.reinsurance_company_id.name"/>
+                        </strong>,
+                    </h4>
+                </p>
+                <hr/>
+                <p>
+                    I hope this message finds you well.
+                </p>
+                <p>
+                    We are writing to formally share the reinsurance details for the following policy issued by our
+                    company:
+                </p>
+                <hr/>
+                <table>
+                    <tr>
+                        <td colspan="2" style="text-align: center; width: 100%">
+                            <strong>
+                                Insurance Policy Details
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%">
+                            <strong>
+                                Insurance:
+                            </strong>
+                        </td>
+                        <td style="width: 50%">
+                            <span t-field="object.insurance_id.insurance_number"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%">
+                            <strong>
+                                Insurance Policy:
+                            </strong>
+                        </td>
+                        <td style="width: 50%">
+                            <span t-field="object.insurance_policy_id.policy_name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%">
+                            <strong>
+                                Policy Period:
+                            </strong>
+                        </td>
+                        <td style="width: 50%">
+                            <span t-field="object.issue_date"/>&#160;to
+                            <span t-field="object.expiry_date"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%">
+                            <strong>
+                                Sum Insured:
+                            </strong>
+                        </td>
+                        <td style="width: 50%">
+                            <t t-out="format_amount(object.sum_assured, object.currency_id)"/>
+                        </td>
+                    </tr>
+                    <tr t-if="object.retention_amount">
+                        <td style="width: 50%">
+                            <strong>
+                                Retention Amount:
+                            </strong>
+                        </td>
+                        <td style="width: 50%">
+                            <t t-out="format_amount(object.retention_amount, object.currency_id)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%">
+                            <strong>
+                                ReInsurance Type:
+                            </strong>
+                        </td>
+                        <td style="width: 50%">
+                            <span t-field="object.re_insurance_type_id.name"/>
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+                <p>
+                    Kindly confirm your acceptance or advise if further clarification is required.
+                </p>
+                <h5>
+                    Best regards,
+                    <br/>
+                    <strong>
+                        <t t-out="object.responsible_id.name"/>
+                    </strong>
+                </h5>
+                <hr/>
+                <span>
+                    <h4>
+                        <t t-out="object.policy_provider_cmp_id.name"/>
+                    </h4>
+                    <t t-out="object.policy_provider_cmp_id.phone"/>
+                    <br/>
+                    <t t-out="object.policy_provider_cmp_id.email"/>
+                    <br/>
+                    <t t-out="object.policy_provider_cmp_id.website"/>
+                </span>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

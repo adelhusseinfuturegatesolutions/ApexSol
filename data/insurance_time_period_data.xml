@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="time_period_1" model="insurance.time.period">
+            <field name="t_period">1 Months</field>
+            <field name="duration">1</field>
+        </record>
+        <record id="time_period_2" model="insurance.time.period">
+            <field name="t_period">3 Months (Quarterly)</field>
+            <field name="duration">3</field>
+        </record>
+        <record id="time_period_3" model="insurance.time.period">
+            <field name="t_period">4 Months</field>
+            <field name="duration">4</field>
+        </record>
+        <record id="time_period_4" model="insurance.time.period">
+            <field name="t_period">6 Months</field>
+            <field name="duration">6</field>
+        </record>
+        <record id="time_period_5" model="insurance.time.period">
+            <field name="t_period">12 Months</field>
+            <field name="duration">12</field>
+        </record>
+    </data>
+</odoo>

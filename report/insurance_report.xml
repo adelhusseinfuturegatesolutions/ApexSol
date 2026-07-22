@@ -1,0 +1,1317 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="insurance_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="insurance">
+                <t t-call="web.external_layout">
+                    <t t-set="report_color" t-value="docs.get_report_color()"/>
+                    <t t-set="report_lighter_color" t-value="docs.get_report_color_lighter()"/>
+                    <style>
+                        .page{
+                        font-family: 'Arial', 'Helvetica Neue', sans-serif;
+                        }
+
+                        .header-custom{
+                        text-align: left;border-bottom:2px solid<t t-esc="report_color"/>;
+                        color:<t t-esc="report_color"/>;
+                        font-size:25px;
+                        }
+
+                        <!--Modern Section Headers -->
+                        .section-header {
+                        background:<t t-esc="report_color"/>;
+                        color: white;
+                        padding: 9px 20px 5px 20px;
+                        margin: 25px 0 15px 0;
+                        font-size: 13pt;
+                        font-weight: 600;
+                        letter-spacing: 0.3px;
+                        }
+
+                        .section-header-alt {
+                        background:<t t-esc="report_lighter_color"/>;
+                        color:<t t-esc="report_color"/>;
+                        padding: 10px 20px;
+                        margin: 20px 0 12px 0;
+                        font-size: 12pt;
+                        font-weight: 600;
+                        border-left: 4px solid<t t-esc="report_color"/>;
+                        }
+                        .border-left {
+                        border-left: 1px solid #e0e0e0;
+                        }
+
+                        table.modern-table {
+                        width: 100%;
+                        border-collapse: separate;
+                        border-spacing: 0;
+                        margin-bottom: 20px;
+                        font-family: Arial, sans-serif;
+                        }
+
+                        table.modern-table td {
+                        padding: 9px 9px;
+                        border-bottom: 2px solid #f0f0f0;
+                        vertical-align: top;
+                        }
+
+                        table.modern-table tr:last-child td {
+                        border-bottom: none;
+                        }
+
+                        table.modern-table td.field-label {
+                        width: 30%;
+                        font-size: 10pt;
+                        color: #1a1a1a;
+                        font-weight: bold;
+                        background:<t t-esc="report_lighter_color"/>;
+                        }
+
+                        table.modern-table td.field-value {
+                        width: 65%;
+                        color: #555;
+                        font-size: 10.5pt;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        padding-left:20px;
+                        }
+
+                        .amount-label-text {
+                        font-size: 10pt;
+                        color: #666;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        margin-bottom: 8px;
+                        text-align: center;
+
+                        }
+                        .amount-value-text {
+                        font-size: 24pt;
+                        color:<t t-esc="report_color"/>;
+                        font-weight: 600;
+                        letter-spacing: 0.5px;
+                        text-align: center;
+                        }
+
+                        .amount-words {
+                        font-size: 9pt;
+                        color: #666;
+                        margin-top: 5px;
+                        font-style: italic;
+                        text-align: center;
+                        }
+                    </style>
+                    <div class="page" style="font-family: 'Arial', 'Helvetica Neue', sans-serif;">
+                        <div class="header-custom">
+                            <strong>Insurance Policy Document
+                            </strong>
+                            <p style="color:#71797E;font-size: 13px;">
+                                Comprehensive Insurance Coverage Details &amp; Terms
+                            </p>
+                        </div>
+                        <!--display number-->
+                        <t t-set="section_no" t-value="0"/>
+                        <!-- ================================== Details ================================== -->
+                        <div t-att-style="' margin-top:8px;background-color:%s;'%report_lighter_color">
+                            <table style="width:100%;" class="table table-borderless">
+                                <tr>
+                                    <td style="width:33%; border:none;padding-left:10px;color:#71797E;">
+                                        Insurance Number
+                                        <br/>
+                                        <strong t-attf-style="color: {{ report_color }};">
+                                            <span t-field="insurance.insurance_number"/>
+                                        </strong>
+                                    </td>
+                                    <td style="width:33%; border:none; padding-left:10px;color:#71797E;">
+                                        Issue Date
+                                        <br/>
+                                        <strong t-attf-style="color: {{ report_color }};">
+                                            <span t-field="insurance.issue_date"/>
+                                        </strong>
+                                    </td>
+                                    <td style="width:33%; border:none; padding-left:10px;color:#71797E;"
+                                        t-if="insurance.state == 'confirmed' or insurance.state == 'running'">
+                                        Policy Status
+                                        <br/>
+                                        <strong style="color:#155724; border-radius:4px; padding:5px 15px 2px 15px;background-color:#d4edda;">
+                                            ACTIVE
+                                        </strong>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                        <!-- ================================== Section 1:  Policy Information ================================== -->
+                        <t t-set="section_no" t-value="section_no + 1"/>
+                        <div class="section-header"><span t-esc="section_no"/>. POLICY DETAILS
+                        </div>
+                        <table class="modern-table table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Policy Category</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.insurance_category_id"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Policy Code</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.insurance_category_id.category_code"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Sub Category</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.insurance_sub_category_id"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Insurance Policy</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.insurance_policy_id"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="insurance.insurance_buying_for_id">
+                                    <td class="field-label" style="padding-left:20px;">Buying For</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.insurance_buying_for_id"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Premium Type</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.premium_type"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Policy Time Period</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.policy_price_list_id"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Issue Date</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.issue_date"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Expiry Date</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.expiry_date"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="insurance.premium_type == 'fixed'">
+                                    <td class="field-label" style="padding-left:20px;">Policy Amount</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.total_policy_amount" class="me-1"/>
+                                        <span class="fw-bold">Invoice</span>
+                                        <span t-field="insurance.invoice_id"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="insurance.premium_type == 'installment'">
+                                    <td class="field-label" style="padding-left:20px;">Monthly Installment</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.monthly_installment"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- ================================== Section 3:  Policy provider ================================== -->
+                        <div style="page-break-inside: avoid !important;">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header" t-if="insurance.policy_provider_cmp_id "><span
+                                    t-esc="section_no"/>. POLICY PROVIDER
+                            </div>
+                            <table class="modern-table table table-borderless" t-if="insurance.policy_provider_cmp_id">
+                                <tbody>
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Policy Provider</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.policy_provider_cmp_id"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Phone</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.policy_provider_cmp_id.phone"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Email</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.policy_provider_cmp_id.email"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== Section 2: Policyholder Information ================================== -->
+                        <p style="page-break-before:always;"/>
+                        <t t-set="section_no" t-value="section_no + 1"/>
+                        <div class="section-header"><span t-esc="section_no"/>. POLICY HOLDER DETAILS
+                        </div>
+                        <table class="modern-table table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Policy Holder</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.policy_holder_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Gender</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.policy_holder_gender"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Date of Birth</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.policy_holder_dob" class="me-1"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Age</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.policy_holder_age"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Email</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.email"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Phone</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.phone"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">Address</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.policy_holder_street"/>
+                                        <t t-if="insurance.policy_holder_street2">
+                                            <span t-field="insurance.policy_holder_street2"/>
+                                        </t>
+                                        <t t-if="insurance.policy_holder_city"><span
+                                                t-field="insurance.policy_holder_city"/>,
+                                        </t>
+                                        <t t-if="insurance.policy_holder_state_id"><span
+                                                t-field="insurance.policy_holder_state_id"/>,
+                                        </t>
+                                        <span t-field="insurance.policy_holder_zip"/>
+                                        <span t-field="insurance.policy_holder_country_id"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- ================================== Section 3:  ADVISER Information ================================== -->
+                        <div style="page-break-inside: avoid !important;">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header" t-if="insurance.responsible_id "><span
+                                    t-esc="section_no"/>. INSURANCE ADVISER
+                            </div>
+                            <table class="modern-table table table-borderless" t-if="insurance.responsible_id">
+                                <tbody>
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Adviser</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.responsible_id"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Phone</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.responsible_id.phone"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Email</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.responsible_id.email"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== Section 4:  Agent Information ================================== -->
+                        <div style="page-break-inside: avoid !important;"  t-if="insurance.agent_required == True">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header" t-if="insurance.agent_required == True"><span
+                                    t-esc="section_no"/>. AGENT DETAILS
+                            </div>
+                            <table class="modern-table table table-borderless" t-if="insurance.agent_required == True">
+                                <tbody>
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Agent</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.agent_id"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Phone</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.agent_phone"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="field-label" style="padding-left:20px;">Email</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.agent_email"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== Section 4:  Insurance Details ================================== -->
+                        <div style="page-break-inside: avoid !important;">
+                            <div class="section-header" t-if="insurance.category == 'health'">
+                                <t t-set="section_no" t-value="section_no + 1"/>
+                                <span t-esc="section_no"/>. INSURER DETAILS
+                            </div>
+                            <table class="modern-table table table-borderless"
+                                   t-if="insurance.category == 'health' and insurance.desired_coverage_type == 'individual'">
+                                <tbody>
+
+                                    <tr t-if="insurance.insured_id">
+                                        <td class="field-label" style="padding-left:20px;">Insured</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.insured_id"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="insurance.gender">
+                                        <td class="field-label" style="padding-left:20px;">Gender</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.gender"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="insurance.dob">
+                                        <td class="field-label" style="padding-left:20px;">Date of Birth</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.dob" class="me-1"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="insurance.dob">
+                                        <td class="field-label" style="padding-left:20px;">Age</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.age"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="insurance.marital_status">
+                                        <td class="field-label" style="padding-left:20px;">Marital Status</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.marital_status"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="insurance.blood_group">
+                                        <td class="field-label" style="padding-left:20px;">Blood Group</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.blood_group"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="insurance.insured_height">
+                                        <td class="field-label" style="padding-left:20px;">Height (cm)</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.insured_height"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="insurance.insured_weight">
+                                        <td class="field-label" style="padding-left:20px;">Weight (kg)</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.insured_weight"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr t-if="insurance.insured_birthmark">
+                                        <td class="field-label" style="padding-left:20px;">Birthmark</td>
+                                        <td class="field-value">
+                                            <span t-field="insurance.insured_birthmark"/>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <table class="table table-borderless"
+                                   style="font-size:13px; border-collapse:collapse;page-break-inside: avoid !important;"
+                                   t-if="insurance.category == 'health' and insurance.desired_coverage_type in ['family', 'group']">
+                                <thead>
+                                    <tr t-att-style="'background-color:%s;border-bottom:2px solid %s;'%(report_lighter_color,report_color) ">
+                                        <th style="padding-left:19px; width:20%; text-align:left;">Insured</th>
+                                        <th style="width:15%;">Date of Birth</th>
+                                        <th style="width:9%;">Age</th>
+                                        <th style="width:7%;">Gender</th>
+                                        <th style="width:9%;">Blood Group</th>
+                                        <th style="width:7%;text-align:right;">Height (cm)</th>
+                                        <th style="width:6%;text-align:right;">Weight (kg)</th>
+                                        <th style="width:3%;">Birthmark</th>
+                                        <th style="width:15%;text-align:left;">Marital Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="insurance.insured_details_ids" t-as="insured">
+                                        <tr style="border-bottom:1px solid #ddd;">
+                                            <td style="padding-left:20px; width:15%; text-align:left;">
+                                                <span t-field="insured.partner_id"/>
+                                            </td>
+                                            <td style="width:10%;">
+                                                <span t-if="insured.insured_dob" t-field="insured.insured_dob"/>
+                                            </td>
+                                            <td style="width:5%;">
+                                                <span t-if="insured.insured_ages" t-field="insured.insured_ages"/>
+                                            </td>
+                                            <td style="width:8%;">
+                                                <span t-if="insured.insured_gender" t-field="insured.insured_gender"/>
+                                            </td>
+                                            <td style="width:8%;">
+                                                <span t-if="insured.insured_blood_group"
+                                                      t-field="insured.insured_blood_group"/>
+                                            </td>
+                                            <td style="width:10%;text-align:right;">
+                                                <span t-if="insured.insured_heights" t-field="insured.insured_heights"/>
+                                            </td>
+                                            <td style="width:10%;text-align:right;">
+                                                <span t-if="insured.insured_weights" t-field="insured.insured_weights"/>
+                                            </td>
+                                            <td style="width:3%;">
+                                                <span t-if="insured.insured_birthmarks"
+                                                      t-field="insured.insured_birthmarks"/>
+                                            </td>
+                                            <td style="width:12%; text-align:left;">
+                                                <span t-if="insured.insured_marital_status"
+                                                      t-field="insured.insured_marital_status"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== Section 7:  Insurance Nominee ================================== -->
+                        <div style="page-break-inside: avoid !important;">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header" t-if="insurance.insurance_nominee_ids"><span
+                                    t-esc="section_no"/>. INSURANCE NOMINEE
+                            </div>
+                            <table class="table table-borderless"
+                                   style="font-size:13px; border-collapse:collapse;page-break-inside: avoid !important;"
+                                   t-if="insurance.insurance_nominee_ids">
+                                <thead>
+                                    <tr t-att-style="'border-bottom:2px solid %s;background-color:%s;'%(report_color,report_lighter_color)">
+                                        <th style="padding-left:22px; width:35%;">Name</th>
+                                        <th style="width:20%;">Relation with Policy Holder</th>
+                                        <th style="width:15%;text-align: right;">Date of Birth</th>
+                                        <th style="width:15%;">Age</th>
+                                        <th style="width:15%;text-align: right;padding-right:10px;">Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="insurance.insurance_nominee_ids" t-as="nominee">
+                                        <tr style="border-bottom:1px solid #ddd;">
+                                            <td style="padding-left:20px; width:35%; ">
+                                                <span t-field="nominee.partner_id"/>
+                                            </td>
+                                            <td style="width:20%;">
+                                                <span t-field="nominee.insurance_nominee_relation_id"/>
+                                            </td>
+                                            <td style="width:10;text-align:right;">
+                                                <span t-field="nominee.nominee_dob"/>
+                                            </td>
+                                            <td style="width:15%;">
+                                                <span t-field="nominee.nominee_age"/>
+                                            </td>
+                                            <td style="width:15%;text-align: right;padding-right:10px;">
+                                                <span t-field="nominee.percentage" class="me-1"/>%
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== Section 5:  Insurance Details ================================== -->
+<!--                        <p style="page-break-before:always;"/>-->
+                        <div>
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header"
+                                 t-if="insurance.insurance_category_id.category != 'vehicle' and insurance.insurance_category_id.category == 'life'">
+                                <span t-esc="section_no"/>. LIFE INSURANCE POLICY DETAILS
+                            </div>
+                            <div class="section-header"
+                                 t-if="insurance.insurance_category_id.category != 'vehicle' and insurance.insurance_category_id.category == 'health'">
+                                <span t-esc="section_no"/>. HEALTH INSURANCE POLICY DETAILS
+                            </div>
+                            <div class="section-header"
+                                 t-if="insurance.insurance_category_id.category != 'vehicle' and insurance.insurance_category_id.category == 'property'">
+                                <span t-esc="section_no"/>. PROPERTY INSURANCE POLICY DETAILS
+                            </div>
+                            <div class="section-header"
+                                 t-if="insurance.insurance_category_id.category != 'vehicle' and insurance.insurance_category_id.category == 'liability'">
+                                <span t-esc="section_no"/>. LIABILITY INSURANCE POLICY DETAILS
+                            </div>
+                            <div class="section-header"
+                                 t-if="insurance.insurance_category_id.category != 'vehicle' and insurance.insurance_category_id.category == 'disability'">
+                                <span t-esc="section_no"/>. DISABILITY INSURANCE POLICY DETAILS
+                            </div>
+                            <div class="section-header"
+                                 t-if="insurance.insurance_category_id.category != 'vehicle' and insurance.insurance_category_id.category == 'travel'">
+                                <span t-esc="section_no"/>. TRAVEL INSURANCE POLICY DETAILS
+                            </div>
+                            <div class="section-header"
+                                 t-if="insurance.insurance_category_id.category != 'vehicle' and insurance.insurance_category_id.category == 'pet'">
+                                <span t-esc="section_no"/>. PET INSURANCE POLICY DETAILS
+                            </div>
+                            <div class="section-header"
+                                 t-if="insurance.insurance_category_id.category != 'vehicle' and insurance.insurance_category_id.category == 'business'">
+                                <span t-esc="section_no"/>. Business insurance policy details
+                            </div>
+                        </div>
+                        <!-- ================================== Table ================================== -->
+                        <table class="modern-table table table-borderless"
+                               t-if="insurance.insurance_category_id.category == 'life'">
+                            <tbody>
+                                <tr t-if="insurance.life_insured_age">
+                                    <td class="field-label" style="padding-left:20px;">Insured Age</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.life_insured_age"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="insurance.is_smoking_status">
+                                    <td class="field-label" style="padding-left:20px;">Smoking Status</td>
+                                    <td class="field-value">
+                                        <t t-if="insurance.is_smoking_status == 'yes'">
+                                            Yes
+                                        </t>
+                                        <t t-else="">
+                                            No
+                                        </t>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="insurance.length_of_coverage_term">
+                                    <td class="field-label" style="padding-left:20px;">Length of Coverage Terms</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.length_of_coverage_term"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="insurance.occupation_and_hobbies">
+                                    <td class="field-label" style="padding-left:20px;">Occupation and Hobbies of
+                                        Insured
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.occupation_and_hobbies"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="insurance.desired_death_amount">
+                                    <td class="field-label" style="padding-left:20px;">Death Amount</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.desired_death_amount"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="insurance.life_health_history">
+                                    <td class="field-label" style="padding-left:20px;">Health History of Insured
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.life_health_history"/>
+                                    </td>
+                                </tr>
+
+                                <tr t-if="insurance.family_medical_history">
+                                    <td class="field-label" style="padding-left:20px;">Family Medical History</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.family_medical_history"/>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                        <!-- Health Insurance Table -->
+                        <table class="modern-table table table-borderless"
+                               t-if="insurance.insurance_category_id.category == 'health'">
+                            <tbody>
+                                <tr t-if="insurance.health_insured_age">
+                                    <td class="field-label" style="padding-left:20px;">Insured Age</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.life_insured_age"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.desired_coverage_type">
+                                    <td class="field-label" style="padding-left:20px;">Desired Coverage Type</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.desired_coverage_type"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.out_of_pocket_maximum">
+                                    <td class="field-label" style="padding-left:20px;">Out of Pocket Maximum</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.out_of_pocket_maximum"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.health_history_of_insured">
+                                    <td class="field-label" style="padding-left:20px;">Health History of Insured
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.health_history_of_insured"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.health_deductible_amount">
+                                    <td class="field-label" style="padding-left:20px;">Deductible Amount</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.health_deductible_amount"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.copay_amount">
+                                    <td class="field-label" style="padding-left:20px;">Co-pay Amount</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.copay_amount"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.drug_coverage">
+                                    <td class="field-label" style="padding-left:20px;">Prescription Drug Coverage
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.drug_coverage"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.healthcare_provider_network">
+                                    <td class="field-label" style="padding-left:20px;">Preferred Healthcare Provider
+                                        Network
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.healthcare_provider_network"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Property Insurance Table -->
+                        <table class="modern-table table table-borderless"
+                               t-if="insurance.insurance_category_id.category == 'property'">
+                            <tbody>
+                                <tr t-if="insurance.property_type">
+                                    <td class="field-label" style="padding-left:20px;">Property Type</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.property_type"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.area_sq_ft">
+                                    <td class="field-label" style="padding-left:20px;">Area (Sq Ft)</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.area_sq_ft"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.desired_coverage_types">
+                                    <td class="field-label" style="padding-left:20px;">Coverage Type</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.desired_coverage_types"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.property_value">
+                                    <td class="field-label" style="padding-left:20px;">Estimated Value</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.property_value"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.construct_year">
+                                    <td class="field-label" style="padding-left:20px;">Construct Year</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.construct_year"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.property_coverage_limits">
+                                    <td class="field-label" style="padding-left:20px;">Property Coverage Limits</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.property_coverage_limits"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.special_features_of_the_property">
+                                    <td class="field-label" style="padding-left:20px;">Special Features of the
+                                        Property
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.special_features_of_the_property"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.property_usage">
+                                    <td class="field-label" style="padding-left:20px;">Usage</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.property_usage"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.property_deductible_amount">
+                                    <td class="field-label" style="padding-left:20px;">Deductible Amount</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.property_deductible_amount"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.construction_type_and_materials">
+                                    <td class="field-label" style="padding-left:20px;">Construction Type and
+                                        Materials
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.construction_type_and_materials"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.personal_property_inventory">
+                                    <td class="field-label" style="padding-left:20px;">Personal Property Inventory
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.personal_property_inventory"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.street">
+                                    <td class="field-label" style="padding-left:20px;">Address</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.street"/>
+                                        <t t-if="insurance.street2">
+                                            ,
+                                            <span t-field="insurance.street2"/>
+                                        </t>
+                                        <br/>
+                                        <span t-field="insurance.city"/>,
+                                        <span t-field="insurance.state_id"/>
+                                        <span t-field="insurance.zip"/>
+                                        <br/>
+                                        <span t-field="insurance.country_id"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Liability Insurance Table -->
+                        <table class="modern-table table table-borderless"
+                               t-if="insurance.insurance_category_id.category == 'liability'">
+                            <tbody>
+                                <tr t-if="insurance.liability_coverage_type">
+                                    <td class="field-label" style="padding-left:20px;">Coverage Type</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.liability_coverage_type"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.desired_coverage_limits">
+                                    <td class="field-label" style="padding-left:20px;">Desired Coverage Limits</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.desired_coverage_limits"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.type_of_liability_risk">
+                                    <td class="field-label" style="padding-left:20px;">Liability Risk</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.type_of_liability_risk"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.business_type_and_operations">
+                                    <td class="field-label" style="padding-left:20px;">Business Type and
+                                        Operations
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.business_type_and_operations"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Disability Insurance Table -->
+                        <table class="modern-table table table-borderless"
+                               t-if="insurance.insurance_category_id.category == 'disability'">
+                            <tbody>
+                                <tr t-if="insurance.occupation">
+                                    <td class="field-label" style="padding-left:20px;">Occupation</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.occupation"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.insured_is_smoking">
+                                    <td class="field-label" style="padding-left:20px;">Insured is Smoking</td>
+                                    <td class="field-value">
+                                        <t t-if="insurance.insured_is_smoking == 'yes'">Yes</t>
+                                        <t t-else="">No</t>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.length_coverage_disability_period">
+                                    <td class="field-label" style="padding-left:20px;">Length of Coverage Period
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.length_coverage_disability_period"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.disability_health_history">
+                                    <td class="field-label" style="padding-left:20px;">Health History</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.disability_health_history"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.income">
+                                    <td class="field-label" style="padding-left:20px;">Income</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.income"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.disability_desired_benefit_amount">
+                                    <td class="field-label" style="padding-left:20px;">Desired Amount</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.disability_desired_benefit_amount"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.occupation_and_hobbies">
+                                    <td class="field-label" style="padding-left:20px;">Occupation and Hobbies of
+                                        Insured
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.occupation_and_hobbies"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Travel Insurance Table -->
+                        <table class="modern-table table table-borderless"
+                               t-if="insurance.insurance_category_id.category == 'travel'">
+                            <tbody>
+                                <tr t-if="insurance.types_of_coverage">
+                                    <td class="field-label" style="padding-left:20px;">Type of Coverage</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.types_of_coverage"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.travel_source">
+                                    <td class="field-label" style="padding-left:20px;">Source</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.travel_source"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.travel_destination">
+                                    <td class="field-label" style="padding-left:20px;">Destination</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.travel_destination"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.travel_purpose">
+                                    <td class="field-label" style="padding-left:20px;">Travel Purpose</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.travel_purpose"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.trip_start_date">
+                                    <td class="field-label" style="padding-left:20px;">Trip Start Date</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.trip_start_date"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.trip_end_date">
+                                    <td class="field-label" style="padding-left:20px;">Trip End Date</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.trip_end_date"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.trip_length">
+                                    <td class="field-label" style="padding-left:20px;">Trip Length</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.trip_length"/>
+                                        <span t-field="insurance.odometer_unit"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.trip_coverage_amount">
+                                    <td class="field-label" style="padding-left:20px;">Coverage Amount</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.trip_coverage_amount"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.traveler_health_history">
+                                    <td class="field-label" style="padding-left:20px;">Traveler Health History</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.traveler_health_history"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Pet Insurance Table -->
+                        <table class="modern-table table table-borderless"
+                               t-if="insurance.insurance_category_id.category == 'pet'">
+                            <tbody>
+                                <tr t-if="insurance.pet_name">
+                                    <td class="field-label" style="padding-left:20px;">Pet Name</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.pet_name"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.age_of_breed_of_the_pet">
+                                    <td class="field-label" style="padding-left:20px;">Age</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.age_of_breed_of_the_pet"/>
+                                        Years
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.pet_desired_coverage_type">
+                                    <td class="field-label" style="padding-left:20px;">Coverage Type</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.pet_desired_coverage_type"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.pet_desired_coverage_type in ['comprehensive', 'accident']">
+                                    <td class="field-label" style="padding-left:20px;">Accident Amount</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.accident_coverage"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.pet_health_history">
+                                    <td class="field-label" style="padding-left:20px;">Health History</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.pet_health_history"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.breed_type">
+                                    <td class="field-label" style="padding-left:20px;">Breed Type</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.breed_type"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.exclusions">
+                                    <td class="field-label" style="padding-left:20px;">Exclusions</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.exclusions"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.pet_deductible_amount">
+                                    <td class="field-label" style="padding-left:20px;">Deductible Amount</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.pet_deductible_amount"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.pet_desired_coverage_type in ['comprehensive', 'illness']">
+                                    <td class="field-label" style="padding-left:20px;">Illness Amount</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.illness_coverage"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.pet_coverage_limits">
+                                    <td class="field-label" style="padding-left:20px;">Coverage Limits</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.pet_coverage_limits"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Business Insurance Table -->
+                        <table class="modern-table table table-borderless"
+                               t-if="insurance.insurance_category_id.category == 'business'">
+                            <tbody>
+                                <tr t-if="insurance.business_name">
+                                    <td class="field-label" style="padding-left:20px;">Business Name</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.business_name"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.business_desired_coverage_type">
+                                    <td class="field-label" style="padding-left:20px;">Coverage Type</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.business_desired_coverage_type"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.business_type_operation">
+                                    <td class="field-label" style="padding-left:20px;">Business Type and
+                                        Operations
+                                    </td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.business_type_operation"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.industry_specific_risks">
+                                    <td class="field-label" style="padding-left:20px;">Industry Specific Risks</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.industry_specific_risks"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.business_property_value">
+                                    <td class="field-label" style="padding-left:20px;">Property Value</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.business_property_value"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.number_of_employees">
+                                    <td class="field-label" style="padding-left:20px;">No. of Employees</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.number_of_employees"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.business_deductible_amount">
+                                    <td class="field-label" style="padding-left:20px;">Deductible Amount</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.business_deductible_amount"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="insurance.business_coverage_limits">
+                                    <td class="field-label" style="padding-left:20px;">Business Coverage Limits</td>
+                                    <td class="field-value">
+                                        <span t-field="insurance.business_coverage_limits"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- ================================== Section 8: PAYMENT DETAILS ================================== -->
+                        <p style="page-break-before:always;"/>
+                        <div style="page-break-inside: avoid !important;margin-bottom:10px;">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header"><span t-esc="section_no"/>. PAYMENT DETAILS
+                            </div>
+                            <div t-att-style="'border:3px solid %s; padding:20px;'%report_color"
+                                 t-if="insurance.premium_type == 'fixed'">
+                                <div class="amount-label-text">Premium Amount</div>
+                                <div class="amount-value-text">
+                                    <span t-field="insurance.total_policy_amount"/>
+                                </div>
+                                <div class="amount-words">
+                                    (
+                                    <span
+                                            t-esc="insurance.currency_id.amount_to_text(insurance.total_policy_amount).upper()"/>
+                                    )
+                                </div>
+                            </div>
+
+                            <div t-att-style="'border:3px solid %s; padding:20px;'%report_color"
+                                 t-if="insurance.premium_type == 'installment'">
+                                <div class="amount-label-text">Monthly Premium Amount</div>
+                                <div class="amount-value-text">
+                                    <span t-field="insurance.monthly_installment"/>
+                                </div>
+                                <div class="amount-words">
+                                    (
+                                    <span
+                                            t-esc="insurance.currency_id.amount_to_text(insurance.monthly_installment).upper()"/>
+                                    )
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ==================================  Insurance EMI Details ================================== -->
+                        <table class="modern-table" style="border:2px solid #f0f0f0;"
+                               t-if="insurance.premium_type == 'fixed'">
+                            <tbody>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">
+                                        Premium Type
+                                    </td>
+                                    <td class="field-value" style="text-align:right;padding-right:20px;">
+                                        <span t-field="insurance.premium_type"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">
+                                        Claim Amount
+                                    </td>
+                                    <td class="field-value" style="text-align:right;padding-right:20px;">
+                                        <span t-field="insurance.claim_amount"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">
+                                        Total Premium Amount
+                                    </td>
+                                    <td class="field-value" style="text-align:right;padding-right:20px;">
+                                        <span t-id="insurance.invoice_id.state == 'paid'" style="margin-right:4px;">
+                                            <span style="color:#155724; border-radius:4px; padding:5px 15px 2px 15px;background-color:#d4edda;">
+                                                PAID
+                                            </span>
+                                        </span>
+                                        (<span t-field="insurance.invoice_id"
+                                               t-attf-style="color: {{ report_color }};"/>)
+                                        <strong>
+                                            <span t-field="insurance.total_policy_amount"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="modern-table" style="border:2px solid #f0f0f0;"
+                               t-if="insurance.premium_type == 'installment'">
+                            <tbody>
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">
+                                        Premium Type
+                                    </td>
+                                    <td class="field-value" style="text-align:right;padding-right:20px;">
+                                        <span t-field="insurance.premium_type"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">
+                                        Claim Amount
+                                    </td>
+                                    <td class="field-value" style="text-align:right;padding-right:20px;">
+                                        <span t-field="insurance.claim_amount"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="field-label" style="padding-left:20px;">
+                                        Total Premium Amount
+                                    </td>
+                                    <td class="field-value" style="text-align:right;padding-right:20px;">
+                                        <strong>
+                                            <span t-field="insurance.total_policy_amount"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="page-break-inside: avoid !important;">
+                            <table class="table table-borderless"
+                                   style="font-size:13px; border-collapse:collapse;page-break-inside: avoid !important;"
+                                   t-if="insurance.insurance_emi_ids">
+                                <thead>
+                                    <tr t-att-style="'border-bottom:2px solid %s;background-color:%s;'%(report_color,report_lighter_color)">
+                                        <th style="padding-left:15px; width:30%; text-align:left;">Name</th>
+                                        <th style="width:20%;text-align: right;">Installment Date</th>
+                                        <th style="width:12%;text-align: right;">Premium</th>
+                                        <th style="width:18%;" t-if="insurance.insurance_emi_ids.invoice_id">Invoice
+                                        </th>
+                                        <th style="width:20%;" t-if="insurance.insurance_emi_ids.invoice_id">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="insurance.insurance_emi_ids" t-as="emi">
+                                        <tr style="border-bottom:1px solid #ddd;">
+                                            <td style="padding-left:20px; width:30%; text-align:left;">
+                                                <span t-field="emi.name"/>
+                                            </td>
+                                            <td style="width:20%;text-align:right;">
+                                                <span t-field="emi.installment_date"/>
+                                            </td>
+                                            <td style="width:12%;text-align:right;">
+                                                <span t-field="emi.installment_amount"/>
+                                            </td>
+                                            <td style="width:18%;">
+                                                <span t-if="emi.invoice_id" t-field="emi.invoice_id"/>
+                                            </td>
+                                            <td style="width:20%; color:green;">
+                                                <span t-if="emi.invoice_id" t-field="emi.invoice_id.payment_state"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ================================== Policy Description ================================== -->
+                        <p style="page-break-before:always;"/>
+                        <div t-att-style="'background-color:%s;border-left:4px solid %s;padding:20px;page-break-inside: avoid !important;'%(report_lighter_color,report_color)"
+                             t-if="insurance.policy_descriptions">
+                            <span class="fw-bold" t-attf-style="color: {{ report_color }};">
+                                Policy Descriptions
+                            </span>
+                            <br/>
+                            <span t-field="insurance.policy_descriptions"/>
+                        </div>
+                        <!-- ================================== DECLARATION &amp; SIGNATURE ================================== -->
+
+                        <div style="page-break-inside: avoid !important;">
+                            <t t-set="section_no" t-value="section_no + 1"/>
+                            <div class="section-header" t-if="insurance.declaration"><span
+                                    t-esc="section_no"/>. DECLARATION &amp; SIGNATURE
+                            </div>
+                            <div style="padding-left:20px;">
+                                <span t-field="insurance.declaration"/>
+                            </div>
+
+                            <div t-att-style="'background-color:%s;border-left:4px solid %s;padding:20px;margin-top:10px;page-break-inside: avoid !important;'%(report_lighter_color,report_color)"
+                                 t-if="insurance.declaration">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <!-- Policy Holder Signature -->
+                                        <!--                                <td t-att-style="'border:2px dashed ' + (report_color )  + '; vertical-align:top; padding:5px;'">-->
+                                        <td style="vertical-align:top; padding:5px;">
+
+                                            <div style="text-align:center;">
+                                                <strong>Policy Holder Signature</strong>
+                                            </div>
+
+                                            <t t-if="insurance.policy_holder_signature">
+                                                <div t-attf-style="border:2px dashed {{report_color}}; height:80px; width:100%; position:relative; padding:10px; box-sizing:border-box;">
+                                                    <!-- Centered signature image -->
+                                                    <div style=" position:absolute;  left:0; right:0; bottom:35px; display:flex; justify-content:center; align-items:center;">
+                                                        <img t-att-src="image_data_uri(insurance.policy_holder_signature)"
+                                                             style="max-width:100px; max-height:60px;display: block; margin:auto;object-fit:contain;"/>
+                                                    </div>
+                                                    <div t-att-style="' position:absolute; bottom:0px; left:0;margin:20px 10px 10px 10px; right:0; text-align:center;border-top:2px solid %s;'%report_color">
+                                                        <div style="font-size:12px; margin-top:3px; color:#444;">
+                                                            Signature
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </td>
+                                        <td style=" vertical-align:top; padding:5px;">
+
+                                            <div style="text-align:center;">
+                                                <strong>Authorized Signature</strong>
+                                            </div>
+
+
+                                            <t t-if="insurance.authorized_signatory">
+                                                <div t-attf-style="border:2px dashed {{report_color}}; height:80px; width:100%; position:relative; padding:10px; box-sizing:border-box;">
+                                                    <!-- Centered signature image -->
+                                                    <div style=" position:absolute;  left:0; right:0; bottom:35px; display:flex; justify-content:center; align-items:center;">
+                                                        <img t-att-src="image_data_uri(insurance.authorized_signatory)"
+                                                             style="max-width:100px; max-height:60px;display: block; margin:auto;object-fit:contain;"/>
+                                                    </div>
+                                                    <div t-att-style="' position:absolute; bottom:0px; left:0;margin:20px 10px 10px 10px; right:0; text-align:center;border-top:2px solid %s;'%report_color">
+                                                        <div style="font-size:12px; margin-top:3px; color:#444;">
+                                                            Signature
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- ================================== Declaration ================================== -->
+                        <div t-att-style="'background-color:%s;border-left:4px solid %s;padding:20px;margin-top:10px;page-break-inside: avoid !important;'%(report_lighter_color,report_color)"
+                             t-if="insurance.policy_terms_and_conditions">
+                            <span class="fw-bold" t-attf-style="color: {{ report_color }};">
+                                Terms &amp; Conditions
+                            </span>
+                            <br/>
+                            <span t-field="insurance.policy_terms_and_conditions"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="action_insurance_report" model="ir.actions.report">
+        <field name="name">Insurance Report</field>
+        <field name="model">insurance.information</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tk_insurance_management.insurance_report_template</field>
+        <field name="report_file">tk_insurance_management.insurance_report_template</field>
+        <field name="binding_model_id" ref="model_insurance_information"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

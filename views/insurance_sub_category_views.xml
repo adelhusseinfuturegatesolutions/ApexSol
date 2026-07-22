@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="insurance_sub_category_form_view" model="ir.ui.view">
+            <field name="name">insurance.sub.category.form.view</field>
+            <field name="model">insurance.sub.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. Homeowner's Insurance.." required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="insurance_category_id" required="1"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                            </group>
+                            <group>
+                                <field name="policy_provider_cmp_id" required="1"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="insurance_sub_category_list_view" model="ir.ui.view">
+            <field name="name">insurance.sub.category.list.view</field>
+            <field name="model">insurance.sub.category</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="insurance_category_id"/>
+                </list>
+            </field>
+        </record>
+        <record id="insurance_sub_category_search_view" model="ir.ui.view">
+            <field name="name">insurance.sub.category.search.view</field>
+            <field name="model">insurance.sub.category</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <group>
+                        <filter name="insurance_category_id" string="Insurance category"
+                                context="{'group_by': 'insurance_category_id'}"/>
+                        <filter name="policy_provider_cmp_id" string="Policy Providers"
+                                context="{'group_by': 'policy_provider_cmp_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_insurance_sub_category" model="ir.actions.act_window">
+            <field name="name">Policy Sub Categories</field>
+            <field name="res_model">insurance.sub.category</field>
+            <field name="view_mode">list,form,search</field>
+            <field name="context">{'search_default_insurance_category_id': 1}</field>
+        </record>
+    </data>
+</odoo>

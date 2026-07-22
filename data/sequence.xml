@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--Insurance-->
+        <record id="insurance_information_sequence" model="ir.sequence">
+            <field name="name">Insurance Information</field>
+            <field name="code">insurance.information</field>
+            <field name="prefix">INS/NO/</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!--Claim-->
+        <record id="claim_information_sequence" model="ir.sequence">
+            <field name="name">Claim Information</field>
+            <field name="code">claim.information</field>
+            <field name="prefix">CLM/NO/</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!--Re Insurance-->
+        <record id="action_re_insurance_sequence_number" model="ir.sequence">
+            <field name="name">Re-Insurance Sequence</field>
+            <field name="code">re.insurance</field>
+            <field name="prefix">RI-%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="suffix">
+            </field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
+

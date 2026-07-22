@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="sub_category_life_insurance_1" model="insurance.sub.category">
+            <field name="name">Term Life Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.life_insurance"/>
+        </record>
+        <record id="sub_category_life_insurance_2" model="insurance.sub.category">
+            <field name="name">Whole Life Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.life_insurance"/>
+        </record>
+        <record id="sub_category_life_insurance_3" model="insurance.sub.category">
+            <field name="name">Universal Life Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.life_insurance"/>
+        </record>
+
+        <record id="sub_category_life_health_insurance_4" model="insurance.sub.category">
+            <field name="name">Personal Health Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.health_insurance"/>
+        </record>
+        <record id="sub_category_life_health_insurance_5" model="insurance.sub.category">
+            <field name="name">Family Health Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.health_insurance"/>
+        </record>
+        <record id="sub_category_life_health_insurance_6" model="insurance.sub.category">
+            <field name="name">Short-Term Health Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.health_insurance"/>
+        </record>
+        <record id="sub_category_life_health_insurance_7" model="insurance.sub.category">
+            <field name="name">Long-Term Health Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.health_insurance"/>
+        </record>
+
+        <record id="sub_category_property_insurance_8" model="insurance.sub.category">
+            <field name="name">Homeowner's Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.property_insurance"/>
+        </record>
+        <record id="sub_category_property_insurance_9" model="insurance.sub.category">
+            <field name="name">Renter's Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.property_insurance"/>
+        </record>
+        <record id="sub_category_property_insurance_10" model="insurance.sub.category">
+            <field name="name">Flood Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.property_insurance"/>
+        </record>
+        <record id="sub_category_property_insurance_11" model="insurance.sub.category">
+            <field name="name">Business Property Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.property_insurance"/>
+        </record>
+
+        <record id="sub_category_liability_insurance_12" model="insurance.sub.category">
+            <field name="name">General Liability Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.liability_insurance"/>
+        </record>
+        <record id="sub_category_liability_insurance_13" model="insurance.sub.category">
+            <field name="name">Professional Liability Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.liability_insurance"/>
+        </record>
+        <record id="sub_category_liability_insurance_14" model="insurance.sub.category">
+            <field name="name">Product Liability Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.liability_insurance"/>
+        </record>
+        <record id="sub_category_liability_insurance_15" model="insurance.sub.category">
+            <field name="name">Umbrella Liability Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.liability_insurance"/>
+        </record>
+
+        <record id="sub_category_disability_insurance_16" model="insurance.sub.category">
+            <field name="name">Short-Term Disability Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.disability_insurance"/>
+        </record>
+        <record id="sub_category_disability_insurance_17" model="insurance.sub.category">
+            <field name="name">Long-Term Disability Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.disability_insurance"/>
+        </record>
+
+        <record id="sub_category_travel_insurance_18" model="insurance.sub.category">
+            <field name="name">Trip Cancellation Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.travel_insurance"/>
+        </record>
+        <record id="sub_category_travel_insurance_19" model="insurance.sub.category">
+            <field name="name">Medical Travel Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.travel_insurance"/>
+        </record>
+        <record id="sub_category_travel_insurance_20" model="insurance.sub.category">
+            <field name="name">Baggage Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.travel_insurance"/>
+        </record>
+
+        <record id="sub_category_pet_insurance_21" model="insurance.sub.category">
+            <field name="name">Accident-Only Pet Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.pet_insurance"/>
+        </record>
+        <record id="sub_category_pet_insurance_22" model="insurance.sub.category">
+            <field name="name">Comprehensive Pet Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.pet_insurance"/>
+        </record>
+        <record id="sub_category_pet_insurance_23" model="insurance.sub.category">
+            <field name="name">Routine Care Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.pet_insurance"/>
+        </record>
+
+        <record id="sub_category_business_insurance_24" model="insurance.sub.category">
+            <field name="name">General Liability Insurance (GLI)</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.business_insurance"/>
+        </record>
+        <record id="sub_category_business_insurance_25" model="insurance.sub.category">
+            <field name="name">Commercial Property Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.business_insurance"/>
+        </record>
+        <record id="sub_category_business_insurance_26" model="insurance.sub.category">
+            <field name="name">Workers’ Compensation Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.business_insurance"/>
+        </record>
+        <record id="sub_category_business_insurance_27" model="insurance.sub.category">
+            <field name="name">Employment Practices Liability Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.business_insurance"/>
+        </record>
+
+        <record id="sub_category_vehicle_insurance_28" model="insurance.sub.category">
+            <field name="name">Third-Party Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.vehicle_insurance"/>
+        </record>
+        <record id="sub_category_vehicle_insurance_29" model="insurance.sub.category">
+            <field name="name">Comprehensive Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.vehicle_insurance"/>
+        </record>
+        <record id="sub_category_vehicle_insurance_30" model="insurance.sub.category">
+            <field name="name">Usage-Based Insurance</field>
+            <field name="insurance_category_id" ref="tk_insurance_management.vehicle_insurance"/>
+        </record>
+    </data>
+</odoo>

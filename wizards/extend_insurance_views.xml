@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="extend_insurance_view_form" model="ir.ui.view">
+            <field name="name">extend.insurance.view.form</field>
+            <field name="model">extend.insurance</field>
+            <field name="arch" type="xml">
+                <form string="Extend Policy">
+                    <group>
+                        <field name="insurance_id" readonly="1"/>
+                        <field name="current_expiry_date" readonly="1"/>
+                        <field name="extension_months"/>
+                        <field name="new_expiry_date" readonly="1"/>
+                    </group>
+                    <footer>
+                        <button string="Extend" name="action_extend" type="object"
+                                class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_extend_insurance" model="ir.actions.act_window">
+            <field name="name">Extend Policy</field>
+            <field name="res_model">extend.insurance</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

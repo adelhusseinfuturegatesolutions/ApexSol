@@ -1,0 +1,1971 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Create New Record-->
+    <template id="insurance_quote_request_form" name="Quotation Request">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="oe_structure">
+                    <div class="container py-4">
+                        <div id="age_alert">
+                        </div>
+                        <t t-if="error">
+                            <div class="alert alert-danger">
+                                <strong>
+                                    <span t-esc="error"/>
+                                </strong>
+                            </div>
+                        </t>
+                        <h3 class="mb-2 text-center text-primary">
+                            <span>
+                                Insurance Quote Request
+                            </span>
+                        </h3>
+                        <form role="form" action="/create/quote-request" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="mb-3">
+                                <label for="quote_for" class="form-label">Quote for
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="quote_for" name="name"
+                                       placeholder="e.g. Car Insurance Gold Plan" required="required"/>
+                            </div>
+                            <h5 class="display-7 py-2 border-bottom border-primary text-primary">
+                                <i class="fa fa-address-card-o me-1" aria-hidden="true"/>
+                                Personal Information
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="holder_name">Name</span>
+                                        <input type="text" class="form-control" id="contact_name" name="contact_name"
+                                               placeholder="e.g. Brandon Freeman"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="holder_email">Email
+                                            <span class="text-danger ms-1">*</span>
+                                        </span>
+                                        <input type="email" class="form-control" id="email_from" required="required"
+                                               name="email_from" placeholder="name@example.com"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-md-8 col-sm-12">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="policy_holder_dob_span">Date of Birth
+                                                    <span class="text-danger ms-1">*</span>
+                                                </span>
+                                                <input type="date" class="form-control" id="policy_holder_dob"
+                                                       name="policy_holder_dob" required="required"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="holder_age">Age</span>
+                                                <input type="text" class="form-control" id="policy_holder_age"
+                                                       name="policy_holder_age" readonly="readonly"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="holder_phone">Phone
+                                            <span class="text-danger ms-1">*</span>
+                                        </span>
+                                        <input type="phone" class="form-control" id="phone" required="required"
+                                               name="phone" placeholder="(829)-386-3277"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="row align-items-center mb-3">
+                                        <div class="col-md-2 col-sm-12">
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="policy_holder_gender">Gender
+                                                    <span class="text-danger ms-1">*</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10 col-sm-12">
+                                            <div class="form-check form-check-inline">
+                                                <input id="male" class="form-check-input" required="required"
+                                                       type="radio" name="policy_holder_gender" value="male"/>
+                                                <label for="male">Male</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input id="female" class="form-check-input" type="radio"
+                                                       name="policy_holder_gender" value="female"/>
+                                                <label for="female">Female</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input id="others" class="form-check-input" type="radio"
+                                                       name="policy_holder_gender" value="others"/>
+                                                <label for="others">Others</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <h5 class="display-7 py-2 border-bottom border-primary text-primary">
+                                        <i class="fa fa-shield me-1" aria-hidden="true"/>
+                                        Insurance Type
+                                    </h5>
+                                    <div class="input-group mb-3">
+                                        <label for="policy_provider_cmp_id" class="input-group-text">Policy Provider
+                                            <span class="text-danger ms-1">*</span>
+                                        </label>
+                                        <select name="policy_provider_cmp_id" id="policy_provider_cmp_id"
+                                                class="form-control link-style" required="required">
+                                            <option selected="selected" value="">Select Policy Provider</option>
+                                            <t t-foreach="policy_providers" t-as="provider">
+                                                <option t-att-value="provider.id" t-esc="provider.name"/>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label for="insurance_category_id" class="input-group-text">Policy Category
+                                            <span class="text-danger ms-1">*</span>
+                                        </label>
+                                        <select name="insurance_category_id" id="insurance_category_id"
+                                                class="form-control link-style" required="required">
+                                            <option selected="selected" value="">Select Category</option>
+                                            <t t-foreach="insurance_category" t-as="ins_category">
+                                                <option t-att-value="ins_category.id" t-esc="ins_category.name"/>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label for="insurance_sub_category_id" class="input-group-text">Sub Category
+                                        </label>
+                                        <select name="insurance_sub_category_id" id="insurance_sub_category_id"
+                                                class="form-control link-style">
+                                            <option selected="selected" value="">Select Sub Category</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label for="document" class="input-group-text">File Attachment</label>
+                                        <input type="file" class="form-control" accept=".png, .pdf, .jpeg"
+                                               name="document"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <h5 class="display-7 py-2 border-bottom border-primary text-primary">
+                                        <i class="fa fa-commenting-o me-1" aria-hidden="true"/>
+                                        Notes
+                                    </h5>
+                                    <textarea class="form-control" id="description" name="description" rows="5"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div t-if="is_terms_and_conditions" style="text-align: left;">
+                                <input type="checkbox" value="terms_and_conditions" name="terms_and_conditions"
+                                       id="terms_and_conditions" required="required"/>
+                                I agree to the
+                                <strong>
+                                    <a t-att-href="terms_condition_url" target="_blank">Terms &amp; Conditions</a>
+                                </strong>
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="quotation_created" name="Quotation Created">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty">
+                <section class="s_text_block pt40 pb40 o_colored_level" data-snippet="s_text_block">
+                    <div class="container s_allow_columns">
+                        <div class="row mt-5">
+                            <div class="col-lg-12 col-xl-12 mr-lg-auto">
+                                <span class="d-block fa fa-4x fa-thumbs-up mx-auto rounded-circle bg-primary">
+                                </span>
+                                <br/>
+                                <h1 class="text-center">Thank You!</h1>
+                                <div class="pb16 pt16 s_hr" data-snippet="s_hr" data-name="Separator">
+                                    <hr class="mx-auto border-top w-50 border-dark text-center"/>
+                                </div>
+                                <h5 class="quote-request-success">
+                                    <span class="fa fa-check-circle">
+                                    </span>
+                                    <span>
+                                        Your Insurance Quotation Request
+                                        <br/>
+                                        <a t-attf-href="/quote/request-information/#{quotation_details.website_ref_number}/">
+                                            <strong>
+                                                <t t-esc="quotation_details.website_ref_number"/>
+                                            </strong>
+                                        </a>
+                                        <br/>
+                                        has been successfully submitted.
+                                    </span>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+
+    <template id="quotation_tracking_details" name="Track Insurance Quotations">
+        <t t-call="website.layout">
+            <div class="container py-4">
+                <center>
+                    <t t-if="invalid_ref">
+                        <div class="alert alert-danger">
+                            <strong>
+                                Invalid Quotation Reference Number
+                            </strong>
+                        </div>
+                    </t>
+                    <t t-if="is_error">
+                        <div class="alert alert-warning">
+                            <strong>
+                                Invalid Quotation Reference Number!
+                            </strong>
+                        </div>
+                    </t>
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Track Your Quote</h5>
+                                    <form method="GET">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="tracking_number"
+                                                   name="quote_number" aria-describedby="emailHelp" required="required"
+                                                   placeholder="Type Your Website Reference Number, Example: xZRJ8YL6Po"/>
+                                            <small id="emailHelp" class="form-text text-muted">
+                                                Enter Your Website Reference Number
+                                            </small>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Track</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                        </div>
+                    </div>
+                    <t t-if="is_error or invalid_ref">
+                        <br/>
+                        Still Having Trouble?
+                        <a href="/contactus">Contact Us</a>
+                    </t>
+                </center>
+            </div>
+            <br/>
+        </t>
+    </template>
+
+    <template id="insurance_quote_details" name="Quote Details">
+        <t t-call="website.layout">
+            <div class="container py-4 start_template">
+                <div class="row">
+                    <h3 class="bg-info text-white"
+                        style="font-size: 24px; padding: 2px; text-align: center; background-color: #17a2b8;">
+                        <strong>
+                            Quote for -
+                        </strong>
+                        <span t-field="quote_details.name"/>
+                    </h3>
+                    <div class="col-md-6 mb-2">
+                        <h3 class="mb0">
+                            <span>
+                                Reference Number:
+                            </span>
+                            <span t-field="quote_details.website_ref_number"/>
+                        </h3>
+                    </div>
+                    <div class="col-md-6 mb-2 text-end">
+                        <span class="badge text-bg-info rounded-0"
+                              t-if="quote_details.website_tracking_status == 'a_draft'">
+                            New
+                        </span>
+                        <span class="badge text-bg-warning rounded-0"
+                              t-if="quote_details.website_tracking_status == 'b_in_progress'">
+                            In Progress
+                        </span>
+                        <span class="badge text-bg-success rounded-0"
+                              t-if="quote_details.website_tracking_status == 'c_complete'">
+                            Completed
+                        </span>
+                        <span class="badge text-bg-danger rounded-0"
+                              t-if="quote_details.website_tracking_status == 'd_cancel'">
+                            Cancelled
+                        </span>
+                    </div>
+                </div>
+                <hr class="bg-primary mb-2 mt-0"/>
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <div class="card border-0">
+                            <div class="card-body p-0">
+                                <div class="row">
+                                    <!-- Left-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <p class="h5 text-primary border-bottom border-2 pb-2">
+                                            <i class="fa fa-user me-2"/>
+                                            Personal Information
+                                        </p>
+                                        <div class="row mb-2 align-items-center" t-if="quote_details.contact_name">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Name</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="quote_details.contact_name" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center"
+                                             t-if="quote_details.policy_holder_dob">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Date of Birth</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-esc="quote_details.policy_holder_dob"
+                                                      class="text-dark me-1"/>
+                                                <span class="text-dark">
+                                                    (<span t-esc="quote_details.policy_holder_age"/>)
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center"
+                                             t-if="quote_details.policy_holder_gender">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Gender</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="quote_details.policy_holder_gender"
+                                                      class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="quote_details.phone">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Phone</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="quote_details.phone" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="quote_details.email_from">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Email</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="quote_details.email_from" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Right-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <p class="h5 text-primary border-bottom border-2 pb-2 pt-2">
+                                            <i class="fa fa-heartbeat me-2"/>
+                                            Insurance Policy Details
+                                        </p>
+                                        <div class="row mb-2 align-items-center"
+                                             t-if="quote_details.policy_provider_cmp_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy Provider</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="quote_details.policy_provider_cmp_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center"
+                                             t-if="quote_details.insurance_category_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy Category</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="quote_details.insurance_category_id"
+                                                      class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center"
+                                             t-if="quote_details.insurance_sub_category_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Sub Category</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="quote_details.insurance_sub_category_id"
+                                                      class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="quote_details.file_name">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">File Attachment</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="quote_details.file_name" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <p class="h5 text-primary border-bottom border-2 pb-2">
+                                            <i class="fa fa-commenting-o me-2"/>
+                                            Additional comments or questions
+                                        </p>
+                                        <div class="row mb-2 align-items-center" t-if="quote_details.description">
+                                            <div class="col-md-12 col-sm-12">
+                                                <span t-field="quote_details.description" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="bg-primary mb-2 mt-0"/>
+                    <div class="col-md-12 col-md-offset-3">
+                        <div class="row">
+                            <div class="col">
+                                <div class="row text-center justify-content-center mb-5">
+                                    <div class="col-xl-6 col-lg-8">
+                                        <h2 class="font-weight-bold">Tracking</h2>
+                                        <p class="text-muted">These are Estimate Tracking Details</p>
+                                    </div>
+                                </div>
+                                <ul class="ul">
+                                    <t t-foreach="quote_details.quote_lead_tracking_ids" t-as="quote_track">
+                                        <li style="--accent-color: #17a2b8">
+                                            <div class="date">
+                                                <t t-esc="quote_track.tracking_date"/>
+                                            </div>
+                                            <div class="descr mt-3">
+                                                <t t-esc="quote_track.tracking_description"/>
+                                            </div>
+                                        </li>
+                                    </t>
+                                </ul>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="text-center" t-if="is_terms_and_conditions">
+                            <button type="button" class="btn btn-link" style="font-size: 20px;">
+                                <a t-att-href="terms_condition_url" target="_blank">
+                                    Terms &amp; Conditions
+                                </a>
+                            </button>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!--Inherit Template-->
+    <template id="portal_insurance_management" inherit_id="portal.portal_my_home" name="Insurance Portal Entry">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <!-- Policy Holder View -->
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">My Insurances</t>
+                <t t-set="url" t-value="'/my/insurance-records'"/>
+                <t t-set="text">Follow and view your insurances</t>
+                <t t-set="placeholder_count" t-value="'count'"/>
+                <t t-set="icon" t-value="'/tk_insurance_management/static/src/img/privacy.png'"/>
+            </t>
+            <!-- Agent View -->
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/tk_insurance_management/static/src/img/customer-services.png'"/>
+                <t t-set="title">Agent Insurances</t>
+                <t t-set="url" t-value="'/my/insurance-managing-records'"/>
+                <t t-set="text">View insurance records you're managing</t>
+                <t t-set="placeholder_count" t-value="'agent_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <!--Breadcrumbs-->
+    <template id="portal_insurance_breadcrumbs" inherit_id="portal.portal_breadcrumbs"
+              name="Portal Insurance Breadcrumbs">
+        <xpath position="inside" expr="//ol[hasclass('o_portal_submenu')]">
+            <!--Insurances-->
+            <li t-if="page_name == 'insurance_record_list'" class="breadcrumb-item">
+                Insurances
+            </li>
+            <li t-if="page_name == 'insurance_policy_form'" class="breadcrumb-item">
+                <a t-att-href="'/my/insurance-records'">
+                    Insurances
+                </a>
+            </li>
+            <li t-if="page_name == 'insurance_policy_form'" class="breadcrumb-item">
+                <t t-out="policy.insurance_number"/>
+            </li>
+
+            <!--Claims-->
+            <li t-if="page_name in ['page_claim_list', 'insurance_claim_form']" class="breadcrumb-item">
+                <a t-att-href="'/my/insurance-records'">
+                    Insurances
+                </a>
+            </li>
+            <li t-if="page_name == 'page_claim_list'" class="breadcrumb-item">
+                <a t-attf-href="/insurance/policy-details/{{insurance.access_token}}">
+                    <t t-out="insurance.insurance_number"/>
+                </a>
+            </li>
+            <li t-if="page_name == 'insurance_claim_form'" class="breadcrumb-item">
+                <a t-attf-href="/insurance/policy-details/{{claim_rec.insurance_id.access_token}}">
+                    <t t-out="claim_rec.insurance_id.insurance_number"/>
+                </a>
+            </li>
+            <li t-if="page_name == 'page_claim_list'" class="breadcrumb-item">
+                Claims
+            </li>
+            <li t-if="page_name == 'insurance_claim_form'" class="breadcrumb-item">
+                <a t-att-href="'/my/insurance-claims/%s' % claim_rec.insurance_id.access_token">
+                    Claims
+                </a>
+            </li>
+            <li t-if="page_name == 'insurance_claim_form'" class="breadcrumb-item">
+                <t t-out="claim_rec.claim_number"/>
+            </li>
+
+            <!--Agent Insurances-->
+            <li t-if="page_name == 'agent_insurance_list'" class="breadcrumb-item">
+                Insurances
+            </li>
+            <li t-if="page_name == 'agent_insurance_form'" class="breadcrumb-item">
+                <a t-att-href="'/my/insurance-managing-records'">
+                    Insurances
+                </a>
+            </li>
+            <li t-if="page_name == 'agent_insurance_form'" class="breadcrumb-item">
+                <t t-out="agent_ins.insurance_number"/>
+            </li>
+        </xpath>
+
+        <!--Filter by and search view-->
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="after">
+            <!--Insurances-->
+            <div t-if="'/my/insurance-records' in request.httprequest.path"
+                 class="d-flex align-items-center gap-3 flex-wrap">
+                <div class="container mt-3">
+                    <form method="get" class="d-flex justify-content-between align-items-center mb-3"
+                          action="/my/insurance-records">
+                        <!-- Filter-->
+                        <div class="d-flex align-items-center me-3">
+                            <span class="small me-2 navbar-text" style="width: max-content;">Filter By:</span>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary dropdown-toggle"
+                                        data-bs-toggle="dropdown">
+                                    <t t-if="request.params.get('filter_by') == 'state_draft'">New</t>
+                                    <t t-elif="request.params.get('filter_by') == 'state_confirmed'">Confirmed</t>
+                                    <t t-elif="request.params.get('filter_by') == 'state_running'">Running</t>
+                                    <t t-elif="request.params.get('filter_by') == 'state_expired'">Expired</t>
+                                    <t t-elif="request.params.get('filter_by') == 'state_cancel'">Cancelled</t>
+                                    <t t-else="">All</t>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if not request.params or ('filter_by' in request.params and request.params.get('filter_by') == 'all') else ''}}"
+                                           t-attf-href="/my/insurance-records?{{ keep_query('*', filter_by='all') }}">
+                                            All
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if 'filter_by' in request.params and request.params.get('filter_by') == 'state_draft' else ''}}"
+                                           t-attf-href="/my/insurance-records?{{ keep_query('*', filter_by='state_draft') }}">
+                                            New
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if 'filter_by' in request.params and request.params.get('filter_by') == 'state_confirmed' else ''}}"
+                                           t-attf-href="/my/insurance-records?{{ keep_query('*', filter_by='state_confirmed') }}">
+                                            Confirmed
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if 'filter_by' in request.params and request.params.get('filter_by') == 'state_running' else ''}}"
+                                           t-attf-href="/my/insurance-records?{{ keep_query('*', filter_by='state_running') }}">
+                                            Running
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if 'filter_by' in request.params and request.params.get('filter_by') == 'state_expired' else ''}}"
+                                           t-attf-href="/my/insurance-records?{{ keep_query('*', filter_by='state_expired') }}">
+                                            Expired
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if 'filter_by' in request.params and request.params.get('filter_by') == 'state_cancel' else ''}}"
+                                           t-attf-href="/my/insurance-records?{{ keep_query('*', filter_by='state_cancel') }}">
+                                            Cancelled
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Search -->
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control"
+                                   placeholder="Search by insurance number, category, status..."
+                                   t-att-value="request.params.get('search')"/>
+                            <button class="btn btn-secondary" type="submit">
+                                <i class="fa fa-search"/>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--Claims-->
+            <div t-if="'/my/insurance-claims' in request.httprequest.path"
+                 class="d-flex align-items-center gap-3 flex-wrap">
+                <div class="container mt-3">
+                    <form method="get" class="d-flex justify-content-between align-items-center mb-3"
+                          t-attf-action="/my/insurance-claims/{{ access_token }}">
+                        <!-- Filter -->
+                        <div class="d-flex align-items-center me-3">
+                            <span class="small me-2 navbar-text" style="width: max-content;">Filter By:</span>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary dropdown-toggle"
+                                        data-bs-toggle="dropdown">
+                                    <t t-if="request.params.get('filter_by') == 'state_draft'">New</t>
+                                    <t t-elif="request.params.get('filter_by') == 'state_submit'">Registered</t>
+                                    <t t-elif="request.params.get('filter_by') == 'state_under_review'">Under Review</t>
+                                    <t t-elif="request.params.get('filter_by') == 'state_running'">Approved</t>
+                                    <t t-elif="request.params.get('filter_by') == 'state_expired'">Rejected</t>
+                                    <t t-elif="request.params.get('filter_by') == 'state_settled'">Settled</t>
+                                    <t t-elif="request.params.get('filter_by') == 'state_closed'">Closed</t>
+                                    <t t-else="">All</t>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if not request.params or 'filter_by' not in request.params or request.params.get('filter_by') == 'all' else ''}}"
+                                           t-attf-href="/my/insurance-claims/{{ access_token }}?{{ keep_query('*', filter_by='all') }}">
+                                            All
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if request.params.get('filter_by') == 'state_draft' else ''}}"
+                                           t-attf-href="/my/insurance-claims/{{ access_token }}?{{ keep_query('*', filter_by='state_draft') }}">
+                                            New
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if request.params.get('filter_by') == 'state_submit' else ''}}"
+                                           t-attf-href="/my/insurance-claims/{{ access_token }}?{{ keep_query('*', filter_by='state_submit') }}">
+                                            Registered
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if request.params.get('filter_by') == 'state_under_review' else ''}}"
+                                           t-attf-href="/my/insurance-claims/{{ access_token }}?{{ keep_query('*', filter_by='state_under_review') }}">
+                                            Under Review
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if request.params.get('filter_by') == 'state_running' else ''}}"
+                                           t-attf-href="/my/insurance-claims/{{ access_token }}?{{ keep_query('*', filter_by='state_running') }}">
+                                            Approved
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if request.params.get('filter_by') == 'state_expired' else ''}}"
+                                           t-attf-href="/my/insurance-claims/{{ access_token }}?{{ keep_query('*', filter_by='state_expired') }}">
+                                            Rejected
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if request.params.get('filter_by') == 'state_settled' else ''}}"
+                                           t-attf-href="/my/insurance-claims/{{ access_token }}?{{ keep_query('*', filter_by='state_settled') }}">
+                                            Settled
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if request.params.get('filter_by') == 'state_closed' else ''}}"
+                                           t-attf-href="/my/insurance-claims/{{ access_token }}?{{ keep_query('*', filter_by='state_closed') }}">
+                                            Closed
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Search -->
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control"
+                                   placeholder="Search by claim number and status..."
+                                   t-att-value="request.params.get('search')"/>
+                            <button class="btn btn-secondary" type="submit">
+                                <i class="fa fa-search"/>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--Claims-->
+            <div t-if="'/my/insurance-managing-records' in request.httprequest.path"
+                 class="d-flex align-items-center gap-3 flex-wrap">
+                <div class="container mt-3">
+                    <form method="get" class="d-flex justify-content-between align-items-center mb-3"
+                          t-attf-action="/my/insurance-managing-records/{{ access_token }}">
+                        <div class="d-flex align-items-center me-3">
+                            <span class="small me-2 navbar-text" style="width: max-content;">Filter By:</span>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary dropdown-toggle"
+                                        data-bs-toggle="dropdown">
+                                    <t t-if="request.params.get('filter_by') == 'fixed_commission'">Fixed</t>
+                                    <t t-elif="request.params.get('filter_by') == 'percentage_commission'">Percentage
+                                    </t>
+                                    <t t-else="">All</t>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if not request.params or (request.params.get('filter_by') == 'all') else ''}}"
+                                           t-attf-href="/my/insurance-managing-records/{{ access_token }}?{{ keep_query('*', filter_by='all') }}">
+                                            All
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if request.params.get('filter_by') == 'fixed_commission' else ''}}"
+                                           t-attf-href="/my/insurance-managing-records/{{ access_token }}?{{ keep_query('*', filter_by='fixed_commission') }}">
+                                            Fixed
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           t-attf-class="dropdown-item {{'active' if request.params.get('filter_by') == 'percentage_commission' else ''}}"
+                                           t-attf-href="/my/insurance-managing-records/{{ access_token }}?{{ keep_query('*', filter_by='percentage_commission') }}">
+                                            Percentage
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Search -->
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control"
+                                   placeholder="Search by reference number..."
+                                   t-att-value="request.params.get('search')"/>
+                            <button class="btn btn-secondary" type="submit">
+                                <i class="fa fa-search"/>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!--Insurance Record List-->
+    <template id="portal_insurance_record_list" name="Portal Insurance Record List">
+        <t t-call="portal.portal_layout">
+            <t t-if="not insurance_records">
+                <div class="alert alert-info my-1 text-center">
+                    <strong>There are currently no insurances for your account.</strong>
+                </div>
+            </t>
+            <t t-if="insurance_records" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Insurance Number #</th>
+                        <th>Policy Category</th>
+                        <th>Sub Category</th>
+                        <th>Insurance Policy</th>
+                        <th>Policy Time Period</th>
+                        <th>Issue Date</th>
+                        <th>Expiry Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <t t-foreach="insurance_records" t-as="ins">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/insurance/policy-details/#{ins.access_token}/">
+                                <span t-field="ins.insurance_number"/>
+                            </a>
+                        </td>
+                        <td>
+                            <span t-field="ins.insurance_category_id"/>
+                        </td>
+                        <td>
+                            <span t-field="ins.insurance_sub_category_id"/>
+                        </td>
+                        <td>
+                            <span t-field="ins.insurance_policy_id"/>
+                        </td>
+                        <td>
+                            <span t-field="ins.policy_price_list_id"/>
+                        </td>
+                        <td>
+                            <span t-field="ins.issue_date"/>
+                        </td>
+                        <td>
+                            <span t-field="ins.expiry_date"/>
+                        </td>
+                        <td>
+                            <span class="badge text-bg-info rounded-0" t-if="ins.state == 'draft'">
+                                New
+                            </span>
+                            <span class="badge text-bg-warning rounded-0" t-if="ins.state == 'confirmed'">
+                                Confirmed
+                            </span>
+                            <span class="badge text-bg-success rounded-0" t-if="ins.state == 'running'">
+                                Running
+                            </span>
+                            <span class="badge text-bg-danger rounded-0" t-if="ins.state == 'expired'">
+                                Expired
+                            </span>
+                            <span class="badge text-bg-danger rounded-0" t-if="ins.state == 'cancel'">
+                                Cancelled
+                            </span>
+                            <span class="badge text-bg-primary rounded-0" t-if="ins.state == 'renew'">
+                                Renew
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!--Insurance Detail View-->
+    <template id="web_insurance_detail_view" name="Insurance Policy Details">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                <div class="alert alert-success alert-dismissible fade show text-center" role="alert"
+                     t-if="policy.renew_insurance_lead_id">
+                    Your insurance renewal request is being processed.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"/>
+                </div>
+                <div class="row align-items-center mb-1">
+                    <!-- Insurance Number -->
+                    <div class="col-12 col-md-3 mb-2 mb-md-0">
+                        <h3 class="mb-0">
+                            <span t-field="policy.insurance_number"/>
+                        </h3>
+                    </div>
+                    <!-- Buttons -->
+                    <div class="col-12 col-md-6 mb-2 mb-md-0">
+                        <div class="d-flex flex-wrap gap-2 justify-content-center">
+                            <!--Report Download Button -->
+                            <a t-att-href="'/my/insurance/report/%s' % policy.access_token"
+                               class="btn btn-outline-secondary" target="_blank">
+                                <i class="fa fa-download me-1" aria-hidden="true"/>
+                                Report
+                            </a>
+                            <!-- Create Claim Button -->
+                            <t t-if="policy.state == 'running' and policy.total_due_amount > 0">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#createClaimModal">
+                                    <i class="fa fa-plus-circle me-1"/>
+                                    Insurance Claim
+                                </button>
+                            </t>
+                            <!-- View Claims Button -->
+                            <t t-if="policy.claim_count > 0">
+                                <a t-attf-href="/my/insurance-claims/{{ policy.access_token }}"
+                                   class="btn btn-outline-primary">
+                                    <i class="fa fa-eye me-1"/>
+                                    View Claims
+                                </a>
+                            </t>
+                            <!--Renew Insurance-->
+                            <t t-if="policy.state == 'expired' and not policy.renew_insurance_lead_id">
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#createRenewInsuranceModal">
+                                    <i class="fa fa-plus-circle me-1"/>
+                                    Renew Insurance
+                                </button>
+                            </t>
+                        </div>
+                        <!-- Claim Insurance Modal -->
+                        <div class="modal fade" id="createClaimModal" tabindex="-1"
+                             aria-labelledby="createClaimModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header p-2">
+                                        <h5 class="modal-title" id="createClaimModalLabel">Claim Your Insurance</h5>
+                                        <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                                aria-label="Close"/>
+                                    </div>
+                                    <!-- Modal Body -->
+                                    <form method="POST"
+                                          action="/my/insurance/submit_claim"
+                                          id="submit_claim_form"
+                                          t-att-data-is-reinsurance-required="policy.is_reinsurance_required"
+                                          t-att-data-re-insurance-id="policy.re_insurance_id.id"
+                                          t-att-data-re-insurance-status="policy.re_insurance_id.status">
+                                        <div class="modal-body">
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                            <input type="hidden" name="insurance_id" t-att-value="policy.id"/>
+                                            <input type="hidden" name="issue_date" t-att-value="policy.issue_date"/>
+                                            <input type="hidden" name="expiry_date" t-att-value="policy.expiry_date"/>
+                                            <div class="mb-3">
+                                                <label class="form-label">Insurance Number</label>
+                                                <input type="text" class="form-control"
+                                                       t-att-value="policy.insurance_number" readonly="readonly"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Claim Date</label>
+                                                <input type="date" name="claim_date" id="claim_date"
+                                                       class="form-control" required="required"/>
+                                                <div id="claim_date_alert"/>
+                                            </div>
+                                        </div>
+                                        <!-- Footer -->
+                                        <div class="modal-footer p-2">
+                                            <button type="submit" class="btn btn-success">Submit Claim</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Insurance Policy Renewal Request Modal -->
+                        <div class="modal fade" id="createRenewInsuranceModal" tabindex="-1"
+                             aria-labelledby="createRenewInsuranceModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header p-2">
+                                        <h5 class="modal-title text-primary" id="createRenewInsuranceModalLabel">
+                                            Insurance Policy Renewal Request
+                                        </h5>
+                                        <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                                aria-label="Close"/>
+                                    </div>
+                                    <!-- Modal Body -->
+                                    <form method="POST" action="/my/insurance/renewal-request">
+                                        <div class="p-2">
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                            <input type="hidden" name="insurance_id" t-att-value="policy.id"/>
+
+                                            <div class="row">
+                                                <div class="col-md-12 mb-2">
+                                                    <div class="row mb-2 align-items-center">
+                                                        <div class="col-md-4 col-sm-12 text-muted fw-bold">
+                                                            Insurance Number
+                                                        </div>
+                                                        <div class="col-md-1 d-none d-md-block text-muted col-sm-12">
+                                                            :
+                                                        </div>
+                                                        <div class="col-md-7 col-sm-12">
+                                                            <span t-field="policy.insurance_number"
+                                                                  class="text-dark"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2 align-items-center">
+                                                        <div class="col-md-4 col-sm-12 text-muted fw-bold">
+                                                            Insurance Category
+                                                        </div>
+                                                        <div class="col-md-1 d-none d-md-block text-muted col-sm-12">
+                                                            :
+                                                        </div>
+                                                        <div class="col-md-7 col-sm-12">
+                                                            <span t-field="policy.insurance_category_id.name"
+                                                                  class="text-dark"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2 align-items-center">
+                                                        <div class="col-md-4 col-sm-12 text-muted fw-bold">
+                                                            Sub Category
+                                                        </div>
+                                                        <div class="col-md-1 d-none d-md-block text-muted col-sm-12">
+                                                            :
+                                                        </div>
+                                                        <div class="col-md-7 col-sm-12">
+                                                            <span t-field="policy.insurance_sub_category_id.name"
+                                                                  class="text-dark"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2 align-items-center">
+                                                        <div class="col-md-4 col-sm-12 text-muted fw-bold">
+                                                            Insurance Policy
+                                                        </div>
+                                                        <div class="col-md-1 d-none d-md-block text-muted col-sm-12">
+                                                            :
+                                                        </div>
+                                                        <div class="col-md-7 col-sm-12">
+                                                            <span t-field="policy.insurance_policy_id.policy_name"
+                                                                  class="text-dark"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2 align-items-center">
+                                                        <div class="col-md-4 col-sm-12 text-muted fw-bold">
+                                                            Issue Date
+                                                        </div>
+                                                        <div class="col-md-1 d-none d-md-block text-muted col-sm-12">
+                                                            :
+                                                        </div>
+                                                        <div class="col-md-7 col-sm-12">
+                                                            <span t-field="policy.issue_date" class="text-dark"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2 align-items-center">
+                                                        <div class="col-md-4 col-sm-12 text-muted fw-bold">
+                                                            Expiry Date
+                                                        </div>
+                                                        <div class="col-md-1 d-none d-md-block text-muted col-sm-12">
+                                                            :
+                                                        </div>
+                                                        <div class="col-md-7 col-sm-12">
+                                                            <span t-field="policy.expiry_date" class="text-dark"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Footer -->
+                                        <div class="modal-footer p-2">
+                                            <button type="submit" class="btn btn-outline-primary">Proceed to Renewal
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Policy Status Badge -->
+                    <div class="col-12 col-md-3 text-md-end text-start">
+                        <span class="badge text-bg-info rounded-0" t-if="policy.state == 'draft'">
+                            New
+                        </span>
+                        <span class="badge text-bg-warning rounded-0" t-if="policy.state == 'confirmed'">
+                            Confirmed
+                        </span>
+                        <span class="badge text-bg-success rounded-0" t-if="policy.state == 'running'">
+                            Running
+                        </span>
+                        <span class="badge text-bg-danger rounded-0" t-if="policy.state == 'expired'">
+                            Expired
+                        </span>
+                        <span class="badge text-bg-danger rounded-0" t-if="policy.state == 'cancel'">
+                            Cancelled
+                        </span>
+                        <span class="badge text-bg-primary rounded-0" t-if="policy.state == 'renew'">
+                            Renew
+                        </span>
+                    </div>
+                </div>
+                <hr class="m-0 p-1 border-2"/>
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <div class="card border-0">
+                            <div class="card-body p-0">
+                                <div class="row">
+                                    <p class="h5 text-primary border-bottom border-2 pb-2">
+                                        <i class="fa fa-user me-2"/>
+                                        Policy Holder Details
+                                    </p>
+                                    <!-- Left-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row mb-2 align-items-center" t-if="policy.policy_holder_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy Holder</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.policy_holder_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="policy.policy_holder_gender">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Gender</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.policy_holder_gender"
+                                                      class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="policy.policy_holder_dob">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Date of Birth</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-esc="policy.policy_holder_dob" class="text-dark me-1"/>
+                                                <span class="text-dark">
+                                                    (<span t-esc="policy.policy_holder_age"/>)
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Right-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row mb-2 align-items-center" t-if="policy.email">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Email</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.email" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="policy.phone">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Phone</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.phone" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <t t-if="policy.policy_holder_street or policy.policy_holder_street2 or policy.policy_holder_city or policy.policy_holder_zip or policy.policy_holder_state_id or policy.policy_holder_country_id">
+                                            <div class="row mb-2 align-items-start">
+                                                <div class="col-md-4 col-sm-12 text-muted fw-bold">Address</div>
+                                                <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                                <div class="col-md-7 col-sm-12">
+                                                    <div t-if="policy.policy_holder_street">
+                                                        <span t-field="policy.policy_holder_street"/>
+                                                    </div>
+                                                    <div t-if="policy.policy_holder_street2">
+                                                        <span t-field="policy.policy_holder_street2"/>
+                                                    </div>
+                                                    <div>
+                                                        <t t-if="policy.policy_holder_city">
+                                                            <span t-field="policy.policy_holder_city"/>,
+                                                        </t>
+                                                        <t t-if="policy.policy_holder_state_id">
+                                                            <span t-field="policy.policy_holder_state_id"/>,
+                                                        </t>
+                                                        <t t-if="policy.policy_holder_zip">
+                                                            <span t-field="policy.policy_holder_zip"/>,
+                                                        </t>
+                                                        <t t-if="policy.policy_holder_country_id">
+                                                            <span t-field="policy.policy_holder_country_id"/>
+                                                        </t>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="h5 text-primary border-bottom border-2 pb-2">
+                                        <i class="fa fa-heartbeat me-2"/>
+                                        Policy Details
+                                    </p>
+                                    <!-- Left-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Category</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.insurance_category_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Sub Category</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.insurance_sub_category_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.insurance_policy_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="policy.insurance_buying_for_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Buying For</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.insurance_buying_for_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy Provider</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.policy_provider_cmp_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Right-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <t t-if="policy.category == 'vehicle'">
+                                            <div class="row mb-2 align-items-center">
+                                                <div class="col-md-4 col-sm-12 text-muted fw-bold">Certificate No</div>
+                                                <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                                <div class="col-md-7 col-sm-12">
+                                                    <span t-field="policy.policy_certificate_no" class="text-dark"/>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 align-items-center">
+                                                <div class="col-md-4 col-sm-12 text-muted fw-bold">Previous Policy</div>
+                                                <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                                <div class="col-md-7 col-sm-12">
+                                                    <span t-field="policy.previous_policy_no" class="text-dark"/>
+                                                </div>
+                                            </div>
+                                        </t>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Issue Date</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.issue_date" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Expiry Date</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.expiry_date" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy Time Period</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.policy_price_list_id.insurance_time_period_id.t_period"
+                                                      class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy Amount</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="policy.policy_amount" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="h5 text-primary border-bottom border-2 pb-2 mt-2">
+                                        <i class="fa fa-credit-card me-2"/>
+                                        Payment Details
+                                    </p>
+                                    <!-- Left-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-6 col-sm-12 text-muted fw-bold">Premium Type</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-5 col-sm-12">
+                                                <span t-field="policy.premium_type" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-6 col-sm-12 text-muted fw-bold">Total Policy Amounts
+                                            </div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-5 col-sm-12">
+                                                <span t-field="policy.total_policy_amount" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center"
+                                             t-if="policy.premium_type == 'installment'">
+                                            <div class="col-md-6 col-sm-12 text-muted fw-bold">Monthly Installment
+                                                Amounts
+                                            </div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-5 col-sm-12">
+                                                <span t-field="policy.monthly_installment" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Right-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row mb-2 align-items-center" t-if="policy.claim_amount">
+                                            <div class="col-md-6 col-sm-12 text-muted fw-bold">Claim Amounts</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-5 col-sm-12">
+                                                <span t-field="policy.claim_amount" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="policy.total_due_amount">
+                                            <div class="col-md-6 col-sm-12 text-muted fw-bold">Remaining Claim Amounts
+                                            </div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-5 col-sm-12">
+                                                <span t-field="policy.total_due_amount" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" t-if="policy.insurance_emi_ids">
+                                    <div class="col-md-12 col-sm-12">
+                                        <p class="h5 text-primary border-bottom border-2 pb-2 pt-2">
+                                            <i class="fa fa-cubes me-2"/>
+                                            Insurance EMI Details
+                                        </p>
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th class="cus-label text-start">
+                                                        Name
+                                                    </th>
+                                                    <th class="cus-label text-end">
+                                                        Installment Date
+                                                    </th>
+                                                    <th class="cus-label text-end">
+                                                        Installment Amounts
+                                                    </th>
+                                                    <th class="cus-label">
+                                                        Invoice
+                                                    </th>
+                                                    <th class="cus-label">
+                                                        Invoice Status
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="policy.insurance_emi_ids" t-as="emi">
+                                                    <tr>
+                                                        <td class="cus-value text-start">
+                                                            <span t-field="emi.name"/>
+                                                        </td>
+                                                        <td class="cus-value text-end">
+                                                            <span t-field="emi.installment_date"/>
+                                                        </td>
+                                                        <td class="cus-value text-end">
+                                                            <span t-field="emi.installment_amount"/>
+                                                        </td>
+                                                        <td class="cus-value">
+                                                            <t t-if="emi.sudo().invoice_id.state != 'draft'">
+                                                                <a t-attf-href="/my/invoices/#{emi.invoice_id.id}?access_token=#{emi.invoice_id.access_token}">
+                                                                    <span t-field="emi.invoice_id"/>
+                                                                </a>
+                                                            </t>
+                                                        </td>
+                                                        <td class="cus-value">
+                                                            <t t-if="emi.invoice_id and emi.invoice_id.state != 'draft'">
+                                                                <span class="badge text-bg-success rounded-0"
+                                                                      t-if="emi.payment_state == 'paid'">
+                                                                    Paid
+                                                                </span>
+                                                                <span class="badge text-bg-danger rounded-0"
+                                                                      t-if="emi.payment_state == 'not_paid'">
+                                                                    Not Paid
+                                                                </span>
+                                                                <span class="badge text-bg-info rounded-0"
+                                                                      t-if="emi.payment_state == 'in_payment'">
+                                                                    In Payment
+                                                                </span>
+                                                                <span class="badge text-bg-primary rounded-0"
+                                                                      t-if="emi.payment_state == 'partial'">
+                                                                    Partially Paid
+                                                                </span>
+                                                                <span class="badge text-bg-warning rounded-0"
+                                                                      t-if="emi.payment_state == 'reversed'">
+                                                                    Reversed
+                                                                </span>
+                                                            </t>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Communication-->
+                        <div id="insurance_information_page" class="col-12 col-lg">
+                            <div id="insurance_communication" class="mt-4">
+                                <h3>Communication</h3>
+                                <t t-call="portal.message_thread">
+                                    <t t-set="object" t-value="policy"/>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!--Insurance claim submitted-->
+    <template id="web_insurance_claim_submitted" name="Insurance claim submitted">
+        <t t-call="website.layout">
+            <div class="container mt-5 text-center">
+                <h1 class="text-success">Thank You!</h1>
+                <p>Your claim has been submitted successfully!</p>
+                <a t-att-href="policy_url" class="btn btn-primary mb-2">Return to Insurance</a>
+            </div>
+        </t>
+    </template>
+
+    <!--Renewal Insurance Request submitted-->
+    <template id="web_renewal_insurance_submitted" name="Renewal Insurance Request submitted">
+        <t t-call="website.layout">
+            <div class="container mt-5 text-center">
+                <h1 class="text-success">Request Submitted</h1>
+                <p>Your insurance renewal request has been submitted successfully.</p>
+                <a t-att-href="policy_url" class="btn btn-primary mb-2">Return to Insurance</a>
+            </div>
+        </t>
+    </template>
+
+    <!--Insurance Claim Records-->
+    <template id="web_insurance_claim_list" name="Portal Claim Record List">
+        <t t-call="portal.portal_layout">
+            <t t-if="not claims">
+                <div class="alert alert-info my-1 text-center">
+                    <strong>There are currently no claims for this insurance.</strong>
+                </div>
+            </t>
+            <t t-if="claims" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Claim Number #</th>
+                        <th>Date</th>
+                        <th class="text-end">Policy Amount</th>
+                        <th class="text-end">Remaining Amount</th>
+                        <th class="text-end">Claim Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <t t-foreach="claims" t-as="claim">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/insurance/claim-details/#{claim.access_token}/">
+                                <span t-field="claim.claim_number"/>
+                            </a>
+                        </td>
+                        <td>
+                            <span t-field="claim.claim_date"/>
+                        </td>
+                        <td class="text-end">
+                            <span t-field="claim.policy_amount"/>
+                        </td>
+                        <td class="text-end">
+                            <span t-field="claim.due_amount"/>
+                        </td>
+                        <td class="text-end">
+                            <span t-field="claim.amount_paid"/>
+                        </td>
+                        <td>
+                            <span class="badge text-bg-info rounded-0" t-if="claim.state == 'draft'">
+                                New
+                            </span>
+                            <span class="badge text-bg-info rounded-0" t-if="claim.state == 'submit'">
+                                Registered
+                            </span>
+                            <span class="badge text-bg-warning rounded-0" t-if="claim.state == 'document_submitted'">
+                                Document Submitted
+                            </span>
+                            <span class="badge text-bg-warning rounded-0" t-if="claim.state == 'under_review'">
+                                Under Review
+                            </span>
+                            <span class="badge text-bg-success rounded-0" t-if="claim.state == 'approved'">
+                                Approved
+                            </span>
+                            <span class="badge text-bg-success rounded-0" t-if="claim.state == 'closed'">
+                                Closed
+                            </span>
+                            <span class="badge text-bg-danger rounded-0" t-if="claim.state == 'not_approved'">
+                                Rejected
+                            </span>
+                            <span class="badge text-bg-primary rounded-0" t-if="claim.state == 'settled'">
+                                Settled
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!--Insurance Claim Details-->
+    <template id="web_insurance_claim_detail_view" name="Insurance Claim Details">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                <div class="row align-items-center mb-1">
+                    <!-- Claim Number -->
+                    <div class="col-12 col-md-3 mb-2 mb-md-0">
+                        <h3 class="mb-0">
+                            <span t-field="claim_rec.claim_number"/>
+                        </h3>
+                    </div>
+                    <!-- Report Download Button -->
+                    <div class="col-12 col-md-2 mb-2 mb-md-0">
+                        <a t-att-href="'/my/claim/report/%s' % claim_rec.access_token" class="btn btn-outline-secondary"
+                           target="_blank">
+                            <i class="fa fa-download me-2" aria-hidden="true"/>
+                            Report
+                        </a>
+                    </div>
+                    <!-- Claim Status Badge -->
+                    <div class="col-12 col-md-7 text-md-end text-start">
+                        <span class="badge text-bg-info rounded-0 me-1" t-if="claim_rec.state == 'draft'">
+                            New
+                        </span>
+                        <span class="badge text-bg-info rounded-0 me-1" t-if="claim_rec.state == 'submit'">
+                            Registered
+                        </span>
+                        <span class="badge text-bg-warning rounded-0 me-1"
+                              t-if="claim_rec.state == 'document_submitted'">
+                            Document Submitted
+                        </span>
+                        <span class="badge text-bg-warning rounded-0 me-1" t-if="claim_rec.state == 'under_review'">
+                            Under Review
+                        </span>
+                        <span class="badge text-bg-success rounded-0 me-1" t-if="claim_rec.state == 'approved'">
+                            Approved
+                        </span>
+                        <span class="badge text-bg-success rounded-0 me-1" t-if="claim_rec.state == 'closed'">
+                            Closed
+                        </span>
+                        <span class="badge text-bg-danger rounded-0 me-1" t-if="claim_rec.state == 'not_approved'">
+                            Rejected
+                        </span>
+                        <span class="badge text-bg-primary rounded-0" t-if="claim_rec.state == 'settled'">
+                            Settled
+                        </span>
+                    </div>
+                </div>
+                <hr class="m-0 p-1 border-2"/>
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <div class="card border-0">
+                            <div class="card-body p-0">
+                                <div class="row">
+                                    <!-- Left-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <p class="h5 text-primary border-bottom border-2 pb-2 pt-2">
+                                            <i class="fa fa-heartbeat me-2"/>
+                                            Insurance Details
+                                        </p>
+                                        <div class="row mb-2 align-items-center" t-if="claim_rec.insurance_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Insurance</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <a t-attf-href="/insurance/policy-details/#{claim_rec.insurance_id.access_token}/">
+                                                    <span t-field="claim_rec.insurance_id.insurance_number"/>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Right-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <p class="h5 text-primary border-bottom border-2 pb-2 pt-2">
+                                            <i class="fa fa-calendar me-2"/>
+                                            Claim Date Details
+                                        </p>
+                                        <div class="row mb-2 align-items-center" t-if="claim_rec.claim_date">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Claim Date</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.claim_date" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="h5 text-primary border-bottom border-2 pb-2 pt-2">
+                                        <i class="fa fa-user me-2"/>
+                                        Policy Holder Details
+                                    </p>
+                                    <!-- Left-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row mb-2 align-items-center" t-if="claim_rec.policy_holder_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy Holder</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.policy_holder_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="claim_rec.policy_holder_gender">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Gender</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.policy_holder_gender" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="claim_rec.policy_holder_dob">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Date of Birth</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-esc="claim_rec.policy_holder_dob" class="text-dark me-1"/>
+                                                <span class="text-dark">
+                                                    (<span t-esc="claim_rec.policy_holder_age"/>)
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Right-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row mb-2 align-items-center" t-if="claim_rec.email">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Email</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.email" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="claim_rec.phone">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Phone</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.phone" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <t t-if="claim_rec.policy_holder_street or claim_rec.policy_holder_street2 or claim_rec.policy_holder_city or claim_rec.policy_holder_zip or claim_rec.policy_holder_state_id or claim_rec.policy_holder_country_id">
+                                            <div class="row mb-2 align-items-start">
+                                                <div class="col-md-4 col-sm-12 text-muted fw-bold">Address</div>
+                                                <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                                <div class="col-md-7 col-sm-12">
+                                                    <div t-if="claim_rec.policy_holder_street">
+                                                        <span t-field="claim_rec.policy_holder_street"/>
+                                                    </div>
+                                                    <div t-if="claim_rec.policy_holder_street2">
+                                                        <span t-field="claim_rec.policy_holder_street2"/>
+                                                    </div>
+                                                    <div>
+                                                        <t t-if="claim_rec.policy_holder_city">
+                                                            <span t-field="claim_rec.policy_holder_city"/>,
+                                                        </t>
+                                                        <t t-if="claim_rec.policy_holder_state_id">
+                                                            <span t-field="claim_rec.policy_holder_state_id"/>,
+                                                        </t>
+                                                        <t t-if="claim_rec.policy_holder_zip">
+                                                            <span t-field="claim_rec.policy_holder_zip"/>,
+                                                        </t>
+                                                        <t t-if="claim_rec.policy_holder_country_id">
+                                                            <span t-field="claim_rec.policy_holder_country_id"/>
+                                                        </t>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="h5 text-primary border-bottom border-2 pb-2">
+                                        <i class="fa fa-heartbeat me-2"/>
+                                        Policy Details
+                                    </p>
+                                    <!-- Left-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Category</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.insurance_category_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Sub Category</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.insurance_sub_category_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Right-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.insurance_policy_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy Time Period</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.policy_price_list_id.insurance_time_period_id.t_period"
+                                                      class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="h5 text-primary border-bottom border-2 pb-2 pt-2">
+                                        <i class="fa fa-credit-card me-2"/>
+                                        Claim Financial Overview
+                                    </p>
+                                    <!-- Left-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy Provider</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.policy_provider_cmp_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy Amounts</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.policy_amount" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="claim_rec.amount_paid">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Claim Amounts</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.amount_paid" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Right-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Remain Amounts</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.due_amount" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Due Amounts</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.total_due_amount" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="claim_rec.claim_fee_amount">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Claim Fee Charges</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.claim_fee_amount" class="text-dark me-2"/>
+                                                <span class="text-dark">
+                                                    <span class="text-muted fw-bold" t-if="claim_rec.fee_invoice_id">
+                                                        Invoice:
+                                                    </span>
+                                                    <t t-if="claim_rec.sudo().fee_invoice_id.state != 'draft'">
+                                                        <a t-attf-href="/my/invoices/#{claim_rec.fee_invoice_id.id}?access_token=#{claim_rec.reinsurer_invoice_id.access_token}">
+                                                            <span t-field="claim_rec.fee_invoice_id"/>
+                                                        </a>
+                                                    </t>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="claim_rec.invoice_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Ceding Company Bill</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.invoice_id.name" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="claim_rec.reinsurer_invoice_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Reinsurer Bill</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="claim_rec.reinsurer_invoice_id.name" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Communication-->
+                                <div id="claim_information_page" class="col-12 col-lg">
+                                    <div id="claim_communication" class="mt-4">
+                                        <h3>Communication</h3>
+                                        <t t-call="portal.message_thread">
+                                            <t t-set="object" t-value="claim_rec"/>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!--Agent Insurances Record List-->
+    <template id="portal_agent_insurance_record_list" name="Portal Agent Insurance Record List">
+        <t t-call="portal.portal_layout">
+            <t t-if="not agent_insurance_records">
+                <div class="alert alert-info my-1 text-center">
+                    <strong>There are currently no 'Managing Insurance' entries linked to your account.</strong>
+                </div>
+            </t>
+            <t t-if="agent_insurance_records" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Reference #</th>
+                        <th>Policy Holder</th>
+                        <th>Category</th>
+                        <th>Sub Category</th>
+                        <th>Insurance Policy</th>
+                        <th>Commission Type</th>
+                        <th>Bill Date</th>
+                        <th>Commission Bill</th>
+                    </tr>
+                </thead>
+                <t t-foreach="agent_insurance_records" t-as="agent">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/my/insurance-record-details/#{agent.access_token}/">
+                                <span t-field="agent.insurance_number"/>
+                            </a>
+                        </td>
+                        <td>
+                            <span t-field="agent.policy_holder_id.name"/>
+                        </td>
+                        <td>
+                            <span t-field="agent.insurance_category_id"/>
+                        </td>
+                        <td>
+                            <span t-field="agent.insurance_sub_category_id"/>
+                        </td>
+                        <td>
+                            <span t-field="agent.insurance_policy_id"/>
+                        </td>
+                        <td>
+                            <span t-field="agent.commission_type"/>
+                        </td>
+                        <td>
+                            <span t-field="agent.agent_bill_id.invoice_date"/>
+                        </td>
+                        <td class="text-left">
+                            <a t-attf-href="/my/invoices/#{agent.agent_bill_id.id}?access_token=#{agent.agent_bill_id.access_token}"
+                               t-if="agent.sudo().agent_bill_id.state != 'draft'">
+                                <span t-field="agent.agent_bill_id"/>
+                            </a>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!--Agent Insurance Record Details-->
+    <template id="portal_agent_insurance_record_details" name="Agent Insurance Record Details">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="mb0">
+                            <span t-field="agent_ins.insurance_number"/>
+                        </h3>
+                    </div>
+                    <div class="col-6 text-end">
+                        <span class="badge text-bg-info rounded-0" t-if="agent_ins.state == 'draft'">
+                            New
+                        </span>
+                        <span class="badge text-bg-warning rounded-0" t-if="agent_ins.state == 'confirmed'">
+                            Confirmed
+                        </span>
+                        <span class="badge text-bg-success rounded-0" t-if="agent_ins.state == 'running'">
+                            Running
+                        </span>
+                        <span class="badge text-bg-danger rounded-0" t-if="agent_ins.state == 'expired'">
+                            Expired
+                        </span>
+                        <span class="badge text-bg-danger rounded-0" t-if="agent_ins.state == 'cancel'">
+                            Cancelled
+                        </span>
+                        <span class="badge text-bg-primary rounded-0" t-if="agent_ins.state == 'renew'">
+                            Renew
+                        </span>
+                    </div>
+                </div>
+                <hr class="m-0 p-1 border-2"/>
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <div class="card border-0">
+                            <div class="card-body p-0">
+                                <div class="row">
+                                    <!-- Left-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <p class="h5 text-primary border-bottom border-2 pb-2">
+                                            <i class="fa fa-heartbeat me-2"/>
+                                            Insurance Details
+                                        </p>
+                                        <div class="row mb-2 align-items-center" t-if="agent_ins.policy_holder_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy Holder</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="agent_ins.policy_holder_id.name" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="agent_ins.insurance_category_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Category</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="agent_ins.insurance_category_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center"
+                                             t-if="agent_ins.insurance_sub_category_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Sub Category</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="agent_ins.insurance_sub_category_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="agent_ins.insurance_policy_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Policy</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="agent_ins.insurance_policy_id" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Right-->
+                                    <div class="col-md-6 col-sm-12">
+                                        <p class="h5 text-primary border-bottom border-2 pb-2">
+                                            <i class="fa fa-credit-card me-2"/>
+                                            Commission &amp; Billing
+                                        </p>
+                                        <div class="row mb-2 align-items-center" t-if="agent_ins.agent_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Agent</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="agent_ins.agent_id.name" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="agent_ins.commission_type">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Commission Type</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="agent_ins.commission_type" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="agent_ins.agent_bill_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Bill Date</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <span t-field="agent_ins.agent_bill_id.invoice_date" class="text-dark"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 align-items-center" t-if="agent_ins.agent_bill_id">
+                                            <div class="col-md-4 col-sm-12 text-muted fw-bold">Commission Bill</div>
+                                            <div class="col-md-1 d-none d-md-block text-muted col-sm-12">:</div>
+                                            <div class="col-md-7 col-sm-12">
+                                                <t t-if="agent_ins.sudo().agent_bill_id.state != 'draft'">
+                                                    <a t-attf-href="/my/invoices/#{agent_ins.agent_bill_id.id}?access_token=#{agent_ins.agent_bill_id.access_token}">
+                                                        <span t-field="agent_ins.agent_bill_id"/>
+                                                    </a>
+                                                </t>
+                                                <t t-else="">
+                                                    <span class="text-muted">Draft</span>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Communication-->
+                                <div id="agent_insurance_information_page" class="col-12 col-lg">
+                                    <div id="agent_insurance_communication" class="mt-4">
+                                        <h3>Communication</h3>
+                                        <t t-call="portal.message_thread">
+                                            <t t-set="object" t-value="agent_ins"/>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="quote_ref_number_mail_template" model="mail.template">
+            <field name="name">Quote Reference Number Mail Template</field>
+            <field name="model_id" ref="tk_insurance_management.model_crm_lead"/>
+            <field name="use_default_to" eval="True"/>
+            <field name="subject">Quote Reference Number : {{ object.website_ref_number}}</field>
+            <field name="body_html" type="html">
+                <h4>
+                    Dear,
+                    <br/>
+                </h4>
+                <hr/>
+                <p>
+                    I hope this email finds you well.
+                    <br/>
+                    I am writing to provide you with the details of the quotation you requested. Enclosed within this
+                    email, you will find comprehensive information regarding the quotation.
+                </p>
+                <hr/>
+                <table>
+                    <tr>
+                        <td>
+                            <strong>
+                                Quote Reference Number:
+                            </strong>
+                            <t t-out="object.website_ref_number"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Name:
+                            </strong>
+                            <t t-out="object.contact_name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Email:
+                            </strong>
+                            <t t-out="object.email_from"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Phone:
+                            </strong>
+                            <t t-out="object.phone"/>
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+                <p>
+                    Should you require any clarification or have any questions regarding the quotation, please do not
+                    hesitate to contact us. Our team is readily available to assist you and address any inquiries you
+                    may have.
+                </p>
+                <p>
+                    Thank you for considering
+                    <strong>
+                        <t t-out="object.company_id.name"/>
+                    </strong>
+                    . We appreciate the opportunity to serve you and look forward to the possibility of working
+                    together.
+                </p>
+                <a class="btn btn-primary" role="button" t-att-href="object.env.context.get('customer_url')">View
+                    Details
+                </a>
+                <br/>
+            </field>
+        </record>
+    </data>
+</odoo>

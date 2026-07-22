@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="upcoming_invoice_installment_mail_template" model="mail.template">
+            <field name="name">Upcoming Installment Invoice Mail Template</field>
+            <field name="model_id" ref="tk_insurance_management.model_insurance_information"/>
+            <field name="subject">Reminder: Upcoming Insurance Installment Invoice</field>
+            <field name="email_from">{{object.policy_provider_cmp_id.email}}</field>
+            <field name="partner_to">{{object.policy_holder_id.id}}</field>
+            <field name="body_html" type="html">
+                <p>
+                    <h4>
+                        Dear
+                        <strong>
+                            <t t-out="object.policy_holder_id.name"/>
+                        </strong>,
+                    </h4>
+                </p>
+                <hr/>
+                <p>
+                    We hope this email finds you well. We would like to bring to your attention that your next insurance
+                    installment invoice is scheduled to be issued soon. It's important to us that you stay informed
+                    about your policy payments to ensure continuous coverage.
+                </p>
+                <hr/>
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            <strong>
+                                Here are the key details of your upcoming installment:
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Policy Number:
+                            </strong>
+                        </td>
+                        <td>
+                            <t t-out="object.insurance_number"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Policy:
+                            </strong>
+                        </td>
+                        <td>
+                            <t t-out="object.insurance_policy_id.policy_name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Installment Date:
+                            </strong>
+                        </td>
+                        <td>
+                            <t t-esc="datetime.date.today() + relativedelta(days=object.reminder_days)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Installment Amount:
+                            </strong>
+                        </td>
+                        <td>
+                            <span t-field="object.monthly_installment"/>
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+                <p>
+                    Please be prepared to make the payment by the due date to avoid any interruption in your coverage.
+                    Ensuring your policy remains active is crucial for your protection and peace of mind.
+                </p>
+                <p>
+                    If you have any questions regarding your policy or payment options, please feel free to reach out to
+                    our customer service team at
+                    <strong>
+                        <t t-out="object.policy_provider_cmp_id.phone"/>
+                    </strong>
+                    . We are here to assist you and address any concerns you may have.
+                </p>
+                <p>
+                    Thank you for choosing
+                    <strong>
+                        <t t-out="object.policy_provider_cmp_id.name"/>
+                    </strong>
+                    . We appreciate your trust in us and look forward to
+                    continuing to serve your insurance needs.
+                </p>
+                <hr/>
+                <h5>
+                    Best regards,
+                    <br/>
+                    <strong>
+                        <t t-out="object.responsible_id.name"/>
+                    </strong>
+                </h5>
+                <hr/>
+                <span>
+                    <h4>
+                        <t t-out="object.policy_provider_cmp_id.name"/>
+                    </h4>
+                    <t t-out="object.policy_provider_cmp_id.phone"/>
+                    <br/>
+                    <t t-out="object.policy_provider_cmp_id.email"/>
+                    <br/>
+                    <t t-out="object.policy_provider_cmp_id.website"/>
+                </span>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

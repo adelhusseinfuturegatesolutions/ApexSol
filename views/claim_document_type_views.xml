@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="claim_document_type_form_view" model="ir.ui.view">
+            <field name="name">claim.document.type.form.view</field>
+            <field name="model">claim.document.type</field>
+            <field name="arch" type="xml">
+                <form edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="claim_document_type" required="1"/>
+                            </group>
+                            <group>
+                                <field name="color" widget="color_picker"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="claim_document_type_list_view" model="ir.ui.view">
+            <field name="name">claim.document.type.list.view</field>
+            <field name="model">claim.document.type</field>
+            <field name="arch" type="xml">
+                <list editable="bottom">
+                    <field name="claim_document_type"/>
+                    <field name="color" widget="color_picker"/>
+                </list>
+            </field>
+        </record>
+        <record id="action_claim_document_type" model="ir.actions.act_window">
+            <field name="name">Claim Documents</field>
+            <field name="res_model">claim.document.type</field>
+            <field name="view_mode">list</field>
+        </record>
+    </data>
+</odoo>

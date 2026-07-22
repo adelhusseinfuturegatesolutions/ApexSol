@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="insurance_policy_cancel_mail_template" model="mail.template">
+            <field name="name">Notice of Insurance Policy Cancellation</field>
+            <field name="model_id" ref="tk_insurance_management.model_insurance_information"/>
+            <field name="subject">Notice of Insurance Policy Cancellation Due to Inability to Renew</field>
+            <field name="email_from">{{object.policy_provider_cmp_id.email}}</field>
+            <field name="partner_to">{{object.policy_holder_id.id}}</field>
+            <field name="body_html" type="html">
+                <p>
+                    <h4>
+                        Dear
+                        <strong>
+                            <t t-out="object.policy_holder_id.name"/>
+                        </strong>,
+                    </h4>
+                </p>
+                <hr/>
+                <p>
+                    We regret to inform you that your insurance policy with
+                    <strong>
+                        <t t-out="object.policy_provider_cmp_id.name"/>
+                    </strong>
+                    policy number
+                    <strong>
+                        <t t-out="object.insurance_number"/>
+                    </strong>
+                    will be canceled due to our inability to renew it.
+                </p>
+                <hr/>
+                <p>
+                    Effective
+                    <strong>
+                        <t t-out="object.cancellation_date"/>
+                    </strong>
+                    your coverage will be terminated, and you will not be insured under our policies thereafter.
+                </p>
+                <p>
+                    For further assistance or inquiries, please contact our customer service team at
+                    <strong>
+                        <t t-out="object.policy_provider_cmp_id.phone"/>
+                    </strong>
+                    or reply to this email.
+                </p>
+                <p>
+                    Thank you for your understanding.
+                </p>
+                <h5>
+                    Sincerely,
+                    <br/>
+                    <strong>
+                        <t t-out="object.responsible_id.name"/>
+                    </strong>
+                </h5>
+                <hr/>
+                <span>
+                    <h4>
+                        <t t-out="object.policy_provider_cmp_id.name"/>
+                    </h4>
+                    <t t-out="object.policy_provider_cmp_id.phone"/>
+                    <br/>
+                    <t t-out="object.policy_provider_cmp_id.email"/>
+                    <br/>
+                    <t t-out="object.policy_provider_cmp_id.website"/>
+                </span>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

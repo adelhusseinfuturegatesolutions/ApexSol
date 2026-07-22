@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="insurance_category_form_view" model="ir.ui.view">
+            <field name="name">insurance.category.form.view</field>
+            <field name="model">insurance.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. Health Insurance.." required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Insurance Category">
+                                <field name="category" required="1"/>
+                                <field name="is_displayed_on_website"/>
+                            </group>
+                            <group string="Category Code">
+                                <field name="category_code"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Details of Policy Provider">
+                                <field name="policy_provider_cmp_id" required="1"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                            </group>
+                        </group>
+                        <separator string="Per-Role Premium Amounts"/>
+                        <group>
+                            <group string="Employee">
+                                <field name="employee_male_amount"/>
+                                <field name="employee_female_amount"/>
+                            </group>
+                            <group string="Spouse / Parents">
+                                <field name="wife_amount"/>
+                                <field name="husband_amount"/>
+                                <field name="father_amount"/>
+                                <field name="mother_amount"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Children">
+                                <field name="son_amount"/>
+                                <field name="daughter_amount"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="life_insurance" string="Life Insurance Policy Details"
+                                  invisible="category != 'life'">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Length of Coverage Terms
+                                        </h4>
+                                        <field name="length_of_coverage_term"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Health History
+                                        </h4>
+                                        <field name="life_health_history"/>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Occupation and Hobbies
+                                        </h4>
+                                        <field name="occupation_and_hobbies"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Family Medical History
+                                        </h4>
+                                        <field name="family_medical_history"/>
+                                    </div>
+                                </div>
+                            </page>
+                            <page name="health_insurance" string="Health Insurance Policy Details"
+                                  invisible="category != 'health'">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Out of Pocket Maximum
+                                        </h4>
+                                        <field name="out_of_pocket_maximum"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Health History
+                                        </h4>
+                                        <field name="health_history_of_insured"/>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Prescription Drug Coverage
+                                        </h4>
+                                        <field name="drug_coverage"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Preferred Healthcare Provider Network
+                                        </h4>
+                                        <field name="healthcare_provider_network"/>
+                                    </div>
+                                </div>
+                            </page>
+                            <page name="property_insurance" string="Property Insurance Policy Details"
+                                  invisible="category != 'property'">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Property Coverage Limits
+                                        </h4>
+                                        <field name="property_coverage_limits"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Construction Type and Materials
+                                        </h4>
+                                        <field name="construction_type_and_materials"/>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Special Features of the Property
+                                        </h4>
+                                        <field name="special_features_of_the_property"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Personal Property Inventory
+                                        </h4>
+                                        <field name="personal_property_inventory"/>
+                                    </div>
+                                </div>
+                            </page>
+                            <page name="liability_insurance" string="Liability Insurance Policy Details"
+                                  invisible="category != 'liability'">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Desired Coverage Limits
+                                        </h4>
+                                        <field name="desired_coverage_limits"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Business Type and Operations (for Business Liability Insurance)
+                                        </h4>
+                                        <field name="business_type_and_operations"/>
+                                    </div>
+                                </div>
+                            </page>
+                            <page name="disability_insurance" string="Disability Insurance Policy Details"
+                                  invisible="category != 'disability'">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Length of Coverage Period
+                                        </h4>
+                                        <field name="length_coverage_disability_period"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Health History
+                                        </h4>
+                                        <field name="disability_health_history"/>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Occupation and Hobbies
+                                        </h4>
+                                        <field name="occupation_and_hobbies"/>
+                                    </div>
+                                </div>
+                            </page>
+                            <page name="travel_insurance" string="Travel Insurance Policy Details"
+                                  invisible="category != 'travel'">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Travel Purpose
+                                        </h4>
+                                        <field name="travel_purpose"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Traveler Health History
+                                        </h4>
+                                        <field name="traveler_health_history"/>
+                                    </div>
+                                </div>
+                            </page>
+                            <page name="pet_insurance" string="Pet Insurance Policy Details"
+                                  invisible="category != 'pet'">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Health History
+                                        </h4>
+                                        <field name="pet_health_history"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Coverage Limits
+                                        </h4>
+                                        <field name="pet_coverage_limits"/>
+                                    </div>
+                                </div>
+                            </page>
+                            <page name="business_insurance" string="Business Insurance Policy Details"
+                                  invisible="category != 'business'">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Business Type and Operations
+                                        </h4>
+                                        <field name="business_type_operation"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Business Coverage Limits
+                                        </h4>
+                                        <field name="business_coverage_limits"/>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Industry Specific Risks(Such as Malpractice Insurance for Healthcare
+                                            Providers)
+                                        </h4>
+                                        <field name="industry_specific_risks"/>
+                                    </div>
+                                </div>
+                            </page>
+                            <page name="vehicle_insurance" string="Vehicle Insurance Policy Details"
+                                  invisible="category != 'vehicle'">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Limitations as to Use
+                                        </h4>
+                                        <field name="limitation_as_to_use"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Limits of Liability
+                                        </h4>
+                                        <field name="limits_of_liability"/>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Deductibles under Section
+                                        </h4>
+                                        <field name="deductibles_under_section"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>
+                                            Special Conditions
+                                        </h4>
+                                        <field name="special_conditions"/>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>
+                                            Driving History
+                                        </h4>
+                                        <field name="driving_history"/>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="insurance_category_list_view" model="ir.ui.view">
+            <field name="name">insurance.category.list.view</field>
+            <field name="model">insurance.category</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="category_code"/>
+                </list>
+            </field>
+        </record>
+        <record id="insurance_category_search_view" model="ir.ui.view">
+            <field name="name">insurance.category.search.view</field>
+            <field name="model">insurance.category</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <group>
+                        <filter name="category" string="Category"
+                                context="{'group_by': 'category'}"/>
+                        <filter string="Displayed on Website" name="is_displayed_on_website"
+                                domain="[('is_displayed_on_website', '=', True)]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_insurance_category" model="ir.actions.act_window">
+            <field name="name">Policy Categories</field>
+            <field name="res_model">insurance.category</field>
+            <field name="view_mode">list,form,search</field>
+        </record>
+    </data>
+</odoo>

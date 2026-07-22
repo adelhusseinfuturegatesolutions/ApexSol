@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="crm_insurance_form_view" model="ir.ui.view">
+            <field name="name">crm.insurance.form.view</field>
+            <field name="model">crm.insurance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group string="Lead Details">
+                            <field name="crm_lead_id" readonly="1"/>
+                        </group>
+                        <group string="Insurance Issue Date">
+                            <field name="issue_date" required="1"/>
+                        </group>
+                    </group>
+                    <separator string="Policy Holder Details" name="policy_holder_details"/>
+                    <group>
+                        <group>
+                            <field name="policy_holder_id" required="1"/>
+                            <field name="policy_holder_gender" widget="radio" options="{'horizontal': true}"/>
+                            <label for="policy_holder_dob" string="Date of Birth"/>
+                            <div class="address_format">
+                                <field name="policy_holder_dob" style="width: 35%" required="1"/>
+                                <strong style="margin-left: 15px;">&#160;Age</strong>
+                                <field name="policy_holder_age" style="width: 35%; margin-left: 10px;" readonly="1"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="email"/>
+                            <field name="phone"/>
+                        </group>
+                    </group>
+                    <separator string="Policy Details" name="policy_details"/>
+                    <group>
+                        <group>
+                            <field name="insurance_category_id" required="1"
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="insurance_sub_category_id" required="1"
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="insurance_policy_id" required="1"
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="insurance_buying_for_id"
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group>
+                            <field name="policy_provider_cmp_id" required="1"
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="policy_certificate_no"
+                                   required="category == 'vehicle'" invisible="category != 'vehicle'"/>
+                            <field name="previous_policy_no"
+                                   required="category == 'vehicle'" invisible="category != 'vehicle'"/>
+                            <field name="policy_price_list_id" required="1"
+                                   options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="policy_durations" invisible="1"/>
+                            <field name="policy_amount"/>
+                            <field name="claim_amount"/>
+                            <field name="monthly_installment" invisible="1"/>
+                            <field name="responsible_id" widget="many2one_avatar_user" required="1"/>
+                            <field name="category" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Create Insurance" name="action_create_crm_insurance" type="object"
+                                class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_crm_insurance" model="ir.actions.act_window">
+            <field name="name">Insurance Details</field>
+            <field name="res_model">crm.insurance</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="crm_insurance_form_view"/>
+        </record>
+    </data>
+</odoo>
